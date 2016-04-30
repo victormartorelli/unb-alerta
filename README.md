@@ -1,5 +1,5 @@
 ***********************************************
-UNB-ALERTA
+# UNB-ALERTA
 ***********************************************
 Projeto de um site que visa aumentar a segurança da UnB. Feito por alunos do 1/2016 de Linguagens de Programação. 
 
@@ -38,6 +38,6 @@ Para contribuir, siga rigorosamente os passos abaixo:
     ./manage.py bower install
 
 
-* Coloque o dump do Banco na pasta raiz
+* Coloque o dump do Banco do SQLite3 na pasta raiz
 
 * Execute ``./manage.py migrate`` 
