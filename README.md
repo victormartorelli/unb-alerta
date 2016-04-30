@@ -25,7 +25,6 @@ Para contribuir, siga rigorosamente os passos abaixo:
     sudo pip install --upgrade virtualenv
 
 * Crie um virtualenv usando python 3 e ative-o.
-  Use `virtualenvwrapper <https://virtualenvwrapper.readthedocs.org/en/latest/install.html#basic-installation>`_::
 
     mkvirtualenv -p /usr/bin/python3 unb-alerta
 
