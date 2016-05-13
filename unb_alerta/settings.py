@@ -30,14 +30,26 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
+    'django_admin_bootstrapped',  # must come before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+
+    # more
+    'django_extensions',
+    'djangobower',
+    'bootstrap3',  # basically for django_admin_bootstrapped
+    'crispy_forms',
+    'easy_thumbnails',
+    'floppyforms',
+    'sass_processor',
+    'rest_framework',
+
+)
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

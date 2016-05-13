@@ -7,8 +7,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Instale as seguintes dependências do Sistema (comandos para Ubuntu)::
 
-    sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz \
-    pkg-config python-psycopg2 nodejs npm \
+    sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz pkg-config python-psycopg2 nodejs npm \
 
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
@@ -34,9 +33,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Instale as dependências do Bower (Faça isso na raiz do projeto)::
 
-    ./manage.py bower install
 
-
-* Coloque o dump do Banco do SQLite3 na pasta raiz
+* Coloque o dump do Banco do MySQL na pasta raiz
 
 * Execute ``./manage.py migrate`` 
