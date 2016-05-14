@@ -17,15 +17,11 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Fork e Clone esse repositório, seguindo as instruções em https://help.github.com/articles/fork-a-repo.
 
-* Se você ainda não tem o PIP instalado:
+* Se você ainda não tem o PIP instalado, instale-o para Python 3
 
-    sudo apt-get install python-pip python-dev build-essential
-    sudo pip install --upgrade pip
-    sudo pip install --upgrade virtualenv
+* Crie um virtualenv wrapper usando python 3 e ative-o seguindo o link abaixo.
 
-* Crie um virtualenv usando python 3 e ative-o.
-
-    mkvirtualenv -p /usr/bin/python3 unb-alerta
+    http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 * Instale as dependências Python do sistema (Faça isso na raiz do projeto)::
 
