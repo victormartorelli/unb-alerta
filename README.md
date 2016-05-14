@@ -7,7 +7,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Instale as seguintes dependências do Sistema (comandos para Ubuntu)::
 
-    sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz pkg-config python-psycopg2 nodejs npm \
+    sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz pkg-config nodejs npm \
 
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
