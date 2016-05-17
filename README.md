@@ -15,7 +15,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Configure seu GIT, seguindo essas instruções https://help.github.com/articles/set-up-git.
 
-* Fork e Clone esse repositório, seguindo as instruções em https://help.github.com/articles/fork-a-repo.
+* Clone esse repositório, seguindo as instruções em https://help.github.com/articles/fork-a-repo.
 
 * Se você ainda não tem o PIP instalado, instale-o para Python 3
 
