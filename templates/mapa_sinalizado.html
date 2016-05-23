@@ -49,17 +49,17 @@ function initMap() {
 ];
 var ICCPolygon = new google.maps.Polygon({
   // Coordenadas do seu objeto
-  paths: ICCCoords
+  paths: ICCCoords,
   // Cor do da linha
-  //strokeColor: '#3300FF',
+  strokeColor: '#3300FF',
   // Opacidade da linha
-  //strokeOpacity: 0.8,
+  strokeOpacity: 0.8,
   // Espessura da linha
-  //strokeWeight: 2,
+  strokeWeight: 2,
   // Cor de preenchimento do objeto
-  //fillColor: '#942E7C',
+  fillColor: '#942E7C',
   // Opacidade do preenchimento
-  //fillOpacity: 0.35
+  fillOpacity: 0.35
 });
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -15.763606, lng: -47.869636},
