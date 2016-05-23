@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'unb_alerta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projeto-lp',
+        'NAME': 'unbalerta',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
