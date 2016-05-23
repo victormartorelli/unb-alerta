@@ -7,7 +7,11 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Instale as seguintes dependências do Sistema (comandos para Ubuntu)::
 
+<<<<<<< HEAD
+    sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz pkg-config python-psycopg2 nodejs npm \
+=======
     sudo apt-get install git nginx python3-dev libpq-dev graphviz-dev graphviz pkg-config nodejs npm \
+>>>>>>> ef29c4e860b3336f8c87211de9f57cf100df1873
 
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
@@ -15,6 +19,19 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Configure seu GIT, seguindo essas instruções https://help.github.com/articles/set-up-git.
 
+<<<<<<< HEAD
+* Fork e Clone esse repositório, seguindo as instruções em https://help.github.com/articles/fork-a-repo.
+
+* Se você ainda não tem o PIP instalado:
+
+    sudo apt-get install python-pip python-dev build-essential
+    sudo pip install --upgrade pip
+    sudo pip install --upgrade virtualenv
+
+* Crie um virtualenv usando python 3 e ative-o.
+
+    mkvirtualenv -p /usr/bin/python3 unb-alerta
+=======
 * Clone esse repositório.
 
 * Se você ainda não tem o PIP instalado, instale-o para Python 3
@@ -22,6 +39,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 * Crie um virtualenv wrapper usando python 3 e ative-o seguindo o link abaixo.
 
     http://docs.python-guide.org/en/latest/dev/virtualenvs/
+>>>>>>> ef29c4e860b3336f8c87211de9f57cf100df1873
 
 * Instale as dependências Python do sistema (Faça isso na raiz do projeto)::
 
