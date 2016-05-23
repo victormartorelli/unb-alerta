@@ -23,6 +23,18 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
     http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
+* Fork e Clone esse repositório, seguindo as instruções em https://help.github.com/articles/fork-a-repo.
+
+* Se você ainda não tem o PIP instalado:
+
+    sudo apt-get install python-pip python-dev build-essential
+    sudo pip install --upgrade pip
+    sudo pip install --upgrade virtualenv
+
+* Crie um virtualenv usando python 3 e ative-o.
+
+    mkvirtualenv -p /usr/bin/python3 unb-alerta
+
 * Instale as dependências Python do sistema (Faça isso na raiz do projeto)::
 
     pip install -r requirements/dev-requirements.txt
