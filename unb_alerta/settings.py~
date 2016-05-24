@@ -93,7 +93,10 @@ DATABASES = {
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '3306',
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed6137465360c42ca3b8a782b6d864b97c0dc241
     }
 }
 
