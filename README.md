@@ -8,8 +8,11 @@ Para contribuir, siga rigorosamente os passos abaixo:
 * É extremamente recomendado que seja utilizado uma máquina virtual Ubuntu 14.04.
 
 * Certifique-se de que o sistema utiliza como padrão a versão 2.7 do Python:
+    
     sudo rm /usr/bin/python
+    
     sudo ln -s /usr/bin/python2.7 /usr/bin/python
+    
     python -V 
 
 * Instale as seguintes dependências do Sistema (comandos para Ubuntu):
@@ -28,7 +31,9 @@ Para contribuir, siga rigorosamente os passos abaixo:
     
     sudo apt-get install git nginx libpq-dev graphviz-dev graphviz pkg-config nodejs npm
     
-    sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev libcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk
+    sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev
+    
+    sudo apt-get install libcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk
     
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
