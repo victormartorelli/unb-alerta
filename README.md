@@ -53,10 +53,6 @@ Para contribuir, siga rigorosamente os passos abaixo:
     
 * Certifique-se que a partir deste passo, é apresentado no início da linha do prompt a expressão (venv).
 
-    sudo pip install --upgrade pip
-
-    sudo pip install --upgrade virtualenv
-
     pip install mysqlclient
     
     pip install image
