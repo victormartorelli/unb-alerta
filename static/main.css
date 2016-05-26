@@ -32,10 +32,9 @@ space a{
   display: inline;
 }
 #fundo{
-    background: url(http://my
-list.com/img/parallax/back.png);
+    background: url("images/back.png");
   background-color: #444;
-    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
+    background: url("images/pinlayer2.png"),url("images/back.png");    
 }
 
 .vertical-offset-100{
@@ -60,10 +59,10 @@ list.com/img/parallax/back.png);
   margin-bottom:20px;
 }
 .jumbotron {
-      background: url(http://mymaplist.com/img/parallax/back.png);
+      background: url("images/back.png");
   background-color: #444;
-    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);  
-  height: 210px;
+    background: url("images/pinlayer2.png"),url("images/back.png"); 
+  height: 05%;
   background-repeat: no-repeat;
   background-size: cover;
 }
