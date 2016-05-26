@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-import os
+from django.conf.urls.static import static
+
+from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).ancestor(2)
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +31,11 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+
+ALERTA_APPS = (
+    'base',
+    'ocorrencia',
+)
 
 INSTALLED_APPS = (
     'django_admin_bootstrapped',  # must come before django.contrib.admin
@@ -49,7 +56,8 @@ INSTALLED_APPS = (
     'sass_processor',
     'rest_framework',
 
-)
+) + ALERTA_APPS
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -93,9 +101,18 @@ DATABASES = {
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '3306',
+
     }
 }
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR.child("collected_static")
+STATICFILES_DIRS = (BASE_DIR.child("static"),)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
@@ -119,15 +136,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
+LANGUAGES = (
+    ('pt-br', u'Português'),
+)
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
-
-USE_L10N = True
-
+USE_L10N = False
 USE_TZ = True
+# DATE_FORMAT = 'N j, Y'
+DATE_FORMAT = 'd/m/Y'
+SHORT_DATE_FORMAT = 'd/m/Y'
+DATE_INPUT_FORMATS = ('%d/%m/%Y', '%m-%d-%Y', '%Y-%m-%d')
 
 
 # Static files (CSS, JavaScript, Images)

@@ -43,7 +43,7 @@ class Ocorrencia(models.Model):
     class Meta:
         verbose_name = ('Ocorrência')
         verbose_name_plural = ('Ocorrências')
-        unique_together = (("tipo", "numero", "ano"),)
+        unique_together = (("data", "id"),)
         managed = False
         db_table = 'tb_ocorrencia'
 
