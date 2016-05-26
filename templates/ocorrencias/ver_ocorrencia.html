@@ -1,39 +1,6 @@
-<html>
-<head>
-	<title>Ocorrencias</title>
-</head>
+{% extends "base.html"%}
+{% block content %}
 
-<body>
-	<html>
-
-  <head>
-    <meta charset="UTF-8">
-    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
-    <link rel="stylesheet" href="main.css">
-    
-  </head>
-
-  <body>
-  	    <div id="titulo">
-      <space>
-        <a href="cliente.html">UNB ALERTA</a>
-      </space>
-    </div>
-    <div class="nav">
-      <div class="container">
-        <ul class= "pull-right">
-          <li><a href="alter_usu.php"> mudar perfil</a></li>
-          <li><a href="ver_ocorrencia.html">minhas ocorrencias</a></li>
-          <li><a href="inicial.html">sair</a></li>
-       </ul>
-        <ul class="pull-left">
-          <li><a href="mapa.html">ver mapa</a></li>
-          <li><a href="nova_ocorrencia.html">fazer ocorrencia</a></li>
-        </ul>
-      </div>
-    </div>
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
@@ -61,14 +28,13 @@
 							</tr>
 						</c:forEach>
 					</table>
-			</div>
-      </div>
-   	 </div> 
+			   </div>
+          </div>
+   	        </div> 
        </div>
       </div>
     </div>
   </div>
 </div>
 <div>
-  </body>
-</html>
+ {% endblock %} 

@@ -1,6 +1,7 @@
 *.sqlite3
 *.orig
 *.pyc
+*.py~
 venvalerta
 venv
 collected_static
