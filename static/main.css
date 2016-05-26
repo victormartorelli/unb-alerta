@@ -1,6 +1,6 @@
 #titulo{
   margin:auto;
-  height:50px;
+  height:45px;
   width:120px;
   border-radius: 5px;
   text-align:center;
@@ -8,7 +8,7 @@
   border: 2px solid #4E6c24;
   background-color: #95c551;
   position:relative;
-  top: 35px;
+  top: 15px;
 }
 space a{
   text-decoration:none;
