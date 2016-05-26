@@ -49,13 +49,13 @@
 							<th>Descrição</th>
 							<th>Editar</th>
 						</tr>
-						<c:forEach items="${ocorrenciasUsuario}" var="ocorrencia">
+            {% for o in object_list %}
 							<tr>
-								<td>${ocorrencia.id}</td>
-								<td>${ocorrencia.local}</td>
-								<td>${ocorrencia.data}</td>
-								<td>${ocorrencia.imagem}</td>
-								
+								<td>{{o.id}}</td>
+								<td>{{o.local}}</td>
+								<td>{{o.data}}</td>
+								<td>{{o.imagem}}</td>
+						{% endfor %}
 								<td><a class="btn btn-primary" href="./descricao_ocorrencia.html?idocorrencia=${ocorrencia.id}" role="button">Ver Descrição</a></td>
 								<td><a class="btn btn-success" href="./editar_ocorrencia.html?idocorrencia=${ocorrencia.id}" role="button">Editar ocorrência</a></td>
 							</tr>
