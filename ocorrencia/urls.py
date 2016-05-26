@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^ocorrencias/$',
         ListaOcorrenciasView.as_view(), name='lista_ocorrencias'),
 
-    url(r'^ocorrencias/(?P<pk>\d+)/criar-ocorrencia$',
+    url(r'^ocorrencias/criar-ocorrencia/(?P<pk>\d+)$',
         CriarOcorrenciaView.as_view(), name='criar_ocorrencia')
 ]

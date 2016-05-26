@@ -10,23 +10,28 @@
 	        		<table class="table">
 						<tr>
 							<th>Número</th>
-							<th>Local</th>
-							<th>Data</th>
+							<th>Localização</th>
+							<th>Data e Hora</th>
 							<th>Imagem</th>
+							<th>Emergência?</th>
 							<th>Descrição</th>
 							<th>Editar</th>
 						</tr>
             {% for o in object_list %}
-							<tr>
-								<td>{{o.id}}</td>
-								<td>{{o.local}}</td>
-								<td>{{o.data}}</td>
-								<td>{{o.imagem}}</td>
-						{% endfor %}
-								<td><a class="btn btn-primary" href="./descricao_ocorrencia.html?idocorrencia=${ocorrencia.id}" role="button">Ver Descrição</a></td>
-								<td><a class="btn btn-success" href="./editar_ocorrencia.html?idocorrencia=${ocorrencia.id}" role="button">Editar ocorrência</a></td>
-							</tr>
-						</c:forEach>
+				<tr>
+					<td>{{o.id}}</td>
+					<td><a href="http://maps.google.com/?q={{o.tb_localizacao_id.latitude}},{{o.tb_localizacao_id.longitude}}"> Clique para ver no mapa </a></td>
+					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+					<td><a href="#"> Clique para abrir a imagem </a></td>
+					{% if o.emergencia == 1 %}
+						<td> Sim</td>
+					{% else %}
+						<td> Não </td>
+					{% endif %}
+                	<td><a class="btn btn-primary" href="#" role="button">Ver Descrição</a></td>
+                	<td><a class="btn btn-success" href="#" role="button">Editar ocorrência</a></td>
+			{% endfor %}
+			    </tr>
 					</table>
 			   </div>
           </div>
