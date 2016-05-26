@@ -21,13 +21,41 @@
                     <fieldset>
 			   <div id="map"></div>
     <script>
+      
       function initMap() {
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
           center: {lat: -15.763606, lng: -47.869636},
-          zoom: 15
+          zoom: 17
         });
+        google.maps.event.addListener(map, 'click', function(event) {
+           posicionaMarcador(event.latLng);       
+        });
+        
+        var marcador;
+        function posicionaMarcador(posicao){
+          document.getElementById("posicao").value = posicao;
+          
+          if (marcador){
+            marcador.setPosition(posicao);
+          } else {          
+            // Inserindo o marcador
+            marcador = new google.maps.Marker({
+              position: posicao,
+              map: map,
+              icon: {
+                //path: google.maps.SymbolPath.CIRCLE,
+                fillColor: 'red',
+                fillOpacity: .2,
+                strokeColor: 'white',
+                strokeWeight: .5,
+                scale: 10
+              }
+            });
+          }  
+        }
       }
+      
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
         async defer></script>
@@ -47,8 +75,10 @@
 			   <p>imagem:</p>
                <input type="file" name="imagem"/>
               </div>
+              <input type="hidden" id="posicao" name="posicao" value="">
               <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
             </fieldset>
+            
               </form>
           </div>
           <input type="submit" />
