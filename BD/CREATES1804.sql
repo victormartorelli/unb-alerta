@@ -27,10 +27,10 @@ Select * from `projeto-lp`.tb_usuario;
 
 INSERT INTO `projeto-lp`.`tb_ocorrencia` (data, hora, validade, atendida, emergencia, vitimado, resposta,
 usuario_ID, vigilante_ID, tb_categoria_ID, tb_localizacao_ID) VALUES 
-("2016-04-26", "2016-04-26 14:55:23", 'S', 0, 1, 1, "Mantenha a calma", 1, 2, 2, 1);
+("2016-04-26", "14:55:23", 'S', 0, 1, 1, "Mantenha a calma", 1, 2, 2, 1);
 
 INSERT INTO `projeto-lp`.`tb_ocorrencia` (data, hora, validade, atendida, emergencia, vitimado, resposta,
 usuario_ID, vigilante_ID, tb_categoria_ID, tb_localizacao_ID, descricao) VALUES 
-("2015-12-18", "2015-12-18 12:10:32", 'N', 1, 0, 0, "Estamos acionando uma viatura", 3, 2, 4, 2, 
+("2015-12-18", "12:10:32", 'N', 1, 0, 0, "Estamos acionando uma viatura", 3, 2, 4, 2, 
 "Avistei um telefone publico sendo depredado.");
 Select * from `projeto-lp`.tb_ocorrencia;
