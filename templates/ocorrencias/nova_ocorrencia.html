@@ -1,11 +1,5 @@
 {% extends "base.html"%}
 {% block content %}
-    <style>
-      #map {
-        width: 525px;
-        height: 400px;
-      }
-    </style>
 
   <div id = "fundo">
     <div class="container">
@@ -13,48 +7,57 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Cadastro</h3>
+            <h3>Criar Ocorrência</h3>
           </div>
+        </br>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <p>Tipo:</p>
+                {{ form.tb_categoria_ID }}
+            </div>
+            <div class="form-group">
+              <p>Data:</p>
+                {{ form.data }}
+            </div>
+            <div class="form-group">
+              <p>Hora:</p>
+                {{ form.hora }}
+            </div>
+            <div class="form-group">
+              <p>Emergencia?</p>
+              {{ form.emergencia }}
+            </div>
+            <div class="form-group">
+              Descrição: </br>{{ form.descricao }}
+            </div>
+            <div class="form-group">
+              Validade: </br>{{ form.validade }}
+            </div>
+            <div class="form-group">
+              Atendida: </br>{{ form.atendida }}
+            </div>
+            <div class="form-group">
+              Vitimado: </br>{{ form.vitimado }}
+            </div>
+            <div class="form-group">
+              ID USUARIO: </br>{{ form.usuario_ID }}
+            </div>
+            <div class="form-group">
+              Latitude: </br>{{ form.latitude }}
+            </div>
+            <div class="form-group">
+              Longitude: </br>{{ form.longitude }}
+            </div>
+            <div class="form-group">
+              Vigilante ID: </br>{{ form.vigilante_ID }}
+            </div>
 
-          <div class="panel-body">
-            <form action="demo_form.asp" accept-charset="UTF-8" role="form">
-                    <fieldset>
-			   <div id="map"></div>
-    <script>
-      function initMap() {
-        var mapDiv = document.getElementById('map');
-        var map = new google.maps.Map(mapDiv, {
-          center: {lat: -15.763606, lng: -47.869636},
-          zoom: 15
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
-        async defer></script>
-        <form action="" method="post">
-              <div class="form-group">
-                <p>Tipo:</p>
-                  {{ form.tb_categoria_id }}
-              </div>
-              <div class="form-group">
-                <p>Emergencia?</p>
-                {{ form.emergencia }}
-              </div>
-              <div class="form-group">
-               Descrição: </br>{{ form.descricao }}
-              </div>
-              <div class="form-group">
-			   <p>imagem:</p>
-               <input type="file" name="imagem"/>
-              </div>
-              <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
-            </fieldset>
-              </form>
-          </div>
-          <input type="submit" />
-          </form>
-          </div>
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
+        </form>
         </div>
+      </div>
+      </div>
     </div>
   <div>
 {% endblock %}
