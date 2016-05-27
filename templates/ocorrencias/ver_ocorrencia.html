@@ -28,7 +28,7 @@
 					{% else %}
 						<td> Não </td>
 					{% endif %}
-                	<td><a class="btn btn-primary" href="#" role="button">Ver Descrição</a></td>
+                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
                 	<td><a class="btn btn-success" href="#" role="button">Editar ocorrência</a></td>
 			{% endfor %}
 			    </tr>
