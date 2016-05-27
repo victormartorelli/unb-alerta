@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% block content %}
+  <div id = "fundo">
+    <div class="container">
+      <div class ="row">
+          <h1> Descrição da ocorrência (Cor segue tipo *) </h1>
+          <div id="map">
+            <script>
+              function initMap() {
+                var mapDiv = document.getElementById('map');
+                var map = new google.maps.Map(mapDiv, {
+                  center: {lat: -15.763606, lng: -47.869636},
+                  zoom: 15
+                });
+              }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="detalhes" role="alert">
+        Detalhes: As ${data}, a vitima relatou o seguinte fato:
+        ${descricao}
+      </div>
+      <div class="relato" role="alert">
+        Relato da vitima: ${relato}
+      </div>
+      
+      <h4> Imagem (Cor segue tipo *)</h4>
+
+      <div class="imagem" >
+        <img src="" alt="Registro do momento">
+      </div>
+
+    </div> 
+{% endblock %}
