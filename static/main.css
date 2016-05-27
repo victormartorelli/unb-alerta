@@ -19,7 +19,6 @@ space a{
   top: 10px;
 }
 
-
 .nav a {
   color: #5a5a5a;
   font-size: 11px;
@@ -32,10 +31,9 @@ space a{
   display: inline;
 }
 #fundo{
-    background: url(http://my
-list.com/img/parallax/back.png);
-  background-color: #444;
-    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
+    background: url("back.png");
+    background-color: #444;
+    background: url("pinlayer2.png"),url("pinlayer2.png"),url("pinlayer2.png");    
 }
 
 .vertical-offset-100{
@@ -84,6 +82,23 @@ list.com/img/parallax/back.png);
   font-size: 20px;
   color: #1c2c48;
 }
+
+h1{
+  text-align: center;
+  color:green;
+}
+h4{
+  text-align: center;
+  color: green;
+}
+#map{
+  width: 30%;
+  height: 50%;
+  margin-top: 3%;
+  margin-left: 10%;
+  margin-bottom: 3%;
+}
+
 #cadastro{
     background:#efefef;
     height:500px;
@@ -103,6 +118,41 @@ list.com/img/parallax/back.png);
     font-family: "Calibri", serif;
     height: 40px;
 }
+
+.detalhes{
+  margin-right:5%; 
+  margin-left:5%;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.relato{
+  margin-right:5%; 
+  margin-left:5%;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.imagem{
+  text-align: center;
+}
+
+.icone{
+  margin-right: 90%;
+
+}
+
 #txt{
   height: 35px;
   width: 250px;
