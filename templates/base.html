@@ -1,7 +1,6 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html>
 
   <head>
     <meta http-equive ="Content-Type" content ="text/html, charset-utf-8">
@@ -13,16 +12,23 @@
   </head>
 
   <body>
+    <!--
     <div id="titulo">
       <space>
         <a href="#">UNB ALERTA</a><br>
       </space>
     </div>
-
-    <!-- Nao consegui botar o bootstrap -->
-    <ul class="nav nav-pills">
-      <div class="container">
-        <ul class= "pull-right">
+    -->
+    
+    <div class="container">
+      <ul class="pull-left">
+        <ul class="nav nav-pills">
+          <li role="presentation" class="active"><a href="#">UNB ALERTA</a></li>
+          <li role="presentation" ><a href="#">ver mapa</a></li>
+        </ul>
+      </ul>
+      <ul class= "pull-right">
+        <ul class="nav nav-pills">
           <li role="presentation" ><a href="nova_ocorrencia.html">fazer ocorrencia</a></li>
           <li role="presentation" ><a href="ocorrencias">minhas ocorrencias</a></li>
           <li role="presentation" ><a href="alter_usu.php"> perfil</a></li>
@@ -30,11 +36,8 @@
           <li role="presentation" ><a href="#">Entrar</a></li>
           <li role="presentation" ><a href="inicial.html">sair</a></li>
         </ul>
-        <ul class="pull-left">
-          <li role="presentation" ><a href="#">ver mapa</a></li>
-        </ul>
-      </div>
-    </ul>
+      </ul>
+    </div>
   {% block content %}
   {% endblock %}
   </body>
