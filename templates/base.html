@@ -23,7 +23,7 @@
       <ul class= "pull-right">
         <ul class="nav nav-pills">
           {% if user.is_authenticated %} <!-- n sei pq n funciona -->
-            <li role="presentation" ><a href="nova_ocorrencia.html">Fazer Ocorrencia</a></li>
+            <li role="presentation" ><a href="{% url 'criar_ocorrencia' %}">fazer ocorrencia</a></li>
             <li role="presentation" ><a href="ocorrencias">Minhas Ocorrencias</a></li>
             <li role="presentation" ><a href="alter_usu.php">Perfil</a></li>
             <li role="presentation" ><a href="inicial.html">Sair</a></li>
