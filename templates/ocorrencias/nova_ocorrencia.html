@@ -1,6 +1,50 @@
 {% extends "base.html"%}
 {% block content %}
-
+<script>
+      
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        
+        //navigator.geolocation.getCurrentPosition(successo, erro);
+        
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: -15.763606, lng: -47.869636},
+          zoom: 17
+        });
+        google.maps.event.addListener(map, 'click', function(event) {
+           posicionaMarcador(event.latLng);       
+        });
+        
+        var marcador;
+        function posicionaMarcador(posicao){
+          document.getElementById("posicao").value = posicao;
+          document.getElementById("resultado").innerHTML = posicao;
+          
+          if (marcador){
+            marcador.setPosition(posicao);
+          } else {          
+            // Inserindo o marcador
+            marcador = new google.maps.Marker({
+              position: posicao,
+              map: map,
+              icon: {
+                //path: google.maps.SymbolPath.CIRCLE,
+                fillColor: 'red',
+                fillOpacity: .2,
+                strokeColor: 'white',
+                strokeWeight: .5,
+                scale: 10
+              }
+            });
+          }  
+        }
+      }
+      
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
+    </script>
+<div id="map"></div>
   <div id = "fundo">
     <div class="container">
     <div class="row vertical-offset-100">
