@@ -80,14 +80,6 @@ space a{
   font-weight: bold;
 }
 
-
-.jumbotron h5 {
-  color: yellow;
-  font-size: 63px;  
-  font-family: 'Calibri';
-  font-weight: bold;
-}
-
 .jumbotron p {
   font-size: 20px;
   color: #1c2c48;
@@ -192,4 +184,12 @@ h4{
   font-size:15px;
   font-family: "Calibri", serif;
   height: 40px;
+}
+
+.dicas {
+  text-align: center;
+}
+
+.dicas h5 {
+  
 }
