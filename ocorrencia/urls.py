@@ -7,9 +7,11 @@ urlpatterns = [
     url(r'^ocorrencias/$',
         ListaOcorrenciasView.as_view(), name='lista_ocorrencias'),
 
-    url(r'^ocorrencias/criar-ocorrencia/(?P<pk>\d+)$',
+    url(r'^ocorrencias/criar-ocorrencia/$',
         CriarOcorrenciaView.as_view(), name='criar_ocorrencia'),
 
     url(r'^ocorrencias/(?P<pk>\d+)$',
-        TemplateView.as_view(template_name='ocorrencias/descricao_ocorrencia.html'), name='ver_ocorrencia')
+        TemplateView.as_view(
+            template_name='ocorrencias/descricao_ocorrencia.html'),
+        name='ver_ocorrencia')
 ]
