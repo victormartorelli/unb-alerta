@@ -13,14 +13,6 @@
   </head>
 
   <body>
-    <!--
-    <div id="titulo">
-      <space>
-        <a href="#">UNB ALERTA</a><br>
-      </space>
-    </div>
-    -->
-    
     <div class="container">
       <ul class="pull-left">
         <ul class="nav nav-pills">
@@ -30,12 +22,15 @@
       </ul>
       <ul class= "pull-right">
         <ul class="nav nav-pills">
-          <li role="presentation" ><a href="{% url 'criar_ocorrencia' %}">fazer ocorrencia</a></li>
-          <li role="presentation" ><a href="ocorrencias">minhas ocorrencias</a></li>
-          <li role="presentation" ><a href="alter_usu.php"> perfil</a></li>
-          <li role="presentation" ><a href="#">Cadastrar</a></li>
-          <li role="presentation" ><a href="#">Entrar</a></li>
-          <li role="presentation" ><a href="inicial.html">sair</a></li>
+          {% if user.is_authenticated %} <!-- n sei pq n funciona -->
+            <li role="presentation" ><a href="{% url 'criar_ocorrencia' %}">fazer ocorrencia</a></li>
+            <li role="presentation" ><a href="ocorrencias">Minhas Ocorrencias</a></li>
+            <li role="presentation" ><a href="alter_usu.php">Perfil</a></li>
+            <li role="presentation" ><a href="inicial.html">Sair</a></li>
+          {% else %}
+            <li role="presentation" ><a href="#">Cadastrar</a></li>
+            <li role="presentation" ><a href="#">Entrar</a></li>
+          {% endif %}
         </ul>
       </ul>
     </div>
@@ -43,3 +38,13 @@
   {% endblock %}
   </body>
 </html>
+
+
+
+    <!--
+    <div id="titulo">
+      <space>
+        <a href="#">UNB ALERTA</a><br>
+      </space>
+    </div>
+    -->
