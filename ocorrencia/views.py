@@ -32,9 +32,10 @@ class CriarOcorrenciaView(CreateView):
     model = Ocorrencia
 
     def get_success_url(self):
-        return reverse('ocorrencia')
+        return reverse('lista_ocorrencias')
 
     def get_context_data(self, **kwargs):
+
         context = super(CriarOcorrenciaView, self).get_context_data(
             **kwargs)
         return context
@@ -42,3 +43,13 @@ class CriarOcorrenciaView(CreateView):
     def form_valid(self, form):
         form.save()
         return redirect(self.get_success_url())
+
+    def post(self, request, *args, **kwargs):
+        # import ipdb; ipdb.set_trace()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)

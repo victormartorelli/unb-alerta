@@ -3,6 +3,11 @@ INSERT INTO `projeto-lp`.`tb_tipoUsuario` (tipo) VALUES ("Usuario");
 INSERT INTO `projeto-lp`.`tb_tipoUsuario` (tipo) VALUES ("Administrador");
 Select * from `projeto-lp`.tb_tipoUsuario;
 
+INSERT INTO `projeto-lp`.`tb_localizacao` (latitude, longitude) VALUES (-15.764941,-47.870677); /*RU da UnB*/
+INSERT INTO `projeto-lp`.`tb_localizacao` (latitude, longitude) VALUES (-22.9519875,-43.2109869); /*Cristo Redentor*/
+INSERT INTO `projeto-lp`.`tb_localizacao` (latitude, longitude) VALUES (52.3747384,4.7581864); /*Amsterdam*/
+Select * from `projeto-lp`.tb_localizacao;
+
 INSERT INTO `projeto-lp`.`tb_categoria` (tipo) VALUES ("Movimentacao estranha");
 INSERT INTO `projeto-lp`.`tb_categoria` (tipo) VALUES ("Assalto a mao armada");
 INSERT INTO `projeto-lp`.`tb_categoria` (tipo) VALUES ("Agressão fisica");
@@ -21,11 +26,11 @@ INSERT INTO `projeto-lp`.`tb_usuario` (nome, email, login, senha, status, tb_tip
 Select * from `projeto-lp`.tb_usuario;
 
 INSERT INTO `projeto-lp`.`tb_ocorrencia` (data, hora, validade, atendida, emergencia, vitimado, resposta,
-usuario_ID, vigilante_ID, tb_categoria_ID, latitude, longitude) VALUES 
-("2016-04-26", "14:55:23", 'S', 0, 1, 1, "Mantenha a calma", 1, 2, 2, -15.764941, -47.870677);
+usuario_ID, vigilante_ID, tb_categoria_ID, tb_localizacao_ID) VALUES 
+("2016-04-26", "14:55:23", 'S', 0, 1, 1, "Mantenha a calma", 1, 2, 2, 1);
 
 INSERT INTO `projeto-lp`.`tb_ocorrencia` (data, hora, validade, atendida, emergencia, vitimado, resposta,
-usuario_ID, vigilante_ID, tb_categoria_ID, descricao, latitude, longitude) VALUES 
-("2015-12-18", "12:10:32", 'N', 1, 0, 0, "Estamos acionando uma viatura", 3, 2, 4, 
-"Avistei um telefone publico sendo depredado.", -22.9519875, -43.2109869);
+usuario_ID, vigilante_ID, tb_categoria_ID, tb_localizacao_ID, descricao) VALUES 
+("2015-12-18", "12:10:32", 'N', 1, 0, 0, "Estamos acionando uma viatura", 3, 2, 4, 2, 
+"Avistei um telefone publico sendo depredado.");
 Select * from `projeto-lp`.tb_ocorrencia;
