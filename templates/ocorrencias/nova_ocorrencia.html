@@ -1,50 +1,118 @@
 {% extends "base.html"%}
 {% block content %}
-<script>
-      
-      function initMap() {
-        var mapDiv = document.getElementById('map');
-        
-        //navigator.geolocation.getCurrentPosition(successo, erro);
-        
-        var map = new google.maps.Map(mapDiv, {
-          center: {lat: -15.763606, lng: -47.869636},
-          zoom: 17
+<style type="text/css">
+      #map { height: 50%; width:50%;}
+</style>
+<div id="map"></div>
+<script type="text/javascript">
+
+var map;
+function initMap() {
+  var ICCCoords = [
+    new google.maps.LatLng(-15.760398,-47.870296),
+    new google.maps.LatLng(-15.760567,-47.870956),
+    new google.maps.LatLng(-15.763245,-47.870163),
+    new google.maps.LatLng(-15.764228,-47.869485),
+    new google.maps.LatLng(-15.765899,-47.867105),
+    new google.maps.LatLng(-15.765350,-47.866690),
+    new google.maps.LatLng(-15.763843,-47.868781),
+    new google.maps.LatLng(-15.762765,-47.869574)  
+  ];
+
+  var UNB_Coords = [
+    new google.maps.LatLng(-15.735485, -47.885615),
+    new google.maps.LatLng(-15.762695, -47.876887),
+    new google.maps.LatLng(-15.769964, -47.875081),
+    new google.maps.LatLng(-15.783380, -47.873746),
+    new google.maps.LatLng(-15.774848, -47.863679),
+    new google.maps.LatLng(-15.763613, -47.862432),
+    new google.maps.LatLng(-15.763530, -47.861102),
+    new google.maps.LatLng(-15.763530, -47.861102),
+    new google.maps.LatLng(-15.768959, -47.855091),
+    new google.maps.LatLng(-15.765684, -47.851076),
+    new google.maps.LatLng(-15.760552, -47.854213),
+    new google.maps.LatLng(-15.759241, -47.854846),
+    new google.maps.LatLng(-15.758828, -47.855629),
+    new google.maps.LatLng(-15.759055, -47.857335),
+    new google.maps.LatLng(-15.762865, -47.861444),
+    new google.maps.LatLng(-15.752488, -47.871733),
+    new google.maps.LatLng(-15.744409, -47.879620),
+    new google.maps.LatLng(-15.735962, -47.884545),
+    new google.maps.LatLng(-15.735291, -47.885317)  
+  ];
+  var ICCPolygon = new google.maps.Polygon({
+    // Coordenadas do seu objeto
+    paths: ICCCoords
+    // Cor do da linha
+    //strokeColor: '#3300FF',
+    // Opacidade da linha
+    //strokeOpacity: 0.8,
+    // Espessura da linha
+    //strokeWeight: 2,
+    // Cor de preenchimento do objeto
+    //fillColor: '#942E7C',
+    // Opacidade do preenchimento
+    //fillOpacity: 0.35
+  });
+  var UNB_Polygon = new google.maps.Polygon({
+    paths: UNB_Coords //,
+    //strokeColor: '#3300FF',
+    //strokeOpacity: 0.8,
+    //strokeWeight: 2,
+    //fillColor: '#942E7C',
+    //filOpacity: 0.35  
+  });
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -15.763606, lng: -47.869636},
+          zoom: 17,
+  });
+  
+  var marcador = '';
+  var pertence = false;
+  google.maps.event.addListener(map, 'click', function(e) {
+    var local = e.latLng;
+    pertence =
+        google.maps.geometry.poly.containsLocation(local, UNB_Polygon) ?
+        true:
+        false;
+    
+    var mensagem = pertence ?
+        "" :
+        "Local inv&aacute;lido! Somente ocorr&ecirc;ncias dentro da UnB - Campus Darci Ribeiro";
+         
+    document.getElementById("mensagem").innerHTML = mensagem;
+    
+    
+    if (pertence){
+      if (marcador){
+        marcador.setPosition(local);
+        document.getElementById("resultado").value = local;
+      } else {          
+        document.getElementById("resultado").value = local;
+        // Inserindo o marcador
+        marcador = new google.maps.Marker({
+          position: local,
+          map: map,
+          icon: {
+            //path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'red',
+            fillOpacity: .2,
+            strokeColor: 'white',
+            strokeWeight: .5,
+            scale: 10
+          }
         });
-        google.maps.event.addListener(map, 'click', function(event) {
-           posicionaMarcador(event.latLng);       
-        });
-        
-        var marcador;
-        function posicionaMarcador(posicao){
-          document.getElementById("posicao").value = posicao;
-          document.getElementById("resultado").innerHTML = posicao;
-          
-          if (marcador){
-            marcador.setPosition(posicao);
-          } else {          
-            // Inserindo o marcador
-            marcador = new google.maps.Marker({
-              position: posicao,
-              map: map,
-              icon: {
-                //path: google.maps.SymbolPath.CIRCLE,
-                fillColor: 'red',
-                fillOpacity: .2,
-                strokeColor: 'white',
-                strokeWeight: .5,
-                scale: 10
-              }
-            });
-          }  
-        }
       }
-      
+    }else{
+      document.getElementById("resultado").value = '';
+    }
+  });
+}
+
 </script>
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
-  <div id="map"></div>
   <div id = "fundo">
     <div class="container">
     <div class="row vertical-offset-100">
@@ -56,6 +124,9 @@
         </br>
         <form action="" method="POST">
             {% csrf_token %}
+            <font color="red"><div id="mensagem"></div></font>
+            <input type="text" id="resultado" name="resultado" />
+          
             <div class="form-group">
               <p>Tipo:</p>
                 {{ form.tb_categoria_ID }}
