@@ -22,15 +22,12 @@
       </ul>
       <ul class= "pull-right">
         <ul class="nav nav-pills">
-          {% if user.is_authenticated %} <!-- n sei pq n funciona -->
             <li role="presentation" ><a href="{% url 'criar_ocorrencia' %}">fazer ocorrencia</a></li>
-            <li role="presentation" ><a href="ocorrencias">Minhas Ocorrencias</a></li>
-            <li role="presentation" ><a href="alter_usu.php">Perfil</a></li>
-            <li role="presentation" ><a href="inicial.html">Sair</a></li>
-          {% else %}
+            <li role="presentation" ><a href="{% url 'lista_ocorrencias' %}">Todas Ocorrências</a></li>
+            <li role="presentation" ><a href="#">Perfil</a></li>
+            <li role="presentation" ><a href="{% url 'inicio' %}">Sair</a></li>
             <li role="presentation" ><a href="#">Cadastrar</a></li>
             <li role="presentation" ><a href="#">Entrar</a></li>
-          {% endif %}
         </ul>
       </ul>
     </div>

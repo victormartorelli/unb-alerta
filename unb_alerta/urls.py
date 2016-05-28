@@ -21,7 +21,7 @@ from django.views.generic.base import TemplateView
 # import base.urls
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='inicial.html')),
+    url(r'^$', TemplateView.as_view(template_name='inicial.html'), name='inicio'),
     url(r'', include('administracao.urls')),
     url(r'', include('ocorrencia.urls')),
 

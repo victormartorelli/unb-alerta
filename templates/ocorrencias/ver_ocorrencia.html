@@ -20,7 +20,7 @@
             {% for o in object_list %}
 				<tr>
 					<td>{{o.id}}</td>
-					<td><a href="http://maps.google.com/?q={{o.tb_localizacao_id.latitude}},{{o.tb_localizacao_id.longitude}}"> Clique para ver no mapa </a></td>
+					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 					<td><a href="#"> Clique para abrir a imagem </a></td>
 					{% if o.emergencia == 1 %}
