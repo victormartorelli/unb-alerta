@@ -11,12 +11,17 @@ class Categoria(models.Model):
     tipo = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
+        verbose_name = ('Categoria')
+        verbose_name_plural = ('Categorias')
         managed = False
         db_table = 'tb_categoria'
 
     def __str__(self):
         return ('%(tipo)s') % {
             'tipo': self.tipo}
+
+    def meta(self):
+        return self._meta
 
 
 class Ocorrencia(models.Model):
@@ -46,3 +51,7 @@ class Ocorrencia(models.Model):
     def __str__(self):
         return ('%(data)s - %(id)s') % {
             'data': self.data, 'id': self.id}
+
+    def meta(self):
+        return self._meta
+

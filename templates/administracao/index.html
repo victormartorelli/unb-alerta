@@ -4,8 +4,30 @@
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
-        <div class="panel panel-success">
+        <div class="panel col-xs-12">
             <h1>Administração</h1>
+            <div class="panel-success">
+                <div class="panel-success col-xs-10 col-xs-offset-1">
+                {% for app in object_list %}
+                    </br>
+                    <div class="panel-heading">{{ app.verbose_name }}</div>
+                    <table class="table table-striped">
+                        {% for model in app.get_models %}
+                            <tr>
+                                <td class="col-xs-10"><p class="vertical_align">{{ model.meta.verbose_name_plural }}</p></td>
+                                <td class="col-xs-1">
+                                    <button type="button" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        Adicionar
+                                    </button>
+                                </td>
+                                <td class="col-xs-1"><button type="button" class="btn btn-success">Modificar</button></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
   </div>
