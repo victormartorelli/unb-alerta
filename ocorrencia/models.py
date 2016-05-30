@@ -1,10 +1,5 @@
 from django.db import models
 
-EMERGENCIA = [
-    (0, 'Não'),
-    (1, 'Sim'),
-]
-
 
 class Categoria(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)

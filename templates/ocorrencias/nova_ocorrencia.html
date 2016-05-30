@@ -90,11 +90,11 @@ function initMap() {
     if (pertence){
       if (marcador){
         marcador.setPosition(local);
-        document.getElementById("coord_latlgn").value = local;
-        document.getElementById("exibe_coord").innerHTML = local;
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
       } else {          
-        document.getElementById("coord_latlgn").value = local;
-        document.getElementById("exibe_coord").innerHTML = local;
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
         // Inserindo o marcador
         marcador = new google.maps.Marker({
           position: local,
@@ -110,8 +110,8 @@ function initMap() {
         });
       }
     }else{
-      document.getElementById("coord_latlgn").value = '';
-      document.getElementById("exibe_coord").innerHTML = '';
+      document.getElementById("latitude").value = '';
+      document.getElementById("longitude").value = '';
     }
   });
 }
@@ -120,6 +120,8 @@ function initMap() {
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
+
+
   <div id = "fundo">
     <div class="container">
     <div class="row vertical-offset-100">
@@ -131,50 +133,49 @@ function initMap() {
         </br>
         <form action="" method="POST">
             {% csrf_token %}
-	    <div id="map"></div>
-            <font color="red">
-	    <div id="mensagem"></div></font>
-            <input type="hidden" id="coord_latlgn" name="coord_latlgn" />
-            <div id="exibe_coord"></div>
+            
+            <p>Insira o local da Ocorrência clicando no mapa abaixo:</p></br>
+      	    
+            <div id="map"></div>
+                  <font color="red">
+      	    
+            <div id="mensagem"></div></font>
+                  <input type="hidden" id="latitude" name="latitude" />
+                  <input type="hidden" id="longitude" name="longitude" />
+                  <div id="exibe_coord"></div>
+            
             <div class="form-group">
-              <p>Tipo:</p>
+              <p>Tipo de Ocorrência:</p>
                 {{ form.tb_categoria_ID }}
             </div>
+            
             <div class="form-group">
-              <p>Data:</p>
+              <p>Data da Ocorrência:</p>
                 {{ form.data }}
             </div>
+            
             <div class="form-group">
-              <p>Hora:</p>
+              <p>Horário da Ocorrência:</p>
                 {{ form.hora }}
             </div>
+            
             <div class="form-group">
-              <p>Emergencia?</p>
+              <p>É uma emergência?</p>
               {{ form.emergencia }}
             </div>
+
+            <div class="form-group">
+              <p>Há alguma vítima?</p>
+              {{ form.vitimado }}
+            </div>
+
+              {{ form.atendida }}
+              {{ form.vigilante_ID }}
+              {{ form.usuario_ID }}
+              {{ form.validade }}
+            
             <div class="form-group">
               Descrição: </br>{{ form.descricao }}
-            </div>
-            <div class="form-group">
-              Validade: </br>{{ form.validade }}
-            </div>
-            <div class="form-group">
-              Atendida: </br>{{ form.atendida }}
-            </div>
-            <div class="form-group">
-              Vitimado: </br>{{ form.vitimado }}
-            </div>
-            <div class="form-group">
-              ID USUARIO: </br>{{ form.usuario_ID }}
-            </div>
-            <div class="form-group">
-              Latitude: </br>{{ form.latitude }}
-            </div>
-            <div class="form-group">
-              Longitude: </br>{{ form.longitude }}
-            </div>
-            <div class="form-group">
-              Vigilante ID: </br>{{ form.vigilante_ID }}
             </div>
 
         <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">

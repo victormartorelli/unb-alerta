@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView
+from django.views.generic import FormView, ListView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
@@ -25,13 +25,9 @@ class ListaOcorrenciasView(ListView):
         return context
 
 
-class CriarOcorrenciaView(CreateView):
+class CriarOcorrenciaView(FormView):
     template_name = "ocorrencias/nova_ocorrencia.html"
     form_class = OcorrenciaForm
-    model = Ocorrencia
-
-    def get_success_url(self):
-        return reverse('lista_ocorrencias')
 
     def get_context_data(self, **kwargs):
 
@@ -41,10 +37,16 @@ class CriarOcorrenciaView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return redirect(self.get_success_url())
+        return redirect(reverse('lista_ocorrencias'))
+
+    def get_initial(self):
+        return {'validade': 'N',
+                'atendida': 0,
+                'vigilante_ID': 1,
+                'usuario_ID': 1}
 
     def post(self, request, *args, **kwargs):
-        # import ipdb; ipdb.set_trace()
+        import ipdb; ipdb.set_trace()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 
