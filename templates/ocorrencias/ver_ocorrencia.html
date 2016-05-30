@@ -15,7 +15,7 @@
 							<th>Imagem</th>
 							<th>Emergência?</th>
 							<th>Descrição</th>
-							<th>Editar</th>
+							<th>Excluir</th>
 						</tr>
             {% for o in object_list %}
 				<tr>
@@ -29,7 +29,7 @@
 						<td> Não </td>
 					{% endif %}
                 	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
-                	<td><a class="btn btn-success" href="#" role="button">Editar ocorrência</a></td>
+                	<td><a class="btn btn-danger" href="#" role="button">Excluir ocorrência</a></td>
 			{% endfor %}
 			    </tr>
 					</table>
