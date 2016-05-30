@@ -9,27 +9,38 @@
     
     <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
     <div class="container">
       <ul class="pull-left">
         <ul class="nav nav-pills">
-          <li role="presentation" class="active"><a href="#">UNB ALERTA</a></li>
-          <li role="presentation" ><a href="#">ver mapa</a></li>
+          <li role="presentation" class="active"><a href="{% url 'inicio' %}">UNB ALERTA</a></li>
+          <li role="presentation" ><a href="#">Estatisticas no mapa</a></li>
         </ul>
       </ul>
       <ul class= "pull-right">
         <ul class="nav nav-pills">
             <li role="presentation" ><a href="{% url 'criar_ocorrencia' %}">fazer ocorrencia</a></li>
-            <li role="presentation" ><a href="{% url 'lista_ocorrencias' %}">Todas Ocorrências</a></li>
+            <li class="dropdown" role="presentation">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"             aria-expanded="false"> Ocorrencias <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'lista_ocorrencias' %}">Todas ocorrencias</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"> Minhas ocorrencias</a></li>
+              </ul>
+            </li>
             <li role="presentation" ><a href="#">Perfil</a></li>
             <li role="presentation" ><a href="{% url 'inicio' %}">Sair</a></li>
             <li role="presentation" ><a href="#">Cadastrar</a></li>
             <li role="presentation" ><a href="#">Entrar</a></li>
         </ul>
       </ul>
+      
+
     </div>
   {% block content %}
   {% endblock %}
