@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-from django.conf.urls.static import static
-
 from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -105,6 +103,9 @@ DATABASES = {
 
     }
 }
+
+MEDIA_ROOT = BASE_DIR.child("media")
+MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR.child("collected_static")

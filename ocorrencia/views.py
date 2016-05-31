@@ -40,13 +40,14 @@ class CriarOcorrenciaView(FormView):
         return redirect(reverse('lista_ocorrencias'))
 
     def get_initial(self):
-        return {'validade': 'N',
-                'atendida': 0,
+        return {'validade': False,
+                'atendida': False,
                 'vigilante_ID': 1,
-                'usuario_ID': 1}
+                'usuario_ID': 1,
+                'repetida': False}
 
     def post(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 

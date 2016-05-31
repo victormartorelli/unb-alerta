@@ -71,19 +71,19 @@ CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_ocorrencia` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `data` DATE NOT NULL,
   `hora` TIME NOT NULL,
+  `latitude` FLOAT NOT NULL,
+  `longitude` FLOAT NOT NULL,
   `descricao` TEXT NULL,
   `foto` VARCHAR(45) NULL,
-  `validade` CHAR NOT NULL,
-  `atendida` TINYINT(1) NOT NULL,
-  `emergencia` TINYINT(1) NOT NULL,
-  `vitimado` TINYINT(1) NOT NULL,
+  `validade` TINYINT(1) NULL DEFAULT NULL,
+  `atendida` TINYINT(1) NOT NULL DEFAULT FALSE,
+  `emergencia` TINYINT(1) NOT NULL DEFAULT FALSE,
+  `vitimado` TINYINT(1) NULL,
+  `repetida` TINYINT(1) NULL,
   `resposta` VARCHAR(45) NULL,
   `usuario_ID` INT NOT NULL,
   `vigilante_ID` INT NOT NULL,
   `tb_categoria_ID` INT NOT NULL,
-  `repetida` TINYINT(1) NULL,
-  `latitude` FLOAT NOT NULL,
-  `longitude` FLOAT NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
   INDEX `fk_tb_ocorrencia_tb_usuario1_idx` (`usuario_ID` ASC),
@@ -95,3 +95,4 @@ ENGINE = MyISAM;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

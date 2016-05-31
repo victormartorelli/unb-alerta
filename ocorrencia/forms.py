@@ -13,7 +13,7 @@ class OcorrenciaForm(ModelForm):
     )
     emergencia = forms.ChoiceField(
         label='Emergência?',
-        choices=[(0, 'Não'), (1, 'Sim')],
+        choices=[(False, 'Não'), (True, 'Sim')],
         widget=forms.Select(
             attrs={'class': 'selector'}))
 
