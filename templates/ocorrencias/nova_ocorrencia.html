@@ -1,12 +1,14 @@
 {% extends "base.html"%}
 {% block content %}
 <style type="text/css">
-      #map { 
-	width: 100% !important; 
-	height:250px !important;
-	margin-left:0% !important;
-	margin-top:0% !important;
-	overflow: visible !important;}
+  #map { 
+  	width: 80% !important; 
+  	height:350px !important;
+  	margin-left:10% !important;
+  	margin-top:0% !important;
+  	overflow: visible !important;
+    border : solid gray;
+  }
 </style>
 <script type="text/javascript">
 
@@ -121,20 +123,19 @@ function initMap() {
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
 
-
   <div id = "fundo">
     <div class="container">
-    <div class="row vertical-offset-100">
-      <div class="col-md-6 col-md-offset-3">
+    <div class="row vertical-offset-100 ">
+      <div class="col-md-7 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>Criar Ocorrência</h3>
+            <h6>Criar Ocorrência</h6>
           </div>
         </br>
         <form action="" method="POST">
             {% csrf_token %}
             
-            <p>Insira o local da Ocorrência clicando no mapa abaixo:</p></br>
+            <p><h3><u>Insira o local da ocorrência clicando no mapa abaixo:</u></h3></p></br>
       	    
             <div id="map"></div>
                   <font color="red">
@@ -145,28 +146,28 @@ function initMap() {
                   <div id="exibe_coord"></div>
             
             <div class="form-group">
-              <p>Tipo de Ocorrência:</p>
-                {{ form.tb_categoria_ID }}
+              <h3>Tipo de Ocorrência:</h3>
+                <h2>{{ form.tb_categoria_ID }}</h2>
+            </div>
+                       
+            <div class="form-group">
+              <h3>Data da Ocorrência:</h3>
+                <h2>{{ form.data }}</h2>
             </div>
             
             <div class="form-group">
-              <p>Data da Ocorrência:</p>
-                {{ form.data }}
+              <h3>Horário da Ocorrência:</h3>
+                <h2>{{ form.hora }}</h2>
             </div>
             
             <div class="form-group">
-              <p>Horário da Ocorrência:</p>
-                {{ form.hora }}
-            </div>
-            
-            <div class="form-group">
-              <p>É uma emergência?</p>
-              {{ form.emergencia }}
+              <h3>É uma emergência?</h3>
+              <h2>{{ form.emergencia }}</h2>
             </div>
 
             <div class="form-group">
-              <p>Há alguma vítima?</p>
-              {{ form.vitimado }}
+              <h3>Há alguma vítima?</h3>
+              <h2>{{ form.vitimado }}</h2>
             </div>
 
               {{ form.atendida }}
@@ -175,18 +176,20 @@ function initMap() {
               {{ form.validade }}
             
             <div class="form-group">
-              Imagem: </br>{{ form.foto }}
+              <h3>Imagem:</h3><h4>{{ form.foto }}</h4></br>
             </div>
 
             <div class="form-group">
-              Descrição: </br>{{ form.descricao }}
+              <h3>Descrição:</h3>
+              <h5>{{ form.descricao }}
+              </h5>
             </div>
 
-        <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
+        <input class="botao btn-sucesso " type="submit" value="Criar ocorrencia">
         </form>
         </div>
       </div>
       </div>
     </div>
-  <div>
+  </div>
 {% endblock %}
