@@ -118,7 +118,7 @@ h4{
 #cadastro td{
     outline: none;
     font-size:15px;
-    font-family: "Calibri", serif;
+    font-family: 'Shift', sans-serif;"Calibri", serif;
     height: 40px;
 }
 
@@ -128,7 +128,7 @@ h4{
     background-color: #dff0d8;
     border-color: #d6e9c6;
     color: #3c763d;
-	font-family:'Shift', sans-serif;
+	font-family: "Calibri", serif;
 
     padding: 15px;
     margin-bottom: 20px;
@@ -141,7 +141,7 @@ h4{
 
 
 .relato{
-	font-family: 'Shift', sans-serif;
+	font-family: "Calibri", serif;
 	margin-left:10px;
 	margin-right:10px;
   background-color: #fcf8e3;
