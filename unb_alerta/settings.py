@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 ALERTA_APPS = (
     'base',
     'ocorrencia',
+    'usuario',
 )
 
 INSTALLED_APPS = (

@@ -1,0 +1,81 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.db import transaction
+from django.forms import ModelForm, ValidationError
+
+from .models import Usuario
+
+
+class UsuarioForm(ModelForm):
+    senha = forms.CharField(
+        max_length=45,
+        label='Senha',
+        widget=forms.PasswordInput())
+
+    confirma_senha = forms.CharField(
+        max_length=45,
+        label='Confirmar Senha',
+        widget=forms.PasswordInput())
+
+    confirma_email = forms.CharField(
+        max_length=20,
+        label='Confirmar Email')
+
+    class Meta:
+        model = Usuario
+        fields = ['login',
+                  'email',
+                  'nome',
+                  'senha',
+                  'confirma_senha',
+                  'confirma_email',
+                  'cpf',
+                  'rg',
+                  'matricula',
+                  'sexo',
+                  'status',
+                  'data_nasc',
+                  'grupo_usuario']
+
+    def valida_igualdade(self, texto1, texto2, msg):
+        if texto1 != texto2:
+            raise ValidationError(msg)
+        return True
+
+    def clean(self):
+
+        if ('senha' not in self.cleaned_data or
+                'confirma_senha' not in self.cleaned_data):
+            raise ValidationError('Favor informar senhas atuais ou novas')
+
+        msg = 'As senhas não conferem.'
+        self.valida_igualdade(
+            self.cleaned_data['senha'],
+            self.cleaned_data['confirma_senha'],
+            msg)
+
+        if ('email' not in self.cleaned_data or
+                'confirma_email' not in self.cleaned_data):
+            raise ValidationError('Favor informar endereços de email')
+
+        msg = 'Os emails não conferem.'
+        self.valida_igualdade(
+            self.cleaned_data['email'],
+            self.cleaned_data['confirma_email'],
+            msg)
+
+        return self.cleaned_data
+
+    @transaction.atomic
+    def save(self, commit=False):
+        usuario = super(UsuarioForm, self).save(commit)
+
+        u = User.objects.create(
+            username=usuario.login,
+            email=usuario.email)
+        u.set_password(self.cleaned_data['senha'])
+        u.save()
+
+        usuario.user = u
+        usuario.save()
+        return usuario
