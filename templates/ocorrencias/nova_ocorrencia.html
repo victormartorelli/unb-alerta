@@ -1,12 +1,14 @@
 {% extends "base.html"%}
 {% block content %}
 <style type="text/css">
-      #map { 
-	width: 100% !important; 
-	height:250px !important;
-	margin-left:0% !important;
-	margin-top:0% !important;
-	overflow: visible !important;}
+  #map { 
+  	width: 80% !important; 
+  	height:350px !important;
+  	margin-left:10% !important;
+  	margin-top:0% !important;
+  	overflow: visible !important;
+    border : solid gray;
+  }
 </style>
 <script type="text/javascript">
 
@@ -121,20 +123,19 @@ function initMap() {
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
 
-
   <div id = "fundo">
     <div class="container">
-    <div class="row vertical-offset-100">
-      <div class="col-md-6 col-md-offset-3">
+    <div class="row vertical-offset-100 ">
+      <div class="col-md-7 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>Criar Ocorrência</h3>
+            <h6>Criar Ocorrência</h6>
           </div>
         </br>
         <form action="" method="POST">
             {% csrf_token %}
             
-            <p>Insira o local da Ocorrência clicando no mapa abaixo:</p></br>
+            <p><h5><u>Insira o local da ocorrência clicando no mapa abaixo:</u></h5></p></br>
       	    
             <div id="map"></div>
                   <font color="red">
@@ -148,7 +149,7 @@ function initMap() {
               <p>Tipo de Ocorrência:</p>
                 {{ form.tb_categoria_ID }}
             </div>
-            
+                       
             <div class="form-group">
               <p>Data da Ocorrência:</p>
                 {{ form.data }}
@@ -182,11 +183,11 @@ function initMap() {
               Descrição: </br>{{ form.descricao }}
             </div>
 
-        <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
+        <input class="botao" type="submit" value="Criar ocorrencia">
         </form>
         </div>
       </div>
       </div>
     </div>
-  <div>
+  </div>
 {% endblock %}
