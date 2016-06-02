@@ -4,4 +4,6 @@
 *.py~
 venvalerta
 venv
+.idea/
 collected_static
+media

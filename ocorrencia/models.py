@@ -1,10 +1,5 @@
 from django.db import models
 
-EMERGENCIA = [
-    (0, 'Não'),
-    (1, 'Sim'),
-]
-
 
 class Categoria(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
@@ -24,11 +19,12 @@ class Ocorrencia(models.Model):
     data = models.DateField()
     hora = models.TimeField()
     descricao = models.TextField(blank=True, null=True)
-    foto = models.CharField(max_length=45, blank=True, null=True)
-    validade = models.CharField(max_length=1)
-    atendida = models.IntegerField()
-    emergencia = models.IntegerField()
-    vitimado = models.IntegerField()
+    foto = models.ImageField(max_length=45, blank=True, null=True)
+    validade = models.BooleanField()
+    atendida = models.BooleanField()
+    emergencia = models.BooleanField()
+    vitimado = models.BooleanField()
+    repetida = models.BooleanField()
     resposta = models.CharField(max_length=45, blank=True, null=True)
     usuario_ID = models.IntegerField(db_column='usuario_ID')
     vigilante_ID = models.IntegerField(db_column='vigilante_ID')
