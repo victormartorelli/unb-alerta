@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from unb_alerta.utils import make_pagination
 
 from .models import Ocorrencia
+
 from .forms import OcorrenciaForm
 
 
