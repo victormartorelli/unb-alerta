@@ -160,6 +160,13 @@ h6{
     height: 40px;
 }
 
+.form-group {
+	font-family: 'Shift', sans-serif;
+	font-size: 15px;
+
+
+}
+
 .detalhes{
   	margin-right:5%; 
   	margin-left:5%;
