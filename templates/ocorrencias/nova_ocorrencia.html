@@ -12,46 +12,49 @@
         </br>
         <form action="" method="POST">
             {% csrf_token %}
-            <div class="form-group">
-              <p>Tipo:</p>
-                {{ form.tb_categoria_ID }}
-            </div>
-            <div class="form-group">
-              <p>Data:</p>
-                {{ form.data }}
-            </div>
-            <div class="form-group">
-              <p>Hora:</p>
+            <fieldset class="form-group">
+              <label for="Catergorias">Categorias</label>
+              <select class="form-control" id="exampleSelect1">
+                 <!-- {{ form.tb_categoria_ID }} -->
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="Data">Data</label> <!-- parei aqui -- >
+              <!--  {{ form.data }} -->
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="Hora">Hora</label>
                 {{ form.hora }}
-            </div>
-            <div class="form-group">
-              <p>Emergencia?</p>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="Emergencia">Emergencia?</label>
+              <input type="checkbox"> Check me out
               {{ form.emergencia }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Descrição: </br>{{ form.descricao }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Validade: </br>{{ form.validade }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Atendida: </br>{{ form.atendida }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Vitimado: </br>{{ form.vitimado }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               ID USUARIO: </br>{{ form.usuario_ID }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Latitude: </br>{{ form.latitude }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Longitude: </br>{{ form.longitude }}
-            </div>
-            <div class="form-group">
+            </fieldset>
+            <fieldset class="form-group">
               Vigilante ID: </br>{{ form.vigilante_ID }}
-            </div>
+            </fieldset>
 
         <input class="btn btn-lg btn-success btn-block" type="submit" value="Criar ocorrencia">
         </form>
@@ -61,3 +64,70 @@
     </div>
   <div>
 {% endblock %}
+
+<!--
+<form action="" method="POST">
+  <fieldset class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="exampleSelect1">Example select</label>
+    <select class="form-control" id="exampleSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="exampleSelect2">Example multiple select</label>
+    <select multiple class="form-control" id="exampleSelect2">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="exampleTextarea">Example textarea</label>
+    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" class="form-control-file" id="exampleInputFile">
+    <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+  </fieldset>
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+      Option one is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+      Option two can be something else and selecting it will deselect option one
+    </label>
+  </div>
+  <div class="radio disabled">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+      Option three is disabled
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+-->
