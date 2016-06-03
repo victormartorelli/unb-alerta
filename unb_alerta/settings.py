@@ -28,11 +28,15 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/?next='
+
 # Application definition
 
 ALERTA_APPS = (
     'base',
     'ocorrencia',
+    'usuario',
 )
 
 INSTALLED_APPS = (

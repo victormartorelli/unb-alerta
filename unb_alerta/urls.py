@@ -21,9 +21,12 @@ from django.views.generic.base import TemplateView
 # import base.urls
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='inicial.html'), name='inicio'),
+    url(r'^$', TemplateView.as_view(
+        template_name='inicial.html'),
+        name='inicio'),
     url(r'^admin/', admin.site.urls),
     url(r'', include('ocorrencia.urls')),
+    url(r'', include('usuario.urls')),
 
     # url(r'', include(ocorrencia.urls)),
 

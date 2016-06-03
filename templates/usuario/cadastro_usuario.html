@@ -1,0 +1,85 @@
+{% extends "base.html"%}
+{% block content %}   
+
+  <div id = "fundo">
+    <div class="container">
+      <div class="row vertical-offset-100">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Cadastro</h3>
+            </div>
+
+          <div class="panel-body">
+            <form action="" method="POST">
+              {% csrf_token %}
+              <fieldset>
+                
+                <div class="form-group">
+                  Nome de Usuário</br>
+                  {{ form.login }}
+                </div>
+                
+                <div class="form-group">
+                  Senha</br>
+                  {{ form.senha }}
+                </div>
+
+                <div class="form-group">
+                  Confirmar Senha</br>
+                  {{ form.confirma_senha }}
+                </div>
+
+                <div class="form-group">
+                  E-mail</br>
+                  {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                  Confirma E-mail</br>
+                  {{ form.confirma_email }}
+                </div>
+
+                <div class="form-group">
+                  Matrícula</br>
+                  {{ form.matricula }}
+                </div>
+
+                <div class="form-group">
+                  Nome Completo</br>
+                  {{ form.nome }}
+                </div>
+                
+                <div class="form-group">
+                  <p>Genero:</p>
+                  <input type="radio" name="sexo" id="sexo" value="1"> Masculino<br>
+                  <input type="radio" name="sexo" id="sexo" value="0"> Feminino<br>
+                </div>
+                
+                <div class="form-group">
+                  Data de Nascimento</br>
+                  {{ form.data_nasc }}
+                </div>
+
+                <div class="form-group">
+                  CPF</br>
+                  {{ form.cpf }}
+                </div>
+                
+                <div class="form-group">
+                  RG</br>
+                  {{ form.rg }}
+                </div>
+
+                {{ form.grupo_usuario }}
+                {{ form.status }}
+
+                
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar">
+              </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
