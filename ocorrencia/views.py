@@ -53,6 +53,12 @@ class CriarOcorrenciaView(FormView):
         form = self.get_form(form_class)
 
         if form.is_valid():
+            ocorrencia = form.save(commit=False)
+
+            if 'foto' in request.FILES:
+                ocorrencia.foto = request.FILES['foto']
+            ocorrencia.save()
             return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            return self.render_to_response(
+                {'form': form})

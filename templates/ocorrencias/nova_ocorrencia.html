@@ -131,7 +131,7 @@ function initMap() {
             <h6>Criar Ocorrência</h6>
           </div>
         </br>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             
             <p><h3><u>Insira o local da ocorrência clicando no mapa abaixo:</u></h3></p></br>
@@ -173,7 +173,6 @@ function initMap() {
               {{ form.vigilante_ID }}
               {{ form.usuario_ID }}
               {{ form.validade }}
-            
             
             <div class="form-group">
               <h3>Imagem:</h3><h4>{{ form.foto }}</h4></br>

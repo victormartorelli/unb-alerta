@@ -21,7 +21,12 @@
 					<td>{{o.id}}</td>
 					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
-					<td><a href="#"> Clique para abrir a imagem </a></td>
+
+					{% if o.foto %}
+					  <td><a href="#"> Clique para abrir a imagem </a></td>
+					{% else %}
+					  <td><a> Não possui imagem </a></td>
+					{% endif %}
 					{% if o.emergencia == 1 %}
 						<td> Sim</td>
 					{% else %}

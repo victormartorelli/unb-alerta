@@ -19,7 +19,11 @@ class Ocorrencia(models.Model):
     data = models.DateField()
     hora = models.TimeField()
     descricao = models.TextField(blank=True, null=True)
-    foto = models.ImageField(max_length=45, blank=True, null=True)
+    foto = models.ImageField(
+        max_length=45,
+        blank=True,
+        null=True,
+        upload_to='ocorrencia/%Y/%m/%d')
     validade = models.BooleanField()
     atendida = models.BooleanField()
     emergencia = models.BooleanField()
