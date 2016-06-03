@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import Categoria, Ocorrencia
 
 
+
 class OcorrenciaForm(ModelForm):
 
     tb_categoria_ID = forms.ModelChoiceField(
@@ -22,6 +23,7 @@ class OcorrenciaForm(ModelForm):
         choices=[(0, 'Não'), (1, 'Sim')],
         widget=forms.Select(
             attrs={'class': 'selector'}))
+       
 
     class Meta:
         model = Ocorrencia
