@@ -22,7 +22,7 @@ class Usuario(models.Model):
         db_column='RG',
         blank=True,
         null=True)
-    matricula = models.IntegerField(
+    matricula = models.CharField(
         blank=True,
         null=True,
         max_length=10)
