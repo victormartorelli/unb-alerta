@@ -21,6 +21,7 @@ space a{
 }
 */
 
+
 .nav a {
   color: #5a5a5a;
   font-size: 11px;
@@ -90,13 +91,13 @@ h1{
   color:green;
 }
 h2{
-  text-align: center;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 h3{
-  text-align: center;
+  margin-left: 10%;
   color: #393c3d;
   font-size: 100%;  
   font-family: 'Calibri';
@@ -104,17 +105,18 @@ h3{
 }
 h4{
   margin-top: 3%;
-  margin-left: 43%;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 h5{
   margin-top: 3%;
-  margin-left: 18%;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  font-color: inherit;
 }
 h6{
   text-align: center;
@@ -158,6 +160,13 @@ h6{
     font-size:15px;
     font-family: "Calibri", serif;
     height: 40px;
+}
+
+.form-group {
+	font-family: 'Shift', sans-serif;
+	font-size: 15px;
+
+
 }
 
 .detalhes{

@@ -24,7 +24,9 @@ class Usuario(models.Model):
         null=True)
     matricula = models.IntegerField(
         blank=True,
-        null=True)
+        null=True,
+        max_length=10)
+    
     sexo = models.CharField(
         max_length=1,
         blank=True,
