@@ -134,7 +134,7 @@ function initMap() {
         <form action="" method="POST">
             {% csrf_token %}
             
-            <p><h3><u>Insira o local da ocorrência clicando no mapa abaixo:</u></h3></p></br>
+            <p><h3>Insira o local da ocorrência clicando no mapa abaixo:</h3></p></br>
       	    
             <div id="map"></div>
                   <font color="red">
@@ -181,7 +181,7 @@ function initMap() {
 
             <div class="form-group">
               <h3>Descrição:</h3>
-              <h5><textarea rows="15" cols="50">{{form.descricao}}</textarea></h5>
+              <h5>{{form.descricao}}</h5>
             </div>
 
         <input class="botao btn1-sucesso " type="submit" value="Criar ocorrencia">
