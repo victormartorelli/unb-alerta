@@ -11,7 +11,7 @@
   	margin-left:10% !important;
   	margin-top:0% !important;
   	overflow: visible !important;
-    border : solid gray;
+    border : 3px solid rgba(211,211,211,0.4);
   }
 </style>
 
@@ -176,13 +176,13 @@ function initMap() {
             </div>
                        
             <div class="form-group">
-              <p>Data da Ocorrência:</p>
-                <input id="data" name = "data"/>
+              <h3>Data da Ocorrência:</h3>
+                <h4><input id="data" name = "data"/></h4>
             </div>
             
             <div class="form-group">
-              <p>Horário da Ocorrência:</p>
-                <input id="hora" name="hora"/>
+              <h3>Horário da Ocorrência:</h3>
+                <h4><input id="hora" name="hora"/></h4>
             </div>
             
             <div class="form-group">
@@ -201,7 +201,7 @@ function initMap() {
               {{ form.validade }}
             
             <div class="form-group">
-              <h3>Imagem:</h3><h4>{{ form.foto }}</h4></br>
+              <h3>Imagem:</h3><h4>{{ form.foto }}</h4>
             </div>
 
             <div class="form-group">

@@ -27,6 +27,13 @@ class OcorrenciaForm(ModelForm):
                             widget=forms.FileInput
                             )
 
+    descricao = forms.CharField(
+        widget=forms.Textarea(
+           attrs={'rows':10,
+               'cols':48,
+               'placeholder': 'Escreva aqui a \
+                    descricao da ocorrencia'}))
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
