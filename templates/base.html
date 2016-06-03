@@ -18,6 +18,7 @@
       <ul class="pull-left">
         <ul class="nav nav-pills">
           <li role="presentation" class="active"><a href="{% url 'inicio' %}">UNB ALERTA</a></li>
+          {% if user.is_authenticated %}
           <li role="presentation" ><a href="#">Estatisticas no mapa</a></li>
         </ul>
       </ul>
@@ -34,9 +35,12 @@
               </ul>
             </li>
             <li role="presentation" ><a href="#">Perfil</a></li>
-            <li role="presentation" ><a href="{% url 'inicio' %}">Sair</a></li>
-            <li role="presentation" ><a href="#">Cadastrar</a></li>
-            <li role="presentation" ><a href="#">Entrar</a></li>
+            <li role="presentation" ><a>{{ user.username }}</a></li>
+            <li role="presentation" ><a href="{% url 'logout' %}">Sair</a></li>
+            {% else %}
+            <li role="presentation" ><a href="{% url 'cadastrar_usuario' %}">Cadastre-se</a></li>
+            <li role="presentation" ><a href="{% url 'login' %}">Entrar</a></li>
+            {% endif %}
         </ul>
       </ul>
       

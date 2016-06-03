@@ -1,11 +1,11 @@
-from django.views.generic import CreateView
+from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
 from .forms import UsuarioForm
 
 
-class CriarUsuarioView(CreateView):
+class CriarUsuarioView(FormView):
     template_name = "usuario/cadastro_usuario.html"
     form_class = UsuarioForm
 
@@ -16,14 +16,11 @@ class CriarUsuarioView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return redirect('')
+        return redirect(reverse('inicio'))
 
-    # def get_initial(self):
-    #     return {'validade': False,
-    #             'atendida': False,
-    #             'vigilante_ID': 1,
-    #             'usuario_ID': 1,
-    #             'repetida': False}
+    def get_initial(self):
+        return {'status': 1,
+                'grupo_usuario': 1}
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()

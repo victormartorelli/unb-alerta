@@ -2,8 +2,21 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Usuario
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Username", max_length=30,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'name': 'username'}))
+
+    password = forms.CharField(
+        label="Password", max_length=30,
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', 'name': 'password'}))
 
 
 class UsuarioForm(ModelForm):
@@ -36,6 +49,9 @@ class UsuarioForm(ModelForm):
                   'status',
                   'data_nasc',
                   'grupo_usuario']
+
+        widgets = {'status': forms.HiddenInput(),
+                   'grupo_usuario': forms.HiddenInput()}
 
     def valida_igualdade(self, texto1, texto2, msg):
         if texto1 != texto2:
