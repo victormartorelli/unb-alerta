@@ -29,10 +29,9 @@ class OcorrenciaForm(ModelForm):
 
     descricao = forms.CharField(
         widget=forms.Textarea(
-           attrs={'rows':10,
-               'cols':48,
-               'placeholder': 'Escreva aqui a \
-                    descricao da ocorrencia'}))
+            attrs={'rows': 10,
+                   'cols': 48,
+                   'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
 
     class Meta:
         model = Ocorrencia
