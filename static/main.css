@@ -110,8 +110,11 @@ h4{
   line-height: inherit;
 }
 h5{
-  text-align: center;
-  color:green;
+  margin-top: 3%;
+  margin-left: 18%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 h6{
   text-align: center;
@@ -207,16 +210,16 @@ h6{
   margin-bottom: 1%;
 }
 
-.btn-sucesso:hover, .btn-sucesso:focus, .btn-sucesso:active, .btn-sucesso.active, .open .dropdown-toggle.btn-sucesso {
+.btn1-sucesso:hover, .btn1-sucesso:focus, .btn1-sucesso:active, .btn1-sucesso.active, .open .dropdown-toggle.btn-sucesso {
     color: #fff;
     background-color: #2d4d84;
     border-color: #2d4d84;
 }
-.btn:hover, .btn:focus {
+.btn1:hover, .btn1:focus {
     color: #333;
     text-decoration: none;
 }
-.btn:focus, .btn:active:focus, .btn.active:focus {
+.btn1:focus, .btn1:active:focus, .btn1.active:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
