@@ -1,4 +1,5 @@
 from django.views.generic import FormView, ListView
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
@@ -60,5 +61,7 @@ class CriarOcorrenciaView(FormView):
             ocorrencia.save()
             return self.form_valid(form)
         else:
+            mensagem = "Formulário Inválido"
+            messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})

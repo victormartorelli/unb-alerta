@@ -26,7 +26,7 @@ class Usuario(models.Model):
         blank=True,
         null=True,
         max_length=10)
-    
+
     sexo = models.CharField(
         max_length=1,
         blank=True,
