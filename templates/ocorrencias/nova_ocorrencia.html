@@ -147,7 +147,6 @@ function initMap() {
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
 
-
   <div id = "fundo">
     <div class="container">
     <div class="row vertical-offset-100 ">
@@ -157,6 +156,15 @@ function initMap() {
             <h6>Criar Ocorrência</h6>
           </div>
         </br>
+
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade in" style="text-align: center" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          {{ message|safe }}
+        </div>
+        {% endfor %}
 
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
