@@ -21,6 +21,7 @@ space a{
 }
 */
 
+
 .nav a {
   color: #5a5a5a;
   font-size: 11px;
@@ -34,7 +35,7 @@ space a{
 }
 #fundo{
     background: url("images/back.png");
-  background-color: #444;
+  	background-color: #444;
     background: url("images/pinlayer2.png"),url("images/back.png");    
 }
 
@@ -60,9 +61,9 @@ space a{
   margin-bottom:20px;
 }
 .jumbotron {
-      background: url("images/back.png");
+  background: url("images/back.png");
   background-color: #444;
-    background: url("images/pinlayer2.png"),url("images/back.png"); 
+  background: url("images/pinlayer2.png"),url("images/back.png"); 
   height: 05%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -90,38 +91,41 @@ h1{
   color:green;
 }
 h2{
-  text-align: center;
+  margin-top:1%;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 h3{
-  text-align: center;
+  margin-left: 10%;
   color: #393c3d;
   font-size: 100%;  
   font-family: 'Calibri';
   font-weight: bold;
 }
 h4{
-  margin-top: 3%;
-  margin-left: 43%;
+  margin-top: 1%;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 h5{
   margin-top: 3%;
-  margin-left: 18%;
+  margin-left: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  font-color: inherit;
 }
 h6{
   text-align: center;
   color: #1c2c48;
   font-size: 200%;  
-  font-family: 'Calibri';
+  font-family: 'Calibri',serif;
   font-weight: bold;
+  font-style: oblique;
 }
 
 #descricao{
@@ -158,6 +162,13 @@ h6{
     font-size:15px;
     font-family: "Calibri", serif;
     height: 40px;
+}
+
+.form-group {
+	font-family: 'Shift', sans-serif;
+	font-size: 15px;
+
+
 }
 
 .detalhes{

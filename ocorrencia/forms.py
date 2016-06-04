@@ -22,6 +22,16 @@ class OcorrenciaForm(ModelForm):
         choices=[(0, 'Não'), (1, 'Sim')],
         widget=forms.Select(
             attrs={'class': 'selector'}))
+    foto = forms.ImageField(label='Fotografia',
+                            required=False,
+                            widget=forms.FileInput
+                            )
+
+    descricao = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 10,
+                   'cols': 48,
+                   'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
 
     class Meta:
         model = Ocorrencia

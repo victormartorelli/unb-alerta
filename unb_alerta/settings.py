@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     # more
     'django_extensions',
     'djangobower',
+    'debug_toolbar',
     'bootstrap3',  # basically for django_admin_bootstrapped
     'crispy_forms',
     'easy_thumbnails',

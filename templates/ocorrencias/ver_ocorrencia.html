@@ -5,8 +5,8 @@
 <div class="container">
     <div class="row vertical-offset-100">
       
-        	<div class="panel panel-success">
-        		<div class="panel-heading">Todas as ocorrências</div>
+        	<div class="panel panel-default">
+        		<div class="panel-heading"><h6>Todas as ocorrências</h6></div>
 	        		<table class="table">
 						<tr>
 							<th>Número</th>
@@ -15,19 +15,26 @@
 							<th>Imagem</th>
 							<th>Emergência?</th>
 							<th>Descrição</th>
+							<th>Editar</th>
 						</tr>
             {% for o in object_list %}
 				<tr>
 					<td>{{o.id}}</td>
 					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
-					<td><a href="#"> Clique para abrir a imagem </a></td>
+
+					{% if o.foto %}
+					  <td><a href="#"> Clique para abrir a imagem </a></td>
+					{% else %}
+					  <td><a> Não possui imagem </a></td>
+					{% endif %}
 					{% if o.emergencia == 1 %}
 						<td> Sim</td>
 					{% else %}
 						<td> Não </td>
 					{% endif %}
                 	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
+                	<td><a class="btn btn-success" href=""  role="button">Editar ocorrencia</a></td>
 			{% endfor %}
 			    </tr>
 					</table>
