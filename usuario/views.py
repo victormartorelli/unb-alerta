@@ -1,4 +1,5 @@
 from django.views.generic import FormView
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
@@ -25,8 +26,11 @@ class CriarUsuarioView(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        import ipdb;ipdb.set_trace()
+
         if form.is_valid():
             return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            mensagem = "Formulário Inválido"
+            messages.add_message(request, messages.ERROR, mensagem)
+            return self.render_to_response(
+                {'form': form})
