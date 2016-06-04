@@ -31,7 +31,7 @@ class Usuario(models.Model):
         max_length=1,
         blank=True,
         null=True)
-    email = models.CharField(max_length=45)
+    email = models.EmailField(max_length=45)
     senha = models.CharField(max_length=45)
     status = models.IntegerField()
     data_nasc = models.DateField(blank=True, null=True)
