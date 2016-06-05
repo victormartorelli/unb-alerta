@@ -145,6 +145,51 @@ function initMap() {
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
 
+<script type="text/javascript">
+  function validateForm(){
+    var latitude = documents.form["cadastroOcorrenciaForm"]["latitude"];
+    var longitude =documents.form["cadastroOcorrenciaForm"]["longitude"]; 
+    // var tipoOcorrencia = documents.form["cadastroOcorrenciaForm"]["?"]; nao sei como faco com aquele form django
+    var dataOcorrencia = documents.form["cadastroOcorrenciaForm"]["data"];
+    var HorarioOcorrencia = documents.form["cadastroOcorrenciaForm"]["hora"];
+    // var emergencia = ; por padrai ja vem um NAO
+    // var algumaVitima = ; por padrao ja vem um NAO
+    // var imagem = ; nao e obrigatorio uma imagem
+    // var descricao = documents.form["cadastroOcorrenciaForm"]["?"]; nao sei como faco com aquele form django
+    if(latitude == null || latitude == ""){
+      alert("Houve um erro ao adquirir a latitude");
+      return false;
+    }
+    if(longitude == null || longitude == ""){
+      alert("Houve um erro ao adquirir a longitude");
+      return false;
+    }
+    
+  }
+</script>
+
+<!-- o script abaixo serviria para colocar direto a data de hj -->
+
+<script type="text/javascript">
+  function getDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = dd+'/'+mm+'/'+yyyy;
+    document.getElementById("data").setAttribute('value', today);  
+  }
+</script>
+
   <div id = "fundo">
     <div class="container">
     <div class="row vertical-offset-100 ">
@@ -164,7 +209,7 @@ function initMap() {
         </div>
         {% endfor %}
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form name="cadastroOcorrenciaForm" action="" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
             {% csrf_token %}
             
             <p><h3>Insira o local da ocorrência clicando no mapa abaixo:</h3></p></br>
