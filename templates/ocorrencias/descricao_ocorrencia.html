@@ -6,18 +6,20 @@
     <div class="row vertical-offset-100">
 		<div class="col-md-10 col-md-offset-1">
         <div class="panel panel-success">
-            <h1 class="painel-title" style="font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 200%;"> Descrição da ocorrência (Cor segue tipo *) </h1>
+		  <div class="panel-heading">
+            <h6> Descrição da ocorrência</h6>
+		  </div>
         <div id="map">
         </div>
         <div class="detalhes" role="alert">
-    Detalhes: As ${data}, a vitima relatou o seguinte fato:
-    ${descricao}
+    <p><b>Detalhes:</b> As ${data}, a vitima relatou o seguinte fato:
+    ${descricao}</p>
   </div>
   <div class="relato" role="alert">
-    Relato da vitima: ${relato} 
+    <p><b>Relato da vitima: </b>${relato} </p>
   </div>
   
-  <h1 class="painel-title" style="font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 100%;"> Imagem (Cor segue tipo *) </h1>
+  <h6 class="painel-title" style="font-size: 110%;"> Imagem </h6>
 
   <div class="imagem" >
     <img src="" alt="Registro do momento">
