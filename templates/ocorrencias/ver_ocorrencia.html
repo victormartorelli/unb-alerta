@@ -6,7 +6,7 @@
     <div class="row vertical-offset-100">
       
         	<div class="panel panel-default">
-        		<div class="panel-heading"><h6>Todas as ocorrências</h6></div>
+        		<div class="panel-heading"><h6> Todas as ocorrências</h6></div>
 	        		<table class="table">
 						<tr>
 							<th>Número</th>
@@ -24,7 +24,42 @@
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
 					{% if o.foto %}
-					  <td><a href="#"> Clique para abrir a imagem </a></td>
+					  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+
+					  <div id="myModal" class="modal"> 
+ 						<span class="close">×</span>
+  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">  						
+   					 	
+  					  </div>
+
+
+  					<script>
+					
+					var modal = document.getElementById('myModal');					
+					var link = document.getElementById("abreImagem");
+					
+					var span = document.getElementsByClassName("close")[0];					
+
+
+					link.onclick = function() {
+					modal.style.display = "block";
+					}
+
+					
+					span.onclick = function() {
+					modal.style.display = "none";
+					}
+
+					window.onclick = function(event) {
+					if (event.target == modal) {
+					    modal.style.display = "none";
+					}
+					}
+					</script>
+	
+</div>
+	
+					  </td>
 					{% else %}
 					  <td><a> Não possui imagem </a></td>
 					{% endif %}

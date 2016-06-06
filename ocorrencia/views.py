@@ -18,6 +18,7 @@ class ListaOcorrenciasView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListaOcorrenciasView, self).get_context_data(**kwargs)
+        # import ipdb; ipdb.set_trace()
 
         paginator = context['paginator']
         page_obj = context['page_obj']
@@ -45,11 +46,10 @@ class CriarOcorrenciaView(FormView):
         return {'validade': False,
                 'atendida': False,
                 'vigilante_ID': 1,
-                'usuario_ID': 1,
+                'usuario_ID': self.request.user.id,
                 'repetida': False}
 
     def post(self, request, *args, **kwargs):
-        # import ipdb; ipdb.set_trace()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
 

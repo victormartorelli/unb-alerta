@@ -82,6 +82,19 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
+        if len(self.cleaned_data['cpf']) != 11:
+            raise ValidationError('CPF deve ter 11 caracteres')
+
+        if len(self.cleaned_data['matricula']) > 10:
+            raise ValidationError(
+                'A matrícula deve ter ter no máximo 9 números')
+
+        msg = 'As senhas não conferem.'
+        self.valida_igualdade(
+            self.cleaned_data['senha'],
+            self.cleaned_data['confirma_senha'],
+            msg)
+
         return self.cleaned_data
 
     @transaction.atomic
