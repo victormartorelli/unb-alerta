@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'djangobower',
     'debug_toolbar',
     'bootstrap3',  # basically for django_admin_bootstrapped
-    'bootstrap_themes',
+    'bootstrap_themes', # temas do bootstrap
     'crispy_forms',
     'easy_thumbnails',
     'floppyforms',
