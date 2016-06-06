@@ -211,7 +211,7 @@ function initMap() {
         </div>
         {% endfor %}
 
-        <form name="cadastroOcorrenciaForm" action="" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <form class="form-horizontal" name="cadastroOcorrenciaForm" action="" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
             {% csrf_token %}
             
             <p><h3>Insira o local da ocorrência clicando no mapa abaixo:</h3></p></br>
