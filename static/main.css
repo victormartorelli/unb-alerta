@@ -102,7 +102,7 @@ space a{
   background: url("images/back.png");
   background-color: #444;
   background: url("images/pinlayer2.png"),url("images/back.png"); 
-  height: 05%;
+  height: 30%;
   background-repeat: no-repeat;
   background-size: cover;
 }
