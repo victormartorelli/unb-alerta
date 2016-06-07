@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.views.generic import FormView
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -28,6 +29,13 @@ class CriarUsuarioView(FormView):
         form = self.get_form(form_class)
 
         if form.is_valid():
+            send_mail(
+                'Confirmacao email',
+                'Obrigado por se cadastrar no UnBAlerta.',
+                'unbalerta@gmail.com',
+                [form.usuario.email],
+                fail_silently=False,
+            )
             return self.form_valid(form)
         else:
             mensagem = "Formulário Inválido"
