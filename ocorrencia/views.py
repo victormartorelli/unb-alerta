@@ -15,31 +15,14 @@ from .forms import OcorrenciaForm, ValidarOcorrenciaEditForm
 
 
 class ListaOcorrenciasView(LoginRequiredMixin, ListView):
-    template_name = "ocorrencias/ver_ocorrencia.html"
+    template_name = "ocorrencias/todas_ocorrencias.html"
     model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(validade=True)
+    queryset = Ocorrencia.objects.filter(validade=True,
+                                         atendida=True)
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(ListaOcorrenciasView, self).get_context_data(**kwargs)
-        # import ipdb; ipdb.set_trace()
-
-        paginator = context['paginator']
-        page_obj = context['page_obj']
-
-        context['page_range'] = make_pagination(
-            page_obj.number, paginator.num_pages)
-        return context
-
-
-class ListaValidacaoView(LoginRequiredMixin, ListView):
-    template_name = "ocorrencias/validacao_list.html"
-    model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(validade=False)
-    paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaValidacaoView, self).get_context_data(**kwargs)
         # import ipdb; ipdb.set_trace()
 
         paginator = context['paginator']
@@ -97,6 +80,24 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
                 {'form': form})
 
 
+class ListaValidacaoView(LoginRequiredMixin, ListView):
+    template_name = "ocorrencias/validacao_list.html"
+    model = Ocorrencia
+    queryset = Ocorrencia.objects.filter(atendida=False)
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaValidacaoView, self).get_context_data(**kwargs)
+        # import ipdb; ipdb.set_trace()
+
+        paginator = context['paginator']
+        page_obj = context['page_obj']
+
+        context['page_range'] = make_pagination(
+            page_obj.number, paginator.num_pages)
+        return context
+
+
 class ValidarOcorrenciaEditView(UpdateView):
     template_name = "ocorrencias/validacao_ocorrencia.html"
     form_class = ValidarOcorrenciaEditForm
@@ -118,9 +119,10 @@ class ValidarOcorrenciaEditView(UpdateView):
 
     def form_valid(self, form):
         ocorrencia = form.instance
+        ocorrencia.id = self.kwargs['pk']
         ocorrencia.save()
 
-        if form.data.get('repetida') is True:
+        if form.data.get('repetida') == 'True':
             Ocorrencia.objects.get(id=ocorrencia.id).delete()
 
         return redirect(reverse('lista_ocorrencias'))
@@ -128,7 +130,7 @@ class ValidarOcorrenciaEditView(UpdateView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        # import ipdb; ipdb.set_trace()
+
         if form.is_valid():
             return self.form_valid(form)
         else:
