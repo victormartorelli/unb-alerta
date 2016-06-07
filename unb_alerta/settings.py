@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'djangobower',
     'debug_toolbar',
     'bootstrap3',  # basically for django_admin_bootstrapped
+    'bootstrap_themes',
     'crispy_forms',
     'easy_thumbnails',
     'floppyforms',
@@ -119,6 +120,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
