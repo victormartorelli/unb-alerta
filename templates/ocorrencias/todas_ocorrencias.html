@@ -8,6 +8,10 @@
         	<div class="panel panel-default">
         		<div class="panel-heading"><h6> Todas as ocorrências</h6></div>
 	        		<table class="table">
+
+	        {% if vazio %}
+        		<h1> Não há nenhuma ocorrência a ser validada </h1>
+					{% else %}
 						<tr>
 							<th>Número</th>
 							<th>Localização</th>
@@ -16,58 +20,59 @@
 							<th>Emergência?</th>
 							<th>Descrição</th>
 						</tr>
-            {% for o in object_list %}
+					{% endif %}
+        {% for o in object_list %}
 				<tr>
 					<td>{{o.id}}</td>
 					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
-					{% if o.foto %}
-					  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+								{% if o.foto %}
+								  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
 
-					  <div id="myModal" class="modal"> 
- 						<span class="close">×</span>
-  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">  						
-   					 	
-  					  </div>
-
-
-  					<script>
-					
-					var modal = document.getElementById('myModal');					
-					var link = document.getElementById("abreImagem");
-					
-					var span = document.getElementsByClassName("close")[0];					
+								  <div id="myModal" class="modal"> 
+			 						<span class="close">×</span>
+			  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">  						
+			   					 	
+			  					  </div>
 
 
-					link.onclick = function() {
-					modal.style.display = "block";
-					}
+			  					<script>
+								
+								var modal = document.getElementById('myModal');					
+								var link = document.getElementById("abreImagem");
+								
+								var span = document.getElementsByClassName("close")[0];					
 
-					
-					span.onclick = function() {
-					modal.style.display = "none";
-					}
 
-					window.onclick = function(event) {
-					if (event.target == modal) {
-					    modal.style.display = "none";
-					}
-					}
-					</script>
-	
-</div>
-	
-					  </td>
-					{% else %}
-					  <td> Não possui imagem </td>
-					{% endif %}
-					{% if o.emergencia == 1 %}
-						<td><font color="red"> Sim </font></td>
-					{% else %}
-						<td> Não </td>
-					{% endif %}
-                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
+								link.onclick = function() {
+								modal.style.display = "block";
+								}
+
+								
+								span.onclick = function() {
+								modal.style.display = "none";
+								}
+
+								window.onclick = function(event) {
+								if (event.target == modal) {
+								    modal.style.display = "none";
+								}
+								}
+								</script>
+				
+			</div>
+				
+								  </td>
+								{% else %}
+								  <td> Não possui imagem </td>
+								{% endif %}
+								{% if o.emergencia == 1 %}
+									<td><font color="red"> Sim </font></td>
+								{% else %}
+									<td> Não </td>
+								{% endif %}
+			                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
 			{% endfor %}
 			    </tr>
 					</table>
