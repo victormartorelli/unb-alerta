@@ -29,7 +29,7 @@ class Ocorrencia(models.Model):
     emergencia = models.BooleanField()
     vitimado = models.BooleanField()
     repetida = models.BooleanField()
-    resposta = models.CharField(max_length=45, blank=True, null=True)
+    resposta = models.TextField(max_length=45, blank=True, null=True)
     usuario_ID = models.IntegerField(db_column='usuario_ID')
     vigilante_ID = models.IntegerField(db_column='vigilante_ID')
     tb_categoria_ID = models.ForeignKey(Categoria, db_column='tb_categoria_ID')
@@ -39,10 +39,12 @@ class Ocorrencia(models.Model):
     class Meta:
         verbose_name = ('Ocorrência')
         verbose_name_plural = ('Ocorrências')
-        unique_together = (("data", "id"),)
+        unique_together = (("id", "tb_categoria_ID", "data"),)
         managed = False
         db_table = 'tb_ocorrencia'
 
     def __str__(self):
-        return ('%(data)s - %(id)s') % {
-            'data': self.data, 'id': self.id}
+        return ('%(id)s - %(tipo)s - %(data)s') % {
+            'data': self.data,
+            'tipo': self.tb_categoria_ID.tipo,
+            'id': self.id}

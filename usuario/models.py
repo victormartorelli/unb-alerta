@@ -7,15 +7,16 @@ class Usuario(models.Model):
         Usuário cadastrado via web
     '''
     id = models.AutoField(db_column='ID', primary_key=True)
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
     nome = models.CharField(max_length=45)
     login = models.CharField(
         verbose_name='Nome de Usuário',
         unique=True,
         max_length=50)
-    cpf = models.BigIntegerField(
+    cpf = models.CharField(
         db_column='CPF',
         unique=True,
+        max_length=15,
         blank=True,
         null=True)
     rg = models.IntegerField(
@@ -31,7 +32,7 @@ class Usuario(models.Model):
         max_length=1,
         blank=True,
         null=True)
-    email = models.EmailField(max_length=45)
+    email = models.EmailField(max_length=45, unique=True)
     senha = models.CharField(max_length=45)
     status = models.IntegerField()
     data_nasc = models.DateField(blank=True, null=True)

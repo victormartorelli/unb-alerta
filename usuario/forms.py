@@ -1,7 +1,6 @@
 from django import forms
 
-from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
 from django.contrib.auth.forms import AuthenticationForm
@@ -82,8 +81,8 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
-        if len(self.cleaned_data['cpf']) != 11:
-            raise ValidationError('CPF deve ter 11 caracteres')
+        if len(self.cleaned_data['cpf']) != 14:
+            raise ValidationError('CPF deve ter 15 caracteres')
 
         if len(self.cleaned_data['matricula']) > 10:
             raise ValidationError(
@@ -109,4 +108,8 @@ class UsuarioForm(ModelForm):
 
         usuario.user = u
         usuario.save()
+
+        grupo = Group.objects.get(name='Usuário Comum')
+        u.groups.add(grupo)
+
         return usuario
