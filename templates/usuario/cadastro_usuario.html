@@ -16,7 +16,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $("#cpf").mask("00000000000", {placeholder: "___-___-___-__"});
+  $("#cpf").mask("000-000-000-00", {placeholder: "___-___-___-__"});
 });
 
 $(document).ready(function() {
@@ -30,7 +30,7 @@ $(document).ready(function() {
   <div id = "fundo">
     <div class="container">
       <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-5 col-md-offset-4">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h1 class="panel-title" style="color:#4E6c24; font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 200%">Cadastro</h1>
@@ -51,58 +51,58 @@ $(document).ready(function() {
                 
                 <div class="form-group">
                   Nome de Usuário</br>
-                  {{ form.login }}
+                  <h4>{{ form.login }}</h4>
                 </div>
                 
                 <div class="form-group">
                   Senha</br>
-                  {{ form.senha }}
+                 <h4> {{ form.senha }}</h4>
                 </div>
 
                 <div class="form-group">
                   Confirmar Senha</br>
-                  {{ form.confirma_senha }}
+                  <h4>{{ form.confirma_senha }}</h4>
                 </div>
 
                 <div class="form-group">
                   E-mail</br>
-                  {{ form.email }}
+                  <h4>{{ form.email }}</h4>
                 </div>
 
                 <div class="form-group">
                   Confirma E-mail</br>
-                  {{ form.confirma_email }}
+                  <h4>{{ form.confirma_email }}</h4>
                 </div>
 
                 <div class="form-group">
                   Matrícula</br>
-                  {{ form.matricula }}
+                  <h4>{{ form.matricula }}</h4>
                 </div>
 
                 <div class="form-group">
                   Nome Completo</br>
-                  {{ form.nome }}
+                 <h4> {{ form.nome }}</h4>
                 </div>
                 
                 <div class="form-group">
                   <p>Genero:</p>
-                  <input type="radio" name="sexo" id="sexo" value="1"> Masculino<br>
-                  <input type="radio" name="sexo" id="sexo" value="0"> Feminino<br>
+                  <h4><input type="radio" name="sexo" id="sexo" value="1"> Masculino</h4>
+                  <h4><input type="radio" name="sexo" id="sexo" value="0"> Feminino</h4>
                 </div>
                 
                 <div class="form-group">
                   Data de Nascimento</br>
-                  <input id="data_nasc" name="data_nasc"/>
+                 <h4> <input id="data_nasc" name="data_nasc"/></h4>
                 </div>
 
                 <div class="form-group">
                   CPF</br>
-                  <input id="cpf" name="cpf" />
+                  <h4><input id="cpf" name="cpf" /></h4>
                 </div>
                 
                 <div class="form-group">
                   RG</br>
-                  <input id"rg" name="rg" />
+                  <h4><input id"rg" name="rg" /></h4>
                 </div>
 
                 {{ form.grupo_usuario }}

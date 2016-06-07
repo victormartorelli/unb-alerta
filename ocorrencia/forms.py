@@ -2,6 +2,15 @@ from django import forms
 from django.forms import ModelForm
 from .models import Categoria, Ocorrencia
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
+
+my_default_errors = {
+    'required': 'Este campo é obrigatório',
+    'invalid': 'Insira um campo válido'
+}
+
 
 class OcorrenciaForm(ModelForm):
 
@@ -10,6 +19,7 @@ class OcorrenciaForm(ModelForm):
         required=True,
         queryset=Categoria.objects.all(),
         empty_label='Selecione',
+        error_messages=my_default_errors
     )
     emergencia = forms.ChoiceField(
         label='Emergência?',
@@ -22,6 +32,7 @@ class OcorrenciaForm(ModelForm):
         choices=[(0, 'Não'), (1, 'Sim')],
         widget=forms.Select(
             attrs={'class': 'selector'}))
+
     foto = forms.ImageField(label='Fotografia',
                             required=False,
                             widget=forms.FileInput
@@ -58,3 +69,62 @@ class OcorrenciaForm(ModelForm):
         cleaned_data = self.cleaned_data
 
         return cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super(OcorrenciaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+
+class ValidarOcorrenciaEditForm(OcorrenciaForm):
+
+    repetida = forms.ChoiceField(
+        label='É repetida?',
+        choices=[(False, 'Não'), (True, 'Sim')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    validade = forms.ChoiceField(
+        label='É válida?',
+        choices=[(False, 'Não'), (True, 'Sim')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    atendida = forms.ChoiceField(
+        label='Foi atendida?',
+        choices=[(False, 'Não'), (True, 'Sim')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    def __init__(self, *args, **kwargs):
+        super(ValidarOcorrenciaEditForm, self).__init__(*args, **kwargs)
+        self.fields['descricao'].required = False
+
+    class Meta:
+        model = Ocorrencia
+        fields = ['emergencia',
+                  'tb_categoria_ID',
+                  'vitimado',
+                  'data',
+                  'hora',
+                  'latitude',
+                  'longitude',
+                  'validade',
+                  'atendida',
+                  'vigilante_ID',
+                  'usuario_ID',
+                  'resposta',
+                  'repetida']
+
+        widgets = {'id': forms.HiddenInput(),
+                   'vigilante_ID': forms.HiddenInput(),
+                   'usuario_ID': forms.HiddenInput(),
+                   'data': forms.HiddenInput(),
+                   'hora': forms.HiddenInput(),
+                   'latitude': forms.HiddenInput(),
+                   'longitude': forms.HiddenInput()}
