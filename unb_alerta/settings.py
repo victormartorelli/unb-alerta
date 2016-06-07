@@ -121,6 +121,8 @@ STATICFILES_FINDERS = (
     'sass_processor.finders.CssFinder',
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 
