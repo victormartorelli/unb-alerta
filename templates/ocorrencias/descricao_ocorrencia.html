@@ -9,24 +9,27 @@
 		  <div class="panel-heading">
             <h6> Descrição da ocorrência</h6>
 		  </div>
-        <div id="map">
-        </div>
-        <div class="detalhes" role="alert">
-    <p><b>Detalhes:</b> As ${data}, a vitima relatou o seguinte fato:
-    ${descricao}</p>
-  </div>
-  <div class="relato" role="alert">
-    <p><b>Relato da vitima: </b>${relato} </p>
-  </div>
-  
-  <h6 class="painel-title" style="font-size: 110%;"> Imagem </h6>
+        
+  <div class="detalhes" role="alert"></div>
 
-  <div class="imagem" >
-    <img src="" alt="Registro do momento">
+  <div class="relato" role="alert">
+    <p><b>Relato da vitima: </b> {{object.descricao|default_if_none:"Não foi relatado nada"}} </p>
   </div>
+ 
+  <div class="relato" role="alert">
+    <p><b>Resposta do Vigilante: </b> {{object.resposta|default_if_none:"Não foi relatado nada"}} </p>
+  </div>
+
+  {% if object.foto %}
+    <h6 class="painel-title" style="font-size: 110%;"> Imagem </h6>
+
+    <div class="imagem" >
+      <img src={{object.foto.name}} alt="Registro do momento">
     </div>
-	</div>
+  {% endif %}
   </div>
+</div>
+</div>
 </div>
 
 {% endblock %}

@@ -8,6 +8,9 @@
         	<div class="panel panel-default">
         		<div class="panel-heading"><h6> Todas as ocorrências</h6></div>
 	        		<table class="table">
+	      {% if vazio %}
+        		<h1> Não há nenhuma ocorrência a ser validada </h1>
+				{% else %}
 						<tr>
 							<th>Número</th>
 							<th>Localização</th>
@@ -17,7 +20,9 @@
 							<th>Descrição</th>
 							<th>Validar</th>
 						</tr>
-            {% for o in object_list %}
+				{% endif %}
+
+      {% for o in object_list %}
 				<tr>
 					<td>{{o.id}}</td>
 					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
@@ -61,10 +66,10 @@
 	
 					  </td>
 					{% else %}
-					  <td><a> Não possui imagem </a></td>
+					  <td> Não possui imagem </td>
 					{% endif %}
 					{% if o.emergencia == 1 %}
-						<td> Sim</td>
+						<td><font color="red"> Sim </font></td>
 					{% else %}
 						<td> Não </td>
 					{% endif %}
