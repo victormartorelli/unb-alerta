@@ -165,6 +165,10 @@ h6{
   font-weight: bold;
   font-style: oblique;
 }
+.list-group-item{
+  text-align: center;
+  
+}
 
 #descricao{
   width: 30%;
