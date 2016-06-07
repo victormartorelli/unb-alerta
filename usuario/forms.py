@@ -32,7 +32,7 @@ class UsuarioForm(ModelForm):
         widget=forms.PasswordInput())
 
     confirma_email = forms.CharField(
-        max_length=20,
+        max_length=45,
         label='Confirmar Email')
 
     class Meta:
