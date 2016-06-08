@@ -22,9 +22,8 @@
 
   {% if object.foto %}
     <h6 class="painel-title" style="font-size: 110%;"> Imagem </h6>
-
     <div class="imagem" >
-      <img src={{object.foto.name}} alt="Registro do momento">
+      <img src="{{object.foto.url}}" height="400px" width="500px">
     </div>
   {% endif %}
   </div>

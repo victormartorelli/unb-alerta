@@ -6,21 +6,14 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 
-my_default_errors = {
-    'required': 'Este campo é obrigatório',
-    'invalid': 'Insira um campo válido'
-}
-
-
 class OcorrenciaForm(ModelForm):
 
     tb_categoria_ID = forms.ModelChoiceField(
         label=('Tipo de Ocorrência'),
         required=True,
         queryset=Categoria.objects.all(),
-        empty_label='Selecione',
-        error_messages=my_default_errors
-    )
+        empty_label='Selecione')
+
     emergencia = forms.ChoiceField(
         label='Emergência?',
         choices=[(False, 'Não'), (True, 'Sim')],

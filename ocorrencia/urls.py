@@ -1,5 +1,8 @@
 from django.conf.urls import url
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
                     ListaValidacaoView, ValidarOcorrenciaEditView)
@@ -19,4 +22,5 @@ urlpatterns = [
 
     url(r'^ocorrencias/(?P<pk>\d+)/validar$',
         ValidarOcorrenciaEditView.as_view(), name='validar_ocorrencia'),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

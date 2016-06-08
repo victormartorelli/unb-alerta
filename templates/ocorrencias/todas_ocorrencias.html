@@ -28,11 +28,11 @@
 					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
 								{% if o.foto %}
-								  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+								  <td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
 
 								  <div id="myModal" class="modal"> 
 			 						<span class="close">×</span>
-			  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">  						
+			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">  						
 			   					 	
 			  					  </div>
 
