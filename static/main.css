@@ -74,7 +74,8 @@ space a{
 #fundo{
     background: url("images/back.png");
   	background-color: #444;
-    background: url("images/pinlayer2.png"),url("images/back.png");    
+    background: url("images/pinlayer2.png"),url("images/back.png");  
+    margin-top: -5%;  
 }
 
 .vertical-offset-100{
@@ -131,6 +132,7 @@ h1{
 h2{
   margin-top:1%;
   margin-left: 10%;
+  margin-right: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -152,6 +154,7 @@ h4{
 h5{
   margin-top: 3%;
   margin-left: 10%;
+  margin-right: 10%;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -164,6 +167,10 @@ h6{
   font-family: 'Calibri',serif;
   font-weight: bold;
   font-style: oblique;
+}
+.list-group-item{
+  text-align: center;
+  
 }
 
 #descricao{

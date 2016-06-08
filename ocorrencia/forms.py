@@ -6,21 +6,14 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 
-my_default_errors = {
-    'required': 'Este campo é obrigatório',
-    'invalid': 'Insira um campo válido'
-}
-
-
 class OcorrenciaForm(ModelForm):
 
     tb_categoria_ID = forms.ModelChoiceField(
         label=('Tipo de Ocorrência'),
         required=True,
         queryset=Categoria.objects.all(),
-        empty_label='Selecione',
-        error_messages=my_default_errors
-    )
+        empty_label='Selecione')
+
     emergencia = forms.ChoiceField(
         label='Emergência?',
         choices=[(False, 'Não'), (True, 'Sim')],
@@ -81,7 +74,19 @@ class OcorrenciaForm(ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
 
 
-class ValidarOcorrenciaEditForm(OcorrenciaForm):
+class ValidarOcorrenciaEditForm(ModelForm):
+
+    emergencia = forms.ChoiceField(
+        label='Emergência?',
+        choices=[(False, 'Não'), (True, 'Sim')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    vitimado = forms.ChoiceField(
+        label='Tem alguma vítima?',
+        choices=[(0, 'Não'), (1, 'Sim')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
 
     repetida = forms.ChoiceField(
         label='É repetida?',
@@ -101,10 +106,6 @@ class ValidarOcorrenciaEditForm(OcorrenciaForm):
         widget=forms.Select(
             attrs={'class': 'selector'}))
 
-    def __init__(self, *args, **kwargs):
-        super(ValidarOcorrenciaEditForm, self).__init__(*args, **kwargs)
-        self.fields['descricao'].required = False
-
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
@@ -119,7 +120,9 @@ class ValidarOcorrenciaEditForm(OcorrenciaForm):
                   'vigilante_ID',
                   'usuario_ID',
                   'resposta',
-                  'repetida']
+                  'repetida',
+                  'foto',
+                  'descricao']
 
         widgets = {'id': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
@@ -127,4 +130,5 @@ class ValidarOcorrenciaEditForm(OcorrenciaForm):
                    'data': forms.HiddenInput(),
                    'hora': forms.HiddenInput(),
                    'latitude': forms.HiddenInput(),
-                   'longitude': forms.HiddenInput()}
+                   'longitude': forms.HiddenInput(),
+                   'descricao': forms.HiddenInput()}
