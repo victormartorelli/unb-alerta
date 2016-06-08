@@ -6,11 +6,16 @@
     <div class="row vertical-offset-100">
       
         	<div class="panel panel-default">
-        		<div class="panel-heading"><h6> Todas as ocorrências</h6></div>
+        		<div class="panel-heading" style="background-color: #fefefe;
+        		border-color: #caced1;"><h6> Todas as ocorrências</h6>
+        		</div>
 	        		<table class="table">
 
 	        {% if vazio %}
-        		<h1> Não há nenhuma ocorrência a ser validada </h1>
+	        	</br>
+        		<div class="alert alert-dismissible alert-warning">
+				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+				</div>
 					{% else %}
 						<tr>
 							<th>Número</th>
