@@ -60,14 +60,6 @@ space a{
     cursor: pointer;
 }
 
-.nav a {
-  color: #5a5a5a;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 14px 10px;
-  text-transform: uppercase;
-}
-
 .nav li {
   display: inline;
 }
@@ -75,7 +67,8 @@ space a{
     background: url("images/back.png");
   	background-color: #444;
     background: url("images/pinlayer2.png"),url("images/back.png");  
-    margin-top: -5%;  
+    margin-top: -5%;
+    min-height: 800px;
 }
 
 .vertical-offset-100{
