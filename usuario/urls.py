@@ -13,4 +13,7 @@ urlpatterns = [
         'authentication_form': LoginForm},
         name='login'),
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
+    url(r'^perfil/$', TemplateView.as_view(
+        template_name='perfil.html'),
+        name='perfil'),
 ]
