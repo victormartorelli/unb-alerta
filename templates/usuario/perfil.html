@@ -33,42 +33,42 @@
 
                     <div class="form-group">
                       <h3>Nome de Usuário:</br></h3>
-                      {% UsuarioForm.login %}
+                      {{ user.login }}
                     </div>
 
                     <div class="form-group">
                       <h3>E-mail:</br></h3>
-                      {% UsuarioForm.email %}
+                      {{ user.email }}
                     </div>
 
                     <div class="form-group">
                       <h3>Matrícula:</br></h3>
-                      {% UsuarioForm.matricula %}
+                      {{ user.matricula }}
                     </div>
 
                     <div class="form-group">
                       <h3>Nome Completo:</br></h3>
-                      {% UsuarioForm.nome %}
+                      {{ user.nome }}
                     </div>
 
                     <div class="form-group">
                       <h3><p>Gênero:</p></h3>
-                      {% UsuarioForm.genero %}
+                      {{ user.genero }}
                     </div>
 
                     <div class="form-group">
                       <h3>Data de Nascimento:</br></h3>
-                      {% UsuarioForm.data %}
+                      {{ user.data }}
                     </div>
 
                     <div class="form-group">
                       <h3>CPF:</br></h3>
-                      {% UsuarioForm.cpf %}
+                      {{ user.cpf }}
                     </div>
 
                     <div class="form-group">
                       <h3>RG:</br></h3>
-                      {% UsuarioForm.rg %}
+                      {{ user.rg }}
                     </div>
 
                     <input class="botao btn1-sucesso" type="submit" value="Editar Perfil">
