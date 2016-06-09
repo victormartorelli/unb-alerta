@@ -1,19 +1,29 @@
 {% extends "base.html"%}
 {% block content %}
-     <script type="text/javascript">
+<style type="text/css">
+  #map { 
+    width: 90% !important; 
+    height:350px !important;
+    margin-left:5% !important;
+    margin-top:7% !important;
+    overflow: visible !important;
+    border : 3px solid rgba(211,211,211,0.4);
+  }
+</style>
 
+<script type="text/javascript">
 var map;
 function initMap() {
 
   // ==============================================================
-  // O parâmetro "libraries=geometry" no script que chama o mapa
-  // possibilita a inserção dos polígonos, enquanto o método
-  // containsLocation desta biblioteca possibilita a detecção
-  // se um ponto está ou não dentro do polígono em questão 
+  // O parÃ¢metro "libraries=geometry" no script que chama o mapa
+  // possibilita a inserÃ§Ã£o dos polÃ­gonos, enquanto o mÃ©todo
+  // containsLocation desta biblioteca possibilita a detecÃ§Ã£o
+  // se um ponto estÃ¡ ou nÃ£o dentro do polÃ­gono em questÃ£o 
   // ==============================================================
 
   // Aqui declaramos os pontos que servem como 
-  // vértices do polígono que delimita a área desejada
+  // vÃ©rtices do polÃ­gono que delimita a Ã¡rea desejada
   var ICCCoords = [
   new google.maps.LatLng(-15.760398,-47.870296),
   new google.maps.LatLng(-15.760567,-47.870956),
@@ -25,7 +35,7 @@ function initMap() {
   new google.maps.LatLng(-15.762765,-47.869574)  
 ];
 
-// Caso deseje exibir o polígono, descomentar as linhas
+// Caso deseje exibir o polÃ­gono, descomentar as linhas
 // de comando do objeto abaixo.
 var ICCPolygon = new google.maps.Polygon({
   // Coordenadas do seu objeto
@@ -47,11 +57,11 @@ var ICCPolygon = new google.maps.Polygon({
           zoom: 17,
   });
 
-  // Descomentar para exibir o polígono
+  // Descomentar para exibir o polÃ­gono
   //ICCPolygon.setMap(map);
    
    // Detectando o click e decidindo a cor e mensagem,  
-   // de acordo com a posição em relação ao polígono 
+   // de acordo com a posiÃ§Ã£o em relaÃ§Ã£o ao polÃ­gono 
    google.maps.event.addListener(map, 'click', function(e) {
     var resultColor =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
@@ -60,8 +70,8 @@ var ICCPolygon = new google.maps.Polygon({
    
     var pertence =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
-        "Ocorrência dentro do ICC" :
-        "Ocorrência fora do ICC ";
+        "OcorrÃªncia dentro do ICC" :
+        "OcorrÃªncia fora do ICC ";
          
     var local = e.latLng;
     document.getElementById("resultado").innerHTML = pertence;
@@ -82,9 +92,32 @@ var ICCPolygon = new google.maps.Polygon({
   });
 }
 
-    </script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry"
-        async defer></script>
-        <b><div id="resultado"></div></b>
+</script>
+  
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry" async defer>
+</script>
+
+<div id = "fundo">
+  <div class="container">
+    <div class="row vertical-offset-100 ">
+      <div class="col-md-7 col-md-offset-2">
+        <nav class="navbar navbar-default" style="height: 450px;width:120%;color:#484343">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <h1 class="navbar-brand" style="margin-left:55%;margin-top:1%;color:inherit">Mapa com estatisticas:</h1>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="form-group">
+                   <div class="form-group">
+                      <div id="map"></div>
+                      <b><div id="resultado" style="text-align:center"></div></b>
+                </div>
+              </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

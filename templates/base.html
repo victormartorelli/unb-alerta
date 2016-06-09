@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
-            <li><a href="#">Estatisticas no Mapa</a></li>
+            <li><a href="{% url 'estatisticas' %}">Estatisticas no Mapa</a></li>
             <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
             <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrencia</a></li>
             <li class="dropdown">
