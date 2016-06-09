@@ -1,5 +1,6 @@
 {% extends "base.html"%}
 {% block content %}
+
 <style type="text/css">
   #map { 
     width: 90% !important; 
@@ -104,7 +105,7 @@ var ICCPolygon = new google.maps.Polygon({
         <nav class="navbar navbar-default" style="height: 450px;width:120%;color:#484343">
           <div class="container-fluid">
             <div class="navbar-header">
-              <h1 class="navbar-brand" style="margin-left:55%;margin-top:1%;color:inherit">Mapa com estatisticas:</h1>
+              <h1 class="panel-title" style="color:#1c2c48; font-family:'Arial', serif; font-weight: bold; font-style: oblique; font-size: 200%">Mapa com estatisticas:</h1>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -120,4 +121,5 @@ var ICCPolygon = new google.maps.Polygon({
     </div>
   </div>
 </div>
+
 {% endblock %}
