@@ -34,9 +34,9 @@
           <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
             <li><a href="#">Estatisticas no Mapa</a></li>
-            {% if not user.grupo_usuario %}
+            {% ifnotequal user.is_staff 0 %}
             <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
-            {% endif %}
+            {% endifnotequal %}
             <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrencia</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ocorrencias <span class="caret"></span></a>
