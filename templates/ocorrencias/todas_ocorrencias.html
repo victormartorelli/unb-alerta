@@ -1,9 +1,69 @@
 {% extends "base.html"%}
 {% block content %}
 
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/static/js/jquery.mask.min.js"></script>
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+  $("#data").mask("00/00/0000", {placeholder: "__/__/____"});
+});
+
+$(document).ready(function() {
+  $("#data").datepicker({dateFormat:'dd/mm/yy'});
+})
+
+
+$(document).ready(function() {
+  $("#hora").mask("00:00", {placeholder: "__:__"});
+});
+</script>
+
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
+    	
+    	<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <h1 class="navbar-brand">Filtragem:</h1>
+		    </div>
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <form class="navbar-form navbar-left" role="search">
+		        <div class="form-group">
+		        	 <div class="form-group">
+		              <label for="data" style="margin-left:10%" >Data</label>
+		                  </br>
+		                  <input id="data" name="data" style="width: 35%;" />
+		            </div>
+		            <div class="form-group">
+		              <label for="hora" style="margin-left:-50%; margin-top:2%;">Horario
+		              		</br>
+		                  <input id="hora" name="hora" style="width: 25%;margin-top:2%" />
+		            </div>
+		            <div class="form-group">
+		            	<label for="tb_categoria_ID" style="margin-left:-600%;margin-top:2%" >Tipo</label>
+		                  </br>
+		            </div>
+		            <div class="form-group">
+		            	<label for="emergencia" style="margin-left:-150%;margin-top:2%">Emergencia?</label>
+		                  </br>
+		            </div>
+		            <div class="form-group">
+		            	<label for="vitima" style="margin-left:-90%;margin-top:2%" >Ha vitima(s)?</label>
+		                  </br>
+		            </div>
+		        </div>
+		        <button type="submit" class="btn btn-primary" style="margin-left:0%">Filtrar</button>
+		      </form>
+		    </div>
+		  </div>
+		</nav>
       
         	<div class="panel panel-default">
         		<div class="panel-heading" style="background-color: #fefefe;
@@ -16,6 +76,9 @@
         		<div class="alert alert-dismissible alert-warning">
 				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
 				</div>
+		        	<div class="form-group">
+	                
+		            </div>
 					{% else %}
 						<tr>
 							<th>Número</th>
