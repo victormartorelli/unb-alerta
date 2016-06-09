@@ -33,7 +33,7 @@ class CriarUsuarioView(FormView):
                 'Confirmacao email',
                 'Obrigado por se cadastrar no UnBAlerta.',
                 'unbalerta@gmail.com',
-                [form.data.email],
+                [form.data['email']],
                 fail_silently=False,
             )
             return self.form_valid(form)
