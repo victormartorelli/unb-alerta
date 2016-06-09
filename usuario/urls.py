@@ -16,6 +16,6 @@ urlpatterns = [
         name='login'),
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
     url(r'^perfil/$', TemplateView.as_view(
-        template_name='perfil.html'),
+        template_name='usuario/perfil.html'),
         name='perfil'),
 ]
