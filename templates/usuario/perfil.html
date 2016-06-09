@@ -1,4 +1,6 @@
 {% extends "base.html"%}
+{% load bootstrap_themes %}
+{% bootstrap_styles theme="spacelab" type='css' %}
 {% block content %}
 
 <html>
@@ -13,7 +15,7 @@
   </head>
 
   <body>
-  
+
     <div id = "fundo">
       <div class="container">
         <div class="row vertical-offset-100">
@@ -30,52 +32,42 @@
                   <form id="editar" method="post" action="">
 
                     <div class="form-group">
-                      <h3>Nome de Usuário</br></h3>
+                      <h3>Nome de Usuário:</br></h3>
                       {{ UsuarioForm.login }}
                     </div>
 
                     <div class="form-group">
-                      <h3>Senha</br></h3>
-                      {{ UsuarioForm.senha }}
-                    </div>
-
-                    <div class="form-group">
-                      <h3>Confirmar Senha</br></h3>
-                      {{ UsuarioForm.confirma_senha }}
-                    </div>
-
-                    <div class="form-group">
-                      <h3>E-mail</br></h3>
+                      <h3>E-mail:</br></h3>
                       {{ UsuarioForm.email }}
                     </div>
 
                     <div class="form-group">
-                      <h3>Matrícula</br></h3>
+                      <h3>Matrícula:</br></h3>
                       {{ UsuarioForm.matricula }}
                     </div>
 
                     <div class="form-group">
-                      <h3>Nome Completo</br></h3>
+                      <h3>Nome Completo:</br></h3>
                       {{ UsuarioForm.nome }}
                     </div>
 
                     <div class="form-group">
-                      <h3><p>Genero:</p></h3>
+                      <h3><p>Gênero:</p></h3>
                       {{ UsuarioForm.genero }}
                     </div>
 
                     <div class="form-group">
-                      <h3>Data de Nascimento</br></h3>
+                      <h3>Data de Nascimento:</br></h3>
                       {{ UsuarioForm.data }}
                     </div>
 
                     <div class="form-group">
-                      <h3>CPF</br></h3>
+                      <h3>CPF:</br></h3>
                       {{ UsuarioForm.cpf }}
                     </div>
 
                     <div class="form-group">
-                      <h3>RG</br></h3>
+                      <h3>RG:</br></h3>
                       {{ UsuarioForm.rg }}
                     </div>
 
