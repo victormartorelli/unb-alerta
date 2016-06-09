@@ -1,9 +1,9 @@
 from django import forms
-
 from django.contrib.auth.models import User, Group
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
 from django.contrib.auth.forms import AuthenticationForm
+import datetime
 
 from .models import Usuario
 
@@ -35,11 +35,7 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
-    data_nasc = forms.CharField(
-        widget=forms.Textarea(
-            attrs={'rows': 10,
-                   'cols': 48,
-                   'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
+    data_nasc = forms.DateField(initial=datetime.date.today)
 
     class Meta:
         model = Usuario
@@ -87,8 +83,8 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
-        if len(self.cleaned_data['cpf']) != 14:
-            raise ValidationError('CPF deve ter 15 caracteres')
+        if self.cleaned_data['cpf'] != '' and len(self.cleaned_data['cpf']) != 14:
+            raise ValidationError('CPF deve ter 11 dígitos')
 
         if len(self.cleaned_data['matricula']) > 10:
             raise ValidationError(
