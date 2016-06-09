@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
-            <li><a href="#">Estatisticas no Mapa</a></li>
+            <li><a href="{% url 'estatisticas' %}">Estatisticas no Mapa</a></li>
             <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
             <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrencia</a></li>
             <li class="dropdown">
@@ -41,7 +41,7 @@
               <ul class="dropdown-menu" role="menu">
                  <li><a href="{% url 'lista_ocorrencias' %}">Todas ocorrencias</a></li>
                 <li class="divider"></li>
-                <li><a href="#"> Minhas Ocorrencias</a></li>
+                <li><a href="{% url 'minhas_ocorrencias' %}"> Minhas Ocorrencias</a></li>
               </ul>
               </li>
           </ul>
@@ -51,7 +51,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"             aria-expanded="false" style=" margin-right=50px;"> {{ user.username }} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Perfil</a></li>
+                <li><a href="{% url 'perfil' %}">Perfil</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{% url 'logout' %}">Sair</a></li>
               </ul>
