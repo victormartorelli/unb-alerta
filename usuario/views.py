@@ -29,13 +29,13 @@ class CriarUsuarioView(FormView):
         form = self.get_form(form_class)
 
         if form.is_valid():
-            send_mail(
-                'Confirmacao email',
-                'Obrigado por se cadastrar no UnBAlerta.',
-                'unbalerta@gmail.com',
-                [form.data.email],
-                fail_silently=False,
-            )
+            # send_mail(
+            #     'Confirmacao email',
+            #     'Obrigado por se cadastrar no UnBAlerta.',
+            #     'unbalerta@gmail.com',
+            #     [form.data.email],
+            #     fail_silently=False,
+            # )
             return self.form_valid(form)
         else:
             mensagem = "Formulário Inválido"
