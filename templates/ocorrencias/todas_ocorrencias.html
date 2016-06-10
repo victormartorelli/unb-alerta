@@ -26,7 +26,7 @@ $(document).ready(function() {
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
-    	
+
     	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
@@ -64,9 +64,9 @@ $(document).ready(function() {
 		    </div>
 		  </div>
 		</nav>
-      
+
         	<div class="panel panel-default">
-        		<div class="panel-heading" style="background-color: #fefefe;
+        		<div class="panel-heading" style="background-color: #f5f5f5;
         		border-color: #caced1;"><h6> Todas as ocorrências</h6>
         		</div>
 	        		<table class="table">
@@ -95,26 +95,26 @@ $(document).ready(function() {
 								{% if o.foto %}
 								  <td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
 
-								  <div id="myModal" class="modal"> 
+								  <div id="myModal" class="modal">
 			 						<span class="close">×</span>
-			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">  						
-			   					 	
+			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">
+
 			  					  </div>
 
 
 			  					<script>
-								
-								var modal = document.getElementById('myModal');					
+
+								var modal = document.getElementById('myModal');
 								var link = document.getElementById("abreImagem");
-								
-								var span = document.getElementsByClassName("close")[0];					
+
+								var span = document.getElementsByClassName("close")[0];
 
 
 								link.onclick = function() {
 								modal.style.display = "block";
 								}
 
-								
+
 								span.onclick = function() {
 								modal.style.display = "none";
 								}
@@ -125,9 +125,9 @@ $(document).ready(function() {
 								}
 								}
 								</script>
-				
+
 			</div>
-				
+
 								  </td>
 								{% else %}
 								  <td> Não possui imagem </td>
@@ -144,11 +144,11 @@ $(document).ready(function() {
 			   </div>
           </div>
    	        </div>
-   	        {% include "pagination.html" %} 
+   	        {% include "pagination.html" %}
        </div>
       </div>
     </div>
   </div>
 </div>
 <div>
- {% endblock %} 
+ {% endblock %}

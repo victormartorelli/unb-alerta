@@ -2,8 +2,8 @@
 {% block content %}
 
 <style type="text/css">
-  #map { 
-    width: 90% !important; 
+  #map {
+    width: 90% !important;
     height:550px !important;
     margin-left:5% !important;
     margin-top:2% !important;
@@ -20,10 +20,10 @@ function initMap() {
   // O parâmetro "libraries=geometry" no script que chama o mapa
   // possibilita a inserção dos polígonos, enquanto o método
   // containsLocation desta biblioteca possibilita a detecção
-  // se um ponto está ou não dentro do polígono em questão 
+  // se um ponto está ou não dentro do polígono em questão
   // ==============================================================
 
-  // Aqui declaramos os pontos que servem como 
+  // Aqui declaramos os pontos que servem como
   // vértices do polígono que delimita a área desejada
   var ICCCoords = [
   new google.maps.LatLng(-15.760398,-47.870296),
@@ -33,7 +33,7 @@ function initMap() {
   new google.maps.LatLng(-15.765899,-47.867105),
   new google.maps.LatLng(-15.765350,-47.866690),
   new google.maps.LatLng(-15.763843,-47.868781),
-  new google.maps.LatLng(-15.762765,-47.869574)  
+  new google.maps.LatLng(-15.762765,-47.869574)
 ];
 
 // Caso deseje exibir o polígono, descomentar as linhas
@@ -60,23 +60,23 @@ var ICCPolygon = new google.maps.Polygon({
 
   // Descomentar para exibir o polígono
   //ICCPolygon.setMap(map);
-   
-   // Detectando o click e decidindo a cor e mensagem,  
-   // de acordo com a posição em relação ao polígono 
+
+   // Detectando o click e decidindo a cor e mensagem,
+   // de acordo com a posição em relação ao polígono
    google.maps.event.addListener(map, 'click', function(e) {
     var resultColor =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
         'red':
         'green';
-   
+
     var pertence =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
         "Ocorrência dentro do ICC" :
         "Ocorrência fora do ICC ";
-         
+
     var local = e.latLng;
     document.getElementById("resultado").innerHTML = pertence;
-    
+
     // Inserindo o marcador
     new google.maps.Marker({
       position: e.latLng,
@@ -94,7 +94,7 @@ var ICCPolygon = new google.maps.Polygon({
 }
 
 </script>
-  
+
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry" async defer>
 </script>
 
@@ -103,17 +103,18 @@ var ICCPolygon = new google.maps.Polygon({
     <div class="row vertical-offset-100">
       <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-     
+
           <div class="panel-heading">
-            <h1 class="panel-title" style="color:#1c2c48; font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 200%"> Mapa com estatisticas: </h1>
+            <h6>Mapa com estatisticas:</h6>
           </div>
 
           <div class="panel-body">
             <div class="form-group">
-              <div id="map" >
               <font color="red">
+              <b><div id="resultado" style="text-align:center"></div></b>
+              <div id="map" >
             </div>
-            <b><div id="resultado" style="text-align:center"></div></b>
+
           </div>
 
         </div>
