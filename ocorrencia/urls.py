@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
-                    ListaValidacaoView, ValidarOcorrenciaEditView)
+                    ListaValidacaoView, ValidarOcorrenciaEditView,
+                    MinhasOcorrenciasView)
 
 urlpatterns = [
     url(r'^ocorrencias/$',
@@ -22,5 +23,8 @@ urlpatterns = [
 
     url(r'^ocorrencias/(?P<pk>\d+)/validar$',
         ValidarOcorrenciaEditView.as_view(), name='validar_ocorrencia'),
+
+    url(r'^ocorrencias/minhas_ocorrencias/$',
+        MinhasOcorrenciasView.as_view(), name='minhas_ocorrencias'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

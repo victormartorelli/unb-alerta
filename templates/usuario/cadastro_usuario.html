@@ -111,7 +111,13 @@ $(document).ready(function() {
                 {{ form.status }}
 
                 
-                <input class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar">
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar" onclick="myFunction()">
+                <script>
+                  function myFunction() {
+                    alert("Favor confirmar cadastro por email");
+                  }
+                </script>
+
               </fieldset>
           </form>
         </div>

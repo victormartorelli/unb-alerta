@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
 
+from django.views.generic.base import TemplateView
+
 from usuario.forms import LoginForm
 
 from .views import CriarUsuarioView
@@ -13,4 +15,7 @@ urlpatterns = [
         'authentication_form': LoginForm},
         name='login'),
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
+    url(r'^perfil/$', TemplateView.as_view(
+        template_name='usuario/perfil.html'),
+        name='perfil'),
 ]

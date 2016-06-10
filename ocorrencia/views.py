@@ -164,3 +164,25 @@ class DescricaoOcorrenciaView(DetailView):
         ocorrencia = Ocorrencia.objects.filter(id=pk)
 
         return ocorrencia
+
+
+class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
+    template_name = "ocorrencias/minhas_ocorrencias.html"
+    model = Ocorrencia
+    queryset = Ocorrencia.objects.filter(
+        validade=True,
+        atendida=True).order_by('-id')
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super(MinhasOcorrenciasView, self).get_context_data(**kwargs)
+
+        if not context.get('object_list'):
+            context['vazio'] = True
+
+        paginator = context['paginator']
+        page_obj = context['page_obj']
+
+        context['page_range'] = make_pagination(
+            page_obj.number, paginator.num_pages)
+        return context

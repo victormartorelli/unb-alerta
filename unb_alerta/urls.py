@@ -27,7 +27,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('ocorrencia.urls')),
     url(r'', include('usuario.urls')),
-
+    url(r'^estatisticas/$', TemplateView.as_view(
+        template_name='mapa.html'),
+        name='estatisticas'),
     # url(r'', include(ocorrencia.urls)),
 
     # # must come at the end
