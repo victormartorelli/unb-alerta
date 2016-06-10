@@ -162,7 +162,7 @@ h6{
   color: #1c2c48;
   font-size: 200%;
   font-family: 'Calibri',serif;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-style: oblique;
 }
 .list-group-item{
