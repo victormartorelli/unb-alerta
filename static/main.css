@@ -209,6 +209,12 @@ h6{
 
 }
 
+.form-group h3{
+  font-size: 100%;
+  font-family: "Calibri", serif;
+}
+
+
 .detalhes{
   	margin-right:5%; 
   	margin-left:5%;
