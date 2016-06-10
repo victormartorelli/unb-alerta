@@ -3,8 +3,8 @@
 {% block content %}
 
 <style type="text/css">
-  #map { 
-  	width: 80% !important; 
+  #map {
+  	width: 80% !important;
   	height:350px !important;
   	margin-left:10% !important;
   	margin-top:0% !important;
@@ -44,7 +44,7 @@ function initMap() {
     new google.maps.LatLng(-15.765899,-47.867105),
     new google.maps.LatLng(-15.765350,-47.866690),
     new google.maps.LatLng(-15.763843,-47.868781),
-    new google.maps.LatLng(-15.762765,-47.869574)  
+    new google.maps.LatLng(-15.762765,-47.869574)
   ];
 
   var UNB_Coords = [
@@ -66,7 +66,7 @@ function initMap() {
     new google.maps.LatLng(-15.752488, -47.871733),
     new google.maps.LatLng(-15.744409, -47.879620),
     new google.maps.LatLng(-15.735962, -47.884545),
-    new google.maps.LatLng(-15.735291, -47.885317)  
+    new google.maps.LatLng(-15.735291, -47.885317)
   ];
   var ICCPolygon = new google.maps.Polygon({
     // Coordenadas do seu objeto
@@ -88,13 +88,13 @@ function initMap() {
     //strokeOpacity: 0.8,
     //strokeWeight: 2,
     //fillColor: '#942E7C',
-    //filOpacity: 0.35  
+    //filOpacity: 0.35
   });
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -15.763606, lng: -47.869636},
           zoom: 17,
   });
-  
+
   var marcador = '';
   var pertence = false;
   google.maps.event.addListener(map, 'click', function(e) {
@@ -103,20 +103,20 @@ function initMap() {
         google.maps.geometry.poly.containsLocation(local, UNB_Polygon) ?
         true:
         false;
-    
+
     var mensagem = pertence ?
         "" :
         "Local inv&aacute;lido! Somente ocorr&ecirc;ncias dentro da UnB - Campus Darci Ribeiro";
-         
+
     document.getElementById("mensagem").innerHTML = mensagem;
-    
-    
+
+
     if (pertence){
       if (marcador){
         marcador.setPosition(local);
         document.getElementById("latitude").value = e.latLng.lat();
         document.getElementById("longitude").value = e.latLng.lng();
-      } else {          
+      } else {
         document.getElementById("latitude").value = e.latLng.lat();
         document.getElementById("longitude").value = e.latLng.lng();
         // Inserindo o marcador
@@ -165,36 +165,36 @@ function initMap() {
 
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <p><h3>Insira o local da ocorrência clicando no mapa abaixo:</h3></p></br>
-      	    
+
             <div id="map"></div>
                   <font color="red">
-      	    
+
             <div id="mensagem"></div></font>
                   <input type="hidden" id="latitude" name="latitude" />
                   <input type="hidden" id="longitude" name="longitude" />
                   <div id="exibe_coord"></div>
-            
+
             <div class="form-group">
                 <h2>{{ form.tb_categoria_ID|as_crispy_field }}</h2>
             </div>
-                       
+
             <div class="form-group">
               <label for="data" class="requiredField" style="margin-left:10%">Data da ocorrencia
                   <span class="asteriskField">*</span> </label>
                   </br>
-                  <input id="data" name="data" required="required" title="Preencha" 
+                  <input id="data" name="data" required="required" title="Preencha"
                   style="width: 80%;height:35px;margin-left:10%" />
             </div>
-            
+
             <div class="form-group">
-              <label for="hora" class="requiredField" style="margin-left:10%">Horario da ocorrencia 
+              <label for="hora" class="requiredField" style="margin-left:10%">Horario da ocorrencia
                   <span class="asteriskField">*</span> </label>
-                  <input id="hora" name="hora" required="required" 
+                  <input id="hora" name="hora" required="required"
                   style="width: 80%;height:35px;margin-left:10%" />
             </div>
-            
+
             <div class="form-group">
               <h2>{{ form.emergencia|as_crispy_field }}</h2>
             </div>
@@ -207,7 +207,7 @@ function initMap() {
               {{ form.vigilante_ID }}
               {{ form.usuario_ID }}
               {{ form.validade }}
-            
+
             <div class="form-group">
               <label for="foto" style="margin-left:10%">Foto:
               </label>

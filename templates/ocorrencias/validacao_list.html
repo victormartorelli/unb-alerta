@@ -4,9 +4,9 @@
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
-      		
+
         	<div class="panel panel-default">
-        		<div class="panel-heading" style="background-color: #fefefe;
+        		<div class="panel-heading" style="background-color: #f5f5f5;
         		border-color: #caced1;"><h6> Ocorrências sem validação</h6>
         		</div>
 	        		<table class="table">
@@ -36,26 +36,26 @@
 					{% if o.foto %}
 					  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
 
-					  <div id="myModal" class="modal"> 
+					  <div id="myModal" class="modal">
  						<span class="close">×</span>
-  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">  						
-   					 	
+  						<img class="modal-content" src="/static/images/back.png" id="imagemOcorrencia">
+
   					  </div>
 
 
   					<script>
-					
-					var modal = document.getElementById('myModal');					
+
+					var modal = document.getElementById('myModal');
 					var link = document.getElementById("abreImagem");
-					
-					var span = document.getElementsByClassName("close")[0];					
+
+					var span = document.getElementsByClassName("close")[0];
 
 
 					link.onclick = function() {
 					modal.style.display = "block";
 					}
 
-					
+
 					span.onclick = function() {
 					modal.style.display = "none";
 					}
@@ -66,9 +66,9 @@
 					}
 					}
 					</script>
-	
+
 </div>
-	
+
 					  </td>
 					{% else %}
 					  <td> Não possui imagem </td>
@@ -86,11 +86,11 @@
 			   </div>
           </div>
    	        </div>
-   	        {% include "pagination.html" %} 
+   	        {% include "pagination.html" %}
        </div>
       </div>
     </div>
   </div>
 </div>
 <div>
- {% endblock %} 
+ {% endblock %}
