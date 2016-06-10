@@ -114,8 +114,12 @@ $(document).ready(function() {
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar" onclick="myFunction()">
                 <script>
                   function myFunction() {
-                    alert("Favor confirmar cadastro por email");
+                    {% for message in messages %}
+                    alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}alert("Favor confirmar cadastro por email");{% endif %}
+                    {{ message|safe }}
+                    
                   }
+                  {% endfor %}
                 </script>
 
               </fieldset>
