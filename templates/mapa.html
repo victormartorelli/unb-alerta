@@ -60,23 +60,23 @@ var ICCPolygon = new google.maps.Polygon({
 
   // Descomentar para exibir o polígono
   //ICCPolygon.setMap(map);
-
-   // Detectando o click e decidindo a cor e mensagem,
-   // de acordo com a posição em relação ao polígono
+   
+   // Detectando o click e decidindo a cor e mensagem,  
+   // de acordo com a posição em relação ao polígono 
    google.maps.event.addListener(map, 'click', function(e) {
     var resultColor =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
         'red':
         'green';
-
+   
     var pertence =
         google.maps.geometry.poly.containsLocation(e.latLng, ICCPolygon) ?
         "Ocorrência dentro do ICC" :
         "Ocorrência fora do ICC ";
-
+         
     var local = e.latLng;
     document.getElementById("resultado").innerHTML = pertence;
-
+    
     // Inserindo o marcador
     new google.maps.Marker({
       position: e.latLng,
@@ -94,7 +94,7 @@ var ICCPolygon = new google.maps.Polygon({
 }
 
 </script>
-
+  
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry" async defer>
 </script>
 
@@ -103,7 +103,7 @@ var ICCPolygon = new google.maps.Polygon({
     <div class="row vertical-offset-100">
       <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-
+     
           <div class="panel-heading">
             <h6>Mapa com estatisticas:</h6>
           </div>

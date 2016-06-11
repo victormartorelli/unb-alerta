@@ -29,8 +29,6 @@
               <div class="panel-body">
                 {% csrf_token %}
                 <fieldset>
-                  <form id="editar" method="post" action="">
-
                     <div class="form-group">
                       <h3>Nome de Usuário:</br></h3>
                       <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ user.username }} " disabled> </h4>
@@ -71,8 +69,7 @@
                       <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ user.rg }} "disabled> </h4>
                     </div>
                   </br>
-
-                    <input class="btn btn-lg btn-primary col-xs-offset-3" value="Editar Perfil" style="background-color:#1c2c48;">
+                    <a class="btn btn-lg btn-primary" href="{% url 'editar_perfil' %}"  role="button" style="background-color:#1c2c48;margin-left:37%">Editar Perfil</a>
                    </form>
                 </fieldset>
               </div>
