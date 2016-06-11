@@ -1,8 +1,9 @@
-from django.views.generic import FormView
+from django.views.generic import (FormView, ListView)
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
+from usuario.models import Usuario
 from .forms import UsuarioForm
 
 
@@ -34,3 +35,13 @@ class CriarUsuarioView(FormView):
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})
+
+
+class EditarPerfilView (ListView):
+    template_name = "usuario/editar_perfil.html"
+    model = Usuario
+
+
+class PerfilView(ListView):
+    template_name = "usuario/perfil.html"
+    model = Usuario
