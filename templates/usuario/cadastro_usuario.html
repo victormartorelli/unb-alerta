@@ -33,10 +33,10 @@ $(document).ready(function() {
   <div id = "fundo">
     <div class="container">
       <div class="row vertical-offset-100">
-        <div class="col-md-5 col-md-offset-4">
+        <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h1 class="panel-title" style="color:#4E6c24; font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 200%">Cadastro</h1>
+              <h3 class="panel-title" style="color:#4E6c24; font-family:'Calibri', serif; font-weight: none; font-style: oblique; font-size: 200% ;margin-left: 40%">Cadastro</h3>
             </div>
 
             {% for message in messages %}
@@ -111,11 +111,16 @@ $(document).ready(function() {
                 {{ form.status }}
 
                 
-                <input class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar" onclick="myFunction()">
+                <input class="btn btn-lg btn-success " type="submit" value="Cadastrar"
+                style= "margin-left:33%; margin-top:3%;width:30%" onclick="myFunction()">
                 <script>
                   function myFunction() {
-                    alert("Favor confirmar cadastro por email");
+                    {% for message in messages %}
+                    alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}alert("Favor confirmar cadastro por email");{% endif %}
+                    {{ message|safe }}
+                    
                   }
+                  {% endfor %}
                 </script>
 
               </fieldset>

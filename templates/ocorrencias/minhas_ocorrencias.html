@@ -5,7 +5,7 @@
 	<div class="container">
     	<div class="row vertical-offset-100">
         	<div class="panel panel-success">
-        		<div class="panel-heading" style="background-color: #fefefe;
+        		<div class="panel-heading" style="background-color: #f5f5f5;
         		border-color: #caced1;"><h6>Minhas ocorrências</h6>
         		</div>
         		{% if vazio %}
@@ -36,7 +36,7 @@
 						{% else %}
 							<td> Não </td>
 						{% endif %}
-	                	<td><a class="btn btn-success" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
+	                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
 	                	<td><a class="btn btn-danger" href="#" role="button">Excluir ocorrência</a></td>
 				{% endfor %}
 				    </tr>
@@ -45,4 +45,4 @@
   		</div>
 	</div>
 </div>
- {% endblock %} 
+ {% endblock %}

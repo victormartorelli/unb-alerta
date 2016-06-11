@@ -1,11 +1,9 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
 
-from django.views.generic.base import TemplateView
-
 from usuario.forms import LoginForm
 
-from .views import CriarUsuarioView
+from .views import CriarUsuarioView, PerfilView, EditarPerfilView
 
 urlpatterns = [
     url(r'^usuario/cadastrar-usuario/$',
@@ -15,7 +13,7 @@ urlpatterns = [
         'authentication_form': LoginForm},
         name='login'),
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
-    url(r'^perfil/$', TemplateView.as_view(
-        template_name='usuario/perfil.html'),
-        name='perfil'),
+    url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
+    url(r'^perfil/editar$',
+        EditarPerfilView.as_view(), name='editar_perfil'),
 ]

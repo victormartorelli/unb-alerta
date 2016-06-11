@@ -2,8 +2,8 @@
 {% block content %}
 
 <style type="text/css">
-  #map { 
-    width: 90% !important; 
+  #map {
+    width: 90% !important;
     height:550px !important;
     margin-left:5% !important;
     margin-top:2% !important;
@@ -20,10 +20,10 @@ function initMap() {
   // O parâmetro "libraries=geometry" no script que chama o mapa
   // possibilita a inserção dos polígonos, enquanto o método
   // containsLocation desta biblioteca possibilita a detecção
-  // se um ponto está ou não dentro do polígono em questão 
+  // se um ponto está ou não dentro do polígono em questão
   // ==============================================================
 
-  // Aqui declaramos os pontos que servem como 
+  // Aqui declaramos os pontos que servem como
   // vértices do polígono que delimita a área desejada
   var ICCCoords = [
   new google.maps.LatLng(-15.760398,-47.870296),
@@ -33,7 +33,7 @@ function initMap() {
   new google.maps.LatLng(-15.765899,-47.867105),
   new google.maps.LatLng(-15.765350,-47.866690),
   new google.maps.LatLng(-15.763843,-47.868781),
-  new google.maps.LatLng(-15.762765,-47.869574)  
+  new google.maps.LatLng(-15.762765,-47.869574)
 ];
 
 // Caso deseje exibir o polígono, descomentar as linhas
@@ -105,15 +105,16 @@ var ICCPolygon = new google.maps.Polygon({
         <div class="panel panel-default">
      
           <div class="panel-heading">
-            <h1 class="panel-title" style="color:#1c2c48; font-family:'Calibri', serif; font-weight: bold; font-style: oblique; font-size: 200%"> Mapa com estatisticas: </h1>
+            <h6>Mapa com estatisticas:</h6>
           </div>
 
           <div class="panel-body">
             <div class="form-group">
-              <div id="map" >
               <font color="red">
+              <b><div id="resultado" style="text-align:center; color:#4E6c24;"></div></b>
+              <div id="map" >
             </div>
-            <b><div id="resultado" style="text-align:center"></div></b>
+
           </div>
 
         </div>
