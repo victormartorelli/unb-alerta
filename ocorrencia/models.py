@@ -32,7 +32,10 @@ class Ocorrencia(models.Model):
     resposta = models.TextField(max_length=45, blank=True, null=True)
     usuario_ID = models.IntegerField(db_column='usuario_ID')
     vigilante_ID = models.IntegerField(db_column='vigilante_ID')
-    tb_categoria_ID = models.ForeignKey(Categoria, db_column='tb_categoria_ID')
+    tb_categoria_ID = models.ForeignKey(
+        Categoria,
+        verbose_name='Categoria',
+        db_column='tb_categoria_ID')
     longitude = models.FloatField()
     latitude = models.FloatField()
 
