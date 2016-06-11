@@ -1,5 +1,6 @@
-from django.views.generic import (FormView, ListView)
+from django.views.generic import (FormView, DetailView, UpdateView)
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
@@ -37,11 +38,23 @@ class CriarUsuarioView(FormView):
                 {'form': form})
 
 
-class EditarPerfilView (ListView):
+class PerfilView(DetailView):
+    template_name = "usuario/perfil.html"
+
+    def get_object(self):
+        if not self.request.user.is_superuser:
+            return Usuario.objects.get(user_id=self.request.user.id)
+        else:
+            return User.objects.get(id=self.request.user.id)
+
+
+class EditarPerfilView (UpdateView):
     template_name = "usuario/editar_perfil.html"
     model = Usuario
 
+    def get_object(self, queryset=None):
+        if not self.request.user.is_superuser:
+            return Usuario.objects.get(user_id=self.request.user.id)
+        else:
+            return User.objects.get(id=self.request.user.id)
 
-class PerfilView(ListView):
-    template_name = "usuario/perfil.html"
-    model = Usuario

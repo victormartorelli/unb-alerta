@@ -8,12 +8,16 @@ from .views import CriarUsuarioView, PerfilView, EditarPerfilView
 urlpatterns = [
     url(r'^usuario/cadastrar-usuario/$',
         CriarUsuarioView.as_view(), name='cadastrar_usuario'),
+
     url(r'^login/$', login, {
         'template_name': 'usuario/login.html',
         'authentication_form': LoginForm},
         name='login'),
+
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
+
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
+
     url(r'^perfil/editar$',
         EditarPerfilView.as_view(), name='editar_perfil'),
 ]

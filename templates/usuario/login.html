@@ -7,23 +7,27 @@
         <div class="panel panel-default">
           
           <div class="panel-heading">
-            <h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri', serif; font-weight: none; font-style: oblique; font-size: 200% ;margin-left: 35%">Login</h3>
+            <h3 class="panel-title " style="color:#26734d; font-family:'Trebuchet MS', Helvetica, sans-serif; font-weight: none; font-size: 200% ;margin-left: 35%"><b>Login</b></h3>
           </div>
-          
+
           <div class="panel-body">
-            <form id="login-form" method="post" action="">
-              {% csrf_token %}
               <fieldset>
-                <div>
-                  <div class="row mg-btm">   
-					 <a href="#">
-					   <img width="120px" height="120px" src="../static/images/facebook.png"  align="left" title="logar com facebook" style="margin-left: 10%"/>
-					 </a>
-					 <a href="#">
-					   <img width="120px" height="120px" src="../static/images/Google+.jpeg"  align="right" title="logar com o google+" style="margin-right: 10%"/> 
-                    </a>
-                  </div>
-                </div>
+
+            {% if form.errors %}
+              <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos. Tente novamente.</font></p>
+            {% endif %}
+
+            {% if next %}
+              {% if user.is_authenticated %}
+                <p><font color="red">Sua conta não tem acesso a esta página.</font></p>          
+              {% else %}
+                <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
+
+              {% endif %}
+          {% endif %}
+
+          <form id="login-form" method="post" action="">
+              {% csrf_token %}
 
                 <div class="form-group">
                   Usuário</br>
