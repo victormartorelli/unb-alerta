@@ -194,7 +194,7 @@ class DescricaoOcorrenciaView(DetailView):
 
 
 class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
-    template_name = "ocorrencias/minhas_ocorrencias.html"
+    template_name = "ocorrencia/minhas_ocorrencias.html"
     model = Ocorrencia
     queryset = Ocorrencia.objects.filter(
         validade=True,

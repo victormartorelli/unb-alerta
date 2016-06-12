@@ -27,8 +27,8 @@ $(document).ready(function() {
 <div class="container">
     <div class="row vertical-offset-100">
 
-    	<nav class="navbar navbar-default">
-		  <div class="container-fluid">
+    	<nav class="navbar navbar-default" style="height:300px">
+		  <div class="container-fluid" >
 		    <div class="navbar-header">
 		      <h1 class="navbar-brand">Filtragem:</h1>
 		    </div>
@@ -36,46 +36,43 @@ $(document).ready(function() {
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <form class="navbar-form navbar-left" role="search">
 		        	
-		      		<div class="form-group">
-		            	<h2>{{ filter.form.id|as_crispy_field }}</h2>
+		      		<div class="form-group" style="margin: -7% 8% 10%">
+		            	{{ filter.form.id|as_crispy_field }}
 		            </div>
 
-		        	<div class="form-group">
-              			<h2>{{ filter.form.tb_categoria_ID|as_crispy_field }}</h2>
+		        	<div class="form-group" style="margin: -7% -3% 10%">
+              			{{ filter.form.tb_categoria_ID|as_crispy_field }}
             		</div>
 
-            		<div class="form-group">
-		            	<h2>{{ filter.form.vitimado|as_crispy_field }}</h2>
+            		<div class="form-group" style="margin: -7% 8% 10%">
+		            	{{ filter.form.vitimado|as_crispy_field }}
 		            </div>
 
-		            <div class="form-group">
-		            	<h2>{{ filter.form.emergencia|as_crispy_field }}</h2>
+		            <div class="form-group" style="margin: -7% -3% 10%">
+		            	{{ filter.form.emergencia|as_crispy_field }}
 		            </div>
 
 
-		        	<div class="form-group">
+		        	<div class="form-group" style="margin: -7% 8% 10%">
 		        		{{filter.form.data|as_crispy_field}}
 		        	</div>
 
-		        	<div class="form-group">
+		        	<div class="form-group" style="margin-left:-5%;margin-top:-11%">
+		            	{{ filter.form.descricao|as_crispy_field }}
+		            </div>
+
+		            <div class="form-group" style="margin-left:3%;margin-top:-11%">
+		            	{{ filter.form.resposta|as_crispy_field }}
+		            </div>
+
+		        	<div class="form-group" style="margin: -7% 8% 10%">
 		        		{{filter.form.hora|as_crispy_field}}
 		        	</div>
 
-		        	<div class="form-group">
-		            	<h2>{{ filter.form.descricao|as_crispy_field }}</h2>
+		            <div class="form-group" style="margin: -7% -5% 10%">
+		            	{{ filter.form.o|as_crispy_field }}
 		            </div>
-
-		            <div class="form-group">
-		            	<h2>{{ filter.form.resposta|as_crispy_field }}</h2>
-		            </div>
-
-		            <div class="form-group">
-		            	<h2>{{ filter.form.o|as_crispy_field }}</h2>
-		            </div>
-
-
-		        </div>
-		        <button type="submit" class="btn btn-primary" style="margin-left:0%">Filtrar</button>
+					<button type="submit" class="btn btn-primary btn-lg" style="margin-left:81%;margin-top:-14%;margin-bottom:-4%;width:16%">Filtrar</button>
 		      </form>
 		    </div>
 		  </div>
@@ -85,8 +82,22 @@ $(document).ready(function() {
         		<div class="panel-heading" style="background-color: #f5f5f5;
         		border-color: #caced1;"><h6> Todas as ocorrências</h6>
         		</div>
-	        		<table class="table">
-
+        		{% if vazio %}
+	        	</br>
+        		<div class="alert alert-dismissible alert-warning">
+				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+				</div>
+				{% else %}
+        		<table class="table" >
+					<tr>
+						<th>Número</th>
+						<th>Localização</th>
+						<th>Data e Hora</th>
+						<th>Imagem</th>
+						<th>Emergência?</th>
+						<th>Descrição</th>
+					</tr>
+				{% endif %}
 	        {% if page_obj|length %}
           		{% if numero_res > 1 %}
               		<h3>Pesquisa concluída com sucesso! Foram encontradas {{numero_res}} ocorrências.</h3>

@@ -1,4 +1,4 @@
-from django.views.generic import (FormView, DetailView, UpdateView)
+from django.views.generic import (FormView, DetailView)
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -46,15 +46,3 @@ class PerfilView(DetailView):
             return Usuario.objects.get(user_id=self.request.user.id)
         else:
             return User.objects.get(id=self.request.user.id)
-
-
-class EditarPerfilView (UpdateView):
-    template_name = "usuario/editar_perfil.html"
-    model = Usuario
-
-    def get_object(self, queryset=None):
-        if not self.request.user.is_superuser:
-            return Usuario.objects.get(user_id=self.request.user.id)
-        else:
-            return User.objects.get(id=self.request.user.id)
-

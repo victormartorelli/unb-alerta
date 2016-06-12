@@ -3,7 +3,7 @@ from django.contrib.auth.views import login, logout
 
 from usuario.forms import LoginForm
 
-from .views import CriarUsuarioView, PerfilView, EditarPerfilView
+from .views import CriarUsuarioView, PerfilView
 
 urlpatterns = [
     url(r'^usuario/cadastrar-usuario/$',
@@ -18,6 +18,4 @@ urlpatterns = [
 
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
 
-    url(r'^perfil/editar$',
-        EditarPerfilView.as_view(), name='editar_perfil'),
 ]
