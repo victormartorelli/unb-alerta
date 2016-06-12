@@ -206,9 +206,13 @@ class OcorrenciaFiltro(django_filters.FilterSet):
         widget=forms.Select(
             attrs={'class': 'selector'}))
 
-    descricao = django_filters.CharFilter(lookup_expr='icontains')
+    descricao = django_filters.CharFilter(
+        label='Descrição (Palavras-Chave)',
+        lookup_expr='icontains')
 
-    resposta = django_filters.CharFilter(lookup_expr='icontains')
+    resposta = django_filters.CharFilter(
+        label='Resposta (Palavras-Chave)',
+        lookup_expr='icontains')
 
     class Meta:
         model = Ocorrencia

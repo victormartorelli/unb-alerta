@@ -18,7 +18,10 @@ class Ocorrencia(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
     data = models.DateField(verbose_name='Data da Ocorrência')
     hora = models.TimeField()
-    descricao = models.TextField(blank=True, null=True)
+    descricao = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Descrição")
     foto = models.ImageField(
         max_length=45,
         blank=True,

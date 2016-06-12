@@ -61,6 +61,14 @@ $(document).ready(function() {
 		        		{{filter.form.hora|as_crispy_field}}
 		        	</div>
 
+		        	<div class="form-group">
+		            	<h2>{{ filter.form.descricao|as_crispy_field }}</h2>
+		            </div>
+
+		            <div class="form-group">
+		            	<h2>{{ filter.form.resposta|as_crispy_field }}</h2>
+		            </div>
+
 		            <div class="form-group">
 		            	<h2>{{ filter.form.o|as_crispy_field }}</h2>
 		            </div>
@@ -79,12 +87,11 @@ $(document).ready(function() {
         		</div>
 	        		<table class="table">
 
-	        {% if vazio %}
-	        	</br>
-        		<div class="alert alert-dismissible alert-warning">
-				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
-				</div>
-					{% else %}
+	        {% if page_obj|length %}
+          		{% if numero_res > 1 %}
+              		<h3>Pesquisa concluída com sucesso! Foram encontradas {{numero_res}} ocorrências.</h3>
+            	{% elif numero_res == 1 %}
+              		<h3>Pesquisa concluída com sucesso! Foi encontrada {{numero_res}} ocorrência.</h3>
 						<tr>
 							<th>Número</th>
 							<th>Localização</th>
@@ -147,6 +154,11 @@ $(document).ready(function() {
 								{% endif %}
 			                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
 			{% endfor %}
+			{% else %}
+				<div class="alert alert-dismissible alert-warning">
+				  <strong style="margin-left:40%">Não há nenhuma ocorrência com essas especificações!</strong>
+				</div>
+			{% endif %}
 			    </tr>
 					</table>
 			   </div>

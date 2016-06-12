@@ -51,8 +51,12 @@ class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
 
         self.filterset.form.fields['o'].label = 'Ordenação'
 
+        queryset = self.object_list.filter(
+            atendida=True,
+            validade=True).distinct()
+
         context = self.get_context_data(filter=self.filterset,
-                                        object_list=self.object_list,
+                                        object_list=queryset,
                                         filter_url=url,
                                         numero_res=len(self.object_list)
                                         )
