@@ -30,7 +30,23 @@
 						<td>{{o.id}}</td>
 						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 						<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
-						<td><a href="#"> Clique para abrir a imagem </a></td>
+
+						{% if o.foto %}
+							<td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
+								<div id="myModal" class="modal">
+			 						<span class="close">×</span>
+			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">
+			  				</div>
+			  			</td>
+
+								{% else %}
+								  <td> Não possui imagem </td>
+								{% endif %}
+								{% if o.emergencia == 1 %}
+									<td><font color="red"> Sim </font></td>
+								{% else %}
+									<td> Não </td>
+								{% endif %}
 						{% if o.emergencia == 1 %}
 							<td> Sim</td>
 						{% else %}
@@ -46,3 +62,28 @@
 	</div>
 </div>
  {% endblock %}
+
+ {% js_block %}
+ <script>
+	var modal = document.getElementById('myModal');
+	var link = document.getElementById("abreImagem");
+
+	var span = document.getElementsByClassName("close")[0];
+
+
+	link.onclick = function() {
+		modal.style.display = "block";
+	}
+
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+	    modal.style.display = "none";
+		}
+	}
+</script>
+{% endblock %}

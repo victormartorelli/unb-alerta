@@ -16,7 +16,7 @@ class Categoria(models.Model):
 
 class Ocorrencia(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
-    data = models.DateField()
+    data = models.DateField(verbose_name='Data da Ocorrência')
     hora = models.TimeField()
     descricao = models.TextField(blank=True, null=True)
     foto = models.ImageField(

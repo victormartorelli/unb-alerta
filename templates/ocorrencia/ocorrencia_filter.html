@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block content %}
-
+{% load crispy_forms_tags %}
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -35,29 +35,37 @@ $(document).ready(function() {
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <form class="navbar-form navbar-left" role="search">
-		        <div class="form-group">
-		        	 <div class="form-group">
-		              <label for="data" style="margin-left:10%" >Data</label>
-		                  </br>
-		                  <input id="data" name="data" style="width: 35%;" />
+		        	
+		      		<div class="form-group">
+		            	<h2>{{ filter.form.id|as_crispy_field }}</h2>
 		            </div>
+
+		        	<div class="form-group">
+              			<h2>{{ filter.form.tb_categoria_ID|as_crispy_field }}</h2>
+            		</div>
+
+            		<div class="form-group">
+		            	<h2>{{ filter.form.vitimado|as_crispy_field }}</h2>
+		            </div>
+
 		            <div class="form-group">
-		              <label for="hora" style="margin-left:-50%; margin-top:2%;">Horario
-		              		</br>
-		                  <input id="hora" name="hora" style="width: 25%;margin-top:2%" />
+		            	<h2>{{ filter.form.emergencia|as_crispy_field }}</h2>
 		            </div>
+
+
+		        	<div class="form-group">
+		        		{{filter.form.data|as_crispy_field}}
+		        	</div>
+
+		        	<div class="form-group">
+		        		{{filter.form.hora|as_crispy_field}}
+		        	</div>
+
 		            <div class="form-group">
-		            	<label for="tb_categoria_ID" style="margin-left:-600%;margin-top:2%" >Tipo</label>
-		                  </br>
+		            	<h2>{{ filter.form.o|as_crispy_field }}</h2>
 		            </div>
-		            <div class="form-group">
-		            	<label for="emergencia" style="margin-left:-150%;margin-top:2%">Emergencia?</label>
-		                  </br>
-		            </div>
-		            <div class="form-group">
-		            	<label for="vitima" style="margin-left:-90%;margin-top:2%" >Ha vitima(s)?</label>
-		                  </br>
-		            </div>
+
+
 		        </div>
 		        <button type="submit" class="btn btn-primary" style="margin-left:0%">Filtrar</button>
 		      </form>

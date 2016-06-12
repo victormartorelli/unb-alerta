@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.core.urlresolvers import reverse, reverse_lazy
+from django_filters.views import FilterView
 from django.shortcuts import redirect
 
 from unb_alerta.utils import make_pagination
@@ -12,33 +13,55 @@ from usuario.models import Usuario
 
 from .models import Ocorrencia
 
-from .forms import OcorrenciaForm, ValidarOcorrenciaEditForm
+from .forms import OcorrenciaForm, ValidarOcorrenciaEditForm, OcorrenciaFiltro
 
 
-class ListaOcorrenciasView(LoginRequiredMixin, ListView):
-    template_name = "ocorrencias/todas_ocorrencias.html"
+class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
     model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(
-        validade=True,
-        atendida=True).order_by('-id')
+    filterset_class = OcorrenciaFiltro
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
-        context = super(ListaOcorrenciasView, self).get_context_data(**kwargs)
-
-        if not context.get('object_list'):
-            context['vazio'] = True
+        context = super(ListaOcorrenciasView,
+                        self).get_context_data(**kwargs)
 
         paginator = context['paginator']
         page_obj = context['page_obj']
 
         context['page_range'] = make_pagination(
             page_obj.number, paginator.num_pages)
+
         return context
+
+    def get(self, request, *args, **kwargs):
+        super(ListaOcorrenciasView, self).get(request)
+
+        # Se a pesquisa estiver quebrando com a paginação
+        # Olhe esta função abaixo
+        # Provavelmente você criou um novo campo no Form/FilterSet
+        # Então a ordem da URL está diferente
+        data = self.filterset.data
+        if (data and data.get('tb_categoria_ID') is not None):
+            url = "&" + str(self.request.environ['QUERY_STRING'])
+            if url.startswith("&page"):
+                ponto_comeco = url.find('tb_categoria_ID=') - 1
+                url = url[ponto_comeco:]
+        else:
+            url = ''
+
+        self.filterset.form.fields['o'].label = 'Ordenação'
+
+        context = self.get_context_data(filter=self.filterset,
+                                        object_list=self.object_list,
+                                        filter_url=url,
+                                        numero_res=len(self.object_list)
+                                        )
+
+        return self.render_to_response(context)
 
 
 class CriarOcorrenciaView(LoginRequiredMixin, FormView):
-    template_name = "ocorrencias/nova_ocorrencia.html"
+    template_name = "ocorrencia/nova_ocorrencia.html"
     form_class = OcorrenciaForm
 
     def get_context_data(self, **kwargs):
@@ -85,7 +108,7 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
 
 
 class ListaValidacaoView(PermissionRequiredMixin, ListView):
-    template_name = "ocorrencias/validacao_list.html"
+    template_name = "ocorrencia/validacao_list.html"
     model = Ocorrencia
     queryset = Ocorrencia.objects.filter(atendida=False).order_by('-id')
     paginate_by = 10
@@ -106,7 +129,7 @@ class ListaValidacaoView(PermissionRequiredMixin, ListView):
 
 
 class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
-    template_name = "ocorrencias/validacao_ocorrencia.html"
+    template_name = "ocorrencia/validacao_ocorrencia.html"
     form_class = ValidarOcorrenciaEditForm
     model = Ocorrencia
     success_url = reverse_lazy('lista_ocorrencias')
@@ -157,7 +180,7 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
 
 
 class DescricaoOcorrenciaView(DetailView):
-    template_name = "ocorrencias/descricao_ocorrencia.html"
+    template_name = "ocorrencia/descricao_ocorrencia.html"
 
     def get_queryset(self):
         pk = self.kwargs['pk']
