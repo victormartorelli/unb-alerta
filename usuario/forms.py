@@ -35,8 +35,6 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
-    data_nasc = forms.DateField(initial=datetime.date.today)
-
     class Meta:
         model = Usuario
         fields = ['login',
@@ -123,3 +121,8 @@ class UsuarioForm(ModelForm):
         u.groups.add(grupo)
 
         return usuario
+
+    def __init__(self, *args, **kwargs):
+        super(UsuarioForm, self).__init__(*args, **kwargs)
+        self.fields['cpf'].widget.attrs['class'] = 'cpf'
+        self.fields['data_nasc'].widget.attrs['class'] = 'data'

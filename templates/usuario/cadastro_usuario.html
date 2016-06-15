@@ -6,29 +6,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="/static/js/jquery.mask.min.js"></script>
-<script type="text/javascript">
-  
-$(document).ready(function() {
-  $("#data_nasc").mask("00/00/0000", {placeholder: "__/__/____"});
-});
-
-$(document).ready(function() {
-  $("#data_nasc").datepicker({dateFormat:'dd/mm/yy'});
-});
-
-$(document).ready(function() {
-  $("#cpf").mask("000.000.000-00", {placeholder: "___.___.___-__"});
-  $('form.uniForm').uniform();
-
-});
-
-$(document).ready(function() {
-  $("#cpf").replace(/[^\d]/g, '');
-});
-
-
-
-</script>
 
   <div id = "fundo">
     <div class="container">
@@ -87,25 +64,11 @@ $(document).ready(function() {
                   <input type="radio" name="sexo" id="sexo" value="0"> <label for="sexo">Feminino</label>
                 </div>
                 
-                <div class="form-group">
-                  <label for="data_nasc" class="requiredField">Data de Nascimento 
-                  <span class="asteriskField">*</span></label>
-                  </br>
-                  <input id="data_nasc" name="data_nasc" required="required" 
-                  style="width: 100%;height:35px" />
-                </div>
+                {{form.data_nasc|as_crispy_field}}
 
-                <div class="form-group">
-                  <label for="cpf">CPF</label>
-                  </br>
-                  <input id="cpf" name="cpf" style="width: 100%;height:35px" /> </br>
-                </div>
+                {{form.cpf|as_crispy_field}}
                 
-                <div class="form-group">
-                  <label for="rg">RG</label>
-                  </br>
-                  <input id="rg" name="rg" style="width: 100%;height:35px"/>
-                </div>
+                {{form.rg|as_crispy_field}}
 
                 {{ form.grupo_usuario }}
                 {{ form.status }}
@@ -113,15 +76,6 @@ $(document).ready(function() {
                 
                 <input class="btn btn-lg btn-success " type="submit" value="Cadastrar"
                 style= "margin-left:33%; margin-top:3%;width:30%" onclick="myFunction()">
-                <script>
-                  function myFunction() {
-                    {% for message in messages %}
-                    alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}alert("Favor confirmar cadastro por email");{% endif %}
-                    {{ message|safe }}
-                    
-                  }
-                  {% endfor %}
-                </script>
 
               </fieldset>
           </form>

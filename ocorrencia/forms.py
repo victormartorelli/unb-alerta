@@ -72,13 +72,8 @@ class OcorrenciaForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(OcorrenciaForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'blueForms'
-        self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
-
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.fields['hora'].widget.attrs['class'] = 'hora'
+        self.fields['data'].widget.attrs['class'] = 'data'
 
 
 class ValidarOcorrenciaEditForm(ModelForm):
@@ -139,6 +134,11 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
                    'descricao': forms.HiddenInput()}
+
+    def __init__(self, *args, **kwargs):
+        super(OcorrenciaForm, self).__init__(*args, **kwargs)
+        self.Meta.fields['hora'].widget.attrs['class'] = 'hora'
+        self.Meta.fields['data'].widget.attrs['class'] = 'data'
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):
@@ -243,4 +243,6 @@ class OcorrenciaFiltro(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(OcorrenciaFiltro, self).__init__(*args, **kwargs)
-        self.filters['id'].label = 'ID'
+        self.form.fields['id'].label = 'ID'
+        self.form.fields['hora'].widget.attrs['class'] = 'hora'
+        self.form.fields['data'].widget.attrs['class'] = 'data'

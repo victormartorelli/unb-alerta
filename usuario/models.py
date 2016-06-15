@@ -7,7 +7,7 @@ class Usuario(models.Model):
         Usuário cadastrado via web
     '''
     id = models.AutoField(db_column='ID', primary_key=True)
-    user = models.ForeignKey(User, verbose_name ="Usuario e Senha")
+    user = models.ForeignKey(User, verbose_name='Usuário')
     nome = models.CharField(max_length=45)
     login = models.CharField(
         verbose_name='Nome de Usuário',
@@ -35,7 +35,9 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=45, unique=True)
     senha = models.CharField(max_length=45)
     status = models.IntegerField(default=1)
-    data_nasc = models.DateField(blank=True, null=True, verbose_name='data de nascimento')
+    data_nasc = models.DateField(blank=True,
+                                 null=True,
+                                 verbose_name='Data de Nascimento')
     grupo_usuario = models.ForeignKey(Group, verbose_name='tipo de usuário')
 
     class Meta:
