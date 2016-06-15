@@ -83,7 +83,8 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
-        if self.cleaned_data['cpf'] != '' and len(self.cleaned_data['cpf']) != 14:
+        if (self.cleaned_data['cpf'] != '' and
+           len(self.cleaned_data['cpf']) != 14):
             raise ValidationError('CPF deve ter 11 dígitos')
 
         if len(self.cleaned_data['matricula']) > 10:
@@ -95,6 +96,13 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['senha'],
             self.cleaned_data['confirma_senha'],
             msg)
+
+        email_existente = Usuario.objects.filter(
+            email=self.cleaned_data['email'])
+
+        if email_existente:
+            msg = 'Esse email já foi cadastrado.'
+            raise ValidationError(msg)
 
         return self.cleaned_data
 

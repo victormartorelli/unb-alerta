@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
 
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
@@ -26,5 +27,9 @@ urlpatterns = [
 
     url(r'^ocorrencias/minhas_ocorrencias/$',
         MinhasOcorrenciasView.as_view(), name='minhas_ocorrencias'),
+
+    url(r'^estatisticas/$', TemplateView.as_view(
+        template_name='mapa.html'),
+        name='estatisticas'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

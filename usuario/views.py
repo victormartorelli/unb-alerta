@@ -32,7 +32,7 @@ class CriarUsuarioView(FormView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            mensagem = "Formulário Inválido"
+            mensagem = mensagem = "Formulário Inválido"
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})
@@ -57,4 +57,3 @@ class EditarPerfilView (UpdateView):
             return Usuario.objects.get(user_id=self.request.user.id)
         else:
             return User.objects.get(id=self.request.user.id)
-
