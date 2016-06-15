@@ -58,7 +58,7 @@ class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
         context = self.get_context_data(filter=self.filterset,
                                         object_list=queryset,
                                         filter_url=url,
-                                        numero_res=len(self.object_list)
+                                        numero_res=len(queryset)
                                         )
 
         return self.render_to_response(context)
@@ -105,7 +105,9 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
             ocorrencia.save()
             return self.form_valid(form)
         else:
-            mensagem = "Formulário Inválido"
+            erros = form.non_field_errors().as_text()
+            erros = ''.join(c for c in erros if c not in '*')
+            mensagem = 'Formulário Inválido.' + erros
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})
@@ -146,9 +148,9 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         return context
 
     def get_initial(self):
+        o = Ocorrencia.objects.get(id=self.kwargs['pk'])
         if self.request.user.is_superuser is False:
             usuario = Usuario.objects.get(user_id=self.request.user.id)
-            o = Ocorrencia.objects.get(id=self.kwargs['pk'])
             return {'vigilante_ID': usuario.id,
                     'emergencia': o.emergencia,
                     'atendida': o.atendida,
@@ -158,14 +160,21 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'foto': o.foto,
                     'descricao': o.descricao}
         else:
-            return {'vigilante_ID': 1}
+            return {'vigilante_ID': 1,
+                    'emergencia': o.emergencia,
+                    'atendida': o.atendida,
+                    'validade': o.atendida,
+                    'repetida': o.repetida,
+                    'vitimado': o.vitimado,
+                    'foto': o.foto,
+                    'descricao': o.descricao}
 
     def form_valid(self, form):
         ocorrencia = form.instance
         ocorrencia.id = self.kwargs['pk']
         ocorrencia.save()
-
-        if form.data.get('repetida') == 'True':
+        import ipdb; ipdb.set_trace()
+        if form.data.get('repetida') == '1':
             Ocorrencia.objects.get(id=ocorrencia.id).delete()
 
         return redirect(reverse('lista_ocorrencias'))
@@ -177,7 +186,9 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            mensagem = "Formulário Inválido"
+            erros = form.non_field_errors().as_text()
+            erros = ''.join(c for c in erros if c not in '*')
+            mensagem = 'Formulário Inválido.' + erros
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})

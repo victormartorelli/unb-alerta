@@ -135,11 +135,6 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'longitude': forms.HiddenInput(),
                    'descricao': forms.HiddenInput()}
 
-    def __init__(self, *args, **kwargs):
-        super(OcorrenciaForm, self).__init__(*args, **kwargs)
-        self.Meta.fields['hora'].widget.attrs['class'] = 'hora'
-        self.Meta.fields['data'].widget.attrs['class'] = 'data'
-
 
 class RangeWidgetOverrideDate(forms.MultiWidget):
 

@@ -32,7 +32,9 @@ class CriarUsuarioView(FormView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            mensagem = "Formulário Inválido"
+            erros = form.non_field_errors().as_text()
+            erros = ''.join(c for c in erros if c not in '*')
+            mensagem = 'Formulário Inválido.' + erros + '.'
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})

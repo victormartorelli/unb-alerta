@@ -63,7 +63,8 @@ class UsuarioForm(ModelForm):
 
         if ('senha' not in self.cleaned_data or
                 'confirma_senha' not in self.cleaned_data):
-            raise ValidationError('Favor informar senhas atuais ou novas')
+            raise ValidationError(
+                'Favor preencher o campo senha e o de confirmação')
 
         msg = 'As senhas não conferem.'
         self.valida_igualdade(
