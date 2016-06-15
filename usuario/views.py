@@ -1,4 +1,4 @@
-from django.views.generic import (FormView, DetailView, UpdateView)
+from django.views.generic import (FormView, DetailView)
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -32,7 +32,7 @@ class CriarUsuarioView(FormView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            mensagem = mensagem = "Formulário Inválido"
+            mensagem = "Formulário Inválido"
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})
@@ -42,17 +42,6 @@ class PerfilView(DetailView):
     template_name = "usuario/perfil.html"
 
     def get_object(self):
-        if not self.request.user.is_superuser:
-            return Usuario.objects.get(user_id=self.request.user.id)
-        else:
-            return User.objects.get(id=self.request.user.id)
-
-
-class EditarPerfilView (UpdateView):
-    template_name = "usuario/editar_perfil.html"
-    model = Usuario
-
-    def get_object(self, queryset=None):
         if not self.request.user.is_superuser:
             return Usuario.objects.get(user_id=self.request.user.id)
         else:

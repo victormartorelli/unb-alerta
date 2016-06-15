@@ -1,6 +1,29 @@
 {% extends "base.html"%}
 {% block content %}
 
+<script>
+	var modal = document.getElementById('myModal');
+	var link = document.getElementById("abreImagem");
+
+	var span = document.getElementsByClassName("close")[0];
+
+
+	link.onclick = function() {
+		modal.style.display = "block";
+	}
+
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+	    modal.style.display = "none";
+		}
+	}
+</script>
+
 <div id = "fundo">
 	<div class="container">
     	<div class="row vertical-offset-100">
@@ -47,11 +70,6 @@
 								{% else %}
 									<td> Não </td>
 								{% endif %}
-						{% if o.emergencia == 1 %}
-							<td> Sim</td>
-						{% else %}
-							<td> Não </td>
-						{% endif %}
 	                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
 	                	<td><a class="btn btn-danger" href="#" role="button">Excluir ocorrência</a></td>
 				{% endfor %}
@@ -62,28 +80,3 @@
 	</div>
 </div>
  {% endblock %}
-
- {% js_block %}
- <script>
-	var modal = document.getElementById('myModal');
-	var link = document.getElementById("abreImagem");
-
-	var span = document.getElementsByClassName("close")[0];
-
-
-	link.onclick = function() {
-		modal.style.display = "block";
-	}
-
-
-	span.onclick = function() {
-		modal.style.display = "none";
-	}
-
-	window.onclick = function(event) {
-		if (event.target == modal) {
-	    modal.style.display = "none";
-		}
-	}
-</script>
-{% endblock %}
