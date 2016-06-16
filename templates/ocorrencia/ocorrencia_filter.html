@@ -103,14 +103,6 @@ $(document).ready(function() {
               		<h3>Pesquisa concluída com sucesso! Foram encontradas {{numero_res}} ocorrências.</h3>
             	{% elif numero_res == 1 %}
               		<h3>Pesquisa concluída com sucesso! Foi encontrada {{numero_res}} ocorrência.</h3>
-						<tr>
-							<th>Número</th>
-							<th>Localização</th>
-							<th>Data e Hora</th>
-							<th>Imagem</th>
-							<th>Emergência?</th>
-							<th>Descrição</th>
-						</tr>
 					{% endif %}
         {% for o in object_list %}
 				<tr>
