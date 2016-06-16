@@ -22,8 +22,7 @@ class CriarUsuarioView(FormView):
         return redirect(reverse('inicio'))
 
     def get_initial(self):
-        return {'status': 1,
-                'grupo_usuario': 1}
+        return {'grupo_usuario': 1}
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()

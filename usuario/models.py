@@ -22,11 +22,13 @@ class Usuario(models.Model):
     rg = models.IntegerField(
         db_column='RG',
         blank=True,
-        null=True)
+        null=True,
+        unique=True)
     matricula = models.CharField(
         blank=True,
         null=True,
-        max_length=10)
+        max_length=10,
+        unique=True)
 
     sexo = models.CharField(
         max_length=1,
@@ -34,11 +36,14 @@ class Usuario(models.Model):
         null=True)
     email = models.EmailField(max_length=45, unique=True)
     senha = models.CharField(max_length=45)
-    status = models.IntegerField(default=1)
-    data_nasc = models.DateField(blank=True,
-                                 null=True,
-                                 verbose_name='Data de Nascimento')
-    grupo_usuario = models.ForeignKey(Group, verbose_name='tipo de usuário')
+    status = models.BooleanField(default=False, verbose_name='Ativo?')
+    data_nasc = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name='Data de Nascimento')
+    grupo_usuario = models.ForeignKey(
+        Group,
+        verbose_name='Tipo de Usuário')
 
     class Meta:
         verbose_name = 'Usuário'
@@ -46,11 +51,3 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.login
-
-    def save(self, *args, **kwargs):
-        if (self.login == ''):
-            self.login = self.user.username
-        if(self.senha == ''):
-            self.senha = self.user.password    
-        super(Usuario, self).save(*args, **kwargs)
-

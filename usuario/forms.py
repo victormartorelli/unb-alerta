@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, Group
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
 from django.contrib.auth.forms import AuthenticationForm
-import datetime
 
 from .models import Usuario
 
@@ -45,9 +44,9 @@ class UsuarioForm(ModelForm):
                   'confirma_email',
                   'cpf',
                   'rg',
+                  'status',
                   'matricula',
                   'sexo',
-                  'status',
                   'data_nasc',
                   'grupo_usuario']
 
@@ -113,6 +112,7 @@ class UsuarioForm(ModelForm):
             username=usuario.login,
             email=usuario.email)
         u.set_password(self.cleaned_data['senha'])
+        u.is_active = usuario.status
         u.save()
 
         usuario.user = u

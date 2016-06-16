@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from django.contrib.auth.models import User
 
 # import ocorrencia.urls
 # import base.urls
@@ -33,3 +34,5 @@ urlpatterns = [
     # #   so that base /sistema/ url doesn't capture its children
     # url(r'', include(base.urls)),
 ]
+
+admin.site.unregister(User)
