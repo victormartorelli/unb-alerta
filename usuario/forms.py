@@ -94,10 +94,13 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_senha'],
             msg)
 
-        email_existente = Usuario.objects.filter(
+        email_existente1 = Usuario.objects.filter(
             email=self.cleaned_data['email'])
 
-        if email_existente:
+        email_existente2 = User.objects.filter(
+            email=self.cleaned_data['email'])
+
+        if email_existente1 or email_existente2:
             msg = 'Esse email já foi cadastrado.'
             raise ValidationError(msg)
 

@@ -1,8 +1,13 @@
-from django.views.generic import (FormView, DetailView)
+from django.views.generic import FormView, DetailView, TemplateView
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
 
 from usuario.models import Usuario
 from .forms import UsuarioForm
@@ -18,8 +23,28 @@ class CriarUsuarioView(FormView):
         return context
 
     def form_valid(self, form):
+        kwargs = {}
         form.save()
-        return redirect(reverse('inicio'))
+        import ipdb; ipdb.set_trace()
+        user = User.objects.get(email=self.request.POST.get('email'))
+
+        kwargs['token'] = default_token_generator.make_token(user)
+        kwargs['uidb64'] = urlsafe_base64_encode(force_bytes(user.pk))
+        assunto = "UnB Alerta - Confirmação de Conta"
+        full_url = self.request.get_raw_uri(),
+        url_base = full_url[0][:full_url[0].find('usuario') - 1],
+        mensagem = ("Este e-mail foi utilizado para fazer cadastro no " +
+                    "UnB Alerta.\n" +
+                    "Caso você não tenha feito este cadastro, por favor " +
+                    "ignore esta mensagem. Caso tenha, clique " +
+                    "no link abaixo\n" + url_base[0] +
+                    reverse('confirmar_email', kwargs=kwargs))
+        remetente = settings.EMAIL_HOST_USER
+        destinatario = [self.request.POST.get('email'),
+                        settings.EMAIL_HOST_USER]
+        send_mail(assunto, mensagem, remetente, destinatario,
+                  fail_silently=False)
+        return redirect(reverse('solicita_confirmacao'))
 
     def get_initial(self):
         return {'grupo_usuario': 1}
@@ -47,3 +72,18 @@ class PerfilView(DetailView):
             return Usuario.objects.get(user_id=self.request.user.id)
         else:
             return User.objects.get(id=self.request.user.id)
+
+
+class ConfirmarEmailView(TemplateView):
+    template_name = "usuario/confirma_email.html"
+
+    def get(self, request, *args, **kwargs):
+        uid = urlsafe_base64_decode(self.kwargs['uidb64'])
+        user = User.objects.get(id=uid)
+        user.is_active = True
+        usuario = Usuario.objects.get(user_id=uid)
+        usuario.status = True
+        usuario.save()
+        user.save()
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)

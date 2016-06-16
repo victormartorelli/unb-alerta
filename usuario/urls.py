@@ -3,12 +3,13 @@ from django.contrib.auth.views import (login, logout, password_reset,
                                        password_reset_done,
                                        password_reset_confirm,
                                        password_reset_complete)
+from django.views.generic.base import TemplateView
 
 from unb_alerta.settings import DEFAULT_FROM_EMAIL
 from usuario.forms import (LoginForm, RecuperarSenhaEmailForm,
                            RecuperacaoMudarSenhaForm)
 
-from .views import CriarUsuarioView, PerfilView
+from .views import CriarUsuarioView, PerfilView, ConfirmarEmailView
 
 recuperar_email = [
     url(r'^recuperar/recuperar_senha/$',
@@ -48,4 +49,11 @@ urlpatterns = [
     url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
 
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
+
+    url(r'usuario/solicita-confirmacao^$', TemplateView.as_view(
+        template_name='usuario/solicita_confirmacao.html'),
+        name='solicita_confirmacao'),
+    url(r'^usuario/confirmar/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
+        ConfirmarEmailView.as_view(),
+        name='confirmar_email'),
 ] + recuperar_email
