@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'unbalerta@gmail.com'
+EMAIL_HOST_PASSWORD = 'unbalerta123'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/?next='
