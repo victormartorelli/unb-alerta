@@ -28,7 +28,7 @@
 			</br>
 			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
 			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
-			<p><font color="red">{{ form.email.errors }}</font></p>
+			<p><font color="red">{{ form.non_field_errors }}</font></p>
 			
 			<input class="btn btn-lg btn-success" 
 			type="submit" value="Recuperar" 

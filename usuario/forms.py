@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.models import User, Group
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
-from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
+                                       SetPasswordForm)
 from .models import Usuario
 
 
@@ -81,8 +81,7 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
-        if (self.cleaned_data['cpf'] != '' and
-           len(self.cleaned_data['cpf']) != 14):
+        if (self.cleaned_data['cpf'] != '' and len(self.cleaned_data['cpf']) != 14):
             raise ValidationError('CPF deve ter 11 dígitos')
 
         if len(self.cleaned_data['matricula']) > 10:
@@ -127,3 +126,26 @@ class UsuarioForm(ModelForm):
         super(UsuarioForm, self).__init__(*args, **kwargs)
         self.fields['cpf'].widget.attrs['class'] = 'cpf'
         self.fields['data_nasc'].widget.attrs['class'] = 'data'
+
+
+class RecuperarSenhaEmailForm(PasswordResetForm):
+
+    def __init__(self, *args, **kwargs):
+        super(RecuperarSenhaEmailForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        email_existente_usuario = Usuario.objects.filter(
+            email=self.cleaned_data['email'])
+        email_existente_user = User.objects.filter(
+            email=self.cleaned_data['email'])
+
+        if not email_existente_usuario and not email_existente_user:
+            msg = 'Não existe nenhum usuário cadastrado com este e-mail.'
+            raise ValidationError(msg)
+
+        return self.cleaned_data
+
+
+class RecuperacaoMudarSenhaForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super(RecuperacaoMudarSenhaForm, self).__init__(*args, **kwargs)

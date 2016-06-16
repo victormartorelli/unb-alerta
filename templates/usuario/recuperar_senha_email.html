@@ -1,0 +1,13 @@
+<p>Você está recebendo este e-mail pois solicitou recuperacao de senha de sua conta no site <b>UnB Alerta</b>.</p></br></p>
+
+<p>Por favor clique no link a seguir e redefina sua senha:</p></br>
+
+<p><a href="{{ protocol }}://{{ domain }}{% url 'recuperar_senha_confirma' uidb64=uid token=token %}"> 
+
+Clique aqui</a></p></br>.
+
+<p>Seu nome de usuario, caso voce tenha esquecido é: <b>{{ user.get_username }}</b></p></br>
+
+<p>Obrigado por utilizar os nossos recursos!</p></br>
+
+<p>A equipe <b>UnB Alerta</b> agradece sua visita.</p>
