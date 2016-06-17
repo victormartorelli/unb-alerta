@@ -24,7 +24,6 @@ class UsuarioAdmin(admin.ModelAdmin):
                     'grupo_usuario']
 
     def save_model(self, request, obj, form, change):
-        import ipdb; ipdb.set_trace()
         u = User.objects.get_or_create(
             username=obj.login,
             email=obj.email)

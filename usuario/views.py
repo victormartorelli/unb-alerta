@@ -25,7 +25,6 @@ class CriarUsuarioView(FormView):
     def form_valid(self, form):
         kwargs = {}
         form.save()
-        import ipdb; ipdb.set_trace()
         user = User.objects.get(email=self.request.POST.get('email'))
 
         kwargs['token'] = default_token_generator.make_token(user)
