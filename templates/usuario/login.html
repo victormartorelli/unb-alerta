@@ -38,7 +38,8 @@
                 {% endif %}
                 
                 <input type="hidden" name="next" value="{{ next }}" />
-                <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a>
+                <div class = "senha">
+                <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a></div>
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%">
               </fieldset>
             </form>
