@@ -1,96 +1,79 @@
 {% extends "base.html"%}
 {% block content %}
 
-<div id = "fundo">
-<div class="container">
-    <div class="row vertical-offset-100">
+	<div id = "fundo">
+		<div class="container">
+			<div class="row vertical-offset-100">
+				<div class="panel panel-default">
+					<div class="panel-heading" style="background-color: #f5f5f5; border-color: #caced1;">
+						<h6> Ocorrências sem validação</h6>
+					</div>
+					<table class="table">
+						{% if vazio %}
+						</br>
+						<div class="alert alert-dismissible alert-warning">
+							<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+						</div>
+						{% else %}
+							<tr>
+								<th>Número</th>
+								<th>Localização</th>
+								<th>Data e Hora</th>
+								<th>Imagem</th>
+								<th>Emergência?</th>
+								<th>Descrição</th>
+								<th>Validar</th>
+							</tr>
+						{% endif %}
 
-        	<div class="panel panel-default">
-        		<div class="panel-heading" style="background-color: #f5f5f5;
-        		border-color: #caced1;"><h6> Ocorrências sem validação</h6>
-        		</div>
-	        		<table class="table">
-	      {% if vazio %}
-        		</br>
-        		<div class="alert alert-dismissible alert-warning">
-				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
-				</div>
-				{% else %}
-						<tr>
-							<th>Número</th>
-							<th>Localização</th>
-							<th>Data e Hora</th>
-							<th>Imagem</th>
-							<th>Emergência?</th>
-							<th>Descrição</th>
-							<th>Validar</th>
-						</tr>
-				{% endif %}
+						{% for o in object_list %}
+							<tr>
+								<td>{{o.id}}</td>
+								<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
+								<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
-      {% for o in object_list %}
-				<tr>
-					<td>{{o.id}}</td>
-					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
-					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+								{% if o.foto %}
+									<td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+										<div id="myModal" class="modal">
+											<span class="close">×</span>
+											<img class="modal-content" src="{{MEDIA_URL}}{{o.foto.url}}" id="imagemOcorrencia">
+										</div>
+										<script> <!-- Qual o tipo de script? Javascript?-->
+											var modal = document.getElementById('myModal');
+											var link = document.getElementById("abreImagem");
+											var span = document.getElementsByClassName("close")[0];
 
-					{% if o.foto %}
-					  <td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+											link.onclick = function() {
+												modal.style.display = "block";
+											}
 
-					  <div id="myModal" class="modal">
- 						<span class="close">×</span>
-              <img class="modal-content" src="{{MEDIA_URL}}{{o.foto.url}}" id="imagemOcorrencia">
+											span.onclick = function() {
+												modal.style.display = "none";
+											}
 
-  					  </div>
-
-
-  					<script>
-
-					var modal = document.getElementById('myModal');
-					var link = document.getElementById("abreImagem");
-
-					var span = document.getElementsByClassName("close")[0];
-
-
-					link.onclick = function() {
-					modal.style.display = "block";
-					}
-
-
-					span.onclick = function() {
-					modal.style.display = "none";
-					}
-
-					window.onclick = function(event) {
-					if (event.target == modal) {
-					    modal.style.display = "none";
-					}
-					}
-					</script>
-
+											window.onclick = function(event) {
+												if (event.target == modal) {
+													modal.style.display = "none";
+												}
+											}
+										</script>
+									</td>
+								{% else %}
+									<td> Não possui imagem </td>
+								{% endif %}
+								{% if o.emergencia == 1 %}
+									<td><font color="red"> Sim </font></td>
+								{% else %}
+									<td> Não </td>
+								{% endif %}
+								<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
+								<td><a class="btn btn-success" href="{% url 'validar_ocorrencia' o.id %}"  role="button">Validar Ocorrência</a></td>
+							</tr>
+						{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+	{% include "pagination.html" %}
 </div>
-
-					  </td>
-					{% else %}
-					  <td> Não possui imagem </td>
-					{% endif %}
-					{% if o.emergencia == 1 %}
-						<td><font color="red"> Sim </font></td>
-					{% else %}
-						<td> Não </td>
-					{% endif %}
-                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
-                	<td><a class="btn btn-success" href="{% url 'validar_ocorrencia' o.id %}"  role="button">Validar Ocorrência</a></td>
-			{% endfor %}
-			    </tr>
-					</table>
-			   </div>
-          </div>
-   	        </div>
-   	        {% include "pagination.html" %}
-       </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div>
- {% endblock %}
+{% endblock %}
