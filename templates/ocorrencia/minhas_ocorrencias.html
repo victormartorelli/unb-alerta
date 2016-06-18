@@ -26,18 +26,18 @@
 
 <div id = "fundo">
 	<div class="container">
-    	<div class="row vertical-offset-100">
-        	<div class="panel panel-success">
-        		<div class="panel-heading" style="background-color: #f5f5f5;
-        		border-color: #caced1;"><h6>Minhas ocorrências</h6>
-        		</div>
-        		{% if vazio %}
-	        	</br>
-        		<div class="alert alert-dismissible alert-warning">
-				  <strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+		<div class="row vertical-offset-100">
+			<div class="panel panel-success">
+				<div class="panel-heading" style="background-color: #f5f5f5; border-color: #caced1;">
+					<h6>Minhas ocorrências</h6>
+				</div>
+				{% if vazio %}
+				</br>
+				<div class="alert alert-dismissible alert-warning">
+					<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
 				</div>
 				{% else %}
-        		<table class="table" >
+				<table class="table" >
 					<tr>
 						<th>Número</th>
 						<th>Localização</th>
@@ -47,36 +47,36 @@
 						<th>Descrição</th>
 						<th>Excluir</th>
 					</tr>
-				{% endif %}
-	            {% for o in object_list %}
+					{% endif %}
+					{% for o in object_list %}
 					<tr>
 						<td>{{o.id}}</td>
 						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
 						<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
 						{% if o.foto %}
-							<td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
-								<div id="myModal" class="modal">
-			 						<span class="close">×</span>
-			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">
-			  				</div>
-			  			</td>
+						<td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
+							<div id="myModal" class="modal">
+								<span class="close">×</span>
+								<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">
+							</div>
+						</td>
 
-								{% else %}
-								  <td> Não possui imagem </td>
-								{% endif %}
-								{% if o.emergencia == 1 %}
-									<td><font color="red"> Sim </font></td>
-								{% else %}
-									<td> Não </td>
-								{% endif %}
-	                	<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
-	                	<td><a class="btn btn-danger" href="#" role="button">Excluir ocorrência</a></td>
-				{% endfor %}
-				    </tr>
+						{% else %}
+							<td> Não possui imagem </td>
+						{% endif %}
+						{% if o.emergencia == 1 %}
+							<td><font color="red"> Sim </font></td>
+						{% else %}
+							<td> Não </td>
+						{% endif %}
+							<td><a class="btn btn-primary" href="{%  url 'ver_ocorrencia' o.id %}"  role="button">Ver Descrição</a></td>
+							<td><a class="btn btn-danger" href="#" role="button">Excluir ocorrência</a></td>
+						{% endfor %}
+					</tr>
 				</table>
-    		</div>
-  		</div>
+			</div>
+		</div>
 	</div>
 </div>
  {% endblock %}
