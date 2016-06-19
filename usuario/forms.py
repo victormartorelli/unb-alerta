@@ -110,6 +110,16 @@ class UsuarioForm(ModelForm):
     def save(self, commit=False):
         usuario = super(UsuarioForm, self).save(commit)
 
+        # Muda os valores dos campos CPF, RG e matricula para nulo em vez de vazio
+        # Para não dar problema na hora de inserir dois usuários sem algum desses
+        # campos.
+        if usuario.cpf == '':
+            usuario.cpf = None
+        if usuario.rg == '':
+            usuario.rg = None
+        if usuario.matricula == '':
+            usuario.matricula = None
+
         u = User.objects.create(
             username=usuario.login,
             email=usuario.email)
