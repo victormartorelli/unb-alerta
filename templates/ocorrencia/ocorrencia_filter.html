@@ -1,13 +1,34 @@
 {% extends "base.html"%}
 {% block content %}
 {% load crispy_forms_tags %}
-{% load staticfiles %}
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="/static/js/jquery.mask.min.js"></script>	
-<script src="{% static 'js/eventosOcorrencia.js' %}"></script>
+<script>
+	var modal = document.getElementById('myModal');
+	var link = document.getElementById("abreImagem");
+
+	var span = document.getElementsByClassName("close")[0];
+
+
+	link.onclick = function() {
+		modal.style.display = "block";
+	}
+
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+	    modal.style.display = "none";
+		}
+	}
+</script>
+
 
 <div id = "fundo">
 	<div class="container">
