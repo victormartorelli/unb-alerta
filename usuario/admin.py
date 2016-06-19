@@ -9,7 +9,6 @@ from django import forms
 '''
 TODO 
     Trocar seleção de sexo por select one
-'''
 class UsuarioAdminForm(forms.ModelForm):
     class Meta:
         model = Usuario
@@ -23,9 +22,13 @@ class UsuarioAdminForm(forms.ModelForm):
             initial = 0,
             widget = RadioSelect,
         )
+'''
+
 
 class UsuarioAdmin(admin.ModelAdmin):
+    '''
     form   = UsuarioAdminForm
+    '''
     fields = ['login',
               'senha',
               'nome',
