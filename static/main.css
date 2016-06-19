@@ -204,6 +204,15 @@ form p label{
   margin-bottom: 3%;
 }
 
+#mapa {
+  width: 90% !important;
+  height:550px !important;
+  margin-left:5% !important;
+  margin-top:2% !important;
+  overflow: visible !important;
+  border : 3px solid rgba(211,211,211,0.4);
+}
+
 #cadastro{
     background:#efefef;
     height:500px;
