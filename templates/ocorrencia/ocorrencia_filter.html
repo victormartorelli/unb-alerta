@@ -2,27 +2,13 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="/static/js/jquery.mask.min.js"></script>
-<script type="text/javascript">
+<head>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="/static/js/jquery.mask.min.js"></script>	
 
-
-$(document).ready(function() {
-  $("#data").mask("00/00/0000", {placeholder: "__/__/____"});
-});
-
-$(document).ready(function() {
-  $("#data").datepicker({dateFormat:'dd/mm/yy'});
-})
-
-
-$(document).ready(function() {
-  $("#hora").mask("00:00", {placeholder: "__:__"});
-});
-</script>
-
+</head>
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
@@ -119,30 +105,6 @@ $(document).ready(function() {
 
 			  					  </div>
 
-
-			  					<script>
-
-								var modal = document.getElementById('myModal');
-								var link = document.getElementById("abreImagem");
-
-								var span = document.getElementsByClassName("close")[0];
-
-
-								link.onclick = function() {
-								modal.style.display = "block";
-								}
-
-
-								span.onclick = function() {
-								modal.style.display = "none";
-								}
-
-								window.onclick = function(event) {
-								if (event.target == modal) {
-								    modal.style.display = "none";
-								}
-								}
-								</script>
 
 			</div>
 
