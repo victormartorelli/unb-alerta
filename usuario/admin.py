@@ -36,3 +36,5 @@ class UsuarioAdmin(admin.ModelAdmin):
         obj.save()
 
 admin.site.register(Usuario, UsuarioAdmin)
+admin.site.site_title = 'Administração - UnB Alerta'
+admin.site.site_header = 'Administração - UnB Alerta'
