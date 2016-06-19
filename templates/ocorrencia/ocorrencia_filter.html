@@ -1,6 +1,9 @@
 {% extends "base.html"%}
 {% block content %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<script src="{% static 'js/eventosOcorrencia.js' %}"></script>
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -12,7 +15,7 @@
     <div class="row vertical-offset-100">
     	<nav class="navbar navbar-default" style="height:300px">
 		  <div class="container-fluid" >
-		  
+
 		    <div class="navbar-header">
 		      <h1 class="navbar-brand">Filtragem:</h1>
 		    </div>

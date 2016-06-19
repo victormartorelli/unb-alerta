@@ -1,5 +1,8 @@
 {% extends "base.html"%}
 {% block content %}
+{% load staticfiles %}
+
+	<script src="{% static 'js/eventosOcorrencia.js' %}"></script>
 
 	<div id = "fundo">
 		<div class="container">
@@ -38,25 +41,6 @@
 											<span class="close">×</span>
 											<img class="modal-content" src="{{MEDIA_URL}}{{o.foto.url}}" id="imagemOcorrencia">
 										</div>
-										<script> <!-- Qual o tipo de script? Javascript?-->
-											var modal = document.getElementById('myModal');
-											var link = document.getElementById("abreImagem");
-											var span = document.getElementsByClassName("close")[0];
-
-											link.onclick = function() {
-												modal.style.display = "block";
-											}
-
-											span.onclick = function() {
-												modal.style.display = "none";
-											}
-
-											window.onclick = function(event) {
-												if (event.target == modal) {
-													modal.style.display = "none";
-												}
-											}
-										</script>
 									</td>
 								{% else %}
 									<td> Não possui imagem </td>
@@ -70,10 +54,10 @@
 								<td><a class="btn btn-success" href="{% url 'validar_ocorrencia' o.id %}"  role="button">Validar Ocorrência</a></td>
 							</tr>
 						{% endfor %}
-				</table>
+					</table>
+				</div>
 			</div>
 		</div>
+		{% include "pagination.html" %}
 	</div>
-	{% include "pagination.html" %}
-</div>
 {% endblock %}
