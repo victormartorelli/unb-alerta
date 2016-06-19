@@ -1343,18 +1343,11 @@ var Estacionamento_Principal_FT_Polygon = new google.maps.Polygon({
             </div>
 
             <div class="form-group">
-              <label for="data" class="requiredField" style="margin-left:10%">Data da ocorrencia
-                  <span class="asteriskField">*</span> </label>
-                  </br>
-                  <input id="data" name="data" required="required" title="Preencha"
-                  style="width: 80%;height:35px;margin-left:10%" />
+              <h2>{{ form.data|as_crispy_field }}</h2>
             </div>
 
             <div class="form-group">
-              <label for="hora" class="requiredField" style="margin-left:10%">Horario da ocorrencia
-                  <span class="asteriskField">*</span> </label>
-                  <input id="hora" name="hora" required="required"
-                  style="width: 80%;height:35px;margin-left:10%" />
+              <h2>{{ form.hora|as_crispy_field }}</h2>
             </div>
 
             <div class="form-group">
