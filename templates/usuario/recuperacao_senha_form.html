@@ -3,8 +3,8 @@
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-<a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
-&rsaquo; {% trans 'Password reset confirmation' %}
+	<a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
+	&rsaquo; {% trans 'Password reset confirmation' %}
 </div>
 {% endblock %}
 
@@ -22,21 +22,22 @@
 
 		{% if validlink %}
 
-			<h3>{% trans 'Escreva sua nova senha abaixo:' %}</h3>
+			<h4>{% trans 'Escreva sua nova senha abaixo:' %}</h4>
 
 
 			<form action="" method="post">{% csrf_token %}
 				{{ form.new_password1.errors }}
-				<p class="aligned wide"><label for="id_new_password1">{% trans 'Nova Senha:' %}</label>{{ form.new_password1 }}</p>
+				<p class="aligned wide"><label for="id_new_password1" style="margin-right:13.5%;">{% trans 'Nova Senha:' %}</label>{{ form.new_password1 }}</p>
 				{{ form.new_password2.errors }}
 				<p class="aligned wide"><label for="id_new_password2">{% trans 'Confirmar  Senha:' %}</label>{{ form.new_password2 }}</p>
-				<p><input type="submit"  class="btn btn-lg btn-success"  value="{% trans 'Alterar minha senha' %}" /></p>
+				<input type="submit"  class="btn btn-lg btn-success"  value="{% trans 'Alterar minha senha' %}" style ="margin-left:30%" />
 			</form>
 		{% else %}
 
-			<h1>{% trans "Redefinicao de senha sem sucesso!" %}</h1>
-
-			<p>{% trans "O link para redefinicao de senha era invalido, possivelmente por ja ter sido utilizado. Por favor faca uma nova requisicao de recuperacao de senha." %}</p>
+			<h5>{% trans "Redefinicao de senha sem sucesso!" %}</h5>
+			<div class = "concluido">
+			</br>
+			<p>{% trans "O link para redefinicao de senha era invalido, possivelmente por ja ter sido utilizado. Por favor faca uma nova requisicao de recuperacao de senha." %}</p></div></br>
 		{% endif %}
 
         </div>

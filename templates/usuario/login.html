@@ -11,39 +11,39 @@
           </div>
 
           <div class="panel-body">
-              <fieldset>
+            <fieldset>
 
-          <form id="login-form" method="post" action="">
-              {% csrf_token %}
-
-                <div class="form-group">
-                  Usuário</br>
-                  {{ form.username }}
-                </div>
-                <div class="form-group">
-                  Senha</br>
-                  {{ form.password }}
-                </div>
-                {% if form.errors %}
-                  <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos. Tente novamente.</font></p>
-                {% endif %}
-
-                {% if next %}
-                  {% if user.is_authenticated %}
-                    <p><font color="red">Sua conta não tem acesso a esta página.</font></p>          
-                  {% else %}
-                    <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
-
+            <form id="login-form" method="post" action="">
+                {% csrf_token %}
+                  <div class="form-group">
+                    Usuário</br>
+                    {{ form.username }}
+                  </div>
+                  <div class="form-group">
+                    Senha</br>
+                    {{ form.password }}
+                  </div>
+                  {% if form.errors %}
+                    <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos. Tente novamente.</font></p>
                   {% endif %}
-                {% endif %}
-                
-                <input type="hidden" name="next" value="{{ next }}" />
-                <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a>
-                <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%">
-              </fieldset>
-            </form>
-          </div>
 
+                  {% if next %}
+                    {% if user.is_authenticated %}
+                      <p><font color="red">Sua conta não tem acesso a esta página.</font></p>          
+                    {% else %}
+                      <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
+
+                    {% endif %}
+                  {% endif %}
+                  
+                  <input type="hidden" name="next" value="{{ next }}" />
+                  <div class = "senha">
+                    <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a>
+                  </div>
+                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%">
+              </form>
+            </fieldset>
+          </div>
         </div>
       </div>
     </div>

@@ -25,15 +25,15 @@
 
          	<form action="" method="post">
          	{% csrf_token %}
-			</br>
-			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
-			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
-			<p><font color="red">{{ form.non_field_errors }}</font></p>
-			
-			<input class="btn btn-lg btn-success" 
-			type="submit" value="Recuperar" 
-			style="margin-top:5%;margin-left:20%;margin-bottom:-5%;width:60%" />
-			</form>
+      			</br>
+      			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
+      			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
+      			<p><font color="red">{{ form.non_field_errors }}</font></p>
+      			
+      			<input class="btn btn-lg btn-success" 
+      			type="submit" value="Recuperar" 
+      			style="margin-top:5%;margin-left:20%;margin-bottom:-5%;width:60%" />
+    			</form>
           </div>
 
         </div>
