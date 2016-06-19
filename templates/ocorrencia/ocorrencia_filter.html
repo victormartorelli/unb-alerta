@@ -10,9 +10,9 @@
 <div id = "fundo">
 	<div class="container">
     <div class="row vertical-offset-100">
-
     	<nav class="navbar navbar-default" style="height:300px">
 		  <div class="container-fluid" >
+		  
 		    <div class="navbar-header">
 		      <h1 class="navbar-brand">Filtragem:</h1>
 		    </div>
@@ -20,9 +20,9 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <form class="navbar-form navbar-left" role="search">
 		        	
-		      		<div class="form-group" style="margin: -7% 8% 10%">
-		            	{{ filter.form.id|as_crispy_field }}
-		            </div>
+	      		<div class="form-group" style="margin: -7% 8% 10%">
+            	{{ filter.form.id|as_crispy_field }}
+            </div>
 
 		        	<div class="form-group" style="margin: -7% -3% 10%">
               			{{ filter.form.tb_categoria_ID|as_crispy_field }}
@@ -98,10 +98,9 @@
 								  <td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
 
 								  <div id="myModal" class="modal">
-			 						<span class="close">×</span>
+			 							<span class="close">×</span>
 			  						<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">
-
-			  					  </div>
+			  					 </div>
 
 
 			</div>
