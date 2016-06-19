@@ -1,84 +1,89 @@
 {% extends "base.html"%}
 {% load crispy_forms_tags %}
 {% block content %}   
-
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="/static/js/jquery.mask.min.js"></script>
-
+<head>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="/static/js/jquery.mask.min.js"></script>
+</head>
+<body>
   <div id = "fundo">
     <div class="container">
       <div class="row vertical-offset-100">
         <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
+
             <div class="panel-heading">
               <h2 class="panel-title " style="color:#26734d; font-family:'Trebuchet MS', Helvetica, sans-serif; font-weight: none; font-size: 200% ;margin-left: 35%">Cadastro</h2>
             </div>
 
             {% for message in messages %}
-            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade in" style="text-align: center" role="alert">
-              {{ message|safe }}
-            </div>
+              <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade in" style="text-align: center" role="alert">
+                {{ message|safe }}
+              </div>
            {% endfor %}
-          <div class="panel-body">
-            <form action="" method="POST">
-              {% csrf_token %}
-              <fieldset>
-                <div class="form-group">
-                  {{ form.login|as_crispy_field }}
-                </div>
-                
-                <div class="form-group">
-                 {{ form.senha|as_crispy_field }}
-                </div>
+            <div class="panel-body">
+              <form action="" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                  <div class="form-group">
+                    {{ form.login|as_crispy_field }}
+                  </div>
+                  
+                  <div class="form-group">
+                   {{ form.senha|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                  {{ form.confirma_senha|as_crispy_field }}
-                </div>
+                  <div class="form-group">
+                    {{ form.confirma_senha|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                  {{ form.email|as_crispy_field }}
-                </div>
+                  <div class="form-group">
+                    {{ form.email|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                  {{ form.confirma_email|as_crispy_field }}
-                </div>
+                  <div class="form-group">
+                    {{ form.confirma_email|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                  {{ form.matricula|as_crispy_field }}
-                </div>
+                  <div class="form-group">
+                    {{ form.matricula|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                 {{ form.nome|as_crispy_field }}
-                </div>
+                  <div class="form-group">
+                   {{ form.nome|as_crispy_field }}
+                  </div>
 
-                <div class="form-group">
-                  <label for="sexo">Genero:</label>
-                  </br>
-                  <input type="radio" name="sexo" id="sexo" value="1"> <label for="sexo">Masculino</label>
-                  </br>
-                  <input type="radio" name="sexo" id="sexo" value="0"> <label for="sexo">Feminino</label>
-                </div>
-                
-                {{form.data_nasc|as_crispy_field}}
+                  <div class="form-group">
+                    <label for="sexo">Genero:</label>
+                    </br>
+                    <input type="radio" name="sexo" id="sexo" value="1"> <label for="sexo">Masculino</label>
+                    </br>
+                    <input type="radio" name="sexo" id="sexo" value="0"> <label for="sexo">Feminino</label>
+                  </div>
+                  
+                  {{form.data_nasc|as_crispy_field}}
 
-                {{form.cpf|as_crispy_field}}
-                
-                {{form.rg|as_crispy_field}}
+                  {{form.cpf|as_crispy_field}}
+                  
+                  {{form.rg|as_crispy_field}}
 
-                {{ form.grupo_usuario }}
-                {{ form.status }}
+                  {{ form.grupo_usuario }}
+                  {{ form.status }}
 
-                
-                <input class="btn btn-lg btn-success " type="submit" value="Cadastrar"
-                style= "margin-left:33%; margin-top:3%;width:30%" onclick="myFunction()">
+                  
+                  <input class="btn btn-lg btn-success " type="submit" value="Cadastrar"
+                  style= "margin-left:33%; margin-top:3%;width:30%" onclick="myFunction()">
 
-              </fieldset>
-          </form>
-        </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>  
       </div>
     </div>
   </div>
+</body>
 {% endblock %}
 

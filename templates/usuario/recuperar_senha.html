@@ -2,44 +2,47 @@
 {% load i18n %}
 
 {% block breadcrumbs %}
-<div class="breadcrumbs">
-<a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
-&rsaquo; {% trans 'Password reset' %}
-</div>
+
+  <div class="breadcrumbs">
+  <a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
+  &rsaquo; {% trans 'Password reset' %}
+  </div>
+  
 {% endblock %}
 {% block content %}
 
-<div id = "fundo">
-  <div class="container">
-    <div class="row vertical-offset-100">
-      <div class="col-md-5 col-md-offset-3">
-        <div class="panel panel-default">
-          
-          <div class="panel-heading">
-            <h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200%;margin-left:12%">Recuperação de senha</h3>
+  <div id = "fundo">
+    <div class="container">
+      <div class="row vertical-offset-100">
+        <div class="col-md-5 col-md-offset-3">
+          <div class="panel panel-default">
+            
+            <div class="panel-heading">
+              <h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200%;margin-left:12%">Recuperação de senha</h3>
+            </div>
+
+            <div class="panel-body">
+
+  			<h3>{% trans "Esqueceu sua senha? Entre com seu email abaixo:" %}</h3>
+
+           	<form action="" method="post">
+           	{% csrf_token %}
+        			</br>
+        			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
+        			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
+        			<p><font color="red">{{ form.non_field_errors }}</font></p>
+        			
+        			<input class="btn btn-lg btn-success" 
+        			type="submit" value="Recuperar" 
+        			style="margin-top:5%;margin-left:20%;margin-bottom:-5%;width:60%" />
+      			</form>
+            </div>
+
           </div>
-
-          <div class="panel-body">
-
-			<h3>{% trans "Esqueceu sua senha? Entre com seu email abaixo:" %}</h3>
-
-         	<form action="" method="post">
-         	{% csrf_token %}
-      			</br>
-      			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
-      			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
-      			<p><font color="red">{{ form.non_field_errors }}</font></p>
-      			
-      			<input class="btn btn-lg btn-success" 
-      			type="submit" value="Recuperar" 
-      			style="margin-top:5%;margin-left:20%;margin-bottom:-5%;width:60%" />
-    			</form>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
-</div>
+
 {% endblock %}
 
