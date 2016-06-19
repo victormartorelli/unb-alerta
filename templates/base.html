@@ -35,7 +35,9 @@
           <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
             <li><a href="{% url 'estatisticas' %}">Estatísticas no Mapa</a></li>
+            {% if perms.ocorrencia.change_ocorrencia or user.is_superuser %}
             <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
+            {% endif %}
             <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a></li>
             <li class="dropdown">
               <a href=""dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ocorrências <span class="caret"></span></a>
