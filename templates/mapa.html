@@ -1,35 +1,32 @@
 {% extends "base.html"%}
 {% block content %}
 
-<head>
-  <script src="{% static 'js/mapa#2.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry" async defer></script>
-</head>
-<body>
-  <div id = "fundo">
-    <div class="container">
-      <div class="row vertical-offset-100">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="panel panel-default">
-       
-            <div class="panel-heading">
-              <h6>Mapa com estatisticas:</h6>
-            </div>
+<script src="{% static 'js/mapa#2.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry" async defer></script>
 
-            <div class="panel-body">
-              <div class="form-group">
-                <font color="red">
-                  <b><div id="resultado" style="text-align:center; color:#4E6c24;"></div></b>
-                <div id="map2" ></div>
-              </div>
-            </div>
 
+<div id = "fundo">
+  <div class="container">
+    <div class="row vertical-offset-100">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+     
+          <div class="panel-heading">
+            <h6>Mapa com estatisticas:</h6>
           </div>
-        </div>      
-      </div>
+
+          <div class="panel-body">
+            <div class="form-group">
+              <font color="red">
+                <b><div id="resultado" style="text-align:center; color:#4E6c24;"></div></b>
+              <div id="map2" ></div>
+            </div>
+          </div>
+
+        </div>
+      </div>      
     </div>
   </div>
-</body>
-
+</div>
 
 {% endblock %}
