@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Usuario
 from django.contrib.auth.models import User
-from .filters import StatusFilter, GroupFilter
+from .filters import StatusFilter, GroupFilter, IdadeFilter
 
 from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect
 from django import forms
@@ -40,7 +40,7 @@ class UsuarioAdmin(admin.ModelAdmin):
               'data_nasc',
               'status',
               'grupo_usuario']
-    list_filter = ['sexo', 'data_nasc', GroupFilter, StatusFilter]
+    list_filter = ['sexo', IdadeFilter, GroupFilter, StatusFilter]
     search_fields = ['nome', 'email']
     list_display = ['nome',
                     'email',

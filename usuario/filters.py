@@ -1,6 +1,8 @@
+import datetime
+
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
 from django.contrib import admin
+from django.db.models import F
 
 from django.contrib.admin import SimpleListFilter
 from django.contrib.auth.models import Group
@@ -39,3 +41,27 @@ class GroupFilter(SimpleListFilter):
             return queryset.filter(groups=group_id)
         return queryset
 
+class IdadeFilter(SimpleListFilter):
+    title = _('Faixa Etária')
+    parameter_name = 'data_nasc'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('abaixo', _('Abaixo de 20 anos')),
+            ('2030anos', _('20-30 anos')),
+            ('3040anos', _('30-40 anos')),
+            ('acima', _('Acima de 40 anos')),
+        )
+
+    def queryset(self, request, queryset):
+
+        hoje = datetime.date.today()
+
+        if self.value() == 'abaixo':
+            return queryset.filter((hoje.year - F('data_nasc_year') - ((hoje.month, hoje.day) < (F('data_nasc__month'), F('data_nasc__day')))) < 20)
+        if self.value() == '2030anos':
+            return queryset.all()
+        if self.value() == '3040anos':
+            return queryset.all()
+        if self.value() == 'acima':
+            return queryset.all()
