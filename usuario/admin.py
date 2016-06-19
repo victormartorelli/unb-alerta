@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Usuario
 from django.contrib.auth.models import User
+from .filters import StatusFilter
 
 
 class UsuarioAdmin(admin.ModelAdmin):
@@ -15,7 +16,7 @@ class UsuarioAdmin(admin.ModelAdmin):
               'data_nasc',
               'status',
               'grupo_usuario']
-    list_filter = ['sexo', 'data_nasc', 'grupo_usuario']
+    list_filter = ['sexo', 'data_nasc', 'grupo_usuario', StatusFilter]
     search_fields = ['nome', 'email']
     list_display = ['nome',
                     'email',
