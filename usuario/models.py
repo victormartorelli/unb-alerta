@@ -7,7 +7,7 @@ class Usuario(models.Model):
         Usuário cadastrado via web
     '''
     id = models.AutoField(db_column='ID', primary_key=True)
-    user = models.ForeignKey(User, verbose_name='Usuário')
+    user = models.OneToOneField(User, verbose_name='Usuário')
     nome = models.CharField(max_length=45)
     login = models.CharField(
         verbose_name='Nome de Usuário',

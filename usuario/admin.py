@@ -61,7 +61,8 @@ class UsuarioAdmin(admin.ModelAdmin):
 
     def delete_model(self, request, obj):
         u = obj.user
-        u.delete()
+        user = User.objects.get(id=u.id)
+        user.delete()
         obj.delete()
 
 admin.site.register(Usuario, UsuarioAdmin)

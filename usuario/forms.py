@@ -60,6 +60,13 @@ class UsuarioForm(ModelForm):
 
     def clean(self):
 
+        # Valida Username
+
+        if User.objects.get(username=self.cleaned_data['login']).exists():
+            raise ValidationError(
+                'Esse nome de usuário já existe')
+
+        # Validação de Senha
         if ('senha' not in self.cleaned_data or
                 'confirma_senha' not in self.cleaned_data):
             raise ValidationError(
@@ -81,19 +88,17 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_email'],
             msg)
 
-        if (self.cleaned_data['cpf'] != '' and len(self.cleaned_data['cpf']) != 14):
+        # Validação de CPF
+        if (self.cleaned_data['cpf'] != '' and
+           len(self.cleaned_data['cpf']) != 14):
             raise ValidationError('CPF deve ter 11 dígitos')
 
+        # Validação de Matrícula
         if len(self.cleaned_data['matricula']) > 10:
             raise ValidationError(
                 'A matrícula deve ter ter no máximo 9 números')
 
-        msg = 'As senhas não conferem.'
-        self.valida_igualdade(
-            self.cleaned_data['senha'],
-            self.cleaned_data['confirma_senha'],
-            msg)
-
+        # Validação de Email
         email_existente1 = Usuario.objects.filter(
             email=self.cleaned_data['email'])
 
