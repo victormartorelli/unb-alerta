@@ -59,6 +59,11 @@ class UsuarioAdmin(admin.ModelAdmin):
         obj.user = u
         obj.save()
 
+    def delete_model(self, request, obj):
+        u = obj.user
+        u.delete()
+        obj.delete()
+
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.site_title = 'Administração - UnB Alerta'
 admin.site.site_header = 'Administração - UnB Alerta'
