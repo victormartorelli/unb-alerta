@@ -51,13 +51,13 @@ class CriarUsuarioView(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-
+        import ipdb; ipdb.set_trace()
         if form.is_valid():
             return self.form_valid(form)
         else:
             erros = form.non_field_errors().as_text()
             erros = ''.join(c for c in erros if c not in '*')
-            mensagem = 'Formulário Inválido.' + erros + '.'
+            mensagem = 'Formulário Inválido.' + erros
             messages.add_message(request, messages.ERROR, mensagem)
             return self.render_to_response(
                 {'form': form})
