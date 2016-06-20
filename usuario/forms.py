@@ -144,7 +144,7 @@ class UsuarioForm(ModelForm):
             email=usuario.email)
         u.set_password(self.cleaned_data['senha'])
         u.is_active = usuario.status
-        usuario.password = u.password
+        usuario.senha = u.password
         u.save()
 
         usuario.user = u
