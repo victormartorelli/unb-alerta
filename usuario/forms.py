@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.db import transaction
@@ -62,15 +64,15 @@ class UsuarioForm(ModelForm):
 
         # Valida Username
 
-        if User.objects.get(username=self.cleaned_data['login']).exists():
+        if User.objects.filter(username=self.cleaned_data['login']).exists():
             raise ValidationError(
-                'Esse nome de usuário já existe')
+                'Esse nome de usuário já existe.')
 
         # Validação de Senha
         if ('senha' not in self.cleaned_data or
                 'confirma_senha' not in self.cleaned_data):
             raise ValidationError(
-                'Favor preencher o campo senha e o de confirmação')
+                'Favor preencher o campo senha e o de confirmação.')
 
         msg = 'As senhas não conferem.'
         self.valida_igualdade(
@@ -78,9 +80,10 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['confirma_senha'],
             msg)
 
+        # Validação de Email
         if ('email' not in self.cleaned_data or
                 'confirma_email' not in self.cleaned_data):
-            raise ValidationError('Favor informar endereços de email')
+            raise ValidationError('Favor informar endereços de email.')
 
         msg = 'Os emails não conferem.'
         self.valida_igualdade(
@@ -91,12 +94,33 @@ class UsuarioForm(ModelForm):
         # Validação de CPF
         if (self.cleaned_data['cpf'] != '' and
            len(self.cleaned_data['cpf']) != 14):
-            raise ValidationError('CPF deve ter 11 dígitos')
+            raise ValidationError('CPF deve ter 11 dígitos.')
+
+        if Usuario.objects.filter(cpf=self.cleaned_data['cpf']).exists():
+            raise ValidationError('CPF já existente.')
+
+        # Validação de RG
+        if Usuario.objects.filter(rg=self.cleaned_data['rg']).exists():
+            raise ValidationError('RG já existente.')
 
         # Validação de Matrícula
         if len(self.cleaned_data['matricula']) > 10:
             raise ValidationError(
-                'A matrícula deve ter ter no máximo 9 números')
+                'A matrícula deve ter ter no máximo 9 números.')
+
+        if (Usuario.objects.filter(
+           matricula=self.cleaned_data['matricula']).exists()):
+            raise ValidationError(
+                'Matrícula já existente')
+
+        ano_atual = datetime.datetime.now().date().year
+
+        # Validação de Data de Nascimento
+        if (self.cleaned_data['data_nasc'].year > (ano_atual - 12) or
+           self.cleaned_data['data_nasc'].year > (ano_atual - 100)):
+            raise ValidationError('Você deve ter nascido no mínimo em ' +
+                                  ano_atual - 12 + 'e no máximo em' +
+                                  ano_atual - 100)
 
         # Validação de Email
         email_existente1 = Usuario.objects.filter(
@@ -120,7 +144,7 @@ class UsuarioForm(ModelForm):
             email=usuario.email)
         u.set_password(self.cleaned_data['senha'])
         u.is_active = usuario.status
-        usuario.password = u.password
+        usuario.senha = u.password
         u.save()
 
         usuario.user = u

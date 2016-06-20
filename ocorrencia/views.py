@@ -76,7 +76,7 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        return redirect(reverse('lista_ocorrencias'))
+        return redirect(reverse('minhas_ocorrencias'))
 
     def get_initial(self):
         if self.request.user.is_superuser is False:
@@ -140,11 +140,18 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
     model = Ocorrencia
     success_url = reverse_lazy('lista_ocorrencias')
     permission_required = {'ocorrencia.change_ocorrencia'}
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        context = super(ListaOcorrenciasView,
+                        self).get_context_data(**kwargs)
 
-        context = super(ValidarOcorrenciaEditView, self).get_context_data(
-            **kwargs)
+        paginator = context['paginator']
+        page_obj = context['page_obj']
+
+        context['page_range'] = make_pagination(
+            page_obj.number, paginator.num_pages)
+
         return context
 
     def get_initial(self):
@@ -173,7 +180,6 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         ocorrencia = form.instance
         ocorrencia.id = self.kwargs['pk']
         ocorrencia.save()
-        import ipdb; ipdb.set_trace()
         if form.data.get('repetida') == '1':
             Ocorrencia.objects.get(id=ocorrencia.id).delete()
 
