@@ -47,7 +47,6 @@ ALERTA_APPS = (
 )
 
 INSTALLED_APPS = (
-    'django_admin_bootstrapped',  # must come before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
