@@ -3,32 +3,19 @@ from .models import Usuario
 from django.contrib.auth.models import User
 from .filters import StatusFilter, GroupFilter
 
-from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect
 from django import forms
+from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect, PasswordInput
 
 '''
 TODO 
     Trocar seleção de sexo por select one
-class UsuarioAdminForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = "__all__" 
-        sexo = ChoiceField(
-            label = 'Opcoes',
-            choices = (
-                (0, 'Don\'t change anything.'),
-                (1, 'Do some crazy stuff.'),
-            ),
-            initial = 0,
-            widget = RadioSelect,
-        )
 '''
+class UsuarioAdminForm(forms.ModelForm):
+    senha = forms.CharField(max_length=45, widget=forms.PasswordInput)
 
 
 class UsuarioAdmin(admin.ModelAdmin):
-    '''
     form   = UsuarioAdminForm
-    '''
     fields = ['login',
               'senha',
               'nome',
