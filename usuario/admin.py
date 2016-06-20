@@ -6,10 +6,13 @@ from .filters import StatusFilter, GroupFilter
 from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect
 from django import forms
 
-'''
-TODO 
-    Trocar seleção de sexo por select one
-'''
+
+# '''
+# TODO 
+#     Trocar seleção de sexo por select one
+# '''
+
+
 class UsuarioAdminForm(forms.ModelForm):
     senha = forms.CharField(max_length=45, widget=forms.PasswordInput)
 
@@ -50,7 +53,7 @@ class UsuarioAdmin(admin.ModelAdmin):
         u.is_active = obj.status
         u.set_password(obj.senha)
         u.save()
-        obj.senha = u.set_password
+        obj.senha = u.password
         obj.user = u
         obj.save()
 

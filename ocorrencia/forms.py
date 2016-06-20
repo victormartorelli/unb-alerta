@@ -72,6 +72,10 @@ class OcorrenciaForm(ModelForm):
             raise ValidationError(
                 'Não é possível fazer uma ocorrência em uma data futura')
 
+        if self.files['foto'].size > 30000000:
+            raise ValidationError(
+                'Não é possível fazer o upload de uma imagem maior que 30MB')
+
         return cleaned_data
 
     def __init__(self, *args, **kwargs):
