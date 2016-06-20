@@ -23,8 +23,6 @@ from django import forms
 #             widget = RadioSelect,
 #         )
 
-
-
 class UsuarioAdmin(admin.ModelAdmin):
     '''
     form   = UsuarioAdminForm
