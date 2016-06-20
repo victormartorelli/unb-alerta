@@ -28,14 +28,16 @@
 	<div class="container">
 		<div class="row vertical-offset-100">
 			<div class="panel panel-success">
+
 				<div class="panel-heading" style="background-color: #f5f5f5; border-color: #caced1;">
 					<h6>Minhas ocorrências</h6>
 				</div>
+				
 				{% if vazio %}
-				</br>
-				<div class="alert alert-dismissible alert-warning">
-					<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
-				</div>
+					</br>
+					<div class="alert alert-dismissible alert-warning">
+						<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+					</div>
 				{% else %}
 				<table class="table" >
 					<tr>
