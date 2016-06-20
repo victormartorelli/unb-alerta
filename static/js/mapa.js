@@ -17,40 +17,20 @@ function getNomeLocal(local){
     
     //ICC
     nomeLocal  = nomeLocal_icc(local); 
-    if (nomeLocal != ""){
-      return(nomeLocal);      
+    if (nomeLocal != "") return(nomeLocal);      
     
-    }else {
-      //PAT_PJC_IPOL_CIC_ATHOSBULCAO
-      nomeLocal = nomeLocal_pat_pjc_ipol_cic(local);
+    //PAT_PJC_IPOL_CIC_ATHOSBULCAO
+    nomeLocal = nomeLocal_pat_pjc_ipol_cic(local);
+    if (nomeLocal != "") return(nomeLocal);
       
-      if (nomeLocal != ""){
-        return(nomeLocal);
-      
-      //BCE_REITORIA
-      }else{
-        nomeLocal = nomeLocal_bce_reitoria(local);
-        
-        if (nomeLocal != ""){
-          return(nomeLocal);
-        
-        //PRC_COLINA_FACE
-        }else{ 
-          nomeLocal = nomeLocal_prc_colina_face(local);
-          
-          if (nomeLocal != ""){
-            return (nomeLocal);
-          
-          }//else{
-            //nomeLocal = nomeLocal_sgs_artes_ft(local);
-            
-            //if (nomeLocal != ""){
-              //return (nomeLocal);
-            //}            
-          //}
-        }
-      }
-    } 
+    //BCE_REITORIA
+    nomeLocal = nomeLocal_bce_reitoria(local);
+    if (nomeLocal != "") return(nomeLocal);
+    
+    //PRC_COLINA_FACE
+    nomeLocal = nomeLocal_prc_colina_face(local);
+    if (nomeLocal != "") return (nomeLocal);
+
   return (nomeLocal);    
 }
 
