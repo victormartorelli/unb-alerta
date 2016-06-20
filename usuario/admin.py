@@ -6,23 +6,15 @@ from .filters import StatusFilter, GroupFilter, IdadeFilter
 from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect
 from django import forms
 
-'''
-TODO 
-    Trocar seleção de sexo por select one
+
+# '''
+# TODO 
+#     Trocar seleção de sexo por select one
+# '''
+
+
 class UsuarioAdminForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = "__all__" 
-        sexo = ChoiceField(
-            label = 'Opcoes',
-            choices = (
-                (0, 'Don\'t change anything.'),
-                (1, 'Do some crazy stuff.'),
-            ),
-            initial = 0,
-            widget = RadioSelect,
-        )
-'''
+    senha = forms.CharField(max_length=45, widget=forms.PasswordInput)
 
 
 class UsuarioAdmin(admin.ModelAdmin):
@@ -41,7 +33,12 @@ class UsuarioAdmin(admin.ModelAdmin):
               'status',
               'grupo_usuario']
     list_filter = ['sexo', IdadeFilter, GroupFilter, StatusFilter]
-    search_fields = ['nome', 'email']
+    search_fields = ['nome',
+                     'email',
+                     'cpf',
+                     'rg',
+                     'login',
+                     'matricula']
     list_display = ['nome',
                     'email',
                     'sexo',
@@ -56,8 +53,15 @@ class UsuarioAdmin(admin.ModelAdmin):
         u.is_active = obj.status
         u.set_password(obj.senha)
         u.save()
+        obj.senha = u.password
         obj.user = u
         obj.save()
+
+    def delete_model(self, request, obj):
+        u = obj.user
+        user = User.objects.get(id=u.id)
+        user.delete()
+        obj.delete()
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.site_title = 'Administração - UnB Alerta'

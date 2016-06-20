@@ -1,4 +1,5 @@
 from django.db import models
+from unb_alerta.utils import restringe_tipos_de_arquivo_img
 
 
 class Categoria(models.Model):
@@ -26,6 +27,7 @@ class Ocorrencia(models.Model):
         verbose_name="Descrição")
     foto = models.ImageField(
         max_length=45,
+        validators=[restringe_tipos_de_arquivo_img],
         blank=True,
         null=True,
         upload_to='ocorrencia/%Y/%m/%d')

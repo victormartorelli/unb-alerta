@@ -50,7 +50,7 @@ urlpatterns = [
 
     url(r'^perfil/$', PerfilView.as_view(), name='perfil'),
 
-    url(r'usuario/solicita-confirmacao^$', TemplateView.as_view(
+    url(r'usuario/solicita-confirmacao$', TemplateView.as_view(
         template_name='usuario/solicita_confirmacao.html'),
         name='solicita_confirmacao'),
     url(r'^usuario/confirmar/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',

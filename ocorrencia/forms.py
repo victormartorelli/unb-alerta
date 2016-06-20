@@ -1,12 +1,10 @@
+import datetime
 import django_filters
 
 from django import forms
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 from .models import Categoria, Ocorrencia
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 
 YES_NO_CHOICES = [('', '--------'),
                   (0, 'Não'),
@@ -67,6 +65,16 @@ class OcorrenciaForm(ModelForm):
 
     def clean(self):
         cleaned_data = self.cleaned_data
+
+        data_hoje = datetime.datetime.now().date()
+        # Validação de Data
+        if cleaned_data['data'] > data_hoje:
+            raise ValidationError(
+                'Não é possível fazer uma ocorrência em uma data futura')
+
+        if self.files['foto'].size > 30000000:
+            raise ValidationError(
+                'Não é possível fazer o upload de uma imagem maior que 30MB.')
 
         return cleaned_data
 

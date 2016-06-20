@@ -30,7 +30,11 @@
 							<tr>
 								<td>{{o.id}}</td>
 								<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
-								<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+								{% if o.hora.minute < 10 %}
+									<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
+								{% else %}
+									<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+								{% endif %}
 
 								{% if o.foto %}
 									<td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>

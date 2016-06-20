@@ -7,7 +7,7 @@ class Usuario(models.Model):
         Usuário cadastrado via web
     '''
     id = models.AutoField(db_column='ID', primary_key=True)
-    user = models.ForeignKey(User, verbose_name='Usuário')
+    user = models.OneToOneField(User, verbose_name='Usuário')
     nome = models.CharField(max_length=45)
     login = models.CharField(
         verbose_name='Nome de Usuário',
@@ -18,23 +18,31 @@ class Usuario(models.Model):
         unique=True,
         max_length=15,
         blank=True,
-        null=True)
-    rg = models.IntegerField(
+        null=True,
+        verbose_name='CPF')
+    rg = models.CharField(
         db_column='RG',
+        max_length=15,
         blank=True,
         null=True,
-        unique=True)
+        unique=True,
+        verbose_name='RG')
     matricula = models.CharField(
         blank=True,
         null=True,
         max_length=10,
-        unique=True)
+        unique=True,
+        verbose_name='Matrícula')
 
     sexo = models.CharField(
         max_length=1,
         blank=True,
-        null=True)
-    email = models.EmailField(max_length=45, unique=True)
+        null=True,
+        verbose_name='Gênero')
+    email = models.EmailField(
+        max_length=45,
+        unique=True,
+        verbose_name='E-mail')
     senha = models.CharField(max_length=45)
     status = models.BooleanField(default=False, verbose_name='Ativo?')
     data_nasc = models.DateField(

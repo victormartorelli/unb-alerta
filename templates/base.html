@@ -34,35 +34,38 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'estatisticas' %}">Estatísticas no Mapa</a></li>
-            <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
-            <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a></li>
-            <li class="dropdown">
-              <a href=""dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ocorrências <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                 <li><a href="{% url 'lista_ocorrencias' %}">Todas ocorrências</a></li>
-                <li class="divider"></li>
-                <li><a href="{% url 'minhas_ocorrencias' %}"> Minhas ocorrências</a></li>
-              </ul>
+              <li><a href="{% url 'estatisticas' %}">Estatísticas no Mapa</a></li>
+              {% if perms.ocorrencia.change_ocorrencia or user.is_superuser %}
+                <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
+              {% endif %}
+              <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a></li>
+              <li class="dropdown">
+                <a href=""dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ocorrências <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                   <li><a href="{% url 'lista_ocorrencias' %}">Todas ocorrências</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'minhas_ocorrencias' %}"> Minhas ocorrências</a></li>
+                </ul>
               </li>
-          </ul>
-           <ul class="nav navbar-nav navbar-right" style="position:relative; right:5%;">
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"             aria-expanded="false" style=" margin-right=50px;"> {{ user.username }} <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url 'perfil' %}">Perfil</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{% url 'logout' %}">Sair</a></li>
-              </ul>
-            </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="position:relative; right:5%;">
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"             aria-expanded="false" style=" margin-right=50px;"> {{ user.username }} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{% url 'logout' %}">Sair</a></li>
+                </ul>
+              </li>
+
             </ul>
           {% else %}
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'cadastrar_usuario' %}">Cadastre-se</a></li>
-            <li><a href="{% url 'login' %}">Entrar</a></li>
-          </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'cadastrar_usuario' %}">Cadastre-se</a></li>
+              <li><a href="{% url 'login' %}">Entrar</a></li>
+            </ul>
           {% endif %}
         </div>
       </div>
