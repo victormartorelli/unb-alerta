@@ -6,22 +6,13 @@ from .filters import StatusFilter, GroupFilter
 from django.forms import ModelForm, ValidationError, ChoiceField, RadioSelect
 from django import forms
 
+'''
+TODO 
+    Trocar seleção de sexo por select one
+'''
+class UsuarioAdminForm(forms.ModelForm):
+    senha = forms.CharField(max_length=45, widget=forms.PasswordInput)
 
-# TODO 
-#     Trocar seleção de sexo por select one
-# class UsuarioAdminForm(forms.ModelForm):
-#     class Meta:
-#         model = Usuario
-#         fields = "__all__" 
-#         sexo = ChoiceField(
-#             label = 'Opcoes',
-#             choices = (
-#                 (0, 'Don\'t change anything.'),
-#                 (1, 'Do some crazy stuff.'),
-#             ),
-#             initial = 0,
-#             widget = RadioSelect,
-#         )
 
 class UsuarioAdmin(admin.ModelAdmin):
     '''
