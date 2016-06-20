@@ -1,3 +1,8 @@
+import magic
+
+from django.forms import ValidationError
+
+
 def from_to(start, end):
     return list(range(start, end + 1))
 
@@ -25,3 +30,39 @@ def make_pagination(index, num_pages):
                         None, num_pages - 1, num_pages]
             head = from_to(1, PAGINATION_LENGTH - len(tail) - 1)
         return head + [None] + tail
+
+
+TIPOS_IMG_PERMITIDOS = (
+    'image/jpeg',
+    'image/jpg',
+    'image/jpe_',
+    'image/pjpeg',
+    'image/vnd.swiftview-jpeg',
+    'application/jpg',
+    'application/x-jpg',
+    'image/pjpeg',
+    'image/pipeg',
+    'image/vnd.swiftview-jpeg',
+    'image/x-xbitmap',
+    'image/bmp',
+    'image/x-bmp',
+    'image/x-bitmap',
+    'image/png',
+    'application/png',
+    'application/x-png',
+)
+
+
+def fabrica_validador_de_tipos_de_arquivo(lista, nome):
+
+    def restringe_tipos_de_arquivo(value):
+        mime = magic.from_buffer(value.read(), mime=True)
+        mime = mime.decode()
+        if mime not in lista:
+            raise ValidationError('Este arquivo não é uma imagem.')
+    # o nome é importante para as migrations
+    restringe_tipos_de_arquivo.__name__ = nome
+    return restringe_tipos_de_arquivo
+
+restringe_tipos_de_arquivo_img = fabrica_validador_de_tipos_de_arquivo(
+    TIPOS_IMG_PERMITIDOS, 'restringe_tipos_de_arquivo_img')

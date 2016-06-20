@@ -74,7 +74,7 @@ class OcorrenciaForm(ModelForm):
 
         if self.files['foto'].size > 30000000:
             raise ValidationError(
-                'Não é possível fazer o upload de uma imagem maior que 30MB')
+                'Não é possível fazer o upload de uma imagem maior que 30MB.')
 
         return cleaned_data
 
