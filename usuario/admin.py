@@ -30,7 +30,7 @@ class UsuarioAdmin(admin.ModelAdmin):
               'data_nasc',
               'status',
               'grupo_usuario']
-    list_filter = ['sexo', IdadeFilter, GroupFilter, StatusFilter]
+    list_filter = [IdadeFilter, GroupFilter, StatusFilter, 'user__last_login']
     search_fields = ['nome',
                      'email',
                      'cpf',
