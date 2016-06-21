@@ -12,7 +12,7 @@
 						{% if vazio %}
 						</br>
 						<div class="alert alert-dismissible alert-warning">
-							<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+							<strong style="margin-left:40%">Nao há nenhuma ocorrência pendente!</strong>
 						</div>
 						{% else %}
 							<tr>
@@ -79,7 +79,7 @@
 				</table>
 			</div>
 		</div>
+		{% include "pagination.html" %}
 	</div>
-	{% include "pagination.html" %}
 </div>
 {% endblock %}

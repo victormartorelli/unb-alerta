@@ -56,7 +56,12 @@
 						<td>{{o.id}}</td>
 						<td>{{o.localidade.descricao}}</td>
 						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
-						<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+						
+						{% if o.hora.minute < 10 %}
+							<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
+						{% else %}
+							<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+						{% endif %}
 
 						{% if o.foto %}
 						<td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
@@ -80,6 +85,7 @@
 					</tr>
 				</table>
 			</div>
+		{% include 'pagination.html' %}
 		</div>
 	</div>
 </div>

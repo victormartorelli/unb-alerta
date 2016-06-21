@@ -71,9 +71,10 @@ class OcorrenciaForm(ModelForm):
 
         data_hoje = datetime.datetime.now().date()
         # Validação de Data
-        if cleaned_data['data'] > data_hoje:
-            raise ValidationError(
-                'Não é possível fazer uma ocorrência em uma data futura')
+        if self.data['data']:
+            if cleaned_data['data'] > data_hoje:
+                raise ValidationError(
+                    'Não é possível fazer uma ocorrência em uma data futura')
         if self.files:
             if self.files['foto'].size > 30000000:
                 raise ValidationError(
@@ -228,6 +229,7 @@ class OcorrenciaFiltro(django_filters.FilterSet):
                   'data',
                   'id',
                   'tb_categoria_ID',
+                  'localidade',
                   ]
 
         order_by = (

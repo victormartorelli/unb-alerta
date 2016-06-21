@@ -90,7 +90,7 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
             return {'validade': False,
                     'atendida': False,
                     'vigilante_ID': 1,
-                    'usuario_ID': self.request.user.id,
+                    'usuario_ID': 0,
                     'repetida': False}
 
     def post(self, request, *args, **kwargs):
@@ -221,9 +221,6 @@ class DescricaoOcorrenciaView(PermissionRequiredMixin, LoginRequiredMixin, Detai
 class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
     template_name = "ocorrencia/minhas_ocorrencias.html"
     model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(
-        validade=True,
-        atendida=True).order_by('-id')
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -238,3 +235,14 @@ class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
         context['page_range'] = make_pagination(
             page_obj.number, paginator.num_pages)
         return context
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser:
+            id_usuario = Usuario.objects.get(
+                user__id=self.request.user.id).id
+            ocorrencia = Ocorrencia.objects.filter(
+                usuario_ID=id_usuario).order_by('-id')
+        else:
+            ocorrencia = Ocorrencia.objects.filter(usuario_ID=0)
+
+        return ocorrencia

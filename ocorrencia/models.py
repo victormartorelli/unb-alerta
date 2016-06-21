@@ -32,8 +32,8 @@ class Local(models.Model):
         verbose_name_plural = ('Locais')
 
     def __str__(self):
-        return ('%(id)s - %(nome_cod)s') % {
-            'id': self.id, 'nome_cod': self.nome_cod}
+        return ('%(descricao)s') % {
+            'descricao': self.descricao}
 
 
 class Ocorrencia(models.Model):
@@ -43,7 +43,7 @@ class Ocorrencia(models.Model):
     descricao = models.TextField(
         blank=True,
         null=True,
-        verbose_name="Descrição")
+        verbose_name='Descrição')
     foto = models.ImageField(
         max_length=45,
         validators=[restringe_tipos_de_arquivo_img],
@@ -52,7 +52,7 @@ class Ocorrencia(models.Model):
         upload_to='ocorrencia/%Y/%m/%d')
     validade = models.BooleanField()
     atendida = models.BooleanField()
-    emergencia = models.BooleanField()
+    emergencia = models.BooleanField(verbose_name='Emergência')
     vitimado = models.BooleanField()
     repetida = models.BooleanField()
     resposta = models.CharField(max_length=45, blank=True, null=True)
