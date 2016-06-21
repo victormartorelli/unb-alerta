@@ -38,7 +38,7 @@ class OcorrenciaForm(ModelForm):
 
     descricao = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 10,
+            attrs={'rows': 15,
                    'cols': 48,
                    'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
 

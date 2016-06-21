@@ -13,16 +13,18 @@
 <div id = "fundo">
   <div class="container">
     <div class="row vertical-offset-100">
-      <div class="col-md-7 col-md-offset-3">
+      <div class="col-md-7 col-md-offset-2">
         <div class="panel panel-default">  
         	<div class="panel-heading">
           	<h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200%;margin-left:12%">Recuperação de senha completa</h3>
           </div>
+          <div class="concluido">
+          <br>
+          <p>Sua senha foi alterada com sucesso!  Voce pode acessar sua conta</p>
+          <h2><a href="{{ login_url }}">{% trans 'Entrar' %}</a></h2>          
+          </div>
         </div>
-      <div class="concluido">
-  			<p>{% trans "Sua senha foi alterada com sucesso!  Voce pode acessar sua conta." %}</p>
-  			<p><a href="{{ login_url }}">{% trans 'Entrar' %}</a></p>          
-      </div>
+      
         </div>
       </div>
     </div>
