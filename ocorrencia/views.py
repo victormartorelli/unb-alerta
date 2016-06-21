@@ -96,7 +96,6 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-
         if form.is_valid():
             ocorrencia = form.save(commit=False)
 
@@ -140,19 +139,6 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
     model = Ocorrencia
     success_url = reverse_lazy('lista_ocorrencias')
     permission_required = {'ocorrencia.change_ocorrencia'}
-    paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaOcorrenciasView,
-                        self).get_context_data(**kwargs)
-
-        paginator = context['paginator']
-        page_obj = context['page_obj']
-
-        context['page_range'] = make_pagination(
-            page_obj.number, paginator.num_pages)
-
-        return context
 
     def get_initial(self):
         o = Ocorrencia.objects.get(id=self.kwargs['pk'])
@@ -165,7 +151,8 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'repetida': o.repetida,
                     'vitimado': o.vitimado,
                     'foto': o.foto,
-                    'descricao': o.descricao}
+                    'descricao': o.descricao,
+                    'localidade': o.localidade}
         else:
             return {'vigilante_ID': 1,
                     'emergencia': o.emergencia,
@@ -174,7 +161,8 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'repetida': o.repetida,
                     'vitimado': o.vitimado,
                     'foto': o.foto,
-                    'descricao': o.descricao}
+                    'descricao': o.descricao,
+                    'localidade': o.localidade}
 
     def form_valid(self, form):
         ocorrencia = form.instance
@@ -200,8 +188,28 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                 {'form': form})
 
 
-class DescricaoOcorrenciaView(DetailView):
+class DescricaoOcorrenciaView(PermissionRequiredMixin, LoginRequiredMixin, DetailView):
     template_name = "ocorrencia/descricao_ocorrencia.html"
+
+    def has_permission(self):
+        user = self.request.user
+
+        if (user.is_superuser or
+           Usuario.objects.filter(user_id=user.id,
+                                  grupo_usuario__name="Vigilante")):
+            return True
+        else:
+            pk = self.kwargs['pk']
+            usuario = Usuario.objects.get(user_id=user.id)
+            visivel = Ocorrencia.objects.filter(
+                id=pk,
+                atendida=True,
+                validade=True)
+            pertence = Ocorrencia.objects.filter(id=pk, usuario_ID=usuario.id)
+            if visivel or pertence:
+                return True
+            else:
+                return False
 
     def get_queryset(self):
         pk = self.kwargs['pk']

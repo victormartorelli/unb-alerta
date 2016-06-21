@@ -7,18 +7,37 @@ class Categoria(models.Model):
     tipo = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
-        db_table = 'tb_categoria'
 
     def __str__(self):
         return ('%(tipo)s') % {
             'tipo': self.tipo}
 
 
+class Local(models.Model):
+    nome_cod = models.CharField(
+        max_length=40,
+        verbose_name='Código',
+        primary_key=True)
+    descricao = models.CharField(
+        max_length=50,
+        verbose_name='Local')
+    pai = models.IntegerField(
+        blank=True,
+        null=True)
+
+    class Meta:
+        verbose_name = ('Local')
+        verbose_name_plural = ('Locais')
+
+    def __str__(self):
+        return ('%(id)s - %(nome_cod)s') % {
+            'id': self.id, 'nome_cod': self.nome_cod}
+
+
 class Ocorrencia(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
+    id = models.AutoField(primary_key=True)
     data = models.DateField(verbose_name='Data da Ocorrência')
     hora = models.TimeField()
     descricao = models.TextField(
@@ -37,21 +56,20 @@ class Ocorrencia(models.Model):
     vitimado = models.BooleanField()
     repetida = models.BooleanField()
     resposta = models.CharField(max_length=45, blank=True, null=True)
-    usuario_ID = models.IntegerField(db_column='usuario_ID')
-    vigilante_ID = models.IntegerField(db_column='vigilante_ID')
+    usuario_ID = models.IntegerField()
+    vigilante_ID = models.IntegerField()
     tb_categoria_ID = models.ForeignKey(
         Categoria,
-        verbose_name='Categoria',
-        db_column='tb_categoria_ID')
+        verbose_name='Categoria')
     longitude = models.FloatField()
     latitude = models.FloatField()
+    localidade = models.ForeignKey(
+        Local,
+        verbose_name='Local')
 
     class Meta:
         verbose_name = ('Ocorrência')
         verbose_name_plural = ('Ocorrências')
-        unique_together = (("data", "id"),)
-        managed = False
-        db_table = 'tb_ocorrencia'
 
     def __str__(self):
         return ('%(data)s - %(id)s') % {

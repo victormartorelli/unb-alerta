@@ -43,6 +43,7 @@
 					<tr>
 						<th>Número</th>
 						<th>Localização</th>
+						<th>Local no Mapa</th>
 						<th>Data e Hora</th>
 						<th>Imagem</th>
 						<th>Emergência?</th>
@@ -53,7 +54,8 @@
 					{% for o in object_list %}
 					<tr>
 						<td>{{o.id}}</td>
-						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
+						<td>{{o.localidade.descricao}}</td>
+						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
 						<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 
 						{% if o.foto %}

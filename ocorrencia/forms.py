@@ -56,12 +56,15 @@ class OcorrenciaForm(ModelForm):
                   'data',
                   'latitude',
                   'longitude',
-                  'descricao']
+                  'descricao',
+                  'localidade',
+                  'repetida']
 
         widgets = {'atendida': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
                    'usuario_ID': forms.HiddenInput(),
-                   'validade': forms.HiddenInput()}
+                   'validade': forms.HiddenInput(),
+                   'repetida': forms.HiddenInput()}
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -71,11 +74,11 @@ class OcorrenciaForm(ModelForm):
         if cleaned_data['data'] > data_hoje:
             raise ValidationError(
                 'Não é possível fazer uma ocorrência em uma data futura')
-
-        if self.files['foto'].size > 30000000:
-            raise ValidationError(
-                'Não é possível fazer o upload de uma imagem maior que 30MB.')
-
+        if self.files:
+            if self.files['foto'].size > 30000000:
+                raise ValidationError(
+                    'Não é possível fazer o upload ' +
+                    'de uma imagem maior que 30MB.')
         return cleaned_data
 
     def __init__(self, *args, **kwargs):
@@ -125,6 +128,7 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'hora',
                   'latitude',
                   'longitude',
+                  'localidade',
                   'validade',
                   'atendida',
                   'vigilante_ID',
@@ -141,7 +145,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'hora': forms.HiddenInput(),
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
-                   'descricao': forms.HiddenInput()}
+                   'descricao': forms.HiddenInput(),
+                   'localidade': forms.HiddenInput()}
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):
