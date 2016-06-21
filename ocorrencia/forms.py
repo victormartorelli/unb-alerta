@@ -38,7 +38,7 @@ class OcorrenciaForm(ModelForm):
 
     descricao = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 10,
+            attrs={'rows': 15,
                    'cols': 48,
                    'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
 
@@ -56,26 +56,30 @@ class OcorrenciaForm(ModelForm):
                   'data',
                   'latitude',
                   'longitude',
-                  'descricao']
+                  'descricao',
+                  'localidade',
+                  'repetida']
 
         widgets = {'atendida': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
                    'usuario_ID': forms.HiddenInput(),
-                   'validade': forms.HiddenInput()}
+                   'validade': forms.HiddenInput(),
+                   'repetida': forms.HiddenInput()}
 
     def clean(self):
         cleaned_data = self.cleaned_data
 
         data_hoje = datetime.datetime.now().date()
         # Validação de Data
-        if cleaned_data['data'] > data_hoje:
-            raise ValidationError(
-                'Não é possível fazer uma ocorrência em uma data futura')
-
-        if self.files['foto'].size > 30000000:
-            raise ValidationError(
-                'Não é possível fazer o upload de uma imagem maior que 30MB.')
-
+        if self.data['data']:
+            if cleaned_data['data'] > data_hoje:
+                raise ValidationError(
+                    'Não é possível fazer uma ocorrência em uma data futura')
+        if self.files:
+            if self.files['foto'].size > 30000000:
+                raise ValidationError(
+                    'Não é possível fazer o upload ' +
+                    'de uma imagem maior que 30MB.')
         return cleaned_data
 
     def __init__(self, *args, **kwargs):
@@ -125,6 +129,7 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'hora',
                   'latitude',
                   'longitude',
+                  'localidade',
                   'validade',
                   'atendida',
                   'vigilante_ID',
@@ -141,7 +146,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'hora': forms.HiddenInput(),
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
-                   'descricao': forms.HiddenInput()}
+                   'descricao': forms.HiddenInput(),
+                   'localidade': forms.HiddenInput()}
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):
@@ -223,6 +229,7 @@ class OcorrenciaFiltro(django_filters.FilterSet):
                   'data',
                   'id',
                   'tb_categoria_ID',
+                  'localidade',
                   ]
 
         order_by = (

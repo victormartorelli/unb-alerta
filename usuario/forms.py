@@ -113,14 +113,14 @@ class UsuarioForm(ModelForm):
             raise ValidationError(
                 'Matrícula já existente')
 
-        ano_atual = datetime.datetime.now().date().year
+        # ano_atual = datetime.datetime.now().date().year
 
-        # Validação de Data de Nascimento
-        if (self.cleaned_data['data_nasc'].year > (ano_atual - 12) or
-           self.cleaned_data['data_nasc'].year > (ano_atual - 100)):
-            raise ValidationError('Você deve ter nascido no mínimo em ' +
-                                  ano_atual - 12 + 'e no máximo em' +
-                                  ano_atual - 100)
+        # # Validação de Data de Nascimento
+        # if (self.cleaned_data['data_nasc'].year > (ano_atual - 12) or
+        #    self.cleaned_data['data_nasc'].year > (ano_atual - 100)):
+        #     raise ValidationError('Você deve ter nascido no mínimo em ' +
+        #                           ano_atual - 12 + 'e no máximo em' +
+        #                           ano_atual - 100)
 
         # Validação de Email
         email_existente1 = Usuario.objects.filter(
@@ -168,9 +168,9 @@ class RecuperarSenhaEmailForm(PasswordResetForm):
 
     def clean(self):
         email_existente_usuario = Usuario.objects.filter(
-            email=self.cleaned_data['email'])
+            email=self.data['email'])
         email_existente_user = User.objects.filter(
-            email=self.cleaned_data['email'])
+            email=self.data['email'])
 
         if not email_existente_usuario and not email_existente_user:
             msg = 'Não existe nenhum usuário cadastrado com este e-mail.'

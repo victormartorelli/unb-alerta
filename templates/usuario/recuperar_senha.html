@@ -21,18 +21,17 @@
 
           <div class="panel-body">
 
-			<h3>{% trans "Esqueceu sua senha? Entre com seu email abaixo:" %}</h3>
+			<h3>{% trans "Esqueceu sua senha? Entre com seu e-mail abaixo:" %}</h3>
 
          	<form action="" method="post">
          	{% csrf_token %}
-      			</br>
-      			<h2><label for="email">{% trans 'Endereco de email:' %}</label><h2>
-      			<label for="email>" style="margin-left:45%; margin-top:-15%;"> {{ form.email }} </label>
+      			<h3><label for="email" style="margin-top:3%">{% trans 'Endereco de email:' %}</label><h3>
+      			<label for="email>" style="margin-left:42%; margin-top:-14%;"> {{ form.email }} </label>
       			<p><font color="red">{{ form.non_field_errors }}</font></p>
       			
       			<input class="btn btn-lg btn-success" 
       			type="submit" value="Recuperar" 
-      			style="margin-top:5%;margin-left:20%;margin-bottom:-5%;width:60%" />
+      			style="margin-top:2%;margin-left:20%;margin-bottom:-2%;width:60%" />
     			</form>
           </div>
 

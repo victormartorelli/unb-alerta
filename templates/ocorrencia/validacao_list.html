@@ -12,12 +12,13 @@
 						{% if vazio %}
 						</br>
 						<div class="alert alert-dismissible alert-warning">
-							<strong style="margin-left:40%">Nao ha nenhuma ocorrencia!</strong>
+							<strong style="margin-left:40%">Nao há nenhuma ocorrência pendente!</strong>
 						</div>
 						{% else %}
 							<tr>
 								<th>Número</th>
 								<th>Localização</th>
+						    <th>Local no Mapa</th>
 								<th>Data e Hora</th>
 								<th>Imagem</th>
 								<th>Emergência?</th>
@@ -29,7 +30,8 @@
 						{% for o in object_list %}
 							<tr>
 								<td>{{o.id}}</td>
-								<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
+								<td>{{o.localidade.descricao}}</td>
+								<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
 								{% if o.hora.minute < 10 %}
 									<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
 								{% else %}
@@ -77,7 +79,7 @@
 				</table>
 			</div>
 		</div>
+		{% include "pagination.html" %}
 	</div>
-	{% include "pagination.html" %}
 </div>
 {% endblock %}

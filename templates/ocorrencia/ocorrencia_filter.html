@@ -8,19 +8,6 @@
 <script src="/static/js/jquery.mask.min.js"></script>
 <script type="text/javascript">
 
-
-$(document).ready(function() {
-  $("#data").mask("00/00/0000", {placeholder: "__/__/____"});
-});
-
-$(document).ready(function() {
-  $("#data").datepicker({dateFormat:'dd/mm/yy'});
-})
-
-
-$(document).ready(function() {
-  $("#hora").mask("00:00", {placeholder: "__:__"});
-});
 </script>
 
 <div id = "fundo">
@@ -72,6 +59,11 @@ $(document).ready(function() {
 		            <div class="form-group" style="margin: -7% -5% 10%">
 		            	{{ filter.form.o|as_crispy_field }}
 		            </div>
+
+		            <div class="form-group" style="margin: -7% -5% 10%">
+		            	{{ filter.form.localidade|as_crispy_field }}
+		            </div>
+
 					<button type="submit" class="btn btn-primary btn-lg" style="margin-left:81%;margin-top:-14%;margin-bottom:-4%;width:16%">Filtrar</button>
 		      </form>
 		    </div>
@@ -92,6 +84,7 @@ $(document).ready(function() {
 					<tr>
 						<th>Número</th>
 						<th>Localização</th>
+						<th>Local no Mapa</th>
 						<th>Data e Hora</th>
 						<th>Imagem</th>
 						<th>Emergência?</th>
@@ -107,8 +100,13 @@ $(document).ready(function() {
         {% for o in object_list %}
 				<tr>
 					<td>{{o.id}}</td>
-					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Clique para ver no mapa </a></td>
-					<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+					<td>{{o.localidade.descricao}}</td>
+					<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
+					{% if o.hora.minute < 10 %}
+						<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
+					{% else %}
+						<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
+					{% endif %}
 
 								{% if o.foto %}
 								  <td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
