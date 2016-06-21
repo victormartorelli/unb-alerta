@@ -2,6 +2,7 @@ import datetime
 
 from django import forms
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.password_validation import validate_password
 from django.db import transaction
 from django.forms import ModelForm, ValidationError
 from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
@@ -79,6 +80,11 @@ class UsuarioForm(ModelForm):
             self.cleaned_data['senha'],
             self.cleaned_data['confirma_senha'],
             msg)
+
+        try:
+            validate_password(self.cleaned_data['senha'])
+        except ValidationError as error:
+            raise ValidationError(error)
 
         # Validação de Email
         if ('email' not in self.cleaned_data or
