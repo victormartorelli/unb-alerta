@@ -130,13 +130,13 @@ h2{
   margin-top:1%;
   margin-left: 10%;
   margin-right: 10%;
-  font-family: inherit;
+  font-family: 'Calibri';
   font-size: inherit;
   line-height: inherit;
 }
 h3{
  
-  margin-left: 10%;
+  margin-left: 5%;
   color: #393c3d;
   font-size: 100%;
   font-family: 'Calibri';
@@ -149,7 +149,9 @@ h4{
   font-family: 'Calibri';
 }
 h5{
-  text-align: center;
+  text-indent: 21%;
+  margin-left: 10%;
+  margin-right: 10%;
   color: #393c3d;
   font-size: 150%;
   font-family: 'Calibri';
@@ -176,7 +178,7 @@ form p label{
 }
 .concluido a{
   text-decoration:none;
-  color: #1c2c48;
+  color: #26953b;
   font-size: 150%;
 }
 .senha a{

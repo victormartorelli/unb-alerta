@@ -21,15 +21,16 @@
           </div>
 
 		{% if validlink %}
-
+			<br>
 			<h4>{% trans 'Escreva sua nova senha abaixo:' %}</h4>
 
-
+			<br>
 			<form action="" method="post">{% csrf_token %}
 				{{ form.new_password1.errors }}
 				<p class="aligned wide"><label for="id_new_password1" style="margin-right:13.5%;">{% trans 'Nova Senha:' %}</label>{{ form.new_password1 }}</p>
 				{{ form.new_password2.errors }}
 				<p class="aligned wide"><label for="id_new_password2">{% trans 'Confirmar  Senha:' %}</label>{{ form.new_password2 }}</p>
+				<br>
 				<input type="submit"  class="btn btn-lg btn-success"  value="{% trans 'Alterar minha senha' %}" style ="margin-left:30%" />
 			</form>
 		{% else %}
