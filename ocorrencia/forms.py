@@ -120,6 +120,12 @@ class ValidarOcorrenciaEditForm(ModelForm):
         widget=forms.Select(
             attrs={'class': 'selector'}))
 
+    resposta = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 15,
+                   'cols': 48,
+                   'placeholder': 'Escreva aqui a resposta da ocorrencia'}))
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
