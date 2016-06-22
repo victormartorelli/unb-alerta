@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('ocorrencia.urls')),
     url(r'', include('usuario.urls')),
+    url(r'^captcha/', include('captcha.urls')),
     # url(r'', include(ocorrencia.urls)),
 
     # # must come at the end

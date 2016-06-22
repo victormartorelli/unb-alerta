@@ -1,5 +1,6 @@
 import datetime
 
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.password_validation import validate_password
@@ -37,6 +38,8 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
+    captcha = CaptchaField()
+
     class Meta:
         model = Usuario
         fields = ['login',
@@ -51,7 +54,8 @@ class UsuarioForm(ModelForm):
                   'matricula',
                   'sexo',
                   'data_nasc',
-                  'grupo_usuario']
+                  'grupo_usuario',
+                  'captcha']
 
         widgets = {'status': forms.HiddenInput(),
                    'grupo_usuario': forms.HiddenInput()}

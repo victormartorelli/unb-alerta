@@ -60,12 +60,22 @@
                   </br>
                   <input type="radio" name="sexo" id="sexo" value="F"> <label for="sexo">Feminino</label>
                 </div>
-                
-                {{form.data_nasc|as_crispy_field}}
 
-                {{form.cpf|as_crispy_field}}
+                <div class="form-group">
+                 {{ form.data_nasc|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                 {{ form.cpf|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                 {{ form.rg|as_crispy_field }}
+                </div>
                 
-                {{form.rg|as_crispy_field}}
+                <div class="form-group">
+                 {{ form.captcha|as_crispy_field }}
+                </div>
 
                 {{ form.grupo_usuario }}
                 {{ form.status }}
@@ -82,3 +92,12 @@
   </div>
 {% endblock %}
 
+{% block extra_js %}
+  <script type="text/javascript">
+    $(document).ready(function (){
+      $('#id_captcha_1').keyup(function(){
+        this.value = this.value.toUpperCase();
+      });
+    });
+  </script>
+{% endblock %}

@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'bootstrap3',  # basically for django_admin_bootstrapped
     'bootstrap_themes',
+    'captcha',
     'crispy_forms',
     'easy_thumbnails',
     'floppyforms',
