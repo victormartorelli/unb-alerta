@@ -98,7 +98,6 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
         form = self.get_form(form_class)
         if form.is_valid():
             ocorrencia = form.save(commit=False)
-
             if 'foto' in request.FILES:
                 ocorrencia.foto = request.FILES['foto']
             ocorrencia.save()
@@ -188,7 +187,9 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                 {'form': form})
 
 
-class DescricaoOcorrenciaView(PermissionRequiredMixin, LoginRequiredMixin, DetailView):
+class DescricaoOcorrenciaView(PermissionRequiredMixin,
+                              LoginRequiredMixin,
+                              DetailView):
     template_name = "ocorrencia/descricao_ocorrencia.html"
 
     def has_permission(self):
