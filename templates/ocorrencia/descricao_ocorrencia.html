@@ -22,7 +22,7 @@
             <div class="tab-pane fade active in" id="info">
             <p style=" margin: 2% 2%"><b>Data:</b> {{object.data|default_if_none:"Não foi informado"}} </p>
             <p style=" margin: 2% 2%"><b>Hora:</b> {{object.hora|default_if_none:"Não foi informado"}} </p>
-            <p style=" margin: 2% 2%"><b>É uma emergência?</b>
+            <p style=" margin: 2% 2%"><b>A ocorrência foi validada?</b>
             {% if object.validade == True %} 
                 Sim
               {% else %} 
