@@ -135,7 +135,7 @@ h2{
   line-height: inherit;
 }
 h3{
- 
+
   margin-left: 5%;
   color: #393c3d;
   font-size: 100%;
@@ -155,13 +155,23 @@ h5{
   font-size: 150%;
   font-family: 'Calibri';
 }
-h6{
+
+h6.loggedIn {
   text-align: center;
-  color: #1c2c48;
+  color:#1C2C48;
   font-size: 200%;
-  font-family: 'Calibri',serif;
-  /* font-weight: bold; */
-  font-style: oblique;
+  font-family:'Calibri',serif;
+  font-weight: none;
+  font-size: 200%;
+}
+
+h6.loggedOut {
+  text-align: center;
+  color:#4E6c24;
+  font-size: 200%;
+  font-family:'Calibri',serif;
+  font-weight: none;
+  font-size: 200%;
 }
 form p label{
   color: #393c3d;

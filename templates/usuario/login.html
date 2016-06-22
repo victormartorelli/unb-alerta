@@ -5,9 +5,9 @@
     <div class="row vertical-offset-100">
       <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-default">
-          
+
           <div class="panel-heading">
-            <h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200% ;margin-left: 35%">Login</h3>
+            <h6 class="loggedOut">Login</h6>
           </div>
 
           <div class="panel-body">
@@ -29,13 +29,13 @@
 
                   {% if next %}
                     {% if user.is_authenticated %}
-                      <p><font color="red">Sua conta não tem acesso a esta página.</font></p>          
+                      <p><font color="red">Sua conta não tem acesso a esta página.</font></p>
                     {% else %}
                       <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
 
                     {% endif %}
                   {% endif %}
-                  
+
                   <input type="hidden" name="next" value="{{ next }}" />
                   <div class = "senha">
                     <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a>
