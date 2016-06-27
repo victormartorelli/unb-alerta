@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
-
+from rest_framework_jwt.views import obtain_jwt_token
 # import ocorrencia.urls
 # import base.urls
 
@@ -30,6 +30,11 @@ urlpatterns = [
     url(r'', include('usuario.urls')),
     url(r'^captcha/', include('captcha.urls')),
     # url(r'', include(ocorrencia.urls)),
+    url(r'^api/', include('api.urls')),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+
 
     # # must come at the end
     # #   so that base /sistema/ url doesn't capture its children
