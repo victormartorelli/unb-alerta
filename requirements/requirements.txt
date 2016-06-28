@@ -10,6 +10,7 @@ python-decouple==3.0
 django-extra-views==0.7.1
 django-filter==0.13.0
 django-model-utils==2.4
+djangorestframework-jwt==1.8.0
 django-sass-processor==0.3.4
 django-simple-captcha==0.5.1
 django==1.9.5
