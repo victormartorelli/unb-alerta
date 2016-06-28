@@ -3815,19 +3815,6 @@ function getIdLocal(local){
   return(idLocal);
 }
 
-function include(file_path){
-  var j = document.createElement("script");
-  j.type = "text/javascript";
-  j.src = file_path;
-  document.body.appendChild(j);
-}
-/*
-include ("/unb-alerta/static/js/area_icc.js");
-include ("/unb-alerta/static/js/area_pat_pjc_ipol_cic.js");
-include ("/unb-alerta/static/js/area_bce_reitoria.js");
-include ("/unb-alerta/static/js/area_prc_colina_face.js");*/
-
-var idLocal;
 var map;
 
 function initMap() {
