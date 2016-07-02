@@ -1,3 +1,4 @@
+var nomeLocal = '';
 function getIdLocal(local){    
   
   var Campus_DarcyRibeiro = [
@@ -2614,31 +2615,37 @@ function getIdLocal(local){
     true:
     false){
     idLocal = 1;
+    nomeLocal = "Campus Darcy Ribeiro - UnB";
     //Area_ICC
     if (google.maps.geometry.poly.containsLocation(local, poligonos[2]) ?
       true:
       false){
-      idLocal = 2;
+      idLocal = 2; 
+      nomeLocal = "Área Instituto Central de Ciências - Universidade de Brasília";
       //SubArea_ICC_Norte
       if (google.maps.geometry.poly.containsLocation(local, poligonos[3]) ?
         true:
         false){
         idLocal = 3;
+        nomeLocal = "Sub-Área ICC Norte";
         //ICC_Norte
         if (google.maps.geometry.poly.containsLocation(local, poligonos[4]) ?
           true:
           false){
           idLocal = 4;
+          nomeLocal = "Ala Norte do ICC";
         //P_Onibus_ICC_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[5]) ?
           true:
           false){
           idLocal = 5;
+          nomeLocal = "Parada de Ônibus ICC Norte";
         //Estac_ICC_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[6]) ?
           true:
           false){
           idLocal = 6;
+          nomeLocal = "Estacionamento ICC Norte - UnB";
         }
       
       //SubArea_ICC_Centro_RU
@@ -2646,62 +2653,74 @@ function getIdLocal(local){
         true:
         false){
         idLocal = 7;
+        nomeLocal = "Sub-Área de circulação do ICC e RU - UnB";
         //ICC_Centro
         if (google.maps.geometry.poly.containsLocation(local, poligonos[8]) ?
           true:
           false){
           idLocal = 8;
+          nomeLocal = "Ala Central do ICC";
         //MASC_Centro
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[9]) ?
           true:
           false){
           idLocal = 9;
+          nomeLocal = "Módulo de Atividades de Serviço e Comércio Centro - UnB";
         //P_Onibus_ICC_Centro_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[10]) ?
           true:
           false){
           idLocal = 10;
+          nomeLocal = "Parada de Ônibus ICC Centro Norte";
         //RU
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[11]) ?
           true:
           false){
           idLocal = 11;
+          nomeLocal = "Restaurante Universitário - UnB";
         //Centro_Convivencia
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[12]) ?
           true:
           false){
           idLocal = 12;
+          nomeLocal = "Centro de Convivência";
         }
       //SubArea_ICC_Sul
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[13]) ?
         true:
         false){
         idLocal = 13;
+        nomeLocal = "Sub-área ICC Sul";
         //ICC_Sul
         if (google.maps.geometry.poly.containsLocation(local, poligonos[14]) ?
           true:
           false){
           idLocal = 14;
+          nomeLocal = "Ala Sul do ICC";
         //Estac_ICC_Sul
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[15]) ?
           true:
           false){
           idLocal = 15;
+          nomeLocal = "Estacionamento ICC Sul - UnB";
         //P_Onibus_ICC_Sul
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[16]) ?
           true:
           false){
           idLocal = 16;
+          nomeLocal = "Parada de Ônibus ICC Sul";
         //P_Onibus_ICC_Centro_Sul
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[17]) ?
           true:
           false){
           idLocal = 17;
+          nomeLocal = "Parada de Ônibus ICC Centro/Sul";
         //P_Onibus_ICC_Sul_FS
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[18]) ?
           true:
           false){
           idLocal = 18;
+          nomeLocal = "Parada de ônibus ICC Sul/FS";
         }
       }
     //Area_BCE_Reitoria
@@ -3832,7 +3851,7 @@ function initMap() {
     idLocal = getIdLocal(local);
     
     document.getElementById("localidade").value = idLocal; 
-    document.getElementById("exibe_localidade").innerHTML = idLocal;
+    document.getElementById("exibe_localidade").innerHTML = nomeLocal;
       
     if (idLocal){
       if (marcador){
