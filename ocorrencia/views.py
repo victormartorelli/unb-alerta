@@ -1,5 +1,5 @@
 from django.views.generic import (FormView, ListView, DetailView,
-                                  UpdateView)
+                                  DeleteView, UpdateView)
 from django.contrib import messages
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
@@ -247,3 +247,37 @@ class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
             ocorrencia = Ocorrencia.objects.filter(usuario_ID=0)
 
         return ocorrencia
+
+
+class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
+    success_url = 'minhas_ocorrencias'
+    template_name = 'ocorrencia/deletar.html'
+    model = Ocorrencia
+
+    def has_permission(self):
+        user = self.request.user
+
+        if (user.is_superuser or
+           Usuario.objects.filter(user_id=user.id,
+                                  grupo_usuario__name="Vigilante")):
+            return True
+        else:
+            pk = self.kwargs['pk']
+            usuario = Usuario.objects.get(user_id=user.id)
+            visivel = Ocorrencia.objects.filter(
+                id=pk,
+                atendida=True,
+                validade=True)
+            pertence = Ocorrencia.objects.filter(id=pk, usuario_ID=usuario.id)
+            if visivel or pertence:
+                return True
+            else:
+                return False
+
+    def post(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
+
+    def delete(self, form, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(reverse(self.get_success_url()))
