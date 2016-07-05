@@ -55,7 +55,7 @@ class Ocorrencia(models.Model):
     emergencia = models.BooleanField(verbose_name='Emergência')
     vitimado = models.BooleanField()
     repetida = models.BooleanField()
-    resposta = models.CharField(max_length=45, blank=True, null=True)
+    resposta = models.CharField(max_length=500, blank=True, null=True)
     usuario_ID = models.IntegerField()
     vigilante_ID = models.IntegerField()
     tb_categoria_ID = models.ForeignKey(

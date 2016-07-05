@@ -22,22 +22,26 @@ space a{
 */
 
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
-    z-index: 1; 
-    padding-top: 100px; 
+    z-index: 1;
+    padding-top: 100px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    width: 90%; 
+    width: 90%;
     height: 90%;
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
 
+#imagemOcorrencia {
+  width: auto;
+  height: 100%;
+}
 
-.modal-content {    
+.modal-content {
     display: block;
     margin: auto;
     width: 80%;
@@ -60,21 +64,15 @@ space a{
     cursor: pointer;
 }
 
-.nav a {
-  color: #5a5a5a;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 14px 10px;
-  text-transform: uppercase;
-}
-
 .nav li {
   display: inline;
 }
 #fundo{
     background: url("images/back.png");
   	background-color: #444;
-    background: url("images/pinlayer2.png"),url("images/back.png");    
+    background: url("images/pinlayer2.png"),url("images/back.png");
+    margin-top: -5%;
+    min-height: 800px;
 }
 
 .vertical-offset-100{
@@ -101,8 +99,8 @@ space a{
 .jumbotron {
   background: url("images/back.png");
   background-color: #444;
-  background: url("images/pinlayer2.png"),url("images/back.png"); 
-  height: 05%;
+  background: url("images/pinlayer2.png"),url("images/back.png");
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -114,7 +112,7 @@ space a{
 
 .jumbotron h1 {
   color: yellow;
-  font-size: 63px;  
+  font-size: 63px;
   font-family: 'Calibri';
   font-weight: bold;
 }
@@ -124,46 +122,30 @@ space a{
   color: #1c2c48;
 }
 
-h1{
-  text-align: center;
-  color:green;
-}
-h2{
-  margin-top:1%;
-  margin-left: 10%;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-h3{
-  margin-left: 10%;
+form p label{
   color: #393c3d;
-  font-size: 100%;  
   font-family: 'Calibri';
-  font-weight: bold;
-}
-h4{
-  margin-top: 1%;
   margin-left: 10%;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+  margin-right: 5%;
 }
-h5{
-  margin-top: 3%;
-  margin-left: 10%;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  font-color: inherit;
-}
-h6{
-  text-align: center;
+.concluido{
   color: #1c2c48;
-  font-size: 200%;  
+  font-size: 100%;
   font-family: 'Calibri',serif;
-  font-weight: bold;
-  font-style: oblique;
+  text-align: center;
+}
+.concluido a{
+  text-decoration:none;
+  color: #26953b;
+  font-size: 150%;
+}
+.senha a{
+  text-decoration:none;
+  color: #1c2c48;
+}
+.list-group-item{
+  text-align: center;
+
 }
 
 #descricao{
@@ -209,13 +191,17 @@ h6{
 
 }
 
+.form-group h3{
+  font-size: 100%;
+  font-family: "Calibri", serif;
+}
+
+
 .detalhes{
-  	margin-right:5%; 
+  	margin-right:5%;
   	margin-left:5%;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #3c763d;
 	font-family:'Shift', sans-serif;
+	font-size: 110%;
 
     padding: 15px;
     margin-bottom: 20px;
@@ -231,13 +217,11 @@ h6{
 	font-family: 'Shift', sans-serif;
 	margin-left:10px;
 	margin-right:10px;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-  color: #8a6d3b;
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  font-size: 110%;
 }
 
 .botao{
@@ -319,5 +303,5 @@ h6{
 }
 
 .dicas h5 {
-  
+
 }

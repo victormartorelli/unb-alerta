@@ -2,6 +2,9 @@ import magic
 
 from django.forms import ValidationError
 
+from crispy_forms.bootstrap import FormActions
+from crispy_forms.layout import Div, Submit
+
 
 def from_to(start, end):
     return list(range(start, end + 1))
@@ -66,3 +69,17 @@ def fabrica_validador_de_tipos_de_arquivo(lista, nome):
 
 restringe_tipos_de_arquivo_img = fabrica_validador_de_tipos_de_arquivo(
     TIPOS_IMG_PERMITIDOS, 'restringe_tipos_de_arquivo_img')
+
+
+def to_column(name_span):
+    fieldname, span = name_span
+    return Div(fieldname, css_class='col-md-%d' % span)
+
+
+def to_row(names_spans):
+    return Div(*map(to_column, names_spans), css_class='row-fluid')
+
+
+def form_actions(more=[], save_label='Salvar'):
+    return FormActions(
+        Submit('salvar', save_label, css_class='btn btn-info btn-lg pull-right'), *more)

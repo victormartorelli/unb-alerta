@@ -140,10 +140,28 @@ STATICFILES_DIRS = (BASE_DIR.child("static"),)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
     'sass_processor.finders.CssFinder',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+BOWER_COMPONENTS_ROOT = BASE_DIR.child("bower")
+BOWER_INSTALLED_APPS = (
+    'bootstrap-sass#3.3.6',
+    'components-font-awesome#4.5.0',
+    'tinymce#4.3.3',
+    'jquery-ui#1.11.4',
+    'jquery-runner#2.3.3',
+    'jQuery-Mask-Plugin#1.13.4',
+    'jsdiff#2.2.1',
+    'https://github.com/hoarrd/drunken-parrot-flat-ui.git',
+    'bootstrap'
+)
+
+SASS_PROCESSOR_INCLUDE_DIRS = (BOWER_COMPONENTS_ROOT.child(
+    'bower_components', 'bootstrap-sass', 'assets', 'stylesheets'),
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators

@@ -1,10 +1,15 @@
 import datetime
 import django_filters
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Fieldset, Layout
+
 from django import forms
 from django.db import models
 from django.forms import ModelForm, ValidationError
 from .models import Categoria, Ocorrencia
+
+from unb_alerta.utils import to_row, form_actions
 
 YES_NO_CHOICES = [('', '--------'),
                   (0, 'Não'),
@@ -262,3 +267,24 @@ class OcorrenciaFiltro(django_filters.FilterSet):
         self.form.fields['id'].label = 'ID'
         self.form.fields['hora'].widget.attrs['class'] = 'hora'
         self.form.fields['data'].widget.attrs['class'] = 'data'
+
+        row1 = to_row(
+            [('id', 2),
+             ('tb_categoria_ID', 4),
+             ('vitimado', 3),
+             ('emergencia', 3)])
+        row2 = to_row(
+            [('data', 6),
+             ('hora', 6)])
+        row3 = to_row(
+            [('localidade', 4),
+             ('descricao', 4),
+             ('resposta', 4)])
+        row4 = to_row([('o', 6)])
+
+        self.form.helper = FormHelper()
+        self.form.helper.form_method = 'GET'
+        self.form.helper.layout = Layout(
+            Fieldset('Filtragem de Ocorrências'),
+            row1, row2, row3, row4,
+            form_actions(save_label='Filtrar'))

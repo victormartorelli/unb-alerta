@@ -14,74 +14,27 @@
 <div class="container">
     <div class="row vertical-offset-100">
 
-    	<nav class="navbar navbar-default" style="height:335px">
+    	<nav class="navbar navbar-default" style="height:400px">
 		  <div class="container-fluid" >
-		    <div class="navbar-header">
-		      <h1 class="navbar-brand">Filtragem:</h1>
-		    </div>
-
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <form class="navbar-form navbar-left" role="search">
-		        	
-		      		<div class="form-group" style="margin: -7% 8% 10%;">
-		            	{{ filter.form.id|as_crispy_field }}
-		            </div>
-
-		        	<div class="form-group" style="margin: -7% -3% 10%">
-              			{{ filter.form.tb_categoria_ID|as_crispy_field }}
-            		</div>
-
-            		<div class="form-group" style="margin: -7% 8% 10%">
-		            	{{ filter.form.vitimado|as_crispy_field }}
-		            </div>
-
-		            <div class="form-group" style="margin: -7% -3% 10%">
-		            	{{ filter.form.emergencia|as_crispy_field }}
-		            </div>
-
-
-		        	<div class="form-group" style="margin: -7% 8% 10%">
-		        		{{filter.form.data|as_crispy_field}}
-		        	</div>
-
-		        	<div class="form-group" style="margin-left:-5%;margin-top:-11%">
-		            	{{ filter.form.descricao|as_crispy_field }}
-		            </div>
-
-		            <div class="form-group" style="margin-left:3%;margin-top:-11%">
-		            	{{ filter.form.resposta|as_crispy_field }}
-		            </div>
-
-		        	<div class="form-group" style="margin: -7% 8% 10%">
-		        		{{filter.form.hora|as_crispy_field}}
-		        	</div>
-
-		            <div class="form-group" style="margin: -7% -5% 10%">
-		            	{{ filter.form.localidade|as_crispy_field }}
-		            </div>
-
-
-		            <div class="form-group" style="margin-top:-2%;margin-left:-79%">
-		            	{{ filter.form.o|as_crispy_field }}
-		            </div>
-
-
-					<button type="submit" class="btn btn-primary btn-lg" style="margin-left:52%;margin-top:1%;margin-bottom:2%;width:16%">Filtrar</button>
-		      </form>
+		        {% crispy filter.form %}
 		    </div>
 		  </div>
 		</nav>
 
-        	<div class="panel panel-default">
-        		<div class="panel-heading" style="background-color: #f5f5f5;
-        		border-color: #caced1;"><h6> Todas as ocorrências</h6>
+        	<div class="panel panel-primary">
+          		<div class="panel-heading" style="text-align:center">
+            		<h1>Todas as Ocorrências</h1>
         		</div>
         		
 	        {% if page_obj|length %}
           		{% if numero_res > 1 %}
-              		<h3>Pesquisa concluída com sucesso! Foram encontradas {{numero_res}} ocorrências.</h3>
+          			<div class="alert alert-dismissible alert-success" style="text-align:center">
+  						<strong><h3>Foram encontradas {{numero_res}} ocorrências.</h3><strong>
+					</div>
             	{% elif numero_res == 1 %}
-              		<h3>Pesquisa concluída com sucesso! Foi encontrada {{numero_res}} ocorrência.</h3>
+            		<div class="alert alert-dismissible alert-success">
+  						<strong><h3>Foi encontrada {{numero_res}} ocorrência.</h3><strong>
+					</div>
 					{% endif %}
 			{% if vazio %}
 	        	</br>
@@ -169,8 +122,8 @@
 				{% endif %}
 			   </div>
           </div>
+          {% include "pagination.html" %}
    	        </div>
-   	        {% include "pagination.html" %}
        </div>
       </div>
     </div>
