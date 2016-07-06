@@ -7,7 +7,7 @@ from django.views.generic.base import TemplateView
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
                     ListaValidacaoView, ValidarOcorrenciaEditView,
-                    MinhasOcorrenciasView)
+                    MinhasOcorrenciasView, OcorrenciaDeleteView)
 
 urlpatterns = [
     url(r'^ocorrencias/$',
@@ -24,6 +24,9 @@ urlpatterns = [
 
     url(r'^ocorrencias/(?P<pk>\d+)/validar$',
         ValidarOcorrenciaEditView.as_view(), name='validar_ocorrencia'),
+
+    url(r'^ocorrencias/(?P<pk>\d+)/deletar-ocorrencia$',
+        OcorrenciaDeleteView.as_view(), name='deletar_ocorrencia'),
 
     url(r'^ocorrencias/minhas_ocorrencias/$',
         MinhasOcorrenciasView.as_view(), name='minhas_ocorrencias'),

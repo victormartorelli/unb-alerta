@@ -69,9 +69,10 @@ class UsuarioForm(ModelForm):
 
         # Valida Username
 
-        if User.objects.filter(username=self.cleaned_data['login']).exists():
-            raise ValidationError(
-                'Esse nome de usuário já existe.')
+        if 'login' in self.cleaned_data:
+            if User.objects.filter(username=self.data['login']).exists():
+                raise ValidationError(
+                    'Esse nome de usuário já existe.')
 
         # Validação de Senha
         if ('senha' not in self.cleaned_data or
