@@ -46,7 +46,8 @@ class OcorrenciaForm(ModelForm):
         widget=forms.Textarea(
             attrs={'rows': 15,
                    'cols': 48,
-                   'placeholder': 'Escreva aqui a descricao da ocorrencia, ou seja, detalhes que você pode perceber mas não tem campos no formulario para tal informação'}))
+                   'placeholder': 'Escreva aqui a descricao da ocorrencia, ou seja, detalhes que você pode perceber mas não tem campos no formulario para tal informação'}),
+        required=False)
 
     class Meta:
         model = Ocorrencia
@@ -64,7 +65,8 @@ class OcorrenciaForm(ModelForm):
                   'longitude',
                   'descricao',
                   'localidade',
-                  'repetida']
+                  'repetida',
+                  'informacoes_segurancas']
 
         widgets = {'atendida': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),

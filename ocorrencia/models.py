@@ -45,6 +45,14 @@ class Ocorrencia(models.Model):
         blank=True,
         null=True,
         verbose_name='Descrição')
+    descricao = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Descrição')
+    informacoes_segurancas = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Informações dos Seguranças')
     foto = models.ImageField(
         max_length=45,
         validators=[restringe_tipos_de_arquivo_img],

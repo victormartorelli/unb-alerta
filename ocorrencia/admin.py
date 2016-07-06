@@ -10,6 +10,7 @@ class OcorrenciaAdmin(admin.ModelAdmin):
               'data',
               'hora',
               'descricao',
+              'informacoes_segurancas',
               'validade',
               'atendida',
               'emergencia',
