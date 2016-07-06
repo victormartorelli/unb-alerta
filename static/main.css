@@ -12,12 +12,19 @@
 label {
   color:white
 }
+.panel{
+	border:0;
+}
 .navbar{
   margin-bottom: 0;
   font-size: 17px;
+	background-color: #247ba0 !important;
 }
 .navbar a{
   font-weight: bolder;
+}
+.navbar a:hover{
+	color: #70c1b3 !important;
 }
 table td{
   text-align: center;
@@ -318,11 +325,4 @@ form p label{
 
 .dicas h5 {
 
-}
-
-.sobre{
-  
-  margin-left: 5%;
-  margin-right: 5%; 
-  margin-top: 5%;
 }
