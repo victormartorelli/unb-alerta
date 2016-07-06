@@ -1,0 +1,228 @@
+{% extends "base.html"%}
+{% block content %}
+
+
+
+
+<style type="text/css">
+  #map { 
+  	width: 80% !important; 
+  	height:350px !important;
+  	margin-left:10% !important;
+  	margin-top:0% !important;
+  	overflow: visible !important;
+    border : 3px solid rgba(211,211,211,0.4);
+  }
+</style>
+
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/static/js/jquery.mask.min.js"></script>
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+  $("#data").mask("00/00/0000", {placeholder: "__/__/____"});
+});
+
+$(document).ready(function() {
+  $("#data").datepicker({dateFormat:'dd/mm/yy'});
+})
+
+
+$(document).ready(function() {
+  $("#hora").mask("00:00", {placeholder: "__:__"});
+});
+
+var map;
+function initMap() {
+  var ICCCoords = [
+    new google.maps.LatLng(-15.760398,-47.870296),
+    new google.maps.LatLng(-15.760567,-47.870956),
+    new google.maps.LatLng(-15.763245,-47.870163),
+    new google.maps.LatLng(-15.764228,-47.869485),
+    new google.maps.LatLng(-15.765899,-47.867105),
+    new google.maps.LatLng(-15.765350,-47.866690),
+    new google.maps.LatLng(-15.763843,-47.868781),
+    new google.maps.LatLng(-15.762765,-47.869574)  
+  ];
+
+  var UNB_Coords = [
+    new google.maps.LatLng(-15.735485, -47.885615),
+    new google.maps.LatLng(-15.762695, -47.876887),
+    new google.maps.LatLng(-15.769964, -47.875081),
+    new google.maps.LatLng(-15.783380, -47.873746),
+    new google.maps.LatLng(-15.774848, -47.863679),
+    new google.maps.LatLng(-15.763613, -47.862432),
+    new google.maps.LatLng(-15.763530, -47.861102),
+    new google.maps.LatLng(-15.763530, -47.861102),
+    new google.maps.LatLng(-15.768959, -47.855091),
+    new google.maps.LatLng(-15.765684, -47.851076),
+    new google.maps.LatLng(-15.760552, -47.854213),
+    new google.maps.LatLng(-15.759241, -47.854846),
+    new google.maps.LatLng(-15.758828, -47.855629),
+    new google.maps.LatLng(-15.759055, -47.857335),
+    new google.maps.LatLng(-15.762865, -47.861444),
+    new google.maps.LatLng(-15.752488, -47.871733),
+    new google.maps.LatLng(-15.744409, -47.879620),
+    new google.maps.LatLng(-15.735962, -47.884545),
+    new google.maps.LatLng(-15.735291, -47.885317)  
+  ];
+  var ICCPolygon = new google.maps.Polygon({
+    // Coordenadas do seu objeto
+    paths: ICCCoords
+    // Cor do da linha
+    //strokeColor: '#3300FF',
+    // Opacidade da linha
+    //strokeOpacity: 0.8,
+    // Espessura da linha
+    //strokeWeight: 2,
+    // Cor de preenchimento do objeto
+    //fillColor: '#942E7C',
+    // Opacidade do preenchimento
+    //fillOpacity: 0.35
+  });
+  var UNB_Polygon = new google.maps.Polygon({
+    paths: UNB_Coords //,
+    //strokeColor: '#3300FF',
+    //strokeOpacity: 0.8,
+    //strokeWeight: 2,
+    //fillColor: '#942E7C',
+    //filOpacity: 0.35  
+  });
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -15.763606, lng: -47.869636},
+          zoom: 17,
+  });
+  
+  var marcador = '';
+  var pertence = false;
+  google.maps.event.addListener(map, 'click', function(e) {
+    var local = e.latLng;
+    pertence =
+        google.maps.geometry.poly.containsLocation(local, UNB_Polygon) ?
+        true:
+        false;
+    
+    var mensagem = pertence ?
+        "" :
+        "Local inv&aacute;lido! Somente ocorr&ecirc;ncias dentro da UnB - Campus Darci Ribeiro";
+         
+    document.getElementById("mensagem").innerHTML = mensagem;
+    
+    
+    if (pertence){
+      if (marcador){
+        marcador.setPosition(local);
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
+      } else {          
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
+        // Inserindo o marcador
+        marcador = new google.maps.Marker({
+          position: local,
+          map: map,
+          icon: {
+            //path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'red',
+            fillOpacity: .2,
+            strokeColor: 'white',
+            strokeWeight: .5,
+            scale: 10
+          }
+        });
+      }
+    }else{
+      document.getElementById("latitude").value = '';
+      document.getElementById("longitude").value = '';
+    }
+  });
+}
+
+</script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
+</script>
+
+  <div id = "fundo">
+    <div class="container">
+    <div class="row vertical-offset-100 ">
+      <div class="col-md-7 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h6 style="font-style:none;">Criar Ocorrência</h6>
+          </div>
+        </br>
+
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade in" style="text-align: center" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          {{ message|safe }}
+        </div>
+        {% endfor %}
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <p><h3>Insira o local da ocorrência clicando no mapa abaixo:</h3></p></br>
+      	    
+            <div id="map"></div>
+                  <font color="red">
+      	    
+            <div id="mensagem"></div></font>
+                  <input type="hidden" id="latitude" name="latitude" />
+                  <input type="hidden" id="longitude" name="longitude" />
+                  <div id="exibe_coord"></div>
+            
+            <div class="form-group">
+              <h3>Tipo de Ocorrência:</h3>
+                <h2>{{ form.tb_categoria_ID }}</h2>
+            </div>
+                       
+            <div class="form-group">
+              <h3>Data da Ocorrência:</h3>
+                <h4><input id="data" name = "data"/></h4>
+            </div>
+            
+            <div class="form-group">
+              <h3>Horário da Ocorrência:</h3>
+                <h4><input id="hora" name="hora"/></h4>
+            </div>
+            
+            <div class="form-group">
+              <h3>É uma emergência?</h3>
+              <h2>{{ form.emergencia }}</h2>
+            </div>
+
+            <div class="form-group">
+              <h3>Há alguma vítima?</h3>
+              <h2>{{ form.vitimado }}</h2>
+            </div>
+
+              {{ form.atendida }}
+              {{ form.vigilante_ID }}
+              {{ form.usuario_ID }}
+              {{ form.validade }}
+            
+            <div class="form-group">
+              <h3>Imagem:</h3><h4>{{ form.foto }}</h4>
+            </div>
+
+            <div class="form-group">
+              <h3>Descrição:</h3>
+              <h5>{{form.descricao}}</h5>
+            </div>
+
+        <input class="botao btn1-sucesso " type="submit" value="Criar ocorrencia">
+        </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

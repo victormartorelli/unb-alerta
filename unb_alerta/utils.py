@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import magic
 
 from django.forms import ValidationError

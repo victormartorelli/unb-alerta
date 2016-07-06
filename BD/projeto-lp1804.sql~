@@ -8,22 +8,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema projeto-lp
+-- Schema projetolp
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `projeto-lp` ;
+DROP SCHEMA IF EXISTS `projetolp` ;
 
 -- -----------------------------------------------------
--- Schema projeto-lp
+-- Schema projetolp
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `projeto-lp` DEFAULT CHARACTER SET utf8 ;
-USE `projeto-lp` ;
+CREATE SCHEMA IF NOT EXISTS `projetolp` DEFAULT CHARACTER SET utf8 ;
+USE `projetolp` ;
 
 -- -----------------------------------------------------
--- Table `projeto-lp`.`tb_tipoUsuario`
+-- Table `projetolp`.`tb_tipoUsuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `projeto-lp`.`tb_tipoUsuario` ;
+DROP TABLE IF EXISTS `projetolp`.`tb_tipoUsuario` ;
 
-CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_tipoUsuario` (
+CREATE TABLE IF NOT EXISTS `projetolp`.`tb_tipoUsuario` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`),
@@ -32,11 +32,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `projeto-lp`.`tb_usuario`
+-- Table `projetolp`.`tb_usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `projeto-lp`.`tb_usuario` ;
+DROP TABLE IF EXISTS `projetolp`.`tb_usuario` ;
 
-CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_usuario` (
+CREATE TABLE IF NOT EXISTS `projetolp`.`tb_usuario` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CPF` VARCHAR(15) NULL,
   `nome` VARCHAR(45) NOT NULL,
@@ -55,18 +55,18 @@ CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_usuario` (
   UNIQUE INDEX `CPF_UNIQUE` (`CPF` ASC),
   CONSTRAINT `fk_tb_usuario_tb_tipoUsuario1`
     FOREIGN KEY (`tb_tipoUsuario_ID`)
-    REFERENCES `projeto-lp`.`tb_tipoUsuario` (`ID`)
+    REFERENCES `projetolp`.`tb_tipoUsuario` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `projeto-lp`.`tb_categoria`
+-- Table `projetolp`.`tb_categoria`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `projeto-lp`.`tb_categoria` ;
+DROP TABLE IF EXISTS `projetolp`.`tb_categoria` ;
 
-CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_categoria` (
+CREATE TABLE IF NOT EXISTS `projetolp`.`tb_categoria` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_categoria` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `projeto-lp`.`tb_ocorrencia`
+-- Table `projetolp`.`tb_ocorrencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `projeto-lp`.`tb_ocorrencia` ;
+DROP TABLE IF EXISTS `projetolp`.`tb_ocorrencia` ;
 
-CREATE TABLE IF NOT EXISTS `projeto-lp`.`tb_ocorrencia` (
+CREATE TABLE IF NOT EXISTS `projetolp`.`tb_ocorrencia` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `data` DATE NOT NULL,
   `hora` TIME NOT NULL,

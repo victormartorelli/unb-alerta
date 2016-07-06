@@ -38,7 +38,6 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
-    captcha = CaptchaField()
 
     class Meta:
         model = Usuario
@@ -54,8 +53,7 @@ class UsuarioForm(ModelForm):
                   'matricula',
                   'sexo',
                   'data_nasc',
-                  'grupo_usuario',
-                  'captcha']
+                  'grupo_usuario']
 
         widgets = {'status': forms.HiddenInput(),
                    'grupo_usuario': forms.HiddenInput()}
@@ -154,7 +152,6 @@ class UsuarioForm(ModelForm):
             email=usuario.email)
         u.set_password(self.cleaned_data['senha'])
         u.is_active = usuario.status
-        usuario.senha = u.password
         u.save()
 
         usuario.user = u

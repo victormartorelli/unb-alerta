@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User, Group
 from django.db import models
 
@@ -43,7 +44,7 @@ class Usuario(models.Model):
         max_length=45,
         unique=True,
         verbose_name='E-mail')
-    senha = models.CharField(max_length=45)
+    senha = models.CharField(max_length=128)
     status = models.BooleanField(default=False, verbose_name='Ativo?')
     data_nasc = models.DateField(
         blank=True,

@@ -8,16 +8,12 @@ from django import forms
 
 
 # '''
-# TODO 
+# TODO
 #     Trocar seleção de sexo por select one
 # '''
 
-class UsuarioAdminForm(forms.ModelForm):
-    senha = forms.CharField(max_length=45, widget=forms.PasswordInput)
-
 
 class UsuarioAdmin(admin.ModelAdmin):
-    form = UsuarioAdminForm
 
     fields = ['login',
               'senha',
@@ -53,7 +49,6 @@ class UsuarioAdmin(admin.ModelAdmin):
         u.is_active = obj.status
         u.set_password(obj.senha)
         u.save()
-        obj.senha = u.password
         obj.user = u
         obj.save()
 

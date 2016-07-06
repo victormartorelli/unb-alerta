@@ -141,9 +141,23 @@ class UsuarioCreate(APIView):
 
         u.set_password(request.data['senha'])
 
-        request.data['user'] = u.id
-        usuario = UsuarioSerializer(data=request.data)
+        request.GET = request.GET.copy()
+        
+        request.GET['user'] = u.id
+        request.GET['cpf'] = request.data['cpf']
+        request.GET['rg'] = request.data['rg']
+        request.GET['matricula'] = request.data['matricula']
+        request.GET['sexo'] = request.data['sexo']
+        request.GET['status'] = request.data['status']
+        request.GET['data_nasc'] = request.data['data_nasc']
+        request.GET['login'] = request.data['login']
+        request.GET['email'] = request.data['email']
+        request.GET['senha'] = request.data['senha']
+        request.GET['nome'] = request.data['nome']
+        request.GET['grupo_usuario'] = request.data['grupo_usuario']
 
+        usuario = UsuarioSerializer(data=request.GET)
+    
         if usuario.is_valid():
 
             try:
