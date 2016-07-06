@@ -21,7 +21,6 @@
 <script src="/static/js/jquery.mask.min.js"></script>
 <script src="{% static 'js/mapa.js' %}"></script>
 
-
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
 </script>
@@ -52,10 +51,14 @@
             {% csrf_token %}
 
             <div id="map"></div>
-                  <font color="red">
-
-            <div id="mensagem"></div></font>
-            <h2><div class="form-group" id="exibe_localidade"></div></h2>
+            <!--COMENTAR LINHA ABAIXO CASO NAO DESEJE EXIBIR MENSAGEM
+            DE ERRO E LOCALIZE O COMENTARIO "MENSAGEM DE ERRO" NO MAPA.JS
+            E SIGA AS INSTRUÇÕES-->
+            <font color="red"><h2 class="form-group" style="text-align:center"><div id="mensagem"></div></h2></font>
+            <!--CASO DESEJE NÃO EXIBIR A LOCALIDADE, COMENTE A LINHA ABAIXO
+            E LOCALIZE O COMENTARIO "EXIBE LOCALIDADE" NO MAPA.JS E SIGA
+            AS ORIENTAÇÕES-->
+            <h2 class="form-group" style="text-align:center"><div id="exibe_localidade"></div></h2>
             <input type="hidden" id="latitude" name="latitude" />
             <input type="hidden" id="longitude" name="longitude" />
             <input type="hidden" id="localidade" name="localidade" />
