@@ -20,6 +20,11 @@ label {
   font-size: 17px;
 	background-color: #247ba0 !important;
 }
+
+.navfilter{
+	background-color: #FFFFFF !important;
+}
+
 .navbar a{
   font-weight: bolder;
 }
