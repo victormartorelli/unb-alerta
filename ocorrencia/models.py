@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from unb_alerta.utils import restringe_tipos_de_arquivo_img
 
@@ -16,12 +17,12 @@ class Categoria(models.Model):
 
 
 class Local(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
     nome_cod = models.CharField(
         max_length=40,
-        verbose_name='Código',
-        primary_key=True)
+        verbose_name='Código')
     descricao = models.CharField(
-        max_length=50,
+        max_length=150,
         verbose_name='Local')
     pai = models.IntegerField(
         blank=True,

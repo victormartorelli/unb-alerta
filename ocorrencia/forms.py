@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import django_filters
 
@@ -45,7 +46,7 @@ class OcorrenciaForm(ModelForm):
         widget=forms.Textarea(
             attrs={'rows': 15,
                    'cols': 48,
-                   'placeholder': 'Escreva aqui a descricao da ocorrencia'}))
+                   'placeholder': 'Escreva aqui a descricao da ocorrencia, ou seja, detalhes que você pode perceber mas não tem campos no formulario para tal informação'}))
 
     class Meta:
         model = Ocorrencia

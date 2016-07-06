@@ -72,6 +72,7 @@ class OcorrenciaSerializer(serializers.ModelSerializer):
                   'repetida',
                   'resposta',
                   'usuario_ID',
+                  'vigilante_ID',
                   'tb_categoria_ID',
                   'localidade'
                   )
@@ -122,6 +123,7 @@ class OcorrenciaCreateSerializer(serializers.ModelSerializer):
                   'repetida',
                   'resposta',
                   'usuario_ID',
+                  'vigilante_ID',
                   'tb_categoria_ID',
                   'localidade'
                   )

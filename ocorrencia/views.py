@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.views.generic import (FormView, ListView, DetailView,
                                   DeleteView, UpdateView)
 from django.contrib import messages

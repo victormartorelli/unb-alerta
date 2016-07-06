@@ -23,14 +23,15 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Categoria',
-                'db_table': 'tb_categoria',
+                'db_table': 'ocorrencia_categoria',
                 'verbose_name_plural': 'Categorias',
             },
         ),
         migrations.CreateModel(
             name='Local',
             fields=[
-                ('nome_cod', models.CharField(max_length=40, primary_key=True, serialize=False, verbose_name='Código')),
+                ('id', models.AutoField(db_column='ID', primary_key=True, serialize=False)),
+                ('nome_cod', models.CharField(max_length=40, serialize=False, verbose_name='Código')),
                 ('descricao', models.CharField(max_length=50, verbose_name='Local')),
                 ('pai', models.IntegerField(blank=True, null=True)),
             ],

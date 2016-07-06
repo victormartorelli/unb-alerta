@@ -56,4 +56,8 @@ urlpatterns = [
     url(r'^usuario/confirmar/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
         ConfirmarEmailView.as_view(),
         name='confirmar_email'),
+
+    url(r'^sobre/$', TemplateView.as_view(
+        template_name='sobre.html'),
+        name='sobre'),
 ] + recuperar_email

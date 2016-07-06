@@ -65,7 +65,8 @@ Para contribuir, siga rigorosamente os passos abaixo:
     
 
 * Instale as dependências do Bower (Faça isso na raiz do projeto)::
-    (se alguém sabe o que isso quer dizer, por favor, poste aqui)
+    ./manage.py bower install
+    ./manage.py collectstatic --noinput
 
 
 * Com o dump do Banco do MySQL na pasta DB, execute:
@@ -76,6 +77,6 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
     ./manage.py runserver
 
-* Em um navegador, acesse http://127.0.0.1:8000 e verifique o carregamento da página do projeto.
+* Em um navegador, acesse localhost:8000 e verifique o carregamento da página do projeto.
 
 * Amém. 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for unb_alerta project.
 
@@ -22,10 +23,11 @@ BASE_DIR = Path(__file__).ancestor(2)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u_witu4lhf9@q!njj1n+pqaw+ad#84&t&v7%c^^z-abn6ngs4h'
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'unbalerta.unb.br', '164.41.209.169']
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -122,9 +124,9 @@ WSGI_APPLICATION = 'unb_alerta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projeto-lp',
+        'NAME': 'projetolp',
         'USER': 'root',
-        'PASSWORD': 'admin',
+        'PASSWORD': '2013Mudar13',
         'HOST': 'localhost',
         'PORT': '3306',
 
