@@ -54,7 +54,7 @@
 					<tr>
 						<td>{{o.id}}</td>
 						<td>{{o.localidade.descricao}}</td>
-						<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
+						<td><a class="btn btn-sm btn-info" href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
 						
 						{% if o.hora.minute < 10 %}
 							<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
@@ -63,7 +63,7 @@
 						{% endif %}
 
 						{% if o.foto %}
-						<td><a href="" id="abreImagem"> Clique para abrir a imagem</a>
+						<td><a class="btn btn-sm btn-info" href="" id="abreImagem"> Clique para abrir a imagem</a>
 							<div id="myModal" class="modal">
 								<span class="close">×</span>
 								<img class="modal-content" src="{{o.foto.url}}" id="imagemOcorrencia">

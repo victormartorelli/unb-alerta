@@ -11,9 +11,8 @@
 
 					<table class="table">
 						{% if vazio %}
-						</br>
 						<div class="alert alert-dismissible alert-warning">
-							<strong style="margin-left:40%">Nao há nenhuma ocorrência pendente!</strong>
+							<strong>Nao há nenhuma ocorrência pendente!</strong>
 						</div>
 						{% else %}
 							<tr>
@@ -32,7 +31,7 @@
 							<tr>
 								<td>{{o.id}}</td>
 								<td>{{o.localidade.descricao}}</td>
-								<td><a href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
+								<td><a class="btn btn-sm btn-info" href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
 								{% if o.hora.minute < 10 %}
 									<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
 								{% else %}
@@ -40,7 +39,7 @@
 								{% endif %}
 
 								{% if o.foto %}
-									<td><a href="#" id="abreImagem"> Clique para abrir a imagem</a>
+									<td><a class="btn btn-sm btn-info" href="#" id="abreImagem"> Clique para abrir a imagem</a>
 										<div id="myModal" class="modal">
 											<span class="close">×</span>
 											<img class="modal-content" src="{{MEDIA_URL}}{{o.foto.url}}" id="imagemOcorrencia">
