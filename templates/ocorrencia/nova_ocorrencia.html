@@ -48,11 +48,16 @@
 
             <h2 style="text-align:center">Insira o local da ocorrência clicando no mapa abaixo:</h2></br>
 
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h2 style="text-align:center">Insira o local da ocorrência clicando no mapa abaixo:</h2></br>
+
             <div id="map"></div>
                   <font color="red">
 
             <div id="mensagem"></div></font>
-            <h5><div style="color:#FFFFFF" id="exibe_localidade"></div></h5>
+            <h2><div class="form-group" id="exibe_localidade"></div></h2>
             <input type="hidden" id="latitude" name="latitude" />
             <input type="hidden" id="longitude" name="longitude" />
             <input type="hidden" id="localidade" name="localidade" />
