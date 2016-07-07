@@ -781,8 +781,8 @@ function getIdLocal(local){
    new google.maps.LatLng(-15.7558586,-47.8755239),
    new google.maps.LatLng(-15.7549913,-47.8760737)];
   
-  var Colina_Bloco_G = [
-  //Colina Bloco G
+  var Colina_Bloco_H = [
+  //Colina Bloco H
    new google.maps.LatLng(-15.7551643,-47.8758726),
    new google.maps.LatLng(-15.7563156,-47.8751537),
    new google.maps.LatLng(-15.7561426,-47.8748479),
@@ -2313,8 +2313,8 @@ function getIdLocal(local){
       82: new google.maps.Polygon({paths: Colina_Bloco_F }),
   //Colina Bloco G
       83: new google.maps.Polygon({paths: Colina_Bloco_G }),
-  //Colina Bloco G
-      84: new google.maps.Polygon({paths: Colina_Bloco_G }),
+  //Colina Bloco H
+      84: new google.maps.Polygon({paths: Colina_Bloco_H }),
   //Colina Bloco I
       85: new google.maps.Polygon({paths: Colina_Bloco_I }),
   //Colina Bloco J
@@ -2553,7 +2553,7 @@ function getIdLocal(local){
       202: new google.maps.Polygon({paths: ESTACIONAMENTO_CO }),
   //Quadras
       203: new google.maps.Polygon({paths: QUADRAS_15 }),
-  //SUB_AREA_FEF_CO_2
+  //Sub-área CEU
       204: new google.maps.Polygon({paths: SUB_AREA_FEF_CO_2 }),
   //Casa do Estudante
       205: new google.maps.Polygon({paths: CEU_1 }),
@@ -2563,7 +2563,7 @@ function getIdLocal(local){
       207: new google.maps.Polygon({paths: CENTRO_OLIMPICO }),
   //Várias quadras
       208: new google.maps.Polygon({paths: QUADRA_14 }),
-  //SUB_AREA_FEF_CO_3
+  //Sub-área FEF CO - Quadras
       209: new google.maps.Polygon({paths: SUB_AREA_FEF_CO_3 }),
   //Quadra
       210: new google.maps.Polygon({paths: QUADRA_16 }),
@@ -2575,7 +2575,7 @@ function getIdLocal(local){
       213: new google.maps.Polygon({paths: QUADRA_19 }),
   //Quadra
       214: new google.maps.Polygon({paths: QUADRA_20 }),
-  //SUB_AREA_FEF_CO_4
+  //Sub-área FEF CO - Quadras
       215: new google.maps.Polygon({paths: SUB_AREA_FEF_CO_4 }),
   //Quadra
       216: new google.maps.Polygon({paths: QUADRA_9 }),
@@ -2587,7 +2587,7 @@ function getIdLocal(local){
       219: new google.maps.Polygon({paths: QUADRA_12 }),
   //Quadra
       220: new google.maps.Polygon({paths: QUADRA_13 }),
-  //SUB_AREA_FEF_CO_5
+  //Sub-área FEF CO - Quadras
       221: new google.maps.Polygon({paths: SUB_AREA_FEF_CO_5 }),
   //Quadra
       222: new google.maps.Polygon({paths: QUADRA_5 }),
@@ -2597,7 +2597,7 @@ function getIdLocal(local){
       224: new google.maps.Polygon({paths: QUADRA_7 }),
   //Quadra
       225: new google.maps.Polygon({paths: QUADRA_8 }),
-  //SUB_AREA_FEF_CO_6
+  //Sub-área FEF CO - Quadras
       226: new google.maps.Polygon({paths: SUB_AREA_FEF_CO_6 }),
   //Quadra
       227: new google.maps.Polygon({paths: QUADRA_1 }),
@@ -2728,78 +2728,98 @@ function getIdLocal(local){
       true:
       false){
       idLocal = 19;
+      nomeLocal = "Área BCE, Reitoria e adjacências";
+
       //SubAreaBCE
       if (google.maps.geometry.poly.containsLocation(local, poligonos[20]) ?
         true:
         false){
         idLocal = 20;
+        nomeLocal = "Sub-área BCE";
+
         //BCE
         if (google.maps.geometry.poly.containsLocation(local, poligonos[21]) ?
           true:
           false){
           idLocal = 21;
+          nomeLocal = "Biblioteca Central Estudantil - UnB";
+
         //Estac_BCE
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[22]) ?
           true:
           false){
           idLocal = 22;
+          nomeLocal = "Estacionamento BCE - UnB";
+
         //Estac_BCE_Serv
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[23]) ?
           true:
           false){
           idLocal = 23;
+          nomeLocal = "Estacionamento para Servidores BCE";
+
         //P_Onibus_BCE
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[24]) ?
           true:
           false){
           idLocal = 24;
+          nomeLocal = "Parada de Ônibus BCE";
         }
       //SubAreaReitoria
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[25]) ?
         true:
         false){
         idLocal = 25;
+        nomeLocal = "Sub-área Reitoria";
         //Estac_BCE_Reitoria
         if (google.maps.geometry.poly.containsLocation(local, poligonos[26]) ?
           true:
           false){
           idLocal = 26;
+          nomeLocal = "Estacionamento BCE e Reitoria - UnB";
         //Reitoria_UnB
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[27]) ?
           true:
           false){
           idLocal = 27;
+          nomeLocal = "Reitoria da Universidade de Brasília";
         //Estac_Reitoria
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[28]) ?
           true:
           false){
           idLocal = 28;
+          nomeLocal = "Estacionamento Reitoria - UnB";
         //P_Onibus_Reitoria
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[29]) ?
           true:
           false){
           idLocal = 29;
+          nomeLocal = "Paradas de Ônibus Reitoria";
         //Memorial_Darcy_Ribeiro
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[30]) ?
           true:
           false){
           idLocal = 30;
+          nomeLocal = "Memorial Darcy Ribeiro - UnB";
         }
       //SubArea_Circulacao_ICC_BCE_Reitoria
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[31]) ?
         true:
         false){
         idLocal = 31;
+        nomeLocal = "Trajeto de Pedestres e Ciclistas ICC, BCE e Reitoria";
         //TeatroArena_Honestino_Gimaraes
         if (google.maps.geometry.poly.containsLocation(local, poligonos[32]) ?
           true:
           false){
           idLocal = 32;
+          nomeLocal = "Teatro Arena Honestino Guimarães";
         //Trajetos_Centrais_BCE_Reitoria
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[33]) ?
           true:
           false){
           idLocal = 33;
+          nomeLocal = "Trajetos Centrais BCE Reitoria";
         }
       }
     //Area_PAT_PJC_IPol_CIC
@@ -2807,145 +2827,173 @@ function getIdLocal(local){
       true:
       false){
       idLocal = 34;
+      nomeLocal = "Área PAT, PJC, IPol/IRel/CIC/Est";
       //SubArea_PAT
       if (google.maps.geometry.poly.containsLocation(local, poligonos[35]) ?
         true:
         false){
         idLocal = 35;
+        nomeLocal = "Sub-Área PAT";
         //PAT_UnB
         if (google.maps.geometry.poly.containsLocation(local, poligonos[36]) ?
           true:
           false){
           idLocal = 36;
+          nomeLocal = "Pavilhão Anísio Teixeira - UnB";
         //Estac_PAT_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[37]) ?
           true:
           false){
           idLocal = 37;
+          nomeLocal = "Estacionamento Norte do PAT";
         //Estac_PAT_Oeste
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[38]) ?
           true:
           false){
           idLocal = 38;
+          nomeLocal = "Estacionamento Oeste PAT";
         //Masc_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[39]) ?
           true:
           false){
           idLocal = 39;
+          nomeLocal = "Módulo de Atividades de Serviço e Comércio Norte - UnB";
         //Acesso_PAT_PJC_Sul
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[40]) ?
           true:
           false){
           idLocal = 40;
+          nomeLocal = "Acesso PAT Sul";
         //P_Onibus_PAT_PJC
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[41]) ?
           true:
           false){
           idLocal = 41;
+          nomeLocal = "Parada de Onibus PAT/PJC";
         }
       //SubArea_PJC
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[42]) ?
         true:
         false){
         idLocal = 42;
+        nomeLocal = "Sub-Área PJC";
         //PJC_UnB
         if (google.maps.geometry.poly.containsLocation(local, poligonos[43]) ?
           true:
           false){
           idLocal = 43;
+          nomeLocal = "Pavilhão João Calmon - UnB";
         //Estac_PJC_Sul
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[44]) ?
           true:
           false){
           idLocal = 44;
+          nomeLocal = "Estacionamento Sul do Pavilhão João Calmon";
         //Estac_PAT_PJC
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[45]) ?
           true:
           false){
           idLocal = 45;
+          nomeLocal = "Estacionamento PAT PJC";
         //Estac_PJC_PAT_Norte
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[46]) ?
           true:
           false){
           idLocal = 46;
+          nomeLocal = "Estacionamento Norte PJC e PAT - UnB";
         //Estac_PJC_IPol_IRel
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[47]) ?
           true:
           false){
           idLocal = 47;
+          nomeLocal = "Estacionamento PJC, IPol e IRel";
         //Frente_PJC
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[48]) ?
           true:
           false){
           idLocal = 48;
+          nomeLocal = "Gramado em frente ao PJC";
         }
       //SubArea_IPol_IRel_CIC_Est
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[49]) ?
         true:
         false){
         idLocal = 49;
+        nomeLocal = "Sub-Área IPol/IRel/CIC/Est";
         //IPol_IRel_UnB
         if (google.maps.geometry.poly.containsLocation(local, poligonos[50]) ?
           true:
           false){
           idLocal = 50;
+          nomeLocal = "Institutos de Ciência Política e Relações Internacionais - UnB";
         //CIC_Est_UnB
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[51]) ?
           true:
           false){
           idLocal = 51;
+          nomeLocal = "Prédio de Ciência da Computação e Estatística  - UnB";
         //Estac_Acesso_CIC_Est
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[52]) ?
           true:
           false){
           idLocal = 52;
+          nomeLocal = "Estacionamento e acesso ao CIC/Est";
         }
       //SubArea_Centro_Comunitario
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[53]) ?
         true:
         false){
         idLocal = 53;
+        nomeLocal = "Área do Centro Comunitário";
         //AthosBulcao
         if (google.maps.geometry.poly.containsLocation(local, poligonos[54]) ?
           true:
           false){
           idLocal = 54;
+          nomeLocal = "Centro Comunitário Athos Bulcão - UnB";
         //Estac_Centro_Comunitario
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[55]) ?
           true:
           false){
           idLocal = 55;
+          nomeLocal = "Estacionamento Centro Comunitário Athos Bulcão";
         }
       //SubArea_BAES_Almox
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[56]) ?
         true:
         false){
         idLocal = 56;
+        nomeLocal = "Sub-área BAES e Almoxarifado";
         //Almoxarifado
         if (google.maps.geometry.poly.containsLocation(local, poligonos[57]) ?
           true:
           false){
           idLocal = 57;
+          nomeLocal = "Almoxarifado";
         //Garagem_Oficina
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[58]) ?
           true:
           false){
           idLocal = 58;
+          nomeLocal = "Garagem e Oficina Mecânica";
         //BAES
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[59]) ?
           true:
           false){
           idLocal = 59;
+          nomeLocal = "Bloco de Salas de Aula Eudoro de Souza";
         //BSAN
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[60]) ?
           true:
           false){
           idLocal = 60;
+          nomeLocal = "Bloco de Salas de Aula Norte";
         //Estac_BAES_BSAN
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[61]) ?
           true:
           false){
           idLocal = 61;
+          nomeLocal = "Estacionamento BAES e BSAN";
         }
       }
     //Area_PRC_Colina_FACE
@@ -2953,129 +3001,154 @@ function getIdLocal(local){
       true:
       false){
       idLocal = 62;
+      nomeLocal = "Área PRC Colina FACE";
       //SubArea_FACE
       if (google.maps.geometry.poly.containsLocation(local, poligonos[63]) ?
         true:
         false){
         idLocal = 63;
+        nomeLocal = "Sub-área FACE ICS";
         //FACE
         if (google.maps.geometry.poly.containsLocation(local, poligonos[64]) ?
           true:
           false){
           idLocal = 64;
+          nomeLocal = "Faculdade de Economia e Administração";
         //FA
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[65]) ?
           true:
           false){
           idLocal = 65;
+          nomeLocal = "Faculdade de Direito";
         //Estac_FACE
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[66]) ?
           true:
           false){
           idLocal = 66;
+          nomeLocal = "Estacionamento Face";
         //Estac_FA
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[67]) ?
           true:
           false){
           idLocal = 67;
+          nomeLocal = "Estacionamento FA";
         //Circulacao_Pedestres_FA
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[68]) ?
           true:
           false){
           idLocal = 68;
+          nomeLocal = "Circulação de pedestres FA";
         //ICS
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[69]) ?
           true:
           false){
           idLocal = 69;
+          nomeLocal = "Instituto de Ciências Sociais";
         }
       //SubArea_PRC
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[70]) ?
         true:
         false){
         idLocal = 70;
+        nomeLocal = "Sub-Área PRC/Colina";
         //PostoPetrobras
         if (google.maps.geometry.poly.containsLocation(local, poligonos[71]) ?
           true:
           false){
           idLocal = 71;
+          nomeLocal = "Posto Petrobrás";
         //P_Onibus_Posto
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[72]) ?
           true:
           false){
           idLocal = 72;
+          nomeLocal = "Parada de Ônibus Posto";
         //PRC
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[73]) ?
           true:
           false){
           idLocal = 73;
+          nomeLocal = "Prefeitura do Campus";
         //ASFUB
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[74]) ?
           true:
           false){
           idLocal = 74;
+          nomeLocal = "ASFUB";
         }
       //SubArea_Colina_Blocos_ABCDE
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[75]) ?
         true:
         false){
         idLocal = 75;
+        nomeLocal = "UnB Colina Blocos A, B, C, D e E";
         //Colina_Bloco_A
         if (google.maps.geometry.poly.containsLocation(local, poligonos[76]) ?
           true:
           false){
           idLocal = 76;
+          nomeLocal = "Colina Bloco A";
         //Colina_Bloco_B
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[77]) ?
           true:
           false){
           idLocal = 77;
+          nomeLocal = "Colina Bloco B";
         //Colina_Bloco_C
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[78]) ?
           true:
           false){
           idLocal = 78;
+          nomeLocal = "Colina Bloco C";
         //Colina_Bloco_D
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[79]) ?
           true:
           false){
           idLocal = 79;
+          nomeLocal = "Colina Bloco D";
         //Colina_Bloco_E
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[80]) ?
           true:
           false){
           idLocal = 80;
+          nomeLocal = "Colina Bloco E";
         }
       //SubArea_Colina_Blocos_FGHIJ
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[81]) ?
         true:
         false){
         idLocal = 81;
+        nomeLocal = "Colina Blocos F, G, H, I e J";
         //Colina_Bloco_F
         if (google.maps.geometry.poly.containsLocation(local, poligonos[82]) ?
           true:
           false){
           idLocal = 82;
+          nomeLocal = "Colina Bloco F";
         //Colina_Bloco_G
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[83]) ?
           true:
           false){
           idLocal = 83;
-        //Colina_Bloco_G
+          nomeLocal = "Colina Bloco G";
+        //Colina_Bloco_H
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[84]) ?
           true:
           false){
           idLocal = 84;
+          nomeLocal = "Colina Bloco H";
         //Colina_Bloco_I
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[85]) ?
           true:
           false){
           idLocal = 85;
+          nomeLocal = "Colina Bloco I";
         //Colina_Bloco_J
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[86]) ?
           true:
           false){
           idLocal = 86;
+          nomeLocal = "Colina Bloco J";
         }
       }
     //Area_SGs_Artes_FT
@@ -3083,155 +3156,185 @@ function getIdLocal(local){
       true:
       false){
       idLocal = 87;
+      nomeLocal = "Área dos SGs e Prédios das Artes";
       //SubArea_FT
       if (google.maps.geometry.poly.containsLocation(local, poligonos[88]) ?
         true:
         false){
         idLocal = 88;
+        nomeLocal = "Sub Área de SGs_e_Artes_e_Ft, que contempla toda a área da Faculdade de Tecnologia";
         //FT
         if (google.maps.geometry.poly.containsLocation(local, poligonos[89]) ?
           true:
           false){
           idLocal = 89;
+          nomeLocal = "FT - Faculdade de Tecnologia(prédio)";
         //Est_menor_FT
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[90]) ?
           true:
           false){
           idLocal = 90;
+          nomeLocal = "Estacionamento Secundário da FT";
         //Est_maior_FT
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[91]) ?
           true:
           false){
           idLocal = 91;
+          nomeLocal = "Estacionamento Principal da FT";
         //Lab_de_Hidraulica_e_Estrut
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[92]) ?
           true:
           false){
           idLocal = 92;
+          nomeLocal = "Laboratório de Hidráulica e Estruturas";
         //UnB_Lab_de_Energia
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[93]) ?
           true:
           false){
           idLocal = 93;
+          nomeLocal = "Laboratório de Energia";
         //Passagem_Pedestres_FT
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[94]) ?
           true:
           false){
           idLocal = 94;
+          nomeLocal = "Passagem dos Pedestres da FT";          
         }
       //SubArea_Musica
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[95]) ?
         true:
         false){
         idLocal = 95;
+        nomeLocal = "Sub Área SGs da música";
         //SG_2
         if (google.maps.geometry.poly.containsLocation(local, poligonos[96]) ?
           true:
           false){
           idLocal = 96;
+          nomeLocal = "SG 2";
         //Aud_de_Mus
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[97]) ?
           true:
           false){
           idLocal = 97;
+          nomeLocal = "Auditório de Música";
         //Est_SG2/8
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[98]) ?
           true:
           false){
           idLocal = 98;
+          nomeLocal = "Estacionamento do SG 2 e SG 8";
         //SG_8
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[99]) ?
           true:
           false){
           idLocal = 99;
+          nomeLocal = "SG 8";
         //SG_10
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[100]) ?
           true:
           false){
           idLocal = 100;
+          nomeLocal = "SG 10";
         //Est_SG10
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[101]) ?
           true:
           false){
           idLocal = 101;
+          nomeLocal = "Estacionamento do SG 10";
         }
       //SubArea_Artes
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[102]) ?
         true:
         false){
         idLocal = 102;
+        nomeLocal = "Sub Área dos prédios da Artes";
         //Inst_de_Artes
         if (google.maps.geometry.poly.containsLocation(local, poligonos[103]) ?
           true:
           false){
           idLocal = 103;
+          nomeLocal = "Instituto de Artes";
         //Concha_Praca
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[104]) ?
           true:
           false){
           idLocal = 104;
+          nomeLocal = "Área da Concha Acústica e Praça da Música";
         //Dep_de_Artes_Cen
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[105]) ?
           true:
           false){
           idLocal = 105;
+          nomeLocal = "Departamento de Artes Cênicas";
         }
       //SubArea_Engenharias
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[106]) ?
         true:
         false){
         idLocal = 106;
+        nomeLocal = "Sub Área SGs das Engenharias.";
         //Est_SG12
         if (google.maps.geometry.poly.containsLocation(local, poligonos[107]) ?
           true:
           false){
           idLocal = 107;
+          nomeLocal = "Estacionamento do SG 12";
         //SG_11
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[108]) ?
           true:
           false){
           idLocal = 108;
+          nomeLocal = "SG 11";
         //Est_SG9
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[109]) ?
           true:
           false){
           idLocal = 109;
+          nomeLocal = "Estacionamento do SG 9";
         //SG_12
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[110]) ?
           true:
           false){
           idLocal = 110;
+          nomeLocal = "SG 12";
         //Est_SG11
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[111]) ?
           true:
           false){
           idLocal = 111;
+          nomeLocal = "Estacionamento do SG 11";
         //SG_9
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[112]) ?
           true:
           false){
           idLocal = 112;
+          nomeLocal = "SG 9";
         }
       //SubArea_Complementares
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[113]) ?
         true:
         false){
         idLocal = 113;
+        nomeLocal = "Sub Área Observatório Sismológico, APOSFUB, Associação dos Ex-Alunos da UnB e Retaurante";
         //Obs_Sism
         if (google.maps.geometry.poly.containsLocation(local, poligonos[114]) ?
           true:
           false){
           idLocal = 114;
+          nomeLocal = "Observatório Sismológico";
         //APOSFUB/EX_UNB
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[115]) ?
           true:
           false){
           idLocal = 115;
+          nomeLocal = "Associação dos Aposentados da FUB/Associação dos Ex-Alunos";
         //Rest_ADUnB
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[116]) ?
           true:
           false){
           idLocal = 116;
+          nomeLocal = "Restaurante da ADUnB";
         }
       }
     //Area Educacao
@@ -3850,7 +3953,8 @@ function initMap() {
     var local = e.latLng;
     idLocal = getIdLocal(local);
     
-    document.getElementById("localidade").value = idLocal; 
+    document.getElementById("localidade").value = idLocal;
+    //EXIBE LOCALIDADE: COMENTAR A LINHA ABAIXO CASO NÃO DESEJE EXIBIR 
     document.getElementById("exibe_localidade").innerHTML = nomeLocal;
       
     if (idLocal){
@@ -3869,14 +3973,14 @@ function initMap() {
         marcador = new google.maps.Marker({
           position: local,
           map: map,
-          icon: {
-            //path: google.maps.SymbolPath.CIRCLE,
+          /*icon: {
+            path: google.maps.SymbolPath.CIRCLE,
             fillColor: 'red',
             fillOpacity: .2,
             strokeColor: 'white',
             strokeWeight: .5,
             scale: 10
-          }
+          }*/
         });
       }
     }else{
@@ -3884,6 +3988,7 @@ function initMap() {
       document.getElementById("longitude").value = '';
       mensagem = "Local inválido! Somente ocorrências dentro da UnB - Campus Darcy Ribeiro";
     }
+    //MENSAGEM DE ERRO: COMENTAR LINHA ABAIXO CASO NAO DESEJE EXIBIR
     document.getElementById("mensagem").innerHTML = mensagem;
   });
 }
