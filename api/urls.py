@@ -56,10 +56,13 @@ urlpatterns = [
     # Acesso  a lista de usuários e seus detalhes
     url(r'^usuario$',
         UsuarioList.as_view(), name="Usuario List"),
+
     url(r'^usuario/create/$',
         UsuarioCreate.as_view(), name="Create Usuario"),
-    url(r'^usuario/(?P<pk>\d+)/$',
+
+    url(r'^usuario/(?P<login>.*)/$',
         UsuarioDetail.as_view(), name="UsuarioDetail"),
+
     url(r'^usuario/(?P<pk>\d+)/edit/$',
         UsuarioEdit.as_view(), name="Usuario Update"),
     url(r'^usuario/(?P<pk>\d+)/delete/$',

@@ -9,3 +9,4 @@ venv
 collected_static
 media
 bower
+unb_alerta/settings.py

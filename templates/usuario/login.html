@@ -1,28 +1,23 @@
 {% extends "base.html"%}
 {% block content %}
-<div id = "fundo">
-  <div class="container">
-    <div class="row vertical-offset-100">
-      <div class="col-md-4 col-md-offset-4">
-        <div style="display:table" class="panel panel-primary">
-          <div style="text-align:center; height:70px;display: table-row;" class="panel-heading">
-            <h1 class="panel-title" style="display:table-cell; vertical-align: middle; width: 100%;"><strong>LOGIN</strong></h1>
-          </div>
-             <div class="panel-body">
+<center>
+<div class="inicial">
+<br><h1>Login</h1>
+  <div class="block">
               <fieldset>
 
             <form id="login-form" method="post" action="">
                 {% csrf_token %}
                   <div class="form-group">
-                    Usuário</br>
+                    <center><p style="font-size:18px; margin-bottom:1px;">Usuário</p></center>
                     {{ form.username }}
                   </div>
                   <div class="form-group">
-                    Senha</br>
+                    <center><p style="font-size:18px; margin-bottom:1px;">Senha</p></center>
                     {{ form.password }}
                   </div>
                   {% if form.errors %}
-                    <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos. Tente novamente.</font></p>
+                    <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos.<br>Tente novamente.</font></p>
                   {% endif %}
 
                   {% if next %}
@@ -35,16 +30,15 @@
                   {% endif %}
 
                   <input type="hidden" name="next" value="{{ next }}" />
+				  <br>
                   <div class = "senha">
-                    <a href="{% url 'recuperar_senha' %}">Esqueceu a senha? </a>
+                    <a href="{% url 'recuperar_senha' %}" style="font-size:16px">Esqueceu a senha?</a>
                   </div>
-                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%">
+                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:5px;">
               </form>
             </fieldset>
-          </div>
         </div>
-      </div>
-    </div>
+	</div>
   </div>
-</div>
+  </center>
 {% endblock %}
