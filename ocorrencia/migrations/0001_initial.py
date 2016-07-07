@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Local',
             fields=[
-                ('id', models.AutoField(db_column='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(db_column='id', primary_key=True, serialize=False)),
                 ('nome_cod', models.CharField(max_length=40, verbose_name='Código')),
                 ('descricao', models.CharField(max_length=150, verbose_name='Local')),
                 ('pai', models.IntegerField(blank=True, null=True)),

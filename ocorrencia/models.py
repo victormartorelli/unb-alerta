@@ -18,7 +18,7 @@ class Categoria(models.Model):
 
 
 class Local(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
+    id = models.AutoField(db_column='id', primary_key=True)
     nome_cod = models.CharField(
         max_length=40,
         verbose_name='Código')
