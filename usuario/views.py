@@ -2,15 +2,21 @@ from django.views.generic import FormView, DetailView, TemplateView
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin)
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django_filters.views import FilterView
 from django.shortcuts import redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
 from usuario.models import Usuario, PlacaCarro
-from .forms import UsuarioForm
+
+from unb_alerta.utils import make_pagination
+
+from .forms import UsuarioForm, PlacaFiltro
 
 
 class CriarUsuarioView(FormView):
@@ -91,4 +97,50 @@ class ConfirmarEmailView(TemplateView):
         usuario.save()
         user.save()
         context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+
+class PlacaFiltroView(PermissionRequiredMixin, FilterView):
+    model = PlacaCarro
+    filterset_class = PlacaFiltro
+    paginate_by = 10
+    permission_required = {'ocorrencia.change_ocorrencia'}
+
+    def get_context_data(self, **kwargs):
+        context = super(PlacaFiltroView,
+                        self).get_context_data(**kwargs)
+
+        paginator = context['paginator']
+        page_obj = context['page_obj']
+
+        context['page_range'] = make_pagination(
+            page_obj.number, paginator.num_pages)
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        super(PlacaFiltroView, self).get(request)
+
+        # Se a pesquisa estiver quebrando com a paginação
+        # Olhe esta função abaixo
+        # Provavelmente você criou um novo campo no Form/FilterSet
+        # Então a ordem da URL está diferente
+        data = self.filterset.data
+        if (data and data.get('numero') is not None):
+            url = "&" + str(self.request.environ['QUERY_STRING'])
+            if url.startswith("&page"):
+                ponto_comeco = url.find('numero=') - 1
+                url = url[ponto_comeco:]
+        else:
+            url = ''
+
+
+        queryset = self.object_list.distinct()
+
+        context = self.get_context_data(filter=self.filterset,
+                                        object_list=queryset,
+                                        filter_url=url,
+                                        numero_res=len(queryset)
+                                        )
+
         return self.render_to_response(context)

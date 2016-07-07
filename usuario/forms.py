@@ -1,4 +1,8 @@
 import datetime
+import django_filters
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Fieldset, Layout
 
 from captcha.fields import CaptchaField
 from django import forms
@@ -8,8 +12,9 @@ from django.db import transaction
 from django.forms import ModelForm, ValidationError
 from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
                                        SetPasswordForm)
-from .models import Usuario
+from .models import Usuario, PlacaCarro
 
+from unb_alerta.utils import to_row, form_actions
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -200,3 +205,25 @@ class RecuperarSenhaEmailForm(PasswordResetForm):
 class RecuperacaoMudarSenhaForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(RecuperacaoMudarSenhaForm, self).__init__(*args, **kwargs)
+
+
+class PlacaFiltro(django_filters.FilterSet):
+    numero = django_filters.CharFilter(
+        lookup_expr='icontains')
+
+    class Meta:
+        model = PlacaCarro
+        fields = ['numero']
+    
+    def __init__(self, *args, **kwargs):
+        super(PlacaFiltro, self).__init__(*args, **kwargs)
+
+        row1 = to_row(
+            [('numero', 12)])
+
+        self.form.helper = FormHelper()
+        self.form.helper.form_method = 'GET'
+        self.form.helper.layout = Layout(
+            Fieldset('Procurar Usuário por Placa'),
+            row1,
+            form_actions(save_label='Filtrar'))

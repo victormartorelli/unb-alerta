@@ -64,5 +64,12 @@ class Usuario(models.Model):
 
 
 class PlacaCarro(models.Model):
-    numero = models.CharField(max_length=8)
-    usuario = models.ForeignKey(Usuario)
+    numero = models.CharField(max_length=8, verbose_name='Ńúmero da Placa')
+    usuario = models.OneToOneField(Usuario)
+
+    class Meta:
+        verbose_name = 'Placa'
+        verbose_name_plural = 'Placas'
+
+    def __str__(self):
+        return self.numero

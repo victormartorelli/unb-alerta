@@ -9,7 +9,8 @@ from unb_alerta.settings import DEFAULT_FROM_EMAIL
 from usuario.forms import (LoginForm, RecuperarSenhaEmailForm,
                            RecuperacaoMudarSenhaForm)
 
-from .views import CriarUsuarioView, PerfilView, ConfirmarEmailView
+from .views import (CriarUsuarioView, PerfilView, ConfirmarEmailView,
+                    PlacaFiltroView)
 
 recuperar_email = [
     url(r'^recuperar/recuperar_senha/$',
@@ -56,6 +57,10 @@ urlpatterns = [
     url(r'^usuario/confirmar/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$',
         ConfirmarEmailView.as_view(),
         name='confirmar_email'),
+
+    url(r'^pesquisar-placas/$', PlacaFiltroView.as_view(
+        template_name='usuario/placacarro_filter.html'),
+        name='pesquisar_placas'),
 
     url(r'^sobre/$', TemplateView.as_view(
         template_name='sobre.html'),
