@@ -190,9 +190,9 @@ class UsuarioDetail(APIView):
     """
     # Função que retorna um objeto Usuário
 
-    def get_object(self, pk):
+    def get_object(self, login):
         try:
-            return Usuario.objects.get(pk=pk)
+            return Usuario.objects.get(login=login)
         except Usuario.DoesNotExist:
             raise Http404
     # PERMISSÕES
@@ -209,9 +209,8 @@ class UsuarioDetail(APIView):
     # FIM DAS PERMISSÕES
 
     # Função que retorna os detalhes sobre um usuário específico
-    def get(self, request, pk, format=None):
-
-        usuario = self.get_object(pk)
+    def get(self, request, login, format=None):
+        usuario = self.get_object(login)
         serializer = UsuarioSerializer(usuario)
 
         x = self.has_permission(request, UsuarioDetail)
@@ -221,6 +220,10 @@ class UsuarioDetail(APIView):
         if (x and y and z):
             return Response(serializer.data)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+        def __init__(self):
+            print("inits")
+
 
 # Edição de um usuário
 # Permissão: liberado para o próprio usuário e admin
