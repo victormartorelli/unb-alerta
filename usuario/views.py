@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
-from usuario.models import Usuario
+from usuario.models import Usuario, PlacaCarro
 from .forms import UsuarioForm
 
 
@@ -43,6 +43,13 @@ class CriarUsuarioView(FormView):
                         settings.EMAIL_HOST_USER]
         send_mail(assunto, mensagem, remetente, destinatario,
                   fail_silently=False)
+
+        if form.data['placa']:
+            usuario = Usuario.objects.get(user_id=user.id)
+            placa = PlacaCarro(numero=form.data['placa'],
+                               usuario=usuario)
+            placa.save()
+
         return redirect(reverse('solicita_confirmacao'))
 
     def get_initial(self):

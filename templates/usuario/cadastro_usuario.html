@@ -54,11 +54,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="sexo">Genero:</label>
-                  </br>
-                  <input type="radio" name="sexo" id="sexo" value="M"> <label for="sexo">Masculino</label>
-                  </br>
-                  <input type="radio" name="sexo" id="sexo" value="F"> <label for="sexo">Feminino</label>
+                  {{ form.sexo|as_crispy_field }}
                 </div>
 
                 <div class="form-group">
@@ -71,6 +67,10 @@
 
                 <div class="form-group">
                  {{ form.rg|as_crispy_field }}
+                </div>
+
+                <div class="form-group">
+                 {{ form.placa|as_crispy_field }}
                 </div>
 
                 {{ form.grupo_usuario }}

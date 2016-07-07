@@ -91,7 +91,7 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
             return {'validade': False,
                     'atendida': False,
                     'vigilante_ID': 1,
-                    'usuario_ID': 0,
+                    'usuario_ID': 1,
                     'repetida': False}
 
     def post(self, request, *args, **kwargs):
@@ -152,7 +152,8 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
-                    'localidade': o.localidade}
+                    'localidade': o.localidade,
+                    'informacoes_segurancas': o.informacoes_segurancas}
         else:
             return {'vigilante_ID': 1,
                     'emergencia': o.emergencia,
@@ -162,7 +163,8 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
-                    'localidade': o.localidade}
+                    'localidade': o.localidade,
+                    'informacoes_segurancas': o.informacoes_segurancas}
 
     def form_valid(self, form):
         ocorrencia = form.instance
@@ -245,7 +247,7 @@ class MinhasOcorrenciasView(LoginRequiredMixin, ListView):
             ocorrencia = Ocorrencia.objects.filter(
                 usuario_ID=id_usuario).order_by('-id')
         else:
-            ocorrencia = Ocorrencia.objects.filter(usuario_ID=0)
+            ocorrencia = Ocorrencia.objects.filter(usuario_ID=1)
 
         return ocorrencia
 

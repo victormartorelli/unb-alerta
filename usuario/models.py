@@ -52,7 +52,8 @@ class Usuario(models.Model):
         verbose_name='Data de Nascimento')
     grupo_usuario = models.ForeignKey(
         Group,
-        verbose_name='Tipo de Usuário')
+        verbose_name='Tipo de Usuário',
+        default=1)
 
     class Meta:
         verbose_name = 'Usuário'
@@ -60,3 +61,8 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.login
+
+
+class PlacaCarro(models.Model):
+    numero = models.CharField(max_length=8)
+    usuario = models.ForeignKey(Usuario)

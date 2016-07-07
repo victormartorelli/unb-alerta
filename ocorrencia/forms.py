@@ -49,6 +49,12 @@ class OcorrenciaForm(ModelForm):
                    'placeholder': 'Escreva aqui a descricao da ocorrencia, ou seja, detalhes que você pode perceber mas não tem campos no formulario para tal informação'}),
         required=False)
 
+    informacoes_segurancas = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 15,
+                   'cols': 48,}),
+        required=False)
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
@@ -151,7 +157,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'resposta',
                   'repetida',
                   'foto',
-                  'descricao']
+                  'descricao',
+                  'informacoes_segurancas']
 
         widgets = {'id': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
@@ -161,7 +168,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
                    'descricao': forms.HiddenInput(),
-                   'localidade': forms.HiddenInput()}
+                   'localidade': forms.HiddenInput(),
+                   'informacoes_segurancas': forms.HiddenInput()}
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):

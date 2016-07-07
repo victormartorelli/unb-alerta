@@ -7,6 +7,7 @@ function refreshMask () {
   $('.cep').mask("00000-000", {placeholder:"_____-___"});
   $('.rg').mask("0.000.000", {placeholder:"_.___.___"});
   $(".hora").mask("00:00", {placeholder: "__:__"});
+  $('.placa').mask("AAA-0000", {placeholder: "___-____"});
 }
 
 $(document).ready(function (){

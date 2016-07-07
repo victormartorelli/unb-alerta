@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from unb_alerta.utils import restringe_tipos_de_arquivo_img
+from usuario.models import Usuario
 
 
 class Categoria(models.Model):
@@ -52,6 +53,7 @@ class Ocorrencia(models.Model):
     informacoes_segurancas = models.TextField(
         blank=True,
         null=True,
+        max_length=1000,
         verbose_name='Informações dos Seguranças')
     foto = models.ImageField(
         max_length=45,
@@ -64,9 +66,11 @@ class Ocorrencia(models.Model):
     emergencia = models.BooleanField(verbose_name='Emergência')
     vitimado = models.BooleanField()
     repetida = models.BooleanField()
-    resposta = models.CharField(max_length=500, blank=True, null=True)
-    usuario_ID = models.IntegerField()
-    vigilante_ID = models.IntegerField()
+    resposta = models.TextField(max_length=1000, blank=True, null=True)
+    usuario_ID = models.ForeignKey(Usuario,
+                                   related_name='usuario_usuario')
+    vigilante_ID = models.ForeignKey(Usuario,
+                                     related_name='usuario_vigilante')
     tb_categoria_ID = models.ForeignKey(
         Categoria,
         verbose_name='Categoria')

@@ -38,6 +38,15 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
+    placa = forms.CharField(
+        max_length=8,
+        label='Placa do Carro (Opcional)')
+
+    sexo = forms.ChoiceField(
+        label='Gênero',
+        choices=[('', '--------'), ('M', 'Masculino'), ('F', 'Feminino')],
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
 
     class Meta:
         model = Usuario
@@ -167,6 +176,7 @@ class UsuarioForm(ModelForm):
         super(UsuarioForm, self).__init__(*args, **kwargs)
         self.fields['cpf'].widget.attrs['class'] = 'cpf'
         self.fields['data_nasc'].widget.attrs['class'] = 'data'
+        self.fields['placa'].widget.attrs['class'] = 'placa'
 
 
 class RecuperarSenhaEmailForm(PasswordResetForm):
