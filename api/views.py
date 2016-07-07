@@ -19,6 +19,8 @@ from django.http import Http404
 
 from ocorrencia.models import Categoria, Local, Ocorrencia
 
+from api.permissions import IsSuperuser 
+
 from rest_framework import status
 
 from rest_framework.decorators import permission_classes
@@ -37,7 +39,6 @@ from rest_framework.generics import (
 from rest_framework.permissions import (
 
     AllowAny,
-    IsAdminUser,
     IsAuthenticated,
 
 )
@@ -62,7 +63,7 @@ class UserDetailAPIView(RetrieveAPIView):
     '''
     queryset = User.objects.all()  # Retorna todos os User
     serializer_class = UserSerializer  # Utiliza a classe serializer User
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsSuperuser]
 
 
 class UserListAPIView(ListAPIView):
@@ -73,7 +74,7 @@ class UserListAPIView(ListAPIView):
     '''
     queryset = User.objects.all()  # Retorna todos os User
     serializer_class = UserSerializer  # Utiliza a classe serializer User
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsSuperuser]
 
 # GROUP
 # Listagem de Groups internos do Django bem quanto seus detalhes.
@@ -88,7 +89,7 @@ class GroupDetailAPIView(RetrieveAPIView):
     '''
     queryset = Group.objects.all()  # Retorna todos os Groups
     serializer_class = GroupSerializer  # Utiliza a classe serializer Group
-    permission_classes = [IsAdminUser]  # Só quem tem acesso é o Admin
+    permission_classes = [IsSuperuser]  # Só quem tem acesso é o Admin
 
 
 class GroupListAPIView(ListAPIView):
@@ -99,7 +100,7 @@ class GroupListAPIView(ListAPIView):
     '''
     queryset = Group.objects.all()  # Retorna todos os Groups
     serializer_class = GroupSerializer  # Utiliza a classe serializer Group
-    permission_classes = [IsAdminUser]  # Só quem tem acesso é o Admin
+    permission_classes = [IsSuperuser]  # Só quem tem acesso é o Admin
 
 # USUÁRIO
 # Lista de todos os usários
@@ -119,7 +120,7 @@ class UsuarioList(APIView):
         serializer = UsuarioSerializer(usuario, many=True)
         return Response(serializer.data)
 
-    permission_classes = [IsAdminUser]  # Só o admin pode ver todos os usuários
+    permission_classes = [IsSuperuser]  # Só o admin pode ver todos os usuários
 
 # Criação de um novo usuário
 # Permissão: liberado pra todos
@@ -201,7 +202,7 @@ class UsuarioDetail(APIView):
 
     def check_object_permission(self, user, obj):
         return (user and user.is_authenticated() and
-                (user.is_staff or obj.user_id == user.id))
+                (user.is_superuser or obj.user_id == user.id))
 
     def has_object_permission(self, request, view, obj):
         return True
@@ -239,7 +240,7 @@ class UsuarioEdit(APIView):
 
     def check_object_permission(self, user, obj):
         return (user and user.is_authenticated() and
-                (user.is_staff or obj.user_id == user.id))
+                (user.is_superuser or obj.user_id == user.id))
 
     def has_object_permission(self, request, view, obj):
         return True
@@ -322,7 +323,7 @@ class UsuarioDelete(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    permission_classes(IsAdminUser)
+    permission_classes(IsSuperuser)
 
 # OCORRÊNCIA
 # Criar uma nova ocorrência
@@ -380,9 +381,12 @@ class OcorrenciaDetail(APIView):
     # PERMISSÕES
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated()
+        return ((request.user and request.user.is_authenticated()) or request.user.is_superuser)
 
     def check_object_permission(self, user, obj):
+
+        if (user.is_superuser):
+            return True
 
         usuario_id = obj.usuario_ID
         usuario = self.get_usuario(usuario_id)
@@ -390,9 +394,7 @@ class OcorrenciaDetail(APIView):
         vigilante_id = user.id
         vigilante = self.get_usuario_vigilante(vigilante_id)
 
-        return (user and user.is_authenticated() and
-                (user.is_staff or self.is_vigilante(vigilante) or
-                    usuario.user_id == user.id))
+        return (user and user.is_authenticated() or self.is_vigilante(vigilante) or usuario.user_id == user.id)
 
     def has_object_permission(self, request, view, obj):
         return True
@@ -424,7 +426,7 @@ class OcorrenciaList(APIView):
     '''
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated()
+        return ((request.user and request.user.is_authenticated()) or request.user.is_superuser)
 
     def is_vigilante(self, obj):
 
@@ -449,15 +451,23 @@ class OcorrenciaList(APIView):
         # retorna elas
         x = self.has_permission(request, OcorrenciaList)
         if (x): 
-            usuario = self.get_usuario(request.user)
+            
             # user eh admin
-            if (request.user.is_staff or self.is_vigilante(usuario)):
+            if (request.user.is_superuser):
                 ocorrencia = Ocorrencia.objects.all()
                 serializer = OcorrenciaSerializer(ocorrencia, many = True)
                 print(ocorrencia)
                 return Response(serializer.data)
 
-            # user nao eh admin
+            usuario = self.get_usuario(request.user)        
+
+            if (self.is_vigilante(usuario)):
+                ocorrencia = Ocorrencia.objects.all()
+                serializer = OcorrenciaSerializer(ocorrencia, many = True)
+                print(ocorrencia)
+                return Response(serializer.data)
+
+            # user nao eh admin ou vigilante
             elif(self.has_permission(request, OcorrenciaList)):
                 ocorrencia = Ocorrencia.objects.filter(usuario_ID = usuario.id) | Ocorrencia.objects.filter(validade = True)
                 serializer = OcorrenciaSerializer(ocorrencia, many = True)
@@ -490,7 +500,11 @@ class OcorrenciaEdit(APIView):
             raise Http404
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated()
+        
+        if(request.user.is_superuser):
+            return True
+
+        return (request.user and request.user.is_authenticated())
 
         # Função que retorna um objeto Usuário
     def get_object(self, pk):
@@ -505,10 +519,17 @@ class OcorrenciaEdit(APIView):
         # filtra ocorrencias com aquele id e ocorrencias validadas
         # retorna elas
         user_id = request.user.id
-        usuario = self.get_usuario(user_id)
+       
 
         # user eh admin
-        if (request.user.is_staff or self.is_vigilante(usuario)):
+        if (request.user.is_superuser): 
+            ocorrencia = self.get_object(pk)
+            serializer = OcorrenciaSerializer(ocorrencia)
+            return Response(serializer.data)
+
+        usuario = self.get_usuario(user_id)
+
+        if(self.is_vigilante(usuario)):
             ocorrencia = self.get_object(pk)
             serializer = OcorrenciaSerializer(ocorrencia)
             return Response(serializer.data)
@@ -525,16 +546,22 @@ class OcorrenciaEdit(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
     # Função que edita os valores de um usuário específico
-    def put(self, request, pk, format=None):
-        user_id = request.user.id
-        usuario = self.get_usuario(user_id)
-
-        if (request.user.is_staff or self.is_vigilante(usuario)):
+    def put (self, request, pk, format=None):
+        
+        if (request.user.is_superuser):
             ocorrencia = self.get_object(pk)
             serializer = OcorrenciaSerializer(ocorrencia)
             return Response(serializer.data)
 
-        # user nao eh admin
+        user_id = request.user.id
+        usuario = self.get_usuario(user_id)
+
+        if (self.is_vigilante(usuario)):
+            ocorrencia = self.get_object(pk)
+            serializer = OcorrenciaSerializer(ocorrencia)
+            return Response(serializer.data)
+
+        # user nao eh admin nem vigilante
         elif(self.has_permission(request, OcorrenciaEdit)):
 
             ocorrencia = self.get_object(pk)
@@ -594,7 +621,7 @@ class OcorrenciaDelete(APIView):
         usuario = self.get_usuario(user_id)
 
         # user eh admin
-        if (request.user.is_staff or self.is_vigilante(usuario)):
+        if (request.user.is_superuser or self.is_vigilante(usuario)):
             ocorrencia = self.get_object(pk)
             serializer = OcorrenciaSerializer(ocorrencia)
             return Response(serializer.data)
@@ -615,7 +642,7 @@ class OcorrenciaDelete(APIView):
         user_id = request.user.id
         usuario = self.get_usuario(user_id)
 
-        if (request.user.is_staff or self.is_vigilante(usuario)):
+        if (request.user.is_superuser or self.is_vigilante(usuario)):
             ocorrencia = self.get_object(pk)
             ocorrencia.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -633,7 +660,7 @@ class OcorrenciaDelete(APIView):
 
 # CATEGORIA
 # Só tem acesso se o usuário for Admin
-# Criar Admin, mudar no BD is_staff de um User para TRUE
+# Criar Admin, mudar no BD is_superuser de um User para TRUE
 # Permissão: Só quem tem acesso é o Admin
 
 
@@ -645,7 +672,7 @@ class CategoriaCreateAPIView(CreateAPIView):
     '''
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class CategoriaDetailAPIView(RetrieveAPIView):
@@ -656,7 +683,7 @@ class CategoriaDetailAPIView(RetrieveAPIView):
     '''
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class CategoriaListAPIView(ListAPIView):
@@ -667,7 +694,7 @@ class CategoriaListAPIView(ListAPIView):
     '''
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class CategoriaUpdateAPIView(RetrieveUpdateAPIView):
@@ -678,7 +705,7 @@ class CategoriaUpdateAPIView(RetrieveUpdateAPIView):
     '''
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class CategoriaDeleteAPIView(DestroyAPIView):
@@ -689,11 +716,11 @@ class CategoriaDeleteAPIView(DestroyAPIView):
     '''
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 # LOCAL
 # Só tem acesso se o usuário for Admin
-# Criar Admin, mudar no BD is_staff de um User para TRUE
+# Criar Admin, mudar no BD is_superuser de um User para TRUE
 # Permissão: Só quem tem acesso é o Admin
 
 
@@ -705,7 +732,7 @@ class LocalCreateAPIView(CreateAPIView):
     '''
     queryset = Local.objects.all()
     serializer_class = LocalSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class LocalDetailAPIView(RetrieveAPIView):
@@ -716,7 +743,7 @@ class LocalDetailAPIView(RetrieveAPIView):
     '''
     queryset = Local.objects.all()
     serializer_class = LocalSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class LocalListAPIView(ListAPIView):
@@ -727,7 +754,7 @@ class LocalListAPIView(ListAPIView):
     '''
     queryset = Local.objects.all()
     serializer_class = LocalSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class LocalUpdateAPIView(RetrieveUpdateAPIView):
@@ -738,7 +765,7 @@ class LocalUpdateAPIView(RetrieveUpdateAPIView):
     '''
     queryset = Local.objects.all()
     serializer_class = LocalSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)
 
 
 class LocalDeleteAPIView(DestroyAPIView):
@@ -749,4 +776,4 @@ class LocalDeleteAPIView(DestroyAPIView):
     '''
     queryset = Local.objects.all()
     serializer_class = LocalSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsSuperuser,)

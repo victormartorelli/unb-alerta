@@ -144,4 +144,4 @@ class LocalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Local
-        fields = ('nome_cod', 'pai', 'descricao')
+        fields = ('id', 'nome_cod', 'pai', 'descricao')
