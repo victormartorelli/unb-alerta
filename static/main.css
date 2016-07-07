@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+@font-face {
+font-family: LeagueSpartanBold;
+src: url("/static/LeagueSpartan-Bold.otf") format("opentype");
+}
+
 label {
   color:white
 }
@@ -327,4 +332,42 @@ form p label{
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5%;
+}
+
+.inicial
+{
+	margin-left: 10%;
+}
+
+.block
+{
+	margin-right: 10%;
+	min-width: 330px;
+	max-width: 60%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+h1
+{
+	text-align: left;
+	color: #000;
+	font-family: "LeagueSpartanBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 7rem;
+    line-height: 1.2em;
+    margin: 0;
+    padding: 0;
+    position: relative;
+	font-weight: bold;
+	-webkit-margin-end: 0px;
+}
+
+h2
+{
+	margin: 0;
+	text-align: left;
+	font-family: 'VarelaRound', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.85rem;
+	color: #727272;
+	line-height: 1.75em;
 }
