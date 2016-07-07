@@ -5,25 +5,27 @@
 <div id = "fundo">
 <div class="container">
     <div class="row vertical-offset-100">
-    	<nav class="navfilter" style="margin-bottom:20px;">
+    <div class="col-md-6 col-md-offset-3">
+    	<nav class="navfilter" style="margin-bottom:-5%;">
 		  		<div class="container-fluid" >
 		        {% crispy filter.form %}
 		    	</div>
-		  	</div>
 			</nav>
-
+			</div>
+			</div>
+			<div class="col-md-6 col-md-offset-3">
     	<div class="panel panel-primary">
-      		<div class="panel-heading" style="text-align:center">
+      		<div class="panel-heading" style="text-align:center;">
         		<h1>Placas de Carro</h1>
     		</div>
       {% if page_obj|length %}
       		{% if numero_res > 1 %}
-      			<div class="alert alert-dismissible alert-success" style="text-align:center">
-					<strong><h3>Foram encontradas {{numero_res}} placas.</h3><strong>
+      			<div class="alert alert-dismissible alert-success" style="text-align:center;">
+					<strong><h3>Foram encontradas {{numero_res}} placas.</h3></strong>
 			</div>
         	{% elif numero_res == 1 %}
-        		<div class="alert alert-dismissible alert-success" style="text-align:center">
-					<strong><h3>Foi encontrada {{numero_res}} placa.</h3><strong>
+        		<div class="alert alert-dismissible alert-success" style="text-align:center;">
+					<strong><h3>Foi encontrada {{numero_res}} placa.</h3></strong>
 			</div>
 			{% endif %}
 
@@ -33,19 +35,17 @@
 				</div>
 
 			{%else%}
-				<table class="table table-hover table-sm" >
+				<table class="table table-hover table-sm">
 				<tr>
-					<th>Número</th>
-					<th>Usuário</th>
-					<th>E-mail</th>
+					<td><b>Número</b></td>
+					<td><b>Usuário</b></td>
 				</tr>
 			{% endif %}		
         {% for p in object_list %}
       
 				<tr>
 					<td>{{p.numero}}</td>
-					<td>{{p.usuario}}</td>
-					<td>{{p.usuario.email}}</td>			            
+					<td>{{p.usuario}}</td>			            
 				{% endfor %}
 			    </tr>
 					</table>
@@ -61,6 +61,7 @@
        </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 <div>

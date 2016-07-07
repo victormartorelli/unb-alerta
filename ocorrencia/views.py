@@ -282,5 +282,10 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
 
     def delete(self, form, *args, **kwargs):
         self.object = self.get_object()
-        self.object.delete()
+
+        if self.object.atendida is False:
+            self.object.delete()
+        else:
+            mensagem = 'Você não pode apagar uma ocorrência que já foi atendida.'
+            messages.add_message(self.request, messages.ERROR, mensagem)
         return redirect(reverse(self.get_success_url()))
