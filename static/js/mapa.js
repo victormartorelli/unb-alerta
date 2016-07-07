@@ -1145,8 +1145,8 @@ function getIdLocal(local){
    new google.maps.LatLng(-15.7676451,-47.8710741),
    new google.maps.LatLng(-15.7679342,-47.8715006)];
 
-  var SubArea_BSAS_e_Bancos = [
-  //Sub Área da educação com o prédio do BSAS, os bancos, e a quadra
+  var SubArea_Multiuso1_e_Bancos = [
+  //Sub Área da educação com o prédio Multiuso I, os bancos, e a quadra
    new google.maps.LatLng(-15.7670643,-47.8715435),
    new google.maps.LatLng(-15.7686776,-47.8702855),
    new google.maps.LatLng(-15.7670669,-47.8690892),
@@ -1169,7 +1169,7 @@ function getIdLocal(local){
    new google.maps.LatLng(-15.7666023,-47.870594),
    new google.maps.LatLng(-15.7667572,-47.8708193)];
 
-  var BSAS = [
+  var Multiuso1 = [
   //Bloco de Salas Sul
    new google.maps.LatLng(-15.7663803,-47.8705108),
    new google.maps.LatLng(-15.7676761,-47.8695184),
@@ -2395,14 +2395,14 @@ function getIdLocal(local){
       123: new google.maps.Polygon({paths: Dep_de_Planej_e_Adm }),
   //Departamento de Métodos e Técnicas
       124: new google.maps.Polygon({paths: Dep_de_Met_e_Tec }),
-  //Sub Área da educação com o prédio do BSAS, os bancos, e a quadra
-      125: new google.maps.Polygon({paths: SubArea_BSAS_e_Bancos }),
+  //Sub Área da educação com o prédio Multiuso I, os bancos, e a quadra
+      125: new google.maps.Polygon({paths: SubArea_Multiuso1_e_Bancos }),
   //Banco Santander
       126: new google.maps.Polygon({paths: Banco_Santander }),
   //Quadra José Honório
       127: new google.maps.Polygon({paths: Quadra_Jose }),
   //Bloco de Salas Sul
-      128: new google.maps.Polygon({paths: BSAS }),
+      128: new google.maps.Polygon({paths: Multiuso1 }),
   //Estacionamento do Prédio do <br>Departamento de Metodos e Técnicas
       129: new google.maps.Polygon({paths: Est_Dep_de_Met_e_Tec }),
   //Núcleo de Ensino e Pesquisa em Português para Estrangeiros - NEPPE
@@ -3386,12 +3386,12 @@ function getIdLocal(local){
           idLocal = 124;
 					nomeLocal = "Departamento de Métodos e Técnicas";
         }
-      //SubArea_BSAS_e_Bancos
+      //SubArea_Multiuso1_e_Bancos
       }else if (google.maps.geometry.poly.containsLocation(local, poligonos[125]) ?
         true:
         false){
         idLocal = 125;
-				nomeLocal = "Sub Área da educação com o prédio do BSAS, os bancos, e a quadra";
+				nomeLocal = "Sub Área da educação com o prédio Multiuso I, os bancos, e a quadra";
         //Banco_Santander
         if (google.maps.geometry.poly.containsLocation(local, poligonos[126]) ?
           true:
@@ -3404,12 +3404,12 @@ function getIdLocal(local){
           false){
           idLocal = 127;
           nomeLocal = "Quadra José Honório";
-        //BSAS
+        //Multiuso1
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[128]) ?
           true:
           false){
           idLocal = 128;
-          nomeLocal = "Bloco de Salas Sul";
+          nomeLocal = "Prédio Multiuso I";
         //Est_Dep_de_Met_e_Tec
         }else if (google.maps.geometry.poly.containsLocation(local, poligonos[129]) ?
           true:
