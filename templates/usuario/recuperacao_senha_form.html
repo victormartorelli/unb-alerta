@@ -3,22 +3,21 @@
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
-	<a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
-	&rsaquo; {% trans 'Password reset confirmation' %}
+<a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
+&rsaquo; {% trans 'Password reset' %}
 </div>
 {% endblock %}
-
 {% block content %}
 
 <div id = "fundo">
   <div class="container">
     <div class="row vertical-offset-100">
-      <div class="col-md-5 col-md-offset-3">
-        <div class="panel panel-default">
-          
-          <div class="panel-heading">
-            <h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200%;margin-left:12%">Recuperação de senha</h3>
-          </div>
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+              <div class="panel-heading" style="text-align:center">
+                <h1>Recuperação de senha</h1>
+            </div>
+            <div class="panel-body">
 
 		{% if validlink %}
 			<br>
@@ -34,12 +33,14 @@
 				<input type="submit"  class="btn btn-lg btn-success"  value="{% trans 'Alterar minha senha' %}" style ="margin-left:30%" />
 			</form>
 		{% else %}
-
-			<h5>{% trans "Redefinicao de senha sem sucesso!" %}</h5>
-			<div class = "concluido">
+			<div class = "ajuste">
+			<h4 style = "color:#f25f5c; ">{% trans "Redefinicao de senha sem sucesso!" %}</h4>
+			
 			</br>
-			<p>{% trans "O link para redefinicao de senha era invalido, possivelmente por ja ter sido utilizado. Por favor faca uma nova requisicao de recuperacao de senha." %}</p></div></br>
+			<h4>{% trans "O link para redefinicao de senha era invalido, possivelmente por ja ter sido utilizado. Por favor faça uma nova requisiçao de recuperacao de senha." %}</h4></br>
+		</div>
 		{% endif %}
+		</div>
 
         </div>
       </div>

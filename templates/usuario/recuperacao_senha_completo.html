@@ -4,25 +4,26 @@
 {% block breadcrumbs %}
 <div class="breadcrumbs">
 <a href="{% url 'admin:base' %}">{% trans 'Home' %}</a>
-&rsaquo; {% trans 'Recuperacao de Senha' %}
+&rsaquo; {% trans 'Password reset' %}
 </div>
 {% endblock %}
-
 {% block content %}
 
 <div id = "fundo">
   <div class="container">
     <div class="row vertical-offset-100">
-      <div class="col-md-7 col-md-offset-2">
-        <div class="panel panel-default">  
-        	<div class="panel-heading">
-          	<h3 class="panel-title " style="color:#4E6c24; font-family:'Calibri',serif; font-weight: none; font-size: 200%;margin-left:12%">Recuperação de senha completa</h3>
-          </div>
-          <div class="concluido">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+              <div class="panel-heading" style="text-align:center">
+                <h1>Recuperação de senha</h1>
+            </div>
+            <div class="panel-body">
+            <div class = "ajuste">
           <br>
-          <p>Sua senha foi alterada com sucesso!  Voce pode acessar sua conta</p>
-          <h2><a href="{{ login_url }}">{% trans 'Entrar' %}</a></h2>          
+          <h4>Sua senha foi alterada com sucesso!  Você já pode acessar sua conta</h4></br>
+          <a class="btn btn-lg btn-success" href="{{ login_url }}">{% trans 'Entrar' %}</a>          
           </div>
+        </div>
         </div>
       
         </div>
