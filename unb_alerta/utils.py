@@ -84,3 +84,7 @@ def to_row(names_spans):
 def form_actions(more=[], save_label='Salvar'):
     return FormActions(
         Submit('salvar', save_label, css_class='btn btn-info btn-lg pull-right'), *more)
+
+
+def calcular_relativo(parcela, total):
+    return (parcela / total) * 100

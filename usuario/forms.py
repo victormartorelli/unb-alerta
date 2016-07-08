@@ -16,6 +16,7 @@ from .models import Usuario, PlacaCarro
 
 from unb_alerta.utils import to_row, form_actions
 
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
         label="Username", max_length=30,
@@ -45,7 +46,8 @@ class UsuarioForm(ModelForm):
 
     placa = forms.CharField(
         max_length=8,
-        label='Placa do Carro (Opcional)')
+        label='Placa do Carro (Opcional)',
+        required=False)
 
     sexo = forms.ChoiceField(
         label='Gênero',
@@ -214,7 +216,7 @@ class PlacaFiltro(django_filters.FilterSet):
     class Meta:
         model = PlacaCarro
         fields = ['numero']
-    
+
     def __init__(self, *args, **kwargs):
         super(PlacaFiltro, self).__init__(*args, **kwargs)
 

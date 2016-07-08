@@ -5,16 +5,21 @@ from django.contrib import messages
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import Count
 from django_filters.views import FilterView
 from django.shortcuts import redirect
+
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
 
 from unb_alerta.utils import make_pagination
 
 from usuario.models import Usuario
 
-from .models import Ocorrencia
+from .models import Ocorrencia, Local
 
-from .forms import OcorrenciaForm, ValidarOcorrenciaEditForm, OcorrenciaFiltro
+from .forms import (OcorrenciaForm, ValidarOcorrenciaEditForm,
+                    OcorrenciaFiltro, RelatorioFiltro)
 
 
 class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
@@ -289,3 +294,75 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
             mensagem = 'Você não pode apagar uma ocorrência que já foi atendida.'
             messages.add_message(self.request, messages.ERROR, mensagem)
         return redirect(reverse(self.get_success_url()))
+
+
+class GerarRelatorioView(PermissionRequiredMixin, FormView):
+    form_class = RelatorioFiltro
+    permission_required = {'ocorrencia.change_ocorrencia'}
+    template_name = "ocorrencia/gerar_relatorio.html"
+
+    def form_valid(self, form):
+        eixo_x = 30
+        eixo_y = 780
+
+        Local.objects.values('id').annotate(
+            ocorrencia_count=Count('ocorrencia')).order_by(
+            '-ocorrencia_count')[:5]
+
+
+        if form.data.get('localidade'):
+            ocorrencia = Ocorrencia.objects.filter(
+                data__gte=form.cleaned_data['data'],
+                data__lte=form.cleaned_data['data_1'],
+                hora__gte=form.data.get('hora'),
+                hora__lte=form.data.get('hora_1'),
+                localidade=int(form.data.get('localidade')))
+        else:
+            ocorrencia = Ocorrencia.objects.filter(
+                data__gte=form.cleaned_data['data'],
+                data__lte=form.cleaned_data['data_1'],
+                hora__gte=form.data.get('hora'),
+                hora__lte=form.data.get('hora_1'))
+
+        vitima = ocorrencia.filter(vitimado=True).count()
+        emergencia = ocorrencia.filter(emergencia=True).count()
+        validadas = ocorrencia.filter(validade=True).count()
+        atendidas = ocorrencia.filter(atendida=True).count()
+
+        # top_locais = lista.values('id').annotate(
+        #     jobtitle_count=Count('jobtitle')).order_by('-jobtitle_count')[:5]
+
+        # if lista_parametros['local']:
+        #     local = True
+
+        # Create the HttpResponse object with the appropriate PDF headers.
+        response = HttpResponse(content_type='application/pdf')
+        response[
+            'Content-Disposition'] = 'attachment; filename="relatorio.pdf"'
+
+        # Create the PDF object, using the response object as its "file."
+        c = canvas.Canvas(response)
+
+        # Draw things on the PDF. Here's where the PDF generation happens.
+        # See the ReportLab documentation for the full list of functionality.
+        c.drawString(200, eixo_y, "Relatório Unb-Alerta")
+        c.drawString(eixo_x, 730, "Intervalo de Datas: " +
+                                  form.data.get('data') + " - " +
+                                  form.data.get('data_1'))
+        c.drawString(eixo_x, 710, "Intervalo de Horarios: " +
+                                  form.data.get('hora') + " - " +
+                                  form.data.get('hora_1'))
+        if form.data.get('localidade'):
+            c.drawString(eixo_x, 690, "Local: " + Local.objects.filter(
+                id=form.data.get('localidade'))[0].descricao)
+
+        c.drawString(eixo_x + 40, 640, "Com vítima: " + str(vitima))
+        c.drawString(eixo_x + 40, 620, "Emergência: " + str(emergencia))
+        c.drawString(eixo_x + 40, 600, "Validadas: " + str(validadas))
+        c.drawString(eixo_x + 40, 580, "Atendidas: " + str(atendidas))
+        c.drawString(eixo_x + 40, 500, "Top 5 Locais com mais ocorrências: " + str(atendidas))
+
+        # Close the PDF object cleanly, and we're done.
+        c.showPage()
+        c.save()
+        return response

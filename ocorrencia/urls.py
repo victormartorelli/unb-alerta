@@ -8,7 +8,8 @@ from django.views.generic.base import TemplateView
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
                     ListaValidacaoView, ValidarOcorrenciaEditView,
-                    MinhasOcorrenciasView, OcorrenciaDeleteView)
+                    MinhasOcorrenciasView, OcorrenciaDeleteView,
+                    GerarRelatorioView)
 
 urlpatterns = [
     url(r'^ocorrencias/$',
@@ -35,5 +36,8 @@ urlpatterns = [
     url(r'^estatisticas/$', TemplateView.as_view(
         template_name='mapa.html'),
         name='estatisticas'),
+
+    url(r'^gerar-relatorio/$', GerarRelatorioView.as_view(),
+        name='gerar_relatorio'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

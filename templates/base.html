@@ -37,6 +37,7 @@
               {% if perms.ocorrencia.change_ocorrencia %}
                 <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
                 <li role="presentation" ><a href="{% url 'pesquisar_placas' %}">Procurar Placa</a></li>
+                <li role="presentation" ><a href="{% url 'gerar_relatorio' %}">Gerar Relatórios</a></li>
               {% endif %}
               <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a></li>
               <li class="dropdown">
