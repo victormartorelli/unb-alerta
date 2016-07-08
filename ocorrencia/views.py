@@ -422,3 +422,61 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         c.showPage()
         c.save()
         return response
+
+
+class FiltroMapa(LoginRequiredMixin, FilterView):
+    model = Ocorrencia
+    filterset_class = OcorrenciaFiltro
+    paginate_by = 10
+    template_name = "mapa.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(FiltroMapa,
+                        self).get_context_data(**kwargs)
+
+        paginator = context['paginator']
+        page_obj = context['page_obj']
+
+        context['page_range'] = make_pagination(
+            page_obj.number, paginator.num_pages)
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        super(FiltroMapa, self).get(request)
+
+        # Se a pesquisa estiver quebrando com a paginação
+        # Olhe esta função abaixo
+        # Provavelmente você criou um novo campo no Form/FilterSet
+        # Então a ordem da URL está diferente
+        data = self.filterset.data
+        if (data and data.get('tb_categoria_ID') is not None):
+            url = "&" + str(self.request.environ['QUERY_STRING'])
+            if url.startswith("&page"):
+                ponto_comeco = url.find('tb_categoria_ID=') - 1
+                url = url[ponto_comeco:]
+        else:
+            url = ''
+
+        self.filterset.form.fields['o'].label = 'Ordenação'
+
+        queryset = self.object_list.filter(
+            atendida=True,
+            validade=True).distinct()
+
+        array_lat = []
+        array_long = []
+
+        for o in queryset:
+            array_lat.append(o.latitude)
+            array_long.append(o.longitude)
+
+        context = self.get_context_data(filter=self.filterset,
+                                        object_list=queryset,
+                                        filter_url=url,
+                                        numero_res=len(queryset),
+                                        array_lat=array_lat,
+                                        array_long=array_long
+                                        )
+
+        return self.render_to_response(context)

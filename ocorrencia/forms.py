@@ -78,7 +78,8 @@ class OcorrenciaForm(ModelForm):
                    'vigilante_ID': forms.HiddenInput(),
                    'usuario_ID': forms.HiddenInput(),
                    'validade': forms.HiddenInput(),
-                   'repetida': forms.HiddenInput()}
+                   'repetida': forms.HiddenInput(),
+                   'informacoes_segurancas': forms.HiddenInput()}
 
     def clean(self):
         cleaned_data = self.cleaned_data

@@ -9,7 +9,7 @@ from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
                     ListaOcorrenciasView,
                     ListaValidacaoView, ValidarOcorrenciaEditView,
                     MinhasOcorrenciasView, OcorrenciaDeleteView,
-                    GerarRelatorioView)
+                    GerarRelatorioView, FiltroMapa)
 
 urlpatterns = [
     url(r'^ocorrencias/$',
@@ -33,8 +33,7 @@ urlpatterns = [
     url(r'^ocorrencias/minhas_ocorrencias/$',
         MinhasOcorrenciasView.as_view(), name='minhas_ocorrencias'),
 
-    url(r'^estatisticas/$', TemplateView.as_view(
-        template_name='mapa.html'),
+    url(r'^estatisticas/$', FiltroMapa.as_view(),
         name='estatisticas'),
 
     url(r'^gerar-relatorio/$', GerarRelatorioView.as_view(),
