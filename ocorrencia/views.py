@@ -16,7 +16,7 @@ from unb_alerta.utils import make_pagination
 
 from usuario.models import Usuario
 
-from .models import Ocorrencia, Local
+from .models import Ocorrencia, Local, Categoria
 
 from .forms import (OcorrenciaForm, ValidarOcorrenciaEditForm,
                     OcorrenciaFiltro, RelatorioFiltro)
@@ -305,24 +305,45 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         eixo_x = 30
         eixo_y = 780
 
-        Local.objects.values('id').annotate(
-            ocorrencia_count=Count('ocorrencia')).order_by(
-            '-ocorrencia_count')[:5]
+        locais = Local.objects.values('descricao').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
 
+        categorias = Categoria.objects.values('tipo').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
 
-        if form.data.get('localidade'):
+        if form.data.get('tipo') and not form.data.get('localidade'):
             ocorrencia = Ocorrencia.objects.filter(
                 data__gte=form.cleaned_data['data'],
                 data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.data.get('hora'),
-                hora__lte=form.data.get('hora_1'),
-                localidade=int(form.data.get('localidade')))
+                hora__gte=form.cleaned_data['hora'],
+                hora__lte=form.cleaned_data['hora_1'],
+                tb_categoria_ID=form.cleaned_data['tipo'])
+
+        if not form.data.get('tipo') and form.data.get('localidade'):
+            ocorrencia = Ocorrencia.objects.filter(
+                data__gte=form.cleaned_data['data'],
+                data__lte=form.cleaned_data['data_1'],
+                hora__gte=form.cleaned_data['hora'],
+                hora__lte=form.cleaned_data['hora_1'],
+                localidade=form.cleaned_data['localidade'])
+
+        if not form.data.get('tipo') and not form.data.get('localidade'):
+            ocorrencia = Ocorrencia.objects.filter(
+                data__gte=form.cleaned_data['data'],
+                data__lte=form.cleaned_data['data_1'],
+                hora__gte=form.cleaned_data['hora'],
+                hora__lte=form.cleaned_data['hora_1'])
+
         else:
             ocorrencia = Ocorrencia.objects.filter(
                 data__gte=form.cleaned_data['data'],
                 data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.data.get('hora'),
-                hora__lte=form.data.get('hora_1'))
+                hora__gte=form.cleaned_data['hora'],
+                hora__lte=form.cleaned_data['hora_1'],
+                localidade=form.cleaned_data['localidade'],
+                tb_categoria_ID=form.cleaned_data['tipo'])
 
         vitima = ocorrencia.filter(vitimado=True).count()
         emergencia = ocorrencia.filter(emergencia=True).count()
@@ -356,11 +377,46 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             c.drawString(eixo_x, 690, "Local: " + Local.objects.filter(
                 id=form.data.get('localidade'))[0].descricao)
 
-        c.drawString(eixo_x + 40, 640, "Com vítima: " + str(vitima))
-        c.drawString(eixo_x + 40, 620, "Emergência: " + str(emergencia))
-        c.drawString(eixo_x + 40, 600, "Validadas: " + str(validadas))
-        c.drawString(eixo_x + 40, 580, "Atendidas: " + str(atendidas))
-        c.drawString(eixo_x + 40, 500, "Top 5 Locais com mais ocorrências: " + str(atendidas))
+        if form.data.get('tipo'):
+            c.drawString(eixo_x, 670, "Categoria: " + Categoria.objects.filter(
+                id=form.data.get('tipo'))[0].tipo)
+
+        c.drawString(eixo_x + 40, 640, "Com vítima:  " + str(vitima))
+        c.drawString(eixo_x + 40, 620, "Emergência:  " + str(emergencia))
+        c.drawString(eixo_x + 40, 600, "Validadas:   " + str(validadas))
+        c.drawString(eixo_x + 40, 580, "Atendidas:   " + str(atendidas))
+
+        aux = 540
+
+        if not form.data.get('localidade'):
+            c.drawString(
+                eixo_x + 40, aux, "Top 5 Locais com mais ocorrências: ")
+            aux = aux - 30
+            for i in range(5):
+                c.drawString(eixo_x + 90, aux, str(
+                    locais[i].get(
+                        'descricao')) + ":  " + str(locais[i].get('numero')))
+                aux = aux - 20
+
+        else:
+            aux = 540
+
+        if not form.data.get('tipo'):
+            aux = aux - 30
+            c.drawString(
+                eixo_x + 40, aux,
+                "Top 5 Categorias com mais ocorrências: ")
+            aux = aux - 30
+            for i in range(5):
+                c.drawString(eixo_x + 90, aux, str(
+                    categorias[i].get(
+                        'tipo')) + ":  " + str(categorias[i].get('numero')))
+                aux = aux - 20
+
+        # for i in range(5):
+        #     aux = aux - 20
+        #     c.drawString(eixo_x + 90, aux, l[i].get('tipo') + ":" + l[i].get('numero'))
+
 
         # Close the PDF object cleanly, and we're done.
         c.showPage()

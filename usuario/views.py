@@ -134,7 +134,6 @@ class PlacaFiltroView(PermissionRequiredMixin, FilterView):
         else:
             url = ''
 
-
         queryset = self.object_list.distinct()
 
         context = self.get_context_data(filter=self.filterset,
