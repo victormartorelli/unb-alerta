@@ -2,7 +2,7 @@
 {% block content %}
 <center>
 <div class="inicial">
-<br><h1>Login</h1>
+<br><h1 style="margin-left:-10%">Login</h1></br>
   <div class="block">
               <fieldset>
 
@@ -28,13 +28,13 @@
 
                     {% endif %}
                   {% endif %}
-
+                  
                   <input type="hidden" name="next" value="{{ next }}" />
-				  <br>
-                  <div class = "senha">
+                  <div class = "senha" style="margin-top:7%">
                     <a href="{% url 'recuperar_senha' %}" style="font-size:16px">Esqueceu a senha?</a>
                   </div>
-                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:5px;">
+                  
+                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%;">
               </form>
             </fieldset>
         </div>

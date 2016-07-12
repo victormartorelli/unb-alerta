@@ -20,46 +20,48 @@
               {% csrf_token %}
               <fieldset>
                   <div class="form-group">
-                    <h3>Nome de Usuário:</br></h3>
-                    <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.user }} " disabled> </h4>
+                    <h4>Nome de Usuário:</br></h4>
+                    <input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.user }} " disabled>
+                    </h4>
                   </div>
 
                   <div class="form-group">
-                    <h3>E-mail:</br></h3>
-                    <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.email }} "disabled> </h4>
+                    <h4>E-mail:</br></h4>
+                    <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.email }} "disabled>
+                    </h4>
                   </div>
 
                   <div class="form-group">
-                    <h3>Matrícula:</br></h3>
+                    <h4>Matrícula:</br></h4>
                     <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.matricula }} "disabled> </h4>
                   </div>
 
                   <div class="form-group">
-                    <h3>Nome Completo:</br></h3>
+                    <h4>Nome Completo:</br></h4>
                     <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.nome }} "disabled> </h4>
                   </div>
 
                   <div class="form-group">
-                    <h3><p>Gênero:</p></h3>
+                    <h4><p>Gênero:</p></h4>
                     {% if object.sexo == 'M' %}
                     <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="Masculino"disabled> </h4>
                     {% else %}
-                      <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="Feminino"disabled>
+                      <h4><input style="width:90%" type="text" name="sexo" id="sexo" value="Feminino"disabled></h4>
                     {% endif %}
                   </div>
 
                   <div class="form-group">
-                    <h3>Data de Nascimento:</br></h3>
+                    <h4>Data de Nascimento:</br></h4>
                     <h4><input style="width:90%" type="text" name="data_nasc" id="data_nasc" value="{{ object.data_nasc }} "disabled></h4>
                   </div>
 
                   <div class="form-group">
-                    <h3>CPF:</br></h3>
+                    <h4>CPF:</br></h4>
                     <h4><input style="width:90%" type="text" name="cpf" id="cpf" value="{{ object.cpf }} "disabled> </h4>
                   </div>
 
                   <div class="form-group">
-                    <h3>RG:</br></h3>
+                    <h4>RG:</br></h4>
                     <h4><input style="width:90%" type="text" name="rg" id="rg" value="{{ object.rg }} "disabled> </h4>
                   </div>
 
