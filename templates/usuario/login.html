@@ -1,20 +1,32 @@
 {% extends "base.html"%}
+{% load crispy_forms_tags %}
 {% block content %}
-<center>
-<div class="inicial">
-<br><h1 style="margin-left:-10%">Login</h1></br>
-  <div class="block">
-              <fieldset>
 
-            <form id="login-form" method="post" action="">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/static/js/jquery.mask.min.js"></script>
+
+  <div id = "fundo">
+    <div class="container">
+      <div class="row vertical-offset-100">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="panel panel-primary">
+              <div class="panel-heading" style="text-align:center">
+                <h1>Login</h1>
+              </div>
+              <div class="panel-boddy">
+              
+              </br>
+            <form method="post" action="">
                 {% csrf_token %}
                   <div class="form-group">
-                    <center><p style="font-size:18px; margin-bottom:1px;">Usuário</p></center>
-                    {{ form.username }}
+                    <center><p style="font-size:18px; margin-bottom:1px;">Usuário</p>
+                    {{ form.username }}</center>
                   </div>
                   <div class="form-group">
-                    <center><p style="font-size:18px; margin-bottom:1px;">Senha</p></center>
-                    {{ form.password }}
+                    <center><p style="font-size:18px; margin-bottom:1px;">Senha</p>
+                    {{ form.password }}</center>
                   </div>
                   {% if form.errors %}
                     <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos.<br>Tente novamente.</font></p>
@@ -36,9 +48,11 @@
                   
                   <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%;">
               </form>
-            </fieldset>
+            
         </div>
 	</div>
   </div>
-  </center>
+</div>
+</div>
+
 {% endblock %}
