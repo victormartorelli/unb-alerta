@@ -10,12 +10,12 @@
   <div id = "fundo">
     <div class="container">
       <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
-          <div class="panel panel-primary">
+        <div class="col-md-5 col-md-offset-3">
+          <div class="panel panel-primary" >
               <div class="panel-heading" style="text-align:center">
                 <h1>Login</h1>
               </div>
-              <div class="panel-boddy">
+              <div class="panel-body" style="margin-left:5%;margin-right:5%">
               
               </br>
             <form method="post" action="">
@@ -42,12 +42,13 @@
                   {% endif %}
                   
                   <input type="hidden" name="next" value="{{ next }}" />
-                  <div class = "senha" style="margin-top:7%">
+                  <div class = "senha" style="margin-top:7%;text-align:center">
                     <a href="{% url 'recuperar_senha' %}" style="font-size:16px">Esqueceu a senha?</a>
                   </div>
                   
+
                   <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%;">
-              </form>
+            </form>
             
         </div>
 	</div>
