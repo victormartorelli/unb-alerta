@@ -93,13 +93,6 @@
               </div>
             </div>
 
-              {{ form.atendida }}
-              {{ form.vigilante_ID }}
-              {{ form.usuario_ID }}
-              {{ form.validade }}
-              {{ form.repetida }}
-              {{ form.atendida }}
-
             <div class="form-group">
             <div class="col-lg-10">
             <strong>Foto:</strong>
@@ -113,14 +106,15 @@
             </div>
             </div>
 
-            <div class="form-group">
-              <div class="col-lg-10">
-                <h5>{{form.informacoes_segurancas|as_crispy_field}}</h5>
-              </div>
-            </div>
+            {{ form.atendida }}
+            {{ form.vigilante_ID }}
+            {{ form.usuario_ID }}
+            {{ form.validade }}
+            {{ form.repetida }}
+            {{ form.atendida }}
 
         <input class="btn btn-success btn-lg" type="submit" value="Criar ocorrência" style="margin-left:40%">
-        <div style="color:transparent">haha</div>
+        
         </form>
         </div>
       </div>

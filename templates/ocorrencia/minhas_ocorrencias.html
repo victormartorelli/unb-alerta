@@ -1,6 +1,15 @@
 {% extends "base.html"%}
 {% block content %}
 
+<script type="text/javascript">
+
+function popupMaps(url, title, w, h) {
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}  
+</script>
+
 <div id = "fundo">
 	<div class="container">
 		<div class="row vertical-offset-100">
@@ -39,7 +48,8 @@
 					<tr>
 						<td>{{o.id}}</td>
 						<td>{{o.localidade.descricao}}</td>
-						<td><a class="btn btn-sm btn-info" href="http://maps.google.com/?q={{o.latitude}},{{o.longitude}}"> Ver no mapa </a></td>
+						<td><a class="btn btn-sm btn-info" href="#" 
+						onclick="popupMaps('http://maps.google.com/?q={{o.latitude}},{{o.longitude}}', 'Maps',600,400);"> Ver no mapa </a></td>
 						
 						{% if o.hora.minute < 10 %}
 							<td>{{o.data}} - {{o.hora.hour}}:0{{o.hora.minute}}</td>
