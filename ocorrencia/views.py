@@ -121,7 +121,9 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
 class ListaValidacaoView(PermissionRequiredMixin, ListView):
     template_name = "ocorrencia/validacao_list.html"
     model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(atendida=False).order_by('-id')
+    queryset = Ocorrencia.objects.filter(
+        atendida=False,
+        validade=False).order_by('-id')
     paginate_by = 10
     permission_required = {'ocorrencia.change_ocorrencia'}
 
@@ -143,7 +145,7 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
     template_name = "ocorrencia/validacao_ocorrencia.html"
     form_class = ValidarOcorrenciaEditForm
     model = Ocorrencia
-    success_url = reverse_lazy('lista_ocorrencias')
+    success_url = reverse_lazy('lista_validacao')
     permission_required = {'ocorrencia.change_ocorrencia'}
 
     def get_initial(self):
@@ -151,22 +153,12 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         if self.request.user.is_superuser is False:
             usuario = Usuario.objects.get(user_id=self.request.user.id)
             return {'vigilante_ID': usuario.id,
-                    'emergencia': o.emergencia,
-                    'atendida': o.atendida,
-                    'validade': o.atendida,
-                    'repetida': o.repetida,
-                    'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
                     'informacoes_segurancas': o.informacoes_segurancas}
         else:
             return {'vigilante_ID': 1,
-                    'emergencia': o.emergencia,
-                    'atendida': o.atendida,
-                    'validade': o.atendida,
-                    'repetida': o.repetida,
-                    'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
@@ -179,7 +171,7 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         if form.data.get('repetida') == '1':
             Ocorrencia.objects.get(id=ocorrencia.id).delete()
 
-        return redirect(reverse('lista_ocorrencias'))
+        return redirect(reverse('lista_validacao'))
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()

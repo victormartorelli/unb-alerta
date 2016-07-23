@@ -27,9 +27,9 @@ function popupMaps(url, title, w, h) {
 							<tr>
 								<th>Número</th>
 								<th>Localização</th>
-						    <th>Local no Mapa</th>
+						    	<th>Local no Mapa</th>
 								<th>Data e Hora</th>
-								<th>Imagem</th>
+								<th>Status</th>
 								<th>Emergência?</th>
 								<th>Descrição</th>
 								<th>Validar</th>
@@ -48,35 +48,8 @@ function popupMaps(url, title, w, h) {
 									<td>{{o.data}} - {{o.hora.hour}}:{{o.hora.minute}}</td>
 								{% endif %}
 
-								{% if o.foto %}
-									<td><a class="btn btn-sm btn-info" href="#" id="abreImagem"> Clique para abrir a imagem</a>
-										<div id="myModal" class="modal">
-											<span class="close">×</span>
-											<img class="modal-content" src="{{MEDIA_URL}}{{o.foto.url}}" id="imagemOcorrencia">
-										</div>
-										<script> <!-- Qual o tipo de script? Javascript?-->
-											var modal = document.getElementById('myModal');
-											var link = document.getElementById("abreImagem");
-											var span = document.getElementsByClassName("close")[0];
-
-											link.onclick = function() {
-												modal.style.display = "block";
-											}
-
-											span.onclick = function() {
-												modal.style.display = "none";
-											}
-
-											window.onclick = function(event) {
-												if (event.target == modal) {
-													modal.style.display = "none";
-												}
-											}
-										</script>
-									</td>
-								{% else %}
-									<td> Não possui imagem </td>
-								{% endif %}
+								<td>{{o.status|default_if_none:"Não Informado"}}</td>
+								
 								{% if o.emergencia == 1 %}
 									<td><font color="red"> Sim </font></td>
 								{% else %}

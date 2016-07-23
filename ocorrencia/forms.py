@@ -8,7 +8,7 @@ from crispy_forms.layout import Fieldset, Layout
 from django import forms
 from django.db import models
 from django.forms import ModelForm, ValidationError
-from .models import Categoria, Ocorrencia, Local
+from .models import Categoria, Ocorrencia, Local, StatusOcorrencia
 
 from unb_alerta.utils import to_row, form_actions
 
@@ -141,6 +141,12 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'cols': 48,
                    'placeholder': 'Escreva aqui a resposta da ocorrencia'}))
 
+    status = forms.ModelChoiceField(
+        label=('Status da Ocorrência'),
+        required=True,
+        queryset=StatusOcorrencia.objects.all(),
+        empty_label='Selecione')
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
@@ -159,7 +165,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'repetida',
                   'foto',
                   'descricao',
-                  'informacoes_segurancas']
+                  'informacoes_segurancas',
+                  'status']
 
         widgets = {'id': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
