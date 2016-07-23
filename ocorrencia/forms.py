@@ -169,8 +169,7 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
                    'descricao': forms.HiddenInput(),
-                   'localidade': forms.HiddenInput(),
-                   'informacoes_segurancas': forms.HiddenInput()}
+                   'localidade': forms.HiddenInput()}
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):
