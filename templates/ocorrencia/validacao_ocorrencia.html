@@ -66,6 +66,12 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <div class="col-lg-10">
+                <h5>{{ form.informacoes_segurancas|as_crispy_field }}</h5>
+              </div>
+            </div>
+
               {{ form.vigilante_ID }}
               {{ form.usuario_ID }}
               {{ form.data }}
@@ -74,7 +80,6 @@
               {{ form.longitude }}
               {{ form.localidade }}
               {{ form.descricao }}
-              {{ form.informacoes_segurancas}}
 
             <input class="btn btn-success btn-lg" type="submit" value="Salvar" style="margin-left:40%">
           </form>
