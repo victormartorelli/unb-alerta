@@ -65,7 +65,7 @@ class Usuario(models.Model):
 
 class PlacaCarro(models.Model):
     numero = models.CharField(max_length=8, verbose_name='Ńúmero da Placa')
-    usuario = models.OneToOneField(Usuario)
+    usuario = models.ForeignKey(Usuario)
 
     class Meta:
         verbose_name = 'Placa'
