@@ -8,7 +8,7 @@ from crispy_forms.layout import Fieldset, Layout
 from django import forms
 from django.db import models
 from django.forms import ModelForm, ValidationError
-from .models import Categoria, Ocorrencia, Local
+from .models import Categoria, Ocorrencia, Local, StatusOcorrencia
 
 from unb_alerta.utils import to_row, form_actions
 
@@ -141,6 +141,12 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'cols': 48,
                    'placeholder': 'Escreva aqui a resposta da ocorrencia'}))
 
+    status = forms.ModelChoiceField(
+        label=('Status da Ocorrência'),
+        required=True,
+        queryset=StatusOcorrencia.objects.all(),
+        empty_label='Selecione')
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
@@ -159,7 +165,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'repetida',
                   'foto',
                   'descricao',
-                  'informacoes_segurancas']
+                  'informacoes_segurancas',
+                  'status']
 
         widgets = {'id': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
@@ -354,3 +361,32 @@ class RelatorioFiltro(forms.Form):
             Fieldset('Filtragem de Relatórios'),
             row1, row2, row3,
             form_actions(save_label='Gerar Relatório'))
+
+
+class OcorrenciaFiltroMapa(OcorrenciaFiltro):
+
+    def __init__(self, *args, **kwargs):
+        super(OcorrenciaFiltroMapa, self).__init__(*args, **kwargs)
+        self.form.fields['id'].label = 'ID'
+        self.form.fields['hora'].widget.attrs['class'] = 'hora'
+        self.form.fields['data'].widget.attrs['class'] = 'data'
+
+        row1 = to_row(
+            [('id', 2),
+             ('tb_categoria_ID', 4),
+             ('vitimado', 3),
+             ('emergencia', 3)])
+        row2 = to_row(
+            [('data', 6),
+             ('hora', 6)])
+        row3 = to_row(
+            [('localidade', 4),
+             ('descricao', 4),
+             ('resposta', 4)])
+
+        self.form.helper = FormHelper()
+        self.form.helper.form_method = 'GET'
+        self.form.helper.layout = Layout(
+            Fieldset('Filtragem de Ocorrências'),
+            row1, row2, row3,
+            form_actions(save_label='Filtrar'))

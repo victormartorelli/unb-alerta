@@ -19,7 +19,7 @@ from usuario.models import Usuario
 from .models import Ocorrencia, Local, Categoria
 
 from .forms import (OcorrenciaForm, ValidarOcorrenciaEditForm,
-                    OcorrenciaFiltro, RelatorioFiltro)
+                    OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro)
 
 
 class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
@@ -102,6 +102,7 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+
         if form.is_valid():
             ocorrencia = form.save(commit=False)
             if 'foto' in request.FILES:
@@ -120,7 +121,9 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
 class ListaValidacaoView(PermissionRequiredMixin, ListView):
     template_name = "ocorrencia/validacao_list.html"
     model = Ocorrencia
-    queryset = Ocorrencia.objects.filter(atendida=False).order_by('-id')
+    queryset = Ocorrencia.objects.filter(
+        atendida=False,
+        validade=False).order_by('-id')
     paginate_by = 10
     permission_required = {'ocorrencia.change_ocorrencia'}
 
@@ -142,7 +145,7 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
     template_name = "ocorrencia/validacao_ocorrencia.html"
     form_class = ValidarOcorrenciaEditForm
     model = Ocorrencia
-    success_url = reverse_lazy('lista_ocorrencias')
+    success_url = reverse_lazy('lista_validacao')
     permission_required = {'ocorrencia.change_ocorrencia'}
 
     def get_initial(self):
@@ -150,22 +153,12 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         if self.request.user.is_superuser is False:
             usuario = Usuario.objects.get(user_id=self.request.user.id)
             return {'vigilante_ID': usuario.id,
-                    'emergencia': o.emergencia,
-                    'atendida': o.atendida,
-                    'validade': o.atendida,
-                    'repetida': o.repetida,
-                    'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
                     'informacoes_segurancas': o.informacoes_segurancas}
         else:
             return {'vigilante_ID': 1,
-                    'emergencia': o.emergencia,
-                    'atendida': o.atendida,
-                    'validade': o.atendida,
-                    'repetida': o.repetida,
-                    'vitimado': o.vitimado,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
@@ -178,7 +171,7 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
         if form.data.get('repetida') == '1':
             Ocorrencia.objects.get(id=ocorrencia.id).delete()
 
-        return redirect(reverse('lista_ocorrencias'))
+        return redirect(reverse('lista_validacao'))
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -313,37 +306,20 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             numero=Count('ocorrencia')).order_by(
             '-numero')[:5]
 
-        if form.data.get('tipo') and not form.data.get('localidade'):
-            ocorrencia = Ocorrencia.objects.filter(
-                data__gte=form.cleaned_data['data'],
-                data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.cleaned_data['hora'],
-                hora__lte=form.cleaned_data['hora_1'],
-                tb_categoria_ID=form.cleaned_data['tipo'])
+        kwargs = {}
 
-        if not form.data.get('tipo') and form.data.get('localidade'):
-            ocorrencia = Ocorrencia.objects.filter(
-                data__gte=form.cleaned_data['data'],
-                data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.cleaned_data['hora'],
-                hora__lte=form.cleaned_data['hora_1'],
-                localidade=form.cleaned_data['localidade'])
+        kwargs['data__gte'] = form.cleaned_data['data']
+        kwargs['data__lte'] = form.cleaned_data['data_1']
+        kwargs['hora__gte'] = form.cleaned_data['hora']
+        kwargs['hora__lte'] = form.cleaned_data['hora_1']
 
-        if not form.data.get('tipo') and not form.data.get('localidade'):
-            ocorrencia = Ocorrencia.objects.filter(
-                data__gte=form.cleaned_data['data'],
-                data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.cleaned_data['hora'],
-                hora__lte=form.cleaned_data['hora_1'])
+        if form.data.get('tipo'):
+            kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
 
-        else:
-            ocorrencia = Ocorrencia.objects.filter(
-                data__gte=form.cleaned_data['data'],
-                data__lte=form.cleaned_data['data_1'],
-                hora__gte=form.cleaned_data['hora'],
-                hora__lte=form.cleaned_data['hora_1'],
-                localidade=form.cleaned_data['localidade'],
-                tb_categoria_ID=form.cleaned_data['tipo'])
+        if form.data.get('localidade'):
+            kwargs['localidade'] = form.cleaned_data['localidade']
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
 
         vitima = ocorrencia.filter(vitimado=True).count()
         emergencia = ocorrencia.filter(emergencia=True).count()
@@ -426,7 +402,7 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
 
 class FiltroMapa(LoginRequiredMixin, FilterView):
     model = Ocorrencia
-    filterset_class = OcorrenciaFiltro
+    filterset_class = OcorrenciaFiltroMapa
     paginate_by = 10
     template_name = "mapa.html"
 
