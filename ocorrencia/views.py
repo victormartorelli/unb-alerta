@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import weasyprint
+
 from django.views.generic import (FormView, ListView, DetailView,
                                   DeleteView, UpdateView)
 from django.contrib import messages
@@ -7,6 +9,8 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Count
 from django_filters.views import FilterView
+from django.template import RequestContext
+from django.template.loader import get_template
 from django.shortcuts import redirect
 
 from reportlab.pdfgen import canvas
@@ -289,20 +293,93 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
         return redirect(reverse(self.get_success_url()))
 
 
+# def pdf_view(self, form):
+#     locais_list = Local.objects.values('descricao').annotate(
+#         numero=Count('ocorrencia')).order_by(
+#         '-numero')[:5]
+
+#     categorias_list = Categoria.objects.values('tipo').annotate(
+#         numero=Count('ocorrencia')).order_by(
+#         '-numero')[:5]
+
+#     kwargs = {}
+
+#     kwargs['data__gte'] = form.cleaned_data['data']
+#     kwargs['data__lte'] = form.cleaned_data['data_1']
+#     kwargs['hora__gte'] = form.cleaned_data['hora']
+#     kwargs['hora__lte'] = form.cleaned_data['hora_1']
+
+#     if form.data.get('tipo'):
+#         kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
+
+#     if form.data.get('localidade'):
+#         kwargs['localidade'] = form.cleaned_data['localidade']
+
+#     ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+#     vitima = ocorrencia.filter(vitimado=True).count()
+#     emergencia = ocorrencia.filter(emergencia=True).count()
+#     validadas = ocorrencia.filter(validade=True).count()
+#     atendidas = ocorrencia.filter(atendida=True).count()
+
+#     if form.data.get('localidade'):
+#         localidade = Local.objects.filter(
+#             id=form.data.get('localidade'))[0].descricao
+#     else:
+#         localidade = None
+#         for i in range(5):
+#             array_locais_nome = locais_list[i].get('descricao')
+#             array_locais_numero = locais_list[i].get('numero')
+
+#     if form.data.get('tipo'):
+#         categoria = Categoria.objects.filter(
+#             id=form.data.get('tipo'))[0].tipo
+
+#     else:
+#         categoria = None
+#         for i in range(5):
+#             array_categorias_nome = categorias_list[i].get('tipo')
+#             array_categorias_numero = categorias_list[i].get('numero')
+
+#     context = {
+#         'vitima': vitima,
+#         'emergencia': emergencia,
+#         'validadas': validadas,
+#         'atendidas': atendidas,
+#         'localidade': localidade,
+#         'categoria': categoria,
+#         'array_locais_nome': array_locais_nome,
+#         'array_locais_numero': array_locais_numero,
+#         'array_categorias_nome': array_categorias_nome,
+#         'array_categorias_numero': array_categorias_numero,
+#     }
+#     html_template = get_template('relatorio.html')
+#     rendered_html = html_template.render(RequestContext(context))
+#     pdf_file = weasyprint.HTML(
+#         string=rendered_html).write_pdf()
+#     http_response = HttpResponse(pdf_file,
+#                                  content_type='application/pdf')
+#     http_response['Content-Disposition'] = 'filename="report.pdf"'
+
+#     c = canvas.Canvas(http_response)
+
+#     c.showPage()
+#     c.save()
+
+#     return http_response
+
+
 class GerarRelatorioView(PermissionRequiredMixin, FormView):
     form_class = RelatorioFiltro
     permission_required = {'ocorrencia.change_ocorrencia'}
     template_name = "ocorrencia/gerar_relatorio.html"
 
     def form_valid(self, form):
-        eixo_x = 30
-        eixo_y = 780
-
-        locais = Local.objects.values('descricao').annotate(
+        locais_list = Local.objects.values('descricao').annotate(
             numero=Count('ocorrencia')).order_by(
             '-numero')[:5]
 
-        categorias = Categoria.objects.values('tipo').annotate(
+        categorias_list = Categoria.objects.values('tipo').annotate(
             numero=Count('ocorrencia')).order_by(
             '-numero')[:5]
 
@@ -326,77 +403,40 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         validadas = ocorrencia.filter(validade=True).count()
         atendidas = ocorrencia.filter(atendida=True).count()
 
-        # top_locais = lista.values('id').annotate(
-        #     jobtitle_count=Count('jobtitle')).order_by('-jobtitle_count')[:5]
-
-        # if lista_parametros['local']:
-        #     local = True
-
-        # Create the HttpResponse object with the appropriate PDF headers.
-        response = HttpResponse(content_type='application/pdf')
-        response[
-            'Content-Disposition'] = 'attachment; filename="relatorio.pdf"'
-
-        # Create the PDF object, using the response object as its "file."
-        c = canvas.Canvas(response)
-
-        # Draw things on the PDF. Here's where the PDF generation happens.
-        # See the ReportLab documentation for the full list of functionality.
-        c.drawString(200, eixo_y, "Relatório Unb-Alerta")
-        c.drawString(eixo_x, 730, "Intervalo de Datas: " +
-                                  form.data.get('data') + " - " +
-                                  form.data.get('data_1'))
-        c.drawString(eixo_x, 710, "Intervalo de Horarios: " +
-                                  form.data.get('hora') + " - " +
-                                  form.data.get('hora_1'))
         if form.data.get('localidade'):
-            c.drawString(eixo_x, 690, "Local: " + Local.objects.filter(
-                id=form.data.get('localidade'))[0].descricao)
+            localidade = Local.objects.filter(
+                id=form.data.get('localidade'))[0].descricao
+        else:
+            localidade = None
 
         if form.data.get('tipo'):
-            c.drawString(eixo_x, 670, "Categoria: " + Categoria.objects.filter(
-                id=form.data.get('tipo'))[0].tipo)
-
-        c.drawString(eixo_x + 40, 640, "Com vítima:  " + str(vitima))
-        c.drawString(eixo_x + 40, 620, "Emergência:  " + str(emergencia))
-        c.drawString(eixo_x + 40, 600, "Validadas:   " + str(validadas))
-        c.drawString(eixo_x + 40, 580, "Atendidas:   " + str(atendidas))
-
-        aux = 540
-
-        if not form.data.get('localidade'):
-            c.drawString(
-                eixo_x + 40, aux, "Top 5 Locais com mais ocorrências: ")
-            aux = aux - 30
-            for i in range(5):
-                c.drawString(eixo_x + 90, aux, str(
-                    locais[i].get(
-                        'descricao')) + ":  " + str(locais[i].get('numero')))
-                aux = aux - 20
+            categoria = Categoria.objects.filter(
+                id=form.data.get('tipo'))[0].tipo
 
         else:
-            aux = 540
+            categoria = None
 
-        if not form.data.get('tipo'):
-            aux = aux - 30
-            c.drawString(
-                eixo_x + 40, aux,
-                "Top 5 Categorias com mais ocorrências: ")
-            aux = aux - 30
-            for i in range(5):
-                c.drawString(eixo_x + 90, aux, str(
-                    categorias[i].get(
-                        'tipo')) + ":  " + str(categorias[i].get('numero')))
-                aux = aux - 20
+        context = {
+            'data__gte': form.cleaned_data['data'],
+            'data__lte': form.cleaned_data['data_1'],
+            'hora__gte': form.cleaned_data['hora'],
+            'hora__lte': form.cleaned_data['hora_1'],
+            'vitima': vitima,
+            'emergencia': emergencia,
+            'validadas': validadas,
+            'atendidas': atendidas,
+            'localidade': localidade,
+            'categoria': categoria,
+            'array_locais': locais_list,
+            'array_categorias': categorias_list,
+        }
 
-        # for i in range(5):
-        #     aux = aux - 20
-        #     c.drawString(eixo_x + 90, aux, l[i].get('tipo') + ":" + l[i].get('numero'))
+        template = get_template("relatorio.html")
+        html = template.render(RequestContext(self.request, context))
+        response = HttpResponse(content_type="application/pdf")
+        weasyprint.HTML(string=html,
+                        url_fetcher=self.request).write_pdf(response)
 
-
-        # Close the PDF object cleanly, and we're done.
-        c.showPage()
-        c.save()
         return response
 
 

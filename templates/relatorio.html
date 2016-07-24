@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<style>
+    #title {
+        text-align:center
+    }
+    #fields {
+        margin-left:4%
+    }
+    .info {
+        font-family: "Calibri Light";
+        text-decoration-color: #555555;
+        font-size: medium;
+    }
+    .campo {
+        font-family: "Calibri Light";
+        text-decoration-color: #000000;
+        font-size: large;
+    }
+</style>
+
+<!-- TODO - Linkar para um arquivo static -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<head>
+    <meta charset="utf-8">
+</head>
+<body class="panel panel-primary col-md-6 col-md-offset-3">
+    <div id="title" class="panel-heading"><h1>Relatório UnB-Alerta</h1></div>
+    <br/>
+    <br/>
+    <div id="intervals">
+        <div id="dateInterval">
+            <h4><strong>Intervalo de Datas</strong></h4>
+            <p class="info">De {{data__gte}} até {{data__lte}}</p>
+        </div>
+        <div id="hourInterval">
+            <h4><strong>Intervalo de Horas</strong></h4>
+            <p class="info">De {{hora__gte}} até {{hora__lte}}</p>
+        </div>
+    </div>
+    {% if localidade %}
+    <div>
+        <div>
+            <h4><strong>Local</strong></h4>
+            <p class="info">{{ localidade }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if categoria %}
+    </br>
+    <div>
+        <div>
+            <h4><strong>Categoria</strong></h4>
+            <p class="info">{{ categoria }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if localidade %}
+    <p><span class="campo"><strong>Posição no ranking: </strong></span> <span class="info">PosRank</span></p>
+    {% endif %}
+    {% if Categoria %}
+    <p><span class="campo"><strong>Posição no ranking: </strong></span> <span class="info">PosRank</span></p>
+    {% endif %}
+    <h4><strong>Ocorrências</strong></h4>
+    <div id="fields">
+        <p><span class="campo"><strong>Com vítima: </strong></span> <span class="info">{{vitima}}</span></p>
+        <p><span class="campo"><strong>Emergência: </strong></span> <span class="info">{{emergencia}}</span></p>
+        <p><span class="campo"><strong>Validadas: </strong></span> <span class="info">{{validadas}}</span></p>
+        <p><span class="campo"><strong>Atendidas: </strong></span> <span class="info">{{atendidas}}</span></p>
+        <br/>
+        <div id="top5locaisOcorrencias">
+            Top 5 - Locais com mais ocorrências
+            <ul>
+                {% for a in array_locais %}
+                    <p> {{ a.descricao }} : {{ a.numero }}</p>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="top5categoriasOcorrencias">
+            </br>
+            Top 5 - Categorias com mais ocorrências
+            <ul>
+                {% for a in array_categorias %}
+                    <p> {{ a.tipo }} : {{ a.numero }}</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
