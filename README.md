@@ -35,6 +35,8 @@ Para contribuir, siga rigorosamente os passos abaixo:
     
     sudo apt-get install libcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk
     
+    sudo apt-get install python-dev python-pip python-lxml libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev\ shared-mime-info
+    
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
     sudo npm install -g bower
@@ -66,6 +68,7 @@ Para contribuir, siga rigorosamente os passos abaixo:
 
 * Instale as dependências do Bower (Faça isso na raiz do projeto)::
     ./manage.py bower install
+
     ./manage.py collectstatic --noinput
 
 
