@@ -44,9 +44,19 @@ class UsuarioForm(ModelForm):
         max_length=45,
         label='Confirmar Email')
 
-    placa = forms.CharField(
+    placa1 = forms.CharField(
         max_length=8,
-        label='Placa do Carro (Opcional)',
+        label='Placa do carro (Opcional)',
+        required=False)
+
+    placa2 = forms.CharField(
+        max_length=8,
+        label='Placa do segundo carro (Opcional)',
+        required=False)
+
+    placa3 = forms.CharField(
+        max_length=8,
+        label='Placa do terceiro carro (Opcional)',
         required=False)
 
     sexo = forms.ChoiceField(
@@ -183,8 +193,9 @@ class UsuarioForm(ModelForm):
         super(UsuarioForm, self).__init__(*args, **kwargs)
         self.fields['cpf'].widget.attrs['class'] = 'cpf'
         self.fields['data_nasc'].widget.attrs['class'] = 'data'
-        self.fields['placa'].widget.attrs['class'] = 'placa'
-
+        self.fields['placa1'].widget.attrs['class'] = 'placa'
+        self.fields['placa2'].widget.attrs['class'] = 'placa'
+        self.fields['placa3'].widget.attrs['class'] = 'placa'
 
 class RecuperarSenhaEmailForm(PasswordResetForm):
 
