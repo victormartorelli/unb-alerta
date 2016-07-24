@@ -50,9 +50,19 @@ class CriarUsuarioView(FormView):
         send_mail(assunto, mensagem, remetente, destinatario,
                   fail_silently=False)
 
-        if form.data['placa']:
-            usuario = Usuario.objects.get(user_id=user.id)
-            placa = PlacaCarro(numero=form.data['placa'],
+        usuario = Usuario.objects.get(user_id=user.id)
+        if form.data['placa1']:
+            placa = PlacaCarro(numero=form.data['placa1'],
+                               usuario=usuario)
+            placa.save()
+
+        if form.data['placa2']:
+            placa = PlacaCarro(numero=form.data['placa2'],
+                               usuario=usuario)
+            placa.save()
+
+        if form.data['placa3']:
+            placa = PlacaCarro(numero=form.data['placa3'],
                                usuario=usuario)
             placa.save()
 
