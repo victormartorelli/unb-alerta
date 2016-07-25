@@ -37,11 +37,21 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
             <ul class="nav navbar-nav">
             {% if user.is_authenticated %}
-              <li><a href="{% url 'estatisticas' %}">Estatísticas no Mapa</a></li>
+              <li class="dropdown">
+                <a href="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Estatísticas <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url 'estatisticas' %}">Mapa</a></li>
+                  <li class="divider"></li>
+                  {% if perms.ocorrencia.change_ocorrencia %}
+                    <li><a href="{% url 'gerar_relatorio' %}">Relatórios</a></li>
+                  {% endif %}
+                </ul>
+              </li>
+
               {% if perms.ocorrencia.change_ocorrencia %}
                 <li role="presentation" ><a href="{% url 'lista_validacao' %}">Validar Ocorrência</a></li>
                 <li role="presentation" ><a href="{% url 'pesquisar_placas' %}">Procurar Placa</a></li>
-                <li role="presentation" ><a href="{% url 'gerar_relatorio' %}">Gerar Relatórios</a></li>
               {% endif %}
               <li><a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a></li>
               <li class="dropdown">

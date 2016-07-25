@@ -1,26 +1,5 @@
 <!DOCTYPE html>
 <html>
-<style>
-    #title {
-        text-align:center
-    }
-    #fields {
-        margin-left:4%
-    }
-    .info {
-        font-family: "Calibri Light";
-        text-decoration-color: #555555;
-        font-size: medium;
-    }
-    .campo {
-        font-family: "Calibri Light";
-        text-decoration-color: #000000;
-        font-size: large;
-    }
-</style>
-
-<!-- TODO - Linkar para um arquivo static -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 <head>
     <meta charset="utf-8">
@@ -49,7 +28,6 @@
     {% endif %}
 
     {% if categoria %}
-    </br>
     <div>
         <div>
             <h4><strong>Categoria</strong></h4>
@@ -59,10 +37,10 @@
     {% endif %}
 
     {% if localidade %}
-    <p><span class="campo"><strong>Posição no ranking: </strong></span> <span class="info">PosRank</span></p>
+    <p><span class="campo"><strong>Posição no ranking de locais mais perigosos: </strong></span> <span class="info">{{posicao_rank_local}}</span></p>
     {% endif %}
-    {% if Categoria %}
-    <p><span class="campo"><strong>Posição no ranking: </strong></span> <span class="info">PosRank</span></p>
+    {% if categoria %}
+    <p><span class="campo"><strong>Posição no ranking de categorias mais recorrentes: </strong></span> <span class="info">{{posicao_rank_cat}}</span></p>
     {% endif %}
     <h4><strong>Ocorrências</strong></h4>
     <div id="fields">
@@ -71,6 +49,8 @@
         <p><span class="campo"><strong>Validadas: </strong></span> <span class="info">{{validadas}}</span></p>
         <p><span class="campo"><strong>Atendidas: </strong></span> <span class="info">{{atendidas}}</span></p>
         <br/>
+
+    {% if not localidade %}
         <div id="top5locaisOcorrencias">
             Top 5 - Locais com mais ocorrências
             <ul>
@@ -79,6 +59,9 @@
                 {% endfor %}
             </ul>
         </div>
+    {% endif %}
+
+    {% if not categoria %}
         <div id="top5categoriasOcorrencias">
             </br>
             Top 5 - Categorias com mais ocorrências
@@ -88,6 +71,7 @@
                 {% endfor %}
             </ul>
         </div>
+    {% endif %}
     </div>
 </body>
 </html>

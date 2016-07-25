@@ -3,9 +3,11 @@ import weasyprint
 
 from django.views.generic import (FormView, ListView, DetailView,
                                   DeleteView, UpdateView)
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Count
 from django_filters.views import FilterView
@@ -375,28 +377,39 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
     template_name = "ocorrencia/gerar_relatorio.html"
 
     def form_valid(self, form):
-        locais_list = Local.objects.values('descricao').annotate(
-            numero=Count('ocorrencia')).order_by(
-            '-numero')[:5]
-
-        categorias_list = Categoria.objects.values('tipo').annotate(
-            numero=Count('ocorrencia')).order_by(
-            '-numero')[:5]
-
         kwargs = {}
+        kwargs_top = {}
 
         kwargs['data__gte'] = form.cleaned_data['data']
         kwargs['data__lte'] = form.cleaned_data['data_1']
         kwargs['hora__gte'] = form.cleaned_data['hora']
         kwargs['hora__lte'] = form.cleaned_data['hora_1']
 
+        kwargs_top['ocorrencia__data__gte'] = kwargs['data__gte']
+        kwargs_top['ocorrencia__data__lte'] = kwargs['data__lte']
+        kwargs_top['ocorrencia__hora__gte'] = kwargs['hora__gte']
+        kwargs_top['ocorrencia__hora__lte'] = kwargs['hora__lte']
+
         if form.data.get('tipo'):
             kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
+            kwargs_top['ocorrencia__tb_categoria_ID'] = kwargs[
+                'tb_categoria_ID']
 
         if form.data.get('localidade'):
             kwargs['localidade'] = form.cleaned_data['localidade']
+            kwargs_top['ocorrencia__localidade'] = kwargs['localidade']
 
         ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        locais_list = Local.objects.filter(
+            **kwargs_top).values('descricao').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
+
+        categorias_list = Categoria.objects.filter(
+            **kwargs_top).values('tipo').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
 
         vitima = ocorrencia.filter(vitimado=True).count()
         emergencia = ocorrencia.filter(emergencia=True).count()
@@ -406,15 +419,40 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         if form.data.get('localidade'):
             localidade = Local.objects.filter(
                 id=form.data.get('localidade'))[0].descricao
+            lista_top = Local.objects.filter(
+                **kwargs_top).values('descricao').annotate(
+                numero=Count('ocorrencia')).order_by(
+                '-numero')
+            try:
+                objeto = lista_top.get(descricao=localidade)
+            except ObjectDoesNotExist:
+                objeto = None
+                posicao_rank_local = None
+            else:
+                lista_top = list(lista_top)
+                posicao_rank_local = lista_top.index(objeto) + 1
         else:
             localidade = None
+            posicao_rank_local = None
 
         if form.data.get('tipo'):
             categoria = Categoria.objects.filter(
                 id=form.data.get('tipo'))[0].tipo
-
+            lista_top = Categoria.objects.filter(
+                **kwargs_top).values('tipo').annotate(
+                numero=Count('ocorrencia')).order_by(
+                '-numero')
+            try:
+                objeto = lista_top.get(tipo=categoria)
+            except ObjectDoesNotExist:
+                objeto = None
+                posicao_rank_cat = None
+            else:
+                lista_top = list(lista_top)
+                posicao_rank_cat = lista_top.index(objeto) + 1
         else:
             categoria = None
+            posicao_rank_cat = None
 
         context = {
             'data__gte': form.cleaned_data['data'],
@@ -429,13 +467,19 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             'categoria': categoria,
             'array_locais': locais_list,
             'array_categorias': categorias_list,
+            'posicao_rank_local': posicao_rank_local,
+            'posicao_rank_cat': posicao_rank_cat,
         }
 
         template = get_template("relatorio.html")
         html = template.render(RequestContext(self.request, context))
         response = HttpResponse(content_type="application/pdf")
-        weasyprint.HTML(string=html,
-                        url_fetcher=self.request).write_pdf(response)
+        weasyprint.HTML(
+            string=html,
+            url_fetcher=self.request).write_pdf(
+            response,
+            stylesheets=[
+                weasyprint.CSS(settings.STATIC_ROOT + '/css/relatorio.css')])
 
         return response
 
