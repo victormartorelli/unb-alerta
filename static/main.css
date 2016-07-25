@@ -4,6 +4,10 @@ font-family: LeagueSpartanBold;
 src: url("/static/LeagueSpartan-Bold.otf") format("opentype");
 }
 
+body {
+  margin-bottom: -2%;
+}
+
 label {
   color:white
 }
@@ -96,7 +100,7 @@ legend{
   	background-color: #444;
     background: url("images/pinlayer2.png"),url("images/back.png");
     margin-top: -5%;
-    min-height: 100vh;
+    min-height: 150vh;
 }
 
 .vertical-offset-100{
@@ -105,7 +109,7 @@ legend{
 .social-box{
   margin: 0 auto;
   padding: 38px;
-  border-bottom:1px #ccc solid;
+  border-bottom:0px #ccc solid;
 }
 .social-box a{
   font-weight:bold;
@@ -124,15 +128,14 @@ legend{
   background: url("images/back.png");
   background-color: #444;
   background: url("images/pinlayer2.png"),url("images/back.png");
-  height: 30%;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 150vh;
 }
 
 .jumbotron .container {
   position: relative;
-  top:50px;
+  top:0px;
 }
 
 .jumbotron h1 {

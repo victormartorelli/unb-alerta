@@ -10,17 +10,23 @@
 
 <script type="text/javascript">
 
-  $(document).ready(function(){
-    $('#1').hide();
-    $('#2').hide();
-    $('#add0').click(function(){
-        $('#1').fadeIn('fast');
-        $('#add0').hide();
-    });
-    $('#add1').click(function(){
-        $('#2').fadeIn('fast');
-        $('#add1').hide(); 
-    });    
+$(document).ready(function(){
+
+  $('#1').hide();
+  $('#2').hide();
+  
+  $('#add0').click(function(){
+      $('#1').fadeIn('fast');
+      $('#add0').hide();
+      div1 = 1;
+  });
+  
+  $('#add1').click(function(){
+      $('#2').fadeIn('fast');
+      $('#add1').hide(); 
+      div2 = 1;
+  });    
+
 });
 
 </script>
