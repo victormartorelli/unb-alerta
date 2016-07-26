@@ -4,8 +4,9 @@ font-family: LeagueSpartanBold;
 src: url("/static/LeagueSpartan-Bold.otf") format("opentype");
 }
 
-body {
+body{
   margin-bottom: -2%;
+  height: 100%;
 }
 
 label {
@@ -100,7 +101,7 @@ legend{
   	background-color: #444;
     background: url("images/pinlayer2.png"),url("images/back.png");
     margin-top: -5%;
-    min-height: 150vh;
+    min-height: 100vh;
 }
 
 .vertical-offset-100{
@@ -130,7 +131,7 @@ legend{
   background: url("images/pinlayer2.png"),url("images/back.png");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 150vh;
+  min-height: 100vh;
 }
 
 .jumbotron .container {
@@ -239,8 +240,6 @@ form p label{
     border-radius: 4px;
 }
 
-
-
 .relato{
 	font-family: 'Shift', sans-serif;
 	margin-left:10px;
@@ -344,6 +343,7 @@ form p label{
 .inicial
 {
 	margin-left: 10%;
+  margin-bottom:2%;
 }
 
 .block
@@ -390,4 +390,94 @@ h2
 .ajuste{
   text-align: center;
   text-decoration: none;
+}
+
+.footer-rodape{
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px sans-serif;
+  padding: 5% 5%;
+  border: 0;
+}
+
+
+.footer-rodape .footer-centro{
+  margin-top: -6%;
+}
+.footer-rodape .footer-esquerda{
+  width: 40%;
+  margin-top: -4%
+}
+
+.footer-rodape h3{
+  color:  #ffffff;
+  font: normal 36px 'Cookie', cursive;
+  margin: 0;
+}
+
+.footer-rodape h3 span{
+  color:  #5383d3;
+}
+
+.footer-rodape .footer-links{
+  color:  #ffffff;
+  margin: 2% 0 2%;
+  padding: 0;
+}
+
+.footer-rodape .footer-links a{
+  display:inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color:  inherit;
+}
+
+.footer-rodape .footer-unbalerta{
+  color:  #8f9296;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-rodape .footer-centro i{
+  background-color:  #33383b;
+  color: #ffffff;
+  font-size: 25px;
+  width: 3%;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 42px;
+  margin: 0% 0% 30% 20%;
+}
+
+.footer-rodape .footer-centro i.fa-envelope{
+  font-size: 17px;
+  line-height: 38px;
+  margin-left: 10%
+}
+
+.footer-rodape .footer-centro i.fa-phone{
+  margin-left: 10%;
+}
+
+.footer-rodape .footer-centro p{
+  display: inline-block;
+  color: #ffffff;
+  vertical-align: middle;
+  margin-left: 2%;
+}
+
+.footer-rodape .footer-centro p span{
+  display:block;
+  font-weight: normal;
+  font-size:14px;
+  line-height:2;
+}
+
+.footer-rodape .footer-centro p a{
+  color:  #5383d3;
+  text-decoration: none;;
 }
