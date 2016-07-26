@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
 from .views import (CriarOcorrenciaView, DescricaoOcorrenciaView,
-                    ListaOcorrenciasView,
+                    GerarGraficosView, ListaOcorrenciasView,
                     ListaValidacaoView, ValidarOcorrenciaEditView,
                     MinhasOcorrenciasView, OcorrenciaDeleteView,
                     GerarRelatorioView, FiltroMapa)
@@ -38,5 +38,8 @@ urlpatterns = [
 
     url(r'^gerar-relatorio/$', GerarRelatorioView.as_view(),
         name='gerar_relatorio'),
+
+    url(r'^gerar-graficos/$', GerarGraficosView.as_view(),
+        name='gerar_grafico'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

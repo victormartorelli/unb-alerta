@@ -52,7 +52,7 @@ class OcorrenciaForm(ModelForm):
     informacoes_segurancas = forms.CharField(
         widget=forms.Textarea(
             attrs={'rows': 15,
-                   'cols': 48,}),
+                   'cols': 48}),
         required=False)
 
     class Meta:
@@ -361,6 +361,86 @@ class RelatorioFiltro(forms.Form):
             Fieldset('Filtragem de Relatórios'),
             row1, row2, row3,
             form_actions(save_label='Gerar Relatório'))
+
+
+class GraficosFiltro(forms.Form):
+
+    localidade = forms.ModelChoiceField(
+        label='Locais',
+        required=False,
+        queryset=Local.objects.all(),
+        empty_label='Selecione',
+    )
+
+    hora = forms.TimeField(
+        label='Hora Inicial',
+        required=True)
+
+    data = forms.DateField(
+        label='Data Inicial',
+        required=True,
+        input_formats=['%d/%m/%Y'])
+
+    hora_1 = forms.TimeField(label='Hora Final', required=True)
+
+    data_1 = forms.DateField(
+        label='Data Final',
+        required=True,
+        input_formats=['%d/%m/%Y'])
+
+    tipo = forms.ModelChoiceField(
+        label='Categoria',
+        required=False,
+        queryset=Categoria.objects.all(),
+        empty_label='Selecione',
+    )
+
+    emergencia = forms.ChoiceField(
+        label='Emergência?',
+        choices=YES_NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    vitimado = forms.ChoiceField(
+        label='Tem alguma vítima?',
+        required=False,
+        choices=YES_NO_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    validade = forms.ChoiceField(
+        label='É válida?',
+        required=False,
+        choices=YES_NO_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
+    def __init__(self, *args, **kwargs):
+        super(GraficosFiltro, self).__init__(*args, **kwargs)
+        self.fields['hora'].widget.attrs['class'] = 'hora'
+        self.fields['data'].widget.attrs['class'] = 'data'
+        self.fields['hora_1'].widget.attrs['class'] = 'hora'
+        self.fields['data_1'].widget.attrs['class'] = 'data'
+
+        row1 = to_row(
+            [('data', 6),
+             ('data_1', 6)])
+        row2 = to_row(
+            [('hora', 6),
+             ('hora_1', 6)])
+        row3 = to_row(
+            [('emergencia', 4),
+             ('validade', 4),
+             ('vitimado', 4)])
+        row4 = to_row([('localidade', 6),
+                       ('tipo', 6)])
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset('Gráficos'),
+            row1, row2, row3, row4,
+            form_actions(save_label='Gerar Gráficos'))
 
 
 class OcorrenciaFiltroMapa(OcorrenciaFiltro):

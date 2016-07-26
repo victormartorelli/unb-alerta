@@ -24,7 +24,7 @@ from usuario.models import Usuario
 
 from .models import Ocorrencia, Local, Categoria
 
-from .forms import (OcorrenciaForm, ValidarOcorrenciaEditForm,
+from .forms import (GraficosFiltro, OcorrenciaForm, ValidarOcorrenciaEditForm,
                     OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro)
 
 
@@ -295,82 +295,6 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
         return redirect(reverse(self.get_success_url()))
 
 
-# def pdf_view(self, form):
-#     locais_list = Local.objects.values('descricao').annotate(
-#         numero=Count('ocorrencia')).order_by(
-#         '-numero')[:5]
-
-#     categorias_list = Categoria.objects.values('tipo').annotate(
-#         numero=Count('ocorrencia')).order_by(
-#         '-numero')[:5]
-
-#     kwargs = {}
-
-#     kwargs['data__gte'] = form.cleaned_data['data']
-#     kwargs['data__lte'] = form.cleaned_data['data_1']
-#     kwargs['hora__gte'] = form.cleaned_data['hora']
-#     kwargs['hora__lte'] = form.cleaned_data['hora_1']
-
-#     if form.data.get('tipo'):
-#         kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
-
-#     if form.data.get('localidade'):
-#         kwargs['localidade'] = form.cleaned_data['localidade']
-
-#     ocorrencia = Ocorrencia.objects.filter(**kwargs)
-
-#     vitima = ocorrencia.filter(vitimado=True).count()
-#     emergencia = ocorrencia.filter(emergencia=True).count()
-#     validadas = ocorrencia.filter(validade=True).count()
-#     atendidas = ocorrencia.filter(atendida=True).count()
-
-#     if form.data.get('localidade'):
-#         localidade = Local.objects.filter(
-#             id=form.data.get('localidade'))[0].descricao
-#     else:
-#         localidade = None
-#         for i in range(5):
-#             array_locais_nome = locais_list[i].get('descricao')
-#             array_locais_numero = locais_list[i].get('numero')
-
-#     if form.data.get('tipo'):
-#         categoria = Categoria.objects.filter(
-#             id=form.data.get('tipo'))[0].tipo
-
-#     else:
-#         categoria = None
-#         for i in range(5):
-#             array_categorias_nome = categorias_list[i].get('tipo')
-#             array_categorias_numero = categorias_list[i].get('numero')
-
-#     context = {
-#         'vitima': vitima,
-#         'emergencia': emergencia,
-#         'validadas': validadas,
-#         'atendidas': atendidas,
-#         'localidade': localidade,
-#         'categoria': categoria,
-#         'array_locais_nome': array_locais_nome,
-#         'array_locais_numero': array_locais_numero,
-#         'array_categorias_nome': array_categorias_nome,
-#         'array_categorias_numero': array_categorias_numero,
-#     }
-#     html_template = get_template('relatorio.html')
-#     rendered_html = html_template.render(RequestContext(context))
-#     pdf_file = weasyprint.HTML(
-#         string=rendered_html).write_pdf()
-#     http_response = HttpResponse(pdf_file,
-#                                  content_type='application/pdf')
-#     http_response['Content-Disposition'] = 'filename="report.pdf"'
-
-#     c = canvas.Canvas(http_response)
-
-#     c.showPage()
-#     c.save()
-
-#     return http_response
-
-
 class GerarRelatorioView(PermissionRequiredMixin, FormView):
     form_class = RelatorioFiltro
     permission_required = {'ocorrencia.change_ocorrencia'}
@@ -482,6 +406,129 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
                 weasyprint.CSS(settings.STATIC_ROOT + '/css/relatorio.css')])
 
         return response
+
+
+class GerarGraficosView(PermissionRequiredMixin, FormView):
+    form_class = GraficosFiltro
+    permission_required = {'ocorrencia.change_ocorrencia'}
+    template_name = "ocorrencia/gerar_relatorio.html"
+
+    def form_valid(self, form):
+        kwargs = {}
+        kwargs_top = {}
+
+        kwargs['data__gte'] = form.cleaned_data['data']
+        kwargs['data__lte'] = form.cleaned_data['data_1']
+        kwargs['hora__gte'] = form.cleaned_data['hora']
+        kwargs['hora__lte'] = form.cleaned_data['hora_1']
+
+        kwargs_top['ocorrencia__data__gte'] = kwargs['data__gte']
+        kwargs_top['ocorrencia__data__lte'] = kwargs['data__lte']
+        kwargs_top['ocorrencia__hora__gte'] = kwargs['hora__gte']
+        kwargs_top['ocorrencia__hora__lte'] = kwargs['hora__lte']
+
+        if form.data.get('tipo'):
+            kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
+            kwargs_top['ocorrencia__tb_categoria_ID'] = kwargs[
+                'tb_categoria_ID']
+
+        if form.data.get('localidade'):
+            kwargs['localidade'] = form.cleaned_data['localidade']
+            kwargs_top['ocorrencia__localidade'] = kwargs['localidade']
+
+        if form.data.get('vitimado'):
+            kwargs['vitimado'] = form.cleaned_data['vitimado']
+            kwargs_top['ocorrencia__vitimado'] = kwargs[
+                'vitimado']
+
+        if form.data.get('emergencia'):
+            kwargs['emergencia'] = form.cleaned_data['emergencia']
+            kwargs_top['ocorrencia__emergencia'] = kwargs['emergencia']
+
+        if form.data.get('validade'):
+            kwargs['validade'] = form.cleaned_data['validade']
+            kwargs_top['ocorrencia__validade'] = kwargs['validade']
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        locais_list = Local.objects.filter(
+            **kwargs_top).values('descricao').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
+
+        categorias_list = Categoria.objects.filter(
+            **kwargs_top).values('tipo').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
+
+        com_vitima = ocorrencia.filter(vitimado=True).count()
+        sem_vitima = ocorrencia.filter(vitimado=False).count()
+
+        emergencial = ocorrencia.filter(emergencia=True).count()
+        nao_emergencial = ocorrencia.filter(emergencia=False).count()
+
+        validadas = ocorrencia.filter(validade=True).count()
+        falsas = ocorrencia.filter(validade=False).count()
+
+        if form.data.get('localidade'):
+            localidade = Local.objects.filter(
+                id=form.data.get('localidade'))[0].descricao
+            lista_top = Local.objects.filter(
+                **kwargs_top).values('descricao').annotate(
+                numero=Count('ocorrencia')).order_by(
+                '-numero')
+            try:
+                objeto = lista_top.get(descricao=localidade)
+            except ObjectDoesNotExist:
+                objeto = None
+                posicao_rank_local = None
+            else:
+                lista_top = list(lista_top)
+                posicao_rank_local = lista_top.index(objeto) + 1
+        else:
+            localidade = None
+            posicao_rank_local = None
+
+        if form.data.get('tipo'):
+            categoria = Categoria.objects.filter(
+                id=form.data.get('tipo'))[0].tipo
+            lista_top = Categoria.objects.filter(
+                **kwargs_top).values('tipo').annotate(
+                numero=Count('ocorrencia')).order_by(
+                '-numero')
+            try:
+                objeto = lista_top.get(tipo=categoria)
+            except ObjectDoesNotExist:
+                objeto = None
+                posicao_rank_cat = None
+            else:
+                lista_top = list(lista_top)
+                posicao_rank_cat = lista_top.index(objeto) + 1
+        else:
+            categoria = None
+            posicao_rank_cat = None
+
+        context = {
+            'data__gte': form.cleaned_data['data'],
+            'data__lte': form.cleaned_data['data_1'],
+            'hora__gte': form.cleaned_data['hora'],
+            'hora__lte': form.cleaned_data['hora_1'],
+            'com_vitima': com_vitima,
+            'sem_vitima': sem_vitima,
+            'emergencial': emergencial,
+            'nao_emergencial': nao_emergencial,
+            'validadas': validadas,
+            'falsa': falsas,
+            'localidade': localidade,
+            'categoria': categoria,
+            'array_locais': locais_list,
+            'array_categorias': categorias_list,
+            'posicao_rank_local': posicao_rank_local,
+            'posicao_rank_cat': posicao_rank_cat,
+            'form': form,
+        }
+
+        return self.render_to_response(context=context)
 
 
 class FiltroMapa(LoginRequiredMixin, FilterView):
