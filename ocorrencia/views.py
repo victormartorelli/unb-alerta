@@ -411,7 +411,7 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
 class GerarGraficosView(PermissionRequiredMixin, FormView):
     form_class = GraficosFiltro
     permission_required = {'ocorrencia.change_ocorrencia'}
-    template_name = "ocorrencia/gerar_relatorio.html"
+    template_name = "ocorrencia/gerar_grafico.html"
 
     def form_valid(self, form):
         kwargs = {}
@@ -461,6 +461,8 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
             numero=Count('ocorrencia')).order_by(
             '-numero')[:5]
 
+        total_ocorrencias = ocorrencia.count()
+
         com_vitima = ocorrencia.filter(vitimado=True).count()
         sem_vitima = ocorrencia.filter(vitimado=False).count()
 
@@ -508,6 +510,19 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
             categoria = None
             posicao_rank_cat = None
 
+        qntd_locais_top5 = 0
+        qntd_cat_top5 = 0
+
+        for l in locais_list:
+            qntd_locais_top5 = qntd_locais_top5 + int(l.get(
+                'numero'))
+        for c in categorias_list:
+            qntd_cat_top5 = qntd_cat_top5 + int(c.get(
+                'numero'))
+
+        outros_locais = total_ocorrencias - qntd_locais_top5
+        outras_cat = total_ocorrencias - qntd_cat_top5
+
         context = {
             'data__gte': form.cleaned_data['data'],
             'data__lte': form.cleaned_data['data_1'],
@@ -518,13 +533,15 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
             'emergencial': emergencial,
             'nao_emergencial': nao_emergencial,
             'validadas': validadas,
-            'falsa': falsas,
+            'falsas': falsas,
             'localidade': localidade,
             'categoria': categoria,
             'array_locais': locais_list,
             'array_categorias': categorias_list,
             'posicao_rank_local': posicao_rank_local,
             'posicao_rank_cat': posicao_rank_cat,
+            'outros_locais': outros_locais,
+            'outras_cat': outras_cat,
             'form': form,
         }
 

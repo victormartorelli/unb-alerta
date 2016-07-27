@@ -60,8 +60,18 @@
   $('#pizza_loc').click(function(){
     
     var data = [{
-    values: [10, 26, 55],
-    labels: ['Tipo1', 'Tipo2', 'Tipo3'],
+    values: [{{array_locais.0.numero}},
+             {{array_locais.1.numero}},
+             {{array_locais.2.numero}},
+             {{array_locais.3.numero}},
+             {{array_locais.4.numero}},
+             {{outros_locais}}],
+    labels: ['{{array_locais.0.descricao}}',
+             '{{array_locais.1.descricao}}',
+             '{{array_locais.2.descricao}}',
+             '{{array_locais.3.descricao}}',
+             '{{array_locais.4.descricao}}',
+             'Outros'],
     type: 'pie'
   }];
 
@@ -76,24 +86,18 @@
   $('#pizza_cat').click(function(){
     
     var data = [{
-    values: [10, 26, 55],
-    labels: ['Tipo1', 'Tipo2', 'Tipo3'],
-    type: 'pie'
-  }];
-
-    var layout = {
-    height: 400,
-    width: 500
-  };
-
-  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
-  });
-
-  $('#pizza_cat').click(function(){
-    
-    var data = [{
-    values: [10, 26, 55],
-    labels: ['Tipo1', 'Tipo2', 'Tipo3'],
+    values: [{{array_categorias.0.numero}},
+             {{array_categorias.1.numero}},
+             {{array_categorias.2.numero}},
+             {{array_categorias.3.numero}},
+             {{array_categorias.4.numero}},
+             {{outras_cat}}],
+    labels: ['{{array_categorias.0.tipo}}',
+             '{{array_categorias.1.tipo}}',
+             '{{array_categorias.2.tipo}}',
+             '{{array_categorias.3.tipo}}',
+             '{{array_categorias.4.tipo}}',
+             'Outros'],
     type: 'pie'
   }];
 
@@ -137,8 +141,9 @@
                 <button type="button" class="btn btn-primary" id="pizza_cat">Categorias</button>
                 <button type="button" class="btn btn-primary" id="temporal">Temporal</button>
               </div>
-
+              
               	<div id="DivGrafico"></div>
+
     		</nav>
 		</div>
 	</div>
