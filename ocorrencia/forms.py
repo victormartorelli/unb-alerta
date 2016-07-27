@@ -2,6 +2,7 @@
 import datetime
 import django_filters
 
+from captcha.fields import CaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Fieldset, Layout
 
@@ -55,6 +56,8 @@ class OcorrenciaForm(ModelForm):
                    'cols': 48}),
         required=False)
 
+    captcha = CaptchaField()
+
     class Meta:
         model = Ocorrencia
         fields = ['emergencia',
@@ -72,14 +75,16 @@ class OcorrenciaForm(ModelForm):
                   'descricao',
                   'localidade',
                   'repetida',
-                  'informacoes_segurancas']
+                  'informacoes_segurancas',
+                  'data_publicacao']
 
         widgets = {'atendida': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
                    'usuario_ID': forms.HiddenInput(),
                    'validade': forms.HiddenInput(),
                    'repetida': forms.HiddenInput(),
-                   'informacoes_segurancas': forms.HiddenInput()}
+                   'informacoes_segurancas': forms.HiddenInput(),
+                   'data_publicacao': forms.HiddenInput()}
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -166,7 +171,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                   'foto',
                   'descricao',
                   'informacoes_segurancas',
-                  'status']
+                  'status',
+                  'data_publicacao']
 
         widgets = {'id': forms.HiddenInput(),
                    'vigilante_ID': forms.HiddenInput(),
@@ -176,7 +182,8 @@ class ValidarOcorrenciaEditForm(ModelForm):
                    'latitude': forms.HiddenInput(),
                    'longitude': forms.HiddenInput(),
                    'descricao': forms.HiddenInput(),
-                   'localidade': forms.HiddenInput()}
+                   'localidade': forms.HiddenInput(),
+                   'data_publicacao': forms.HiddenInput()}
 
 
 class RangeWidgetOverrideDate(forms.MultiWidget):

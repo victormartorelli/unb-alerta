@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import weasyprint
 
 from django.views.generic import (FormView, ListView, DetailView,
@@ -97,13 +99,15 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
                     'atendida': False,
                     'vigilante_ID': 1,
                     'usuario_ID': usuario.id,
-                    'repetida': False}
+                    'repetida': False,
+                    'data_publicacao': datetime.datetime.now()}
         else:
             return {'validade': False,
                     'atendida': False,
                     'vigilante_ID': 1,
                     'usuario_ID': 1,
-                    'repetida': False}
+                    'repetida': False,
+                    'data_publicacao': datetime.datetime.now()}
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -162,13 +166,15 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
-                    'informacoes_segurancas': o.informacoes_segurancas}
+                    'informacoes_segurancas': o.informacoes_segurancas,
+                    'data_publicacao': o.data_publicacao}
         else:
             return {'vigilante_ID': 1,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
-                    'informacoes_segurancas': o.informacoes_segurancas}
+                    'informacoes_segurancas': o.informacoes_segurancas,
+                    'data_publicacao': o.data_publicacao}
 
     def form_valid(self, form):
         ocorrencia = form.instance

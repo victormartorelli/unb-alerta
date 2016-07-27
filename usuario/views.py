@@ -1,3 +1,5 @@
+from captcha.fields import CaptchaField
+
 from django.views.generic import FormView, DetailView, TemplateView
 from django.contrib import messages
 from django.conf import settings

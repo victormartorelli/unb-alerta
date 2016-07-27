@@ -100,6 +100,11 @@ class Ocorrencia(models.Model):
         blank=True,
         null=True)
 
+    data_publicacao = models.DateTimeField(
+        verbose_name='Data de Criação da Ocorrência',
+        blank=True,
+        null=True)
+
     class Meta:
         verbose_name = ('Ocorrência')
         verbose_name_plural = ('Ocorrências')
