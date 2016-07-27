@@ -7,7 +7,7 @@
         <div class="panel panel-primary">
           <div class="panel-heading" style="text-align:center">
             <h1>Descrição da Ocorrência</h1>
-        </div>
+          </div>
 
           <ul class="nav nav-tabs">
             <li class="active"><a href="#info" data-toggle="tab" aria-expanded="true">Informações Gerais</a></li>
@@ -16,50 +16,52 @@
             <li class=""><a href="#foto" data-toggle="tab" aria-expanded="false">Foto</a></li>
           </ul>
 
-          <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="info">
-            <p style=" margin: 2% 2%"><b>Data:</b> {{object.data|default_if_none:"Não foi informado"}} </p>
-            <p style=" margin: 2% 2%"><b>Hora:</b> {{object.hora|default_if_none:"Não foi informado"}} </p>
-            <p style=" margin: 2% 2%"><b>A ocorrência foi validada?</b>
+          <div id="myTabContent" class="tab-content" >
+            <div class="tab-pane fade active in" id="info" >
+            <p> <b>Data:</b> {{object.data|default_if_none:"Não foi informado"}} </p>
+            <p> <b>Hora:</b> {{object.hora|default_if_none:"Não foi informado"}} </p>
+            <p> <b>A ocorrência foi validada?</b>
             {% if object.validade == True %} 
                 Sim
               {% else %} 
                 Não
-              {% endif %}</p>
-            <p style=" margin: 2% 2%"><b>É uma emergência?</b>
+              {% endif %}
+            </p>
+            <p> <b>É uma emergência?</b>
             {% if object.emergencia == True %} 
                 Sim
               {% else %} 
                 Não
-              {% endif %}</p>
-            <p style=" margin: 2% 2%"><b>Possui vítima?</b>
+              {% endif %}
+            </p>
+            <p> <b>Possui vítima?</b>
               {% if object.vitimado == True %} 
                 Sim
               {% else %} 
                 Não
               {% endif %}</p>
-            <p style=" margin: 2% 2%"><b>Categoria:</b> {{object.tb_categoria_ID|default_if_none:"Não foi informado"}}</p>
-            <p style=" margin: 2% 2%"><b>Local:</b> {{object.localidade.descricao|default_if_none:"Não foi informado"}}</p>
-          </div>
+            <p> <b>Categoria:</b> {{object.tb_categoria_ID|default_if_none:"Não foi informado"}}</p>
+            <p> <b>Local:</b> {{object.localidade.descricao|default_if_none:"Não foi informado"}}</p>
+            </div>
 
-          <div class="tab-pane fade" id="vitima">
-            <p style=" margin: 2% 2%">{{object.descricao|default_if_none:"Não foi relatado nada"}} </p>
-          </div>
+            <div class="tab-pane fade" id="vitima">
+              <p> {{object.descricao|default_if_none:"Não foi relatado nada"}} </p>
+            </div>
 
-          <div class="tab-pane fade" id="vigilante">
-            <p style=" margin: 2% 2%">{{object.resposta|default_if_none:"Não foi relatado nada"}}</p>
-          </div>
+            <div class="tab-pane fade" id="vigilante">
+              <p> {{object.resposta|default_if_none:"Não foi relatado nada"}}</p>
+            </div>
 
-          <div class="tab-pane fade" id="foto" style="margin: 2% 2%">
-            {% if object.foto %}
-              <div class="imagem"  >
-                <img src="{{object.foto.url}}" height="400px" width="500px">
-              </div>
-            {% else %}
-              <p>Nao ha imagem para mostrar</p>
-            {% endif%}
+            <div class="tab-pane fade" id="foto">
+              {% if object.foto %}
+                <div class="imagem"  >
+                  <img src="{{object.foto.url}}" height="400px" width="500px">
+                </div>
+              {% else %}
+                <p>Nao ha imagem para mostrar</p>
+              {% endif%}
+            </div>
           </div>
-
         </div>
       </div>
     </div>

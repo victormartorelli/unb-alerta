@@ -95,6 +95,18 @@ legend{
   display: inline;
 }
 
+#myTabContent,
+#vitima,
+#vigilante,
+#foto{
+  min-height: 7vh;
+  margin: 2% 2%
+}
+
+#gra {
+  text-align: center;
+}
+
 #fundo{
     background: url("images/back.png");
   	background-color: #444;
@@ -399,11 +411,12 @@ h2
   text-align: left;
   font: bold 16px sans-serif;
   padding: 5% 5%;
+  margin-bottom: 0%;
 }
-
 
 .footer-rodape .footer-direita{
   margin-top: -6%;
+  margin-left: -5%;
 }
 .footer-rodape .footer-esquerda{
   width: 40%;
@@ -457,18 +470,18 @@ h2
 .footer-rodape .footer-direita i.fa-envelope{
   font-size: 17px;
   line-height: 38px;
-  margin-left: 10%
+  margin-left: 5%
 }
 
 .footer-rodape .footer-direita i.fa-phone{
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 .footer-rodape .footer-direita p{
   display: inline-block;
   color: #ffffff;
   vertical-align: middle;
-  margin-left: 2%;
+  margin-left: 1%;
 }
 
 .footer-rodape .footer-direita p span{
