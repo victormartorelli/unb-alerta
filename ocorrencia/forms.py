@@ -365,6 +365,10 @@ class RelatorioFiltro(forms.Form):
 
 class GraficosFiltro(forms.Form):
 
+    ano_grafico_barra = forms.IntegerField(
+        label='Ano Gráfico de Barras',
+        required=True)
+
     localidade = forms.ModelChoiceField(
         label='Locais',
         required=False,
@@ -435,11 +439,12 @@ class GraficosFiltro(forms.Form):
              ('vitimado', 4)])
         row4 = to_row([('localidade', 6),
                        ('tipo', 6)])
+        row5 = to_row([('ano_grafico_barra', 6)])
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset('Gráficos'),
-            row1, row2, row3, row4,
+            row1, row2, row3, row4, row5,
             form_actions(save_label='Gerar Gráficos'))
 
 

@@ -472,44 +472,6 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
         validadas = ocorrencia.filter(validade=True).count()
         falsas = ocorrencia.filter(validade=False).count()
 
-        if form.data.get('localidade'):
-            localidade = Local.objects.filter(
-                id=form.data.get('localidade'))[0].descricao
-            lista_top = Local.objects.filter(
-                **kwargs_top).values('descricao').annotate(
-                numero=Count('ocorrencia')).order_by(
-                '-numero')
-            try:
-                objeto = lista_top.get(descricao=localidade)
-            except ObjectDoesNotExist:
-                objeto = None
-                posicao_rank_local = None
-            else:
-                lista_top = list(lista_top)
-                posicao_rank_local = lista_top.index(objeto) + 1
-        else:
-            localidade = None
-            posicao_rank_local = None
-
-        if form.data.get('tipo'):
-            categoria = Categoria.objects.filter(
-                id=form.data.get('tipo'))[0].tipo
-            lista_top = Categoria.objects.filter(
-                **kwargs_top).values('tipo').annotate(
-                numero=Count('ocorrencia')).order_by(
-                '-numero')
-            try:
-                objeto = lista_top.get(tipo=categoria)
-            except ObjectDoesNotExist:
-                objeto = None
-                posicao_rank_cat = None
-            else:
-                lista_top = list(lista_top)
-                posicao_rank_cat = lista_top.index(objeto) + 1
-        else:
-            categoria = None
-            posicao_rank_cat = None
-
         qntd_locais_top5 = 0
         qntd_cat_top5 = 0
 
@@ -523,6 +485,53 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
         outros_locais = total_ocorrencias - qntd_locais_top5
         outras_cat = total_ocorrencias - qntd_cat_top5
 
+        # Gráfico de Barras Ano
+        kwargs.pop('data__gte')
+        kwargs.pop('data__lte')
+
+        kwargs['data__year'] = form.cleaned_data['ano_grafico_barra']
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        meses = {
+            'jan': ocorrencia.filter(data__month=1).count(),
+            'fev': ocorrencia.filter(data__month=2).count(),
+            'mar': ocorrencia.filter(data__month=3).count(),
+            'abr': ocorrencia.filter(data__month=4).count(),
+            'mai': ocorrencia.filter(data__month=5).count(),
+            'jun': ocorrencia.filter(data__month=6).count(),
+            'jul': ocorrencia.filter(data__month=7).count(),
+            'ago': ocorrencia.filter(data__month=8).count(),
+            'set': ocorrencia.filter(data__month=9).count(),
+            'out': ocorrencia.filter(data__month=10).count(),
+            'nov': ocorrencia.filter(data__month=11).count(),
+            'dez': ocorrencia.filter(data__month=12).count(),
+        }
+
+        # Gráfico de Barras Horários
+
+        kwargs['data__gte'] = form.cleaned_data['data']
+        kwargs['data__lte'] = form.cleaned_data['data_1']
+        kwargs.pop('hora__gte')
+        kwargs.pop('hora__lte')
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        horarios = {
+            '00a06': ocorrencia.filter(
+                hora__gt='00:00',
+                hora__lte='06:00').count(),
+            '06a12': ocorrencia.filter(
+                hora__gt='06:00',
+                hora__lte='12:00').count(),
+            '12a18': ocorrencia.filter(
+                hora__gt='12:00',
+                hora__lte='18:00').count(),
+            '18a24': ocorrencia.filter(
+                hora__gt='18:00',
+                hora__lte='00:00').count(),
+        }
+
         context = {
             'data__gte': form.cleaned_data['data'],
             'data__lte': form.cleaned_data['data_1'],
@@ -534,14 +543,12 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
             'nao_emergencial': nao_emergencial,
             'validadas': validadas,
             'falsas': falsas,
-            'localidade': localidade,
-            'categoria': categoria,
             'array_locais': locais_list,
             'array_categorias': categorias_list,
-            'posicao_rank_local': posicao_rank_local,
-            'posicao_rank_cat': posicao_rank_cat,
             'outros_locais': outros_locais,
             'outras_cat': outras_cat,
+            'meses': meses,
+            'horarios': horarios,
             'form': form,
         }
 

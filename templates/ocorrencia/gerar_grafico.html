@@ -109,6 +109,53 @@
   Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
   });
 
+  $('#barra_mes').click(function(){  
+    var data = [{
+      x: ['Janeiro',
+          'Fevereiro',
+          'Março',
+          'Abril',
+          'Maio',
+          'Junho',
+          'Julho',
+          'Agosto',
+          'Setembro',
+          'Outubro',
+          'Novembro',
+          'Dezembro'],
+      y: [ {{meses.jan}},
+           {{meses.fev}},
+           {{meses.mar}},
+           {{meses.abr}},
+           {{meses.mai}},
+           {{meses.jun}},
+           {{meses.jul}},
+           {{meses.ago}},
+           {{meses.set}},
+           {{meses.out}},
+           {{meses.nov}},
+           {{meses.dez}}],
+      type: 'bar'
+    }];
+    Plotly.newPlot(document.getElementById('DivGrafico'), data);
+  });
+
+  $('#barra_hor').click(function(){  
+    var data = [{
+      x: ['00:00 até 06:00',
+          '06:00 até 12:00',
+          '12:00 até 18:00',
+          '18:00 até 00:00'],
+
+      y: [ {{horarios.00a06}},
+           {{horarios.06a12}},
+           {{horarios.12a18}},
+           {{horarios.18a00}}],
+      type: 'bar'
+    }];
+    Plotly.newPlot(document.getElementById('DivGrafico'), data);
+  });
+
   $('#temporal').click(function(){
     
     var data = [{ x: [{{data}}, {{data_1}}],
@@ -139,7 +186,8 @@
                 <button type="button" class="btn btn-primary" id="pizza_val">Validas</button>
                 <button type="button" class="btn btn-primary" id="pizza_loc">Locais</button>
                 <button type="button" class="btn btn-primary" id="pizza_cat">Categorias</button>
-                <button type="button" class="btn btn-primary" id="temporal">Temporal</button>
+                <button type="button" class="btn btn-primary" id="barra_mes">Barra Meses</button>
+                <button type="button" class="btn btn-primary" id="barra_hor">Barra Horarios</button>
               </div>
               
               	<div id="DivGrafico"></div>
