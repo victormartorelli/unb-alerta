@@ -12,48 +12,50 @@
       <div class="row vertical-offset-100">
         <div class="col-md-5 col-md-offset-3">
           <div class="panel panel-primary" >
-              <div class="panel-heading" style="text-align:center">
-                <h1>Login</h1>
-              </div>
-              <div class="panel-body" style="margin-left:5%;margin-right:5%">
+            
+            <div class="panel-heading" style="text-align:center">
+              <h1>Login</h1>
+            </div>
+             
+            <div class="panel-body" style="margin-left:5%;margin-right:5%">
               
               </br>
-            <form method="post" action="">
+              <form method="post" action="">
                 {% csrf_token %}
-                  <div class="form-group">
-                    <center><p style="font-size:18px; margin-bottom:1px;">Usuário</p>
-                    {{ form.username }}</center>
-                  </div>
-                  <div class="form-group">
-                    <center><p style="font-size:18px; margin-bottom:1px;">Senha</p>
-                    {{ form.password }}</center>
-                  </div>
-                  {% if form.errors %}
-                    <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos.<br>Tente novamente.</font></p>
+                <div class="form-group">
+                  <center><p style="font-size:18px; margin-bottom:1px;">Usuário</p>
+                  {{ form.username }}</center>
+                </div>
+                <div class="form-group">
+                  <center><p style="font-size:18px; margin-bottom:1px;">Senha</p>
+                  {{ form.password }}</center>
+                </div>
+                {% if form.errors %}
+                  <p><font color="red">Seu nome de usuário e/ou sua senha estão incorretos.<br>Tente novamente.</font></p>
+                {% endif %}
+
+                {% if next %}
+                  {% if user.is_authenticated %}
+                    <p><font color="red">Sua conta não tem acesso a esta página.</font></p>
+                  {% else %}
+                    <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
+
                   {% endif %}
-
-                  {% if next %}
-                    {% if user.is_authenticated %}
-                      <p><font color="red">Sua conta não tem acesso a esta página.</font></p>
-                    {% else %}
-                      <p><font color="red">Por favor, faça o login para acessar esta página.</font></p>
-
-                    {% endif %}
-                  {% endif %}
+                {% endif %}
+                
+                <input type="hidden" name="next" value="{{ next }}" />
+                <div class = "senha" style="margin-top:7%;text-align:center">
+                  <a href="{% url 'recuperar_senha' %}" style="font-size:16px">Esqueceu a senha?</a>
+                </div>
                   
-                  <input type="hidden" name="next" value="{{ next }}" />
-                  <div class = "senha" style="margin-top:7%;text-align:center">
-                    <a href="{% url 'recuperar_senha' %}" style="font-size:16px">Esqueceu a senha?</a>
-                  </div>
-                  
-
-                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%;">
-            </form>
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" style="margin-top:10%;">
+              </form>
+            </div>  
             
         </div>
-	</div>
+	    </div>
+    </div>
   </div>
-</div>
 </div>
 
 {% endblock %}

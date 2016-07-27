@@ -118,15 +118,17 @@
 
 
 <div id = "fundo">
-<div class="container">
+  <div class="container">
     <div class="row vertical-offset-100">
 	    <div class="col-md-6 col-md-offset-3">
-	    	<nav class="navfilter">
+	    	
+        <nav class="navfilter">
 			  	<div class="container-fluid" >
 			        {% crispy form %}
 		    	</div>
-			</nav>
-	    	<nav class="navfilter">
+			  </nav>
+	    	
+        <nav class="navfilter">
 		    	<legend> Selecione o tipo de gráfico desejado</legend></br>
 
 	            <div class="btn-group" role="group" style="margin-left:25%;margin-bottom: 5%">
@@ -138,11 +140,12 @@
                 <button type="button" class="btn btn-primary" id="temporal">Temporal</button>
               </div>
 
-              	<div id="DivGrafico"></div>
+              <div id="DivGrafico"></div>
     		</nav>
-		</div>
-	</div>
-</div>
+
+		  </div>
+	  </div>
+  </div>
 </div>
 		
  {% endblock %}
