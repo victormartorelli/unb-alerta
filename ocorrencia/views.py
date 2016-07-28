@@ -561,10 +561,11 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
         return self.render_to_response(context=context)
 
 
-class FiltroMapa(LoginRequiredMixin, FilterView):
+class FiltroMapa(PermissionRequiredMixin, FilterView):
     model = Ocorrencia
     filterset_class = OcorrenciaFiltroMapa
     paginate_by = 10
+    permission_required = {'ocorrencia.change_ocorrencia'}
     template_name = "mapa.html"
 
     def get_context_data(self, **kwargs):
@@ -597,9 +598,7 @@ class FiltroMapa(LoginRequiredMixin, FilterView):
 
         self.filterset.form.fields['o'].label = 'Ordenação'
 
-        queryset = self.object_list.filter(
-            atendida=True,
-            validade=True).distinct()
+        queryset = self.object_list.filter().distinct()
 
         array_lat = []
         array_long = []

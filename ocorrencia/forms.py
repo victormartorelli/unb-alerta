@@ -457,6 +457,19 @@ class GraficosFiltro(forms.Form):
 
 class OcorrenciaFiltroMapa(OcorrenciaFiltro):
 
+    status = django_filters.ModelChoiceFilter(
+        label='Status',
+        required=False,
+        queryset=StatusOcorrencia.objects.all(),
+        empty_label='Selecione',
+    )
+
+    validade = forms.ChoiceField(
+        label='É válida?',
+        choices=YES_NO_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
     def __init__(self, *args, **kwargs):
         super(OcorrenciaFiltroMapa, self).__init__(*args, **kwargs)
         self.form.fields['id'].label = 'ID'
@@ -464,21 +477,25 @@ class OcorrenciaFiltroMapa(OcorrenciaFiltro):
         self.form.fields['data'].widget.attrs['class'] = 'data'
 
         row1 = to_row(
-            [('id', 2),
-             ('tb_categoria_ID', 4),
-             ('vitimado', 3),
-             ('emergencia', 3)])
+            [('id', 4),
+             ('vitimado', 4),
+             ('emergencia', 4)])
         row2 = to_row(
             [('data', 6),
              ('hora', 6)])
         row3 = to_row(
-            [('localidade', 4),
-             ('descricao', 4),
-             ('resposta', 4)])
+            [('localidade', 6),
+             ('tb_categoria_ID', 6)])
+        row4 = to_row(
+            [('status', 6),
+             ('validade', 6)])
+        row5 = to_row(
+            [('descricao', 6),
+             ('resposta', 6)])
 
         self.form.helper = FormHelper()
         self.form.helper.form_method = 'GET'
         self.form.helper.layout = Layout(
             Fieldset('Filtragem de Ocorrências'),
-            row1, row2, row3,
+            row1, row2, row3, row4, row5,
             form_actions(save_label='Filtrar'))
