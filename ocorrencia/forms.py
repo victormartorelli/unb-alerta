@@ -9,6 +9,7 @@ from crispy_forms.layout import Fieldset, Layout
 from django import forms
 from django.db import models
 from django.forms import ModelForm, ValidationError
+from django.utils import six
 from .models import Categoria, Ocorrencia, Local, StatusOcorrencia
 
 from unb_alerta.utils import to_row, form_actions
@@ -457,18 +458,18 @@ class GraficosFiltro(forms.Form):
 
 class OcorrenciaFiltroMapa(OcorrenciaFiltro):
 
+    validade = django_filters.ChoiceFilter(
+        label='É válida?',
+        choices=YES_NO_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'selector'}))
+
     status = django_filters.ModelChoiceFilter(
         label='Status',
         required=False,
         queryset=StatusOcorrencia.objects.all(),
         empty_label='Selecione',
     )
-
-    validade = forms.ChoiceField(
-        label='É válida?',
-        choices=YES_NO_CHOICES,
-        widget=forms.Select(
-            attrs={'class': 'selector'}))
 
     def __init__(self, *args, **kwargs):
         super(OcorrenciaFiltroMapa, self).__init__(*args, **kwargs)
@@ -498,4 +499,35 @@ class OcorrenciaFiltroMapa(OcorrenciaFiltro):
         self.form.helper.layout = Layout(
             Fieldset('Filtragem de Ocorrências'),
             row1, row2, row3, row4, row5,
+            form_actions(save_label='Filtrar'))
+
+
+class DateRangeFilterEdit(django_filters.DateRangeFilter):
+    def __init__(self, *args, **kwargs):
+        self.options.pop(4)
+        self.options.pop(5)
+        kwargs['choices'] = [
+            (key, value[0]) for key, value in six.iteritems(self.options)]
+        super(DateRangeFilterEdit, self).__init__(*args, **kwargs)
+
+
+class OcorrenciaFiltroMapaUsuario(django_filters.FilterSet):
+    data = DateRangeFilterEdit(
+        label='Data da Ocorrência')
+
+    class Meta:
+        model = Ocorrencia
+        fields = ['data']
+
+    def __init__(self, *args, **kwargs):
+        super(OcorrenciaFiltroMapaUsuario, self).__init__(*args, **kwargs)
+
+        row1 = to_row(
+            [('data', 6)])
+
+        self.form.helper = FormHelper()
+        self.form.helper.form_method = 'GET'
+        self.form.helper.layout = Layout(
+            Fieldset('Filtragem de Ocorrências'),
+            row1,
             form_actions(save_label='Filtrar'))

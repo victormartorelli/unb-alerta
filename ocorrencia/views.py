@@ -27,13 +27,15 @@ from usuario.models import Usuario
 from .models import Ocorrencia, Local, Categoria
 
 from .forms import (GraficosFiltro, OcorrenciaForm, ValidarOcorrenciaEditForm,
-                    OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro)
+                    OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro,
+                    OcorrenciaFiltroMapaUsuario)
 
 
-class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
+class ListaOcorrenciasView(PermissionRequiredMixin, FilterView):
     model = Ocorrencia
     filterset_class = OcorrenciaFiltro
     paginate_by = 10
+    permission_required = {'ocorrencia.change_ocorrencia'}
 
     def get_context_data(self, **kwargs):
         context = super(ListaOcorrenciasView,
@@ -215,12 +217,10 @@ class DescricaoOcorrenciaView(PermissionRequiredMixin,
         else:
             pk = self.kwargs['pk']
             usuario = Usuario.objects.get(user_id=user.id)
-            visivel = Ocorrencia.objects.filter(
-                id=pk,
-                atendida=True,
-                validade=True)
+
             pertence = Ocorrencia.objects.filter(id=pk, usuario_ID=usuario.id)
-            if visivel or pertence:
+
+            if pertence:
                 return True
             else:
                 return False
@@ -561,12 +561,17 @@ class GerarGraficosView(PermissionRequiredMixin, FormView):
         return self.render_to_response(context=context)
 
 
-class FiltroMapa(PermissionRequiredMixin, FilterView):
+class FiltroMapa(LoginRequiredMixin, FilterView):
     model = Ocorrencia
     filterset_class = OcorrenciaFiltroMapa
     paginate_by = 10
-    permission_required = {'ocorrencia.change_ocorrencia'}
     template_name = "mapa.html"
+
+    def get_filterset_class(self):
+        if self.request.user.groups.filter(name="Usuário Comum"):
+            return OcorrenciaFiltroMapaUsuario
+        else:
+            return super(FiltroMapa, self).get_filterset_class()
 
     def get_context_data(self, **kwargs):
         context = super(FiltroMapa,
@@ -596,9 +601,12 @@ class FiltroMapa(PermissionRequiredMixin, FilterView):
         else:
             url = ''
 
-        self.filterset.form.fields['o'].label = 'Ordenação'
-
-        queryset = self.object_list.filter().distinct()
+        if self.request.user.groups.filter(name="Usuário Comum"):
+            queryset = self.object_list.filter(
+                validade=True,
+                atendida=True).distinct()
+        else:
+            queryset = self.object_list.distinct()
 
         array_lat = []
         array_long = []

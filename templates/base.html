@@ -48,9 +48,9 @@
                 <a href="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 Estatísticas <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                {% if perms.ocorrencia.change_ocorrencia %}
                   <li><a href="{% url 'estatisticas' %}">Mapa</a></li>
                   <li class="divider"></li>
+                  {% if perms.ocorrencia.change_ocorrencia %}
                     <li><a href="{% url 'gerar_relatorio' %}">Relatórios</a></li>
                     <li><a href="{% url 'gerar_grafico' %}">Gráficos</a></li>
                 {% endif %}
@@ -65,7 +65,9 @@
               <li class="dropdown">
                 <a href="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ocorrências <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                {% if perms.ocorrencia.change_ocorrencia %}
                   <li><a href="{% url 'lista_ocorrencias' %}">Todas ocorrências</a></li>
+                {% endif %}
                   <li class="divider"></li>
                   <li><a href="{% url 'minhas_ocorrencias' %}"> Minhas ocorrências</a></li>
                 </ul>
