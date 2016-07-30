@@ -401,15 +401,13 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
 
         ocorrencia = Ocorrencia.objects.filter(**kwargs)
 
-        locais_list = Local.objects.filter(
-            **kwargs_top).values('descricao').annotate(
-            numero=Count('ocorrencia')).order_by(
-            '-numero')[:5]
+        locais_list = enumerate(Local.objects.values('descricao').annotate(numero=Count('ocorrencia')).order_by(
+            '-numero')[:5])
+        locais_list = [(i+1, a) for (i, a) in locais_list]
 
-        categorias_list = Categoria.objects.filter(
-            **kwargs_top).values('tipo').annotate(
-            numero=Count('ocorrencia')).order_by(
-            '-numero')[:5]
+        categorias_list = enumerate(Categoria.objects.values('tipo').annotate(numero=Count('ocorrencia')).order_by(
+            '-numero')[:5])
+        categorias_list = [(i+1, a) for (i, a) in categorias_list]
 
         vitima = ocorrencia.filter(vitimado=True).count()
         emergencia = ocorrencia.filter(emergencia=True).count()
@@ -479,7 +477,9 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             url_fetcher=self.request).write_pdf(
             response,
             stylesheets=[
-                weasyprint.CSS(settings.STATIC_ROOT + '/css/relatorio.css')])
+                weasyprint.CSS(settings.STATIC_ROOT + '/css/relatorio.css'),
+                weasyprint.CSS(settings.STATIC_ROOT + '/css/w3.css')
+            ])
 
         return response
 
