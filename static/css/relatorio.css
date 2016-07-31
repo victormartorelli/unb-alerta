@@ -17,3 +17,8 @@
     font-family: "Times New Roman", cursive;
     font-size: large;
 }
+
+.w3-title-color {
+    background-color: #247ba0;
+    color: #ffffff;
+}
