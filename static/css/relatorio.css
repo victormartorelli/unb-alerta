@@ -1,14 +1,19 @@
 .w3-info-font {
-    font-family: "Calibri Light", cursive;
-    font-size: x-small;
-}
-
-.w3-field-font {
-    font-family: "Calibri Light", cursive;
+    font-family: "Times New Roman", cursive;
     font-size: smaller;
 }
 
+.w3-field-font {
+    font-family: "Times New Roman", cursive;
+    font-size: medium;
+}
+
 .w3-field-font2 {
-    font-family: "Calibri Light", cursive;
-    font-size: x-small;
+    font-family: "Times New Roman", cursive;
+    font-size: smaller;
+}
+
+.w3-title-font {
+    font-family: "Times New Roman", cursive;
+    font-size: large;
 }

@@ -370,7 +370,6 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
 
 #     return http_response
 
-
 class GerarRelatorioView(PermissionRequiredMixin, FormView):
     form_class = RelatorioFiltro
     permission_required = {'ocorrencia.change_ocorrencia'}
@@ -399,28 +398,22 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             kwargs['localidade'] = form.cleaned_data['localidade']
             kwargs_top['ocorrencia__localidade'] = kwargs['localidade']
 
-        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+        ocorrencia = Ocorrencia.objects.all()
 
-        locais_list = enumerate(Local.objects.values('descricao').annotate(numero=Count('ocorrencia')).order_by(
-            '-numero')[:5])
-        locais_list = [(i+1, a) for (i, a) in locais_list]
+        locais_list = Local.objects.values('descricao')
+        categorias_list = Categoria.objects.values('tipo')
 
-        categorias_list = enumerate(Categoria.objects.values('tipo').annotate(numero=Count('ocorrencia')).order_by(
-            '-numero')[:5])
-        categorias_list = [(i+1, a) for (i, a) in categorias_list]
-
-        vitima = ocorrencia.filter(vitimado=True).count()
-        emergencia = ocorrencia.filter(emergencia=True).count()
-        validadas = ocorrencia.filter(validade=True).count()
-        atendidas = ocorrencia.filter(atendida=True).count()
+        vitima_list = ocorrencia.filter(vitimado=True)
+        emergencia_list = ocorrencia.filter(emergencia=True)
+        validadas_list = ocorrencia.filter(validade=True)
+        atendidas_list = ocorrencia.filter(atendida=True)
 
         if form.data.get('localidade'):
-            localidade = Local.objects.filter(
-                id=form.data.get('localidade'))[0].descricao
-            lista_top = Local.objects.filter(
-                **kwargs_top).values('descricao').annotate(
-                numero=Count('ocorrencia')).order_by(
-                '-numero')
+            localidade = Local.objects.filter(id=form.data.get('localidade'))[0].descricao
+            lista_top = Local.objects.values('descricao').annotate(numero=Count('ocorrencia')).order_by('-numero')
+            # TODO
+            # Filtrar lista de categorias de ocorrências que ocorrem em determinado local
+            # Filtrar o tipo de ocorrências que ocorrem em determinado local (vitima, emergencia, validadas, atendidas)
             try:
                 objeto = lista_top.get(descricao=localidade)
             except ObjectDoesNotExist:
@@ -434,12 +427,11 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             posicao_rank_local = None
 
         if form.data.get('tipo'):
-            categoria = Categoria.objects.filter(
-                id=form.data.get('tipo'))[0].tipo
-            lista_top = Categoria.objects.filter(
-                **kwargs_top).values('tipo').annotate(
-                numero=Count('ocorrencia')).order_by(
-                '-numero')
+            categoria = Categoria.objects.filter(id=form.data.get('tipo'))[0].tipo
+            lista_top = Categoria.objects.values('tipo').annotate(numero=Count('ocorrencia')).order_by('-numero')
+            # TODO
+            # Filtrar lista de categorias de ocorrência de determinada categoria
+            # Filtrar tipo de ocorrencias de determinada categoria
             try:
                 objeto = lista_top.get(tipo=categoria)
             except ObjectDoesNotExist:
@@ -451,6 +443,17 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         else:
             categoria = None
             posicao_rank_cat = None
+
+        locais_list = enumerate(locais_list.annotate(numero=Count('ocorrencia')).order_by('-numero')[:5])
+        locais_list = [(i + 1, a) for (i, a) in locais_list]
+
+        categorias_list = enumerate(categorias_list.annotate(numero=Count('ocorrencia')).order_by('-numero')[:5])
+        categorias_list = [(i + 1, a) for (i, a) in categorias_list]
+
+        vitima = vitima_list.count()
+        emergencia = emergencia_list.count()
+        validadas = validadas_list.count()
+        atendidas = atendidas_list.count()
 
         context = {
             'data__gte': form.cleaned_data['data'],
