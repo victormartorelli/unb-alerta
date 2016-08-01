@@ -4,25 +4,35 @@
 <head>
     <meta charset="utf-8">
 </head>
-<body class="panel panel-primary col-md-6 col-md-offset-3">
-    <div id="title" class="panel-heading"><h1>Relatório UnB-Alerta</h1></div>
-    <br/>
-    <br/>
-    <div id="intervals">
-        <div id="dateInterval">
-            <h4><strong>Intervalo de Datas</strong></h4>
-            <p class="info">De {{data__gte}} até {{data__lte}}</p>
+<body class="w3-relatorio-fonte">
+
+    <header class="w3-container w3-title-color">
+        <h1 class="w3-center">Relatório UnB-Alerta</h1>
+    </header>
+    <div>
+        <div>
+            <p>
+                <span class="w3-field-font"><strong>Intervalo de Datas</strong></span>
+                <br/>
+                <span class="w3-info-font">De {{data__gte}} até {{data__lte}}</span>
+            </p>
         </div>
-        <div id="hourInterval">
-            <h4><strong>Intervalo de Horas</strong></h4>
-            <p class="info">De {{hora__gte}} até {{hora__lte}}</p>
+        <div>
+            <p>
+                <span class="w3-field-font"><strong>Intervalo de Horas</strong></span>
+                <br/>
+                <span class="w3-info-font">De {{hora__gte}} até {{hora__lte}}</span>
+            </p>
         </div>
     </div>
     {% if localidade %}
     <div>
         <div>
-            <h4><strong>Local</strong></h4>
-            <p class="info">{{ localidade }}</p>
+            <p>
+                <span class="w3-field-font"><strong>Local: </strong></span><span class="w3-info-font">{{ localidade }}</span>
+                <br/>
+                <span class="w3-field-font"><strong>Posição no ranking de locais mais perigosos: </strong></span> <span class="w3-info-font">{{posicao_rank_local}}</span>
+            </p>
         </div>
     </div>
     {% endif %}
@@ -30,46 +40,65 @@
     {% if categoria %}
     <div>
         <div>
-            <h4><strong>Categoria</strong></h4>
-            <p class="info">{{ categoria }}</p>
+            <p>
+                <span class="w3-field-font"><strong>Categoria: </strong></span><span class="w3-info-font">{{ categoria }}</span>
+                <br/>
+                <span class="w3-field-font"><strong>Posição no ranking de categorias mais recorrentes: </strong></span> <span class="w3-info-font">{{posicao_rank_cat}}</span>
+            </p>
         </div>
     </div>
     {% endif %}
 
-    {% if localidade %}
-    <p><span class="campo"><strong>Posição no ranking de locais mais perigosos: </strong></span> <span class="info">{{posicao_rank_local}}</span></p>
-    {% endif %}
-    {% if categoria %}
-    <p><span class="campo"><strong>Posição no ranking de categorias mais recorrentes: </strong></span> <span class="info">{{posicao_rank_cat}}</span></p>
-    {% endif %}
-    <h4><strong>Ocorrências</strong></h4>
-    <div id="fields">
-        <p><span class="campo"><strong>Com vítima: </strong></span> <span class="info">{{vitima}}</span></p>
-        <p><span class="campo"><strong>Emergência: </strong></span> <span class="info">{{emergencia}}</span></p>
-        <p><span class="campo"><strong>Validadas: </strong></span> <span class="info">{{validadas}}</span></p>
-        <p><span class="campo"><strong>Atendidas: </strong></span> <span class="info">{{atendidas}}</span></p>
-        <br/>
+    <div>
+        <div class="w3-row">
+            <ul class="w3-col s3 w3-ul w3-border">
+                <li class="w3-field-font w3-title-color"><strong>Ocorrências</strong></li>
+                <li><span class="w3-field-font2"><strong>Com vítima: </strong></span> <span class="w3-info-font">{{vitima}}</span></li>
+                <li><span class="w3-field-font2"><strong>Emergência: </strong></span> <span class="w3-info-font">{{emergencia}}</span></li>
+                <li><span class="w3-field-font2"><strong>Validadas: </strong></span> <span class="w3-info-font">{{validadas}}</span></li>
+                <li><span class="w3-field-font2"><strong>Atendidas: </strong></span> <span class="w3-info-font">{{atendidas}}</span></li>
+            </ul>
+        </div>
 
     {% if not localidade %}
-        <div id="top5locaisOcorrencias">
-            Top 5 - Locais com mais ocorrências
-            <ul>
-                {% for a in array_locais %}
-                    <p> {{ a.descricao }} : {{ a.numero }}</p>
+        <br/>
+        <div>
+            <h5 class="w3-center w3-title-font">Top 5 - Locais com mais ocorrências</h5>
+            <table class="w3-table-all">
+                <tr class="w3-field-font">
+                    <th class="w3-title-color">Posição</th>
+                    <th class="w3-title-color">Local</th>
+                    <th class="w3-title-color">Nº de Ocorrências</th>
+                </tr>
+                {% for index, a in array_locais %}
+                    <tr>
+                        <td class="w3-info-font">{{ index }}</td>
+                        <td class="w3-info-font">{{ a.descricao }}</td>
+                        <td class="w3-info-font">{{ a.numero }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     {% endif %}
-
     {% if not categoria %}
-        <div id="top5categoriasOcorrencias">
-            </br>
-            Top 5 - Categorias com mais ocorrências
-            <ul>
-                {% for a in array_categorias %}
-                    <p> {{ a.tipo }} : {{ a.numero }}</p>
+        <br/>
+
+        <div>
+            <h5 class="w3-center w3-title-font">Top 5 - Categorias com mais ocorrências</h5>
+            <table class="w3-table-all">
+                <tr class="w3-field-font">
+                    <th class="w3-title-color">Posição</th>
+                    <th class="w3-title-color">Categoria</th>
+                    <th class="w3-title-color">Nº de Ocorrências</th>
+                </tr>
+                {% for index, a in array_categorias %}
+                    <tr>
+                        <td class="w3-info-font">{{ index }}</td>
+                        <td class="w3-info-font">{{ a.tipo }}</td>
+                        <td class="w3-info-font">{{ a.numero }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     {% endif %}
     </div>
