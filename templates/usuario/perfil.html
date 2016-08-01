@@ -14,14 +14,14 @@
             <div class="panel panel-primary">
               <div class="panel-heading" style="text-align:center">
                 <h1>Perfil</h1>
+              </div>
             </div>
-
             <div class="panel-body">
               {% csrf_token %}
               <fieldset>
                   <div class="form-group">
                     <h4>Nome de Usuário:</br></h4>
-                    <input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.user }} " disabled>
+                    <input style="width:90%" type="text" name="sexo" id="sexo" value="{{ object.username }} " disabled>
                     </h4>
                   </div>
 
@@ -69,6 +69,7 @@
 
                 </br>
               </fieldset>
+
             </div>
           </div>
         </div>

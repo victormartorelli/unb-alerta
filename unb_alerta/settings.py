@@ -11,6 +11,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
+from decouple import config
+from dj_database_url import parse as db_url
+
 from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -29,12 +32,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'unbalerta.unb.br', '164.41.209.169']
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'unbalerta@gmail.com'
-EMAIL_HOST_PASSWORD = 'unbalerta123'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST = config('EMAIL_HOST', cast=str)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', cast=str)
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str)
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', cast=str)
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -122,15 +125,10 @@ WSGI_APPLICATION = 'unb_alerta.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projetolp',
-        'USER': 'root',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '3306',
-
-    }
+    'default': config(
+        'DATABASE_URL',
+        cast=db_url,
+    )
 }
 
 MEDIA_ROOT = BASE_DIR.child("media")

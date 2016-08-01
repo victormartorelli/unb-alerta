@@ -65,6 +65,8 @@ class UsuarioForm(ModelForm):
         widget=forms.Select(
             attrs={'class': 'selector'}))
 
+    captcha = CaptchaField()
+
     class Meta:
         model = Usuario
         fields = ['login',

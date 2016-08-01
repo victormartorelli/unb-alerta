@@ -1,0 +1,203 @@
+{% extends "base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="/static/js/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('#pizza_vit').click(function(){
+    
+    var data = [{
+    values: [{{com_vitima}}, {{sem_vitima}}],
+    labels: ['Com vitimas', 'Sem vitimas'],
+    type: 'pie'
+  }];
+
+    var layout = {
+    height: 400,
+    width: 500
+  };
+
+  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
+  });
+
+  $('#pizza_eme').click(function(){
+    
+    var data = [{
+    values: [ {{emergencial}}, {{nao_emergencial}} ],
+    labels: ['Emergência', 'Normal'],
+    type: 'pie'
+  }];
+
+    var layout = {
+    height: 400,
+    width: 500
+  };
+
+  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
+  });
+
+  $('#pizza_val').click(function(){
+    
+    var data = [{
+    values: [ {{validadas}}, {{falsas}}],
+    labels: ['Válidas', 'Falsas'],
+    type: 'pie'
+  }];
+
+    var layout = {
+    height: 400,
+    width: 500
+  };
+
+  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
+  });
+
+  $('#pizza_loc').click(function(){
+    
+    var data = [{
+    values: [{{array_locais.0.numero}},
+             {{array_locais.1.numero}},
+             {{array_locais.2.numero}},
+             {{array_locais.3.numero}},
+             {{array_locais.4.numero}},
+             {{outros_locais}}],
+    labels: ['{{array_locais.0.descricao}}',
+             '{{array_locais.1.descricao}}',
+             '{{array_locais.2.descricao}}',
+             '{{array_locais.3.descricao}}',
+             '{{array_locais.4.descricao}}',
+             'Outros'],
+    type: 'pie'
+  }];
+
+    var layout = {
+    height: 400,
+    width: 800
+  };
+
+  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
+  });
+
+  $('#pizza_cat').click(function(){
+    
+    var data = [{
+    values: [{{array_categorias.0.numero}},
+             {{array_categorias.1.numero}},
+             {{array_categorias.2.numero}},
+             {{array_categorias.3.numero}},
+             {{array_categorias.4.numero}},
+             {{outras_cat}}],
+    labels: ['{{array_categorias.0.tipo}}',
+             '{{array_categorias.1.tipo}}',
+             '{{array_categorias.2.tipo}}',
+             '{{array_categorias.3.tipo}}',
+             '{{array_categorias.4.tipo}}',
+             'Outros'],
+    type: 'pie'
+  }];
+
+    var layout = {
+    height: 400,
+    width: 500
+  };
+
+  Plotly.newPlot(document.getElementById('DivGrafico'), data, layout);
+  });
+
+  $('#barra_mes').click(function(){  
+    var data = [{
+      x: ['Janeiro',
+          'Fevereiro',
+          'Março',
+          'Abril',
+          'Maio',
+          'Junho',
+          'Julho',
+          'Agosto',
+          'Setembro',
+          'Outubro',
+          'Novembro',
+          'Dezembro'],
+      y: [ {{meses.jan}},
+           {{meses.fev}},
+           {{meses.mar}},
+           {{meses.abr}},
+           {{meses.mai}},
+           {{meses.jun}},
+           {{meses.jul}},
+           {{meses.ago}},
+           {{meses.set}},
+           {{meses.out}},
+           {{meses.nov}},
+           {{meses.dez}}],
+      type: 'bar'
+    }];
+    Plotly.newPlot(document.getElementById('DivGrafico'), data);
+  });
+
+  $('#barra_hor').click(function(){  
+    var data = [{
+      x: ['00:00 até 06:00',
+          '06:00 até 12:00',
+          '12:00 até 18:00',
+          '18:00 até 00:00'],
+
+      y: [ {{horarios.00a06}},
+           {{horarios.06a12}},
+           {{horarios.12a18}},
+           {{horarios.18a00}}],
+      type: 'bar'
+    }];
+    Plotly.newPlot(document.getElementById('DivGrafico'), data);
+  });
+
+  $('#temporal').click(function(){
+    
+    var data = [{ x: [{{data}}, {{data_1}}],
+              y: [1, 3, 6], type: 'scatter'}];
+
+    Plotly.newPlot(document.getElementById('DivGrafico'), data);
+  });
+});
+
+</script>
+
+
+<div id = "fundo">
+  <div class="container">
+    <div class="row vertical-offset-100">
+	    <div class="col-md-10 col-md-offset-1">
+	    	
+        <nav class="navfilter">
+			  	<div class="container-fluid" >
+			        {% crispy form %}
+		    	</div>
+			  </nav>
+	    	
+        <nav class="navfilter">
+		    	<legend id="gra"> Selecione o tipo de gráfico desejado</legend></br>
+
+	            <div class="btn-group" role="group" style="margin-left:20%;margin-bottom: 5%">
+                <button type="button" class="btn btn-primary" id="pizza_vit">Vitimas</button>
+                <button type="button" class="btn btn-primary" id="pizza_eme">Emergências</button>
+                <button type="button" class="btn btn-primary" id="pizza_val">Validas</button>
+                <button type="button" class="btn btn-primary" id="pizza_loc">Locais</button>
+                <button type="button" class="btn btn-primary" id="pizza_cat">Categorias</button>
+                <button type="button" class="btn btn-primary" id="barra_mes">Barra Meses</button>
+                <button type="button" class="btn btn-primary" id="barra_hor">Barra Horarios</button>
+              </div>
+              
+              <div id="DivGrafico"></div>
+    		</nav>
+		  </div>
+	  </div>
+  </div>
+</div>
+
+ {% endblock %}
+

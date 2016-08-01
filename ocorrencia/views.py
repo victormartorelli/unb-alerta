@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import weasyprint
 
 from django.views.generic import (FormView, ListView, DetailView,
@@ -24,14 +26,16 @@ from usuario.models import Usuario
 
 from .models import Ocorrencia, Local, Categoria
 
-from .forms import (OcorrenciaForm, ValidarOcorrenciaEditForm,
-                    OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro)
+from .forms import (GraficosFiltro, OcorrenciaForm, ValidarOcorrenciaEditForm,
+                    OcorrenciaFiltro, OcorrenciaFiltroMapa, RelatorioFiltro,
+                    OcorrenciaFiltroMapaUsuario)
 
 
-class ListaOcorrenciasView(LoginRequiredMixin, FilterView):
+class ListaOcorrenciasView(PermissionRequiredMixin, FilterView):
     model = Ocorrencia
     filterset_class = OcorrenciaFiltro
     paginate_by = 10
+    permission_required = {'ocorrencia.change_ocorrencia'}
 
     def get_context_data(self, **kwargs):
         context = super(ListaOcorrenciasView,
@@ -97,13 +101,15 @@ class CriarOcorrenciaView(LoginRequiredMixin, FormView):
                     'atendida': False,
                     'vigilante_ID': 1,
                     'usuario_ID': usuario.id,
-                    'repetida': False}
+                    'repetida': False,
+                    'data_publicacao': datetime.datetime.now()}
         else:
             return {'validade': False,
                     'atendida': False,
                     'vigilante_ID': 1,
                     'usuario_ID': 1,
-                    'repetida': False}
+                    'repetida': False,
+                    'data_publicacao': datetime.datetime.now()}
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -162,13 +168,15 @@ class ValidarOcorrenciaEditView(PermissionRequiredMixin, UpdateView):
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
-                    'informacoes_segurancas': o.informacoes_segurancas}
+                    'informacoes_segurancas': o.informacoes_segurancas,
+                    'data_publicacao': o.data_publicacao}
         else:
             return {'vigilante_ID': 1,
                     'foto': o.foto,
                     'descricao': o.descricao,
                     'localidade': o.localidade,
-                    'informacoes_segurancas': o.informacoes_segurancas}
+                    'informacoes_segurancas': o.informacoes_segurancas,
+                    'data_publicacao': o.data_publicacao}
 
     def form_valid(self, form):
         ocorrencia = form.instance
@@ -209,12 +217,10 @@ class DescricaoOcorrenciaView(PermissionRequiredMixin,
         else:
             pk = self.kwargs['pk']
             usuario = Usuario.objects.get(user_id=user.id)
-            visivel = Ocorrencia.objects.filter(
-                id=pk,
-                atendida=True,
-                validade=True)
+
             pertence = Ocorrencia.objects.filter(id=pk, usuario_ID=usuario.id)
-            if visivel or pertence:
+
+            if pertence:
                 return True
             else:
                 return False
@@ -294,81 +300,6 @@ class OcorrenciaDeleteView(PermissionRequiredMixin, DeleteView):
             messages.add_message(self.request, messages.ERROR, mensagem)
         return redirect(reverse(self.get_success_url()))
 
-
-# def pdf_view(self, form):
-#     locais_list = Local.objects.values('descricao').annotate(
-#         numero=Count('ocorrencia')).order_by(
-#         '-numero')[:5]
-
-#     categorias_list = Categoria.objects.values('tipo').annotate(
-#         numero=Count('ocorrencia')).order_by(
-#         '-numero')[:5]
-
-#     kwargs = {}
-
-#     kwargs['data__gte'] = form.cleaned_data['data']
-#     kwargs['data__lte'] = form.cleaned_data['data_1']
-#     kwargs['hora__gte'] = form.cleaned_data['hora']
-#     kwargs['hora__lte'] = form.cleaned_data['hora_1']
-
-#     if form.data.get('tipo'):
-#         kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
-
-#     if form.data.get('localidade'):
-#         kwargs['localidade'] = form.cleaned_data['localidade']
-
-#     ocorrencia = Ocorrencia.objects.filter(**kwargs)
-
-#     vitima = ocorrencia.filter(vitimado=True).count()
-#     emergencia = ocorrencia.filter(emergencia=True).count()
-#     validadas = ocorrencia.filter(validade=True).count()
-#     atendidas = ocorrencia.filter(atendida=True).count()
-
-#     if form.data.get('localidade'):
-#         localidade = Local.objects.filter(
-#             id=form.data.get('localidade'))[0].descricao
-#     else:
-#         localidade = None
-#         for i in range(5):
-#             array_locais_nome = locais_list[i].get('descricao')
-#             array_locais_numero = locais_list[i].get('numero')
-
-#     if form.data.get('tipo'):
-#         categoria = Categoria.objects.filter(
-#             id=form.data.get('tipo'))[0].tipo
-
-#     else:
-#         categoria = None
-#         for i in range(5):
-#             array_categorias_nome = categorias_list[i].get('tipo')
-#             array_categorias_numero = categorias_list[i].get('numero')
-
-#     context = {
-#         'vitima': vitima,
-#         'emergencia': emergencia,
-#         'validadas': validadas,
-#         'atendidas': atendidas,
-#         'localidade': localidade,
-#         'categoria': categoria,
-#         'array_locais_nome': array_locais_nome,
-#         'array_locais_numero': array_locais_numero,
-#         'array_categorias_nome': array_categorias_nome,
-#         'array_categorias_numero': array_categorias_numero,
-#     }
-#     html_template = get_template('relatorio.html')
-#     rendered_html = html_template.render(RequestContext(context))
-#     pdf_file = weasyprint.HTML(
-#         string=rendered_html).write_pdf()
-#     http_response = HttpResponse(pdf_file,
-#                                  content_type='application/pdf')
-#     http_response['Content-Disposition'] = 'filename="report.pdf"'
-
-#     c = canvas.Canvas(http_response)
-
-#     c.showPage()
-#     c.save()
-
-#     return http_response
 
 class GerarRelatorioView(PermissionRequiredMixin, FormView):
     form_class = RelatorioFiltro
@@ -487,11 +418,164 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         return response
 
 
+class GerarGraficosView(PermissionRequiredMixin, FormView):
+    form_class = GraficosFiltro
+    permission_required = {'ocorrencia.change_ocorrencia'}
+    template_name = "ocorrencia/gerar_grafico.html"
+
+    def form_valid(self, form):
+        kwargs = {}
+        kwargs_top = {}
+
+        kwargs['data__gte'] = form.cleaned_data['data']
+        kwargs['data__lte'] = form.cleaned_data['data_1']
+        kwargs['hora__gte'] = form.cleaned_data['hora']
+        kwargs['hora__lte'] = form.cleaned_data['hora_1']
+
+        kwargs_top['ocorrencia__data__gte'] = kwargs['data__gte']
+        kwargs_top['ocorrencia__data__lte'] = kwargs['data__lte']
+        kwargs_top['ocorrencia__hora__gte'] = kwargs['hora__gte']
+        kwargs_top['ocorrencia__hora__lte'] = kwargs['hora__lte']
+
+        if form.data.get('tipo'):
+            kwargs['tb_categoria_ID'] = form.cleaned_data['tipo']
+            kwargs_top['ocorrencia__tb_categoria_ID'] = kwargs[
+                'tb_categoria_ID']
+
+        if form.data.get('localidade'):
+            kwargs['localidade'] = form.cleaned_data['localidade']
+            kwargs_top['ocorrencia__localidade'] = kwargs['localidade']
+
+        if form.data.get('vitimado'):
+            kwargs['vitimado'] = form.cleaned_data['vitimado']
+            kwargs_top['ocorrencia__vitimado'] = kwargs[
+                'vitimado']
+
+        if form.data.get('emergencia'):
+            kwargs['emergencia'] = form.cleaned_data['emergencia']
+            kwargs_top['ocorrencia__emergencia'] = kwargs['emergencia']
+
+        if form.data.get('validade'):
+            kwargs['validade'] = form.cleaned_data['validade']
+            kwargs_top['ocorrencia__validade'] = kwargs['validade']
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        locais_list = Local.objects.filter(
+            **kwargs_top).values('descricao').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
+
+        categorias_list = Categoria.objects.filter(
+            **kwargs_top).values('tipo').annotate(
+            numero=Count('ocorrencia')).order_by(
+            '-numero')[:5]
+
+        total_ocorrencias = ocorrencia.count()
+
+        com_vitima = ocorrencia.filter(vitimado=True).count()
+        sem_vitima = ocorrencia.filter(vitimado=False).count()
+
+        emergencial = ocorrencia.filter(emergencia=True).count()
+        nao_emergencial = ocorrencia.filter(emergencia=False).count()
+
+        validadas = ocorrencia.filter(validade=True).count()
+        falsas = ocorrencia.filter(validade=False).count()
+
+        qntd_locais_top5 = 0
+        qntd_cat_top5 = 0
+
+        for l in locais_list:
+            qntd_locais_top5 = qntd_locais_top5 + int(l.get(
+                'numero'))
+        for c in categorias_list:
+            qntd_cat_top5 = qntd_cat_top5 + int(c.get(
+                'numero'))
+
+        outros_locais = total_ocorrencias - qntd_locais_top5
+        outras_cat = total_ocorrencias - qntd_cat_top5
+
+        # Gráfico de Barras Ano
+        kwargs.pop('data__gte')
+        kwargs.pop('data__lte')
+
+        kwargs['data__year'] = form.cleaned_data['ano_grafico_barra']
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        meses = {
+            'jan': ocorrencia.filter(data__month=1).count(),
+            'fev': ocorrencia.filter(data__month=2).count(),
+            'mar': ocorrencia.filter(data__month=3).count(),
+            'abr': ocorrencia.filter(data__month=4).count(),
+            'mai': ocorrencia.filter(data__month=5).count(),
+            'jun': ocorrencia.filter(data__month=6).count(),
+            'jul': ocorrencia.filter(data__month=7).count(),
+            'ago': ocorrencia.filter(data__month=8).count(),
+            'set': ocorrencia.filter(data__month=9).count(),
+            'out': ocorrencia.filter(data__month=10).count(),
+            'nov': ocorrencia.filter(data__month=11).count(),
+            'dez': ocorrencia.filter(data__month=12).count(),
+        }
+
+        # Gráfico de Barras Horários
+
+        kwargs['data__gte'] = form.cleaned_data['data']
+        kwargs['data__lte'] = form.cleaned_data['data_1']
+        kwargs.pop('hora__gte')
+        kwargs.pop('hora__lte')
+
+        ocorrencia = Ocorrencia.objects.filter(**kwargs)
+
+        horarios = {
+            '00a06': ocorrencia.filter(
+                hora__gt='00:00',
+                hora__lte='06:00').count(),
+            '06a12': ocorrencia.filter(
+                hora__gt='06:00',
+                hora__lte='12:00').count(),
+            '12a18': ocorrencia.filter(
+                hora__gt='12:00',
+                hora__lte='18:00').count(),
+            '18a24': ocorrencia.filter(
+                hora__gt='18:00',
+                hora__lte='00:00').count(),
+        }
+
+        context = {
+            'data__gte': form.cleaned_data['data'],
+            'data__lte': form.cleaned_data['data_1'],
+            'hora__gte': form.cleaned_data['hora'],
+            'hora__lte': form.cleaned_data['hora_1'],
+            'com_vitima': com_vitima,
+            'sem_vitima': sem_vitima,
+            'emergencial': emergencial,
+            'nao_emergencial': nao_emergencial,
+            'validadas': validadas,
+            'falsas': falsas,
+            'array_locais': locais_list,
+            'array_categorias': categorias_list,
+            'outros_locais': outros_locais,
+            'outras_cat': outras_cat,
+            'meses': meses,
+            'horarios': horarios,
+            'form': form,
+        }
+
+        return self.render_to_response(context=context)
+
+
 class FiltroMapa(LoginRequiredMixin, FilterView):
     model = Ocorrencia
     filterset_class = OcorrenciaFiltroMapa
     paginate_by = 10
     template_name = "mapa.html"
+
+    def get_filterset_class(self):
+        if self.request.user.groups.filter(name="Usuário Comum"):
+            return OcorrenciaFiltroMapaUsuario
+        else:
+            return super(FiltroMapa, self).get_filterset_class()
 
     def get_context_data(self, **kwargs):
         context = super(FiltroMapa,
@@ -521,11 +605,12 @@ class FiltroMapa(LoginRequiredMixin, FilterView):
         else:
             url = ''
 
-        self.filterset.form.fields['o'].label = 'Ordenação'
-
-        queryset = self.object_list.filter(
-            atendida=True,
-            validade=True).distinct()
+        if self.request.user.groups.filter(name="Usuário Comum"):
+            queryset = self.object_list.filter(
+                validade=True,
+                atendida=True).distinct()
+        else:
+            queryset = self.object_list.distinct()
 
         array_lat = []
         array_long = []
