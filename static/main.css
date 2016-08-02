@@ -623,4 +623,10 @@ a {
   margin-bottom: -3.5%;
 }
 
+.navbar a {
+    margin-left: 40%;
+    margin-top: -7%;
+    font-size: 200%;
+}
+
 }

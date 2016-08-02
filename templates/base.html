@@ -164,8 +164,6 @@ $(document).ready(function(){
       <a href="javascript:void(0)" onclick="hamb_close()"
       class="hamb-closenav hamb-large">Fechar &times;</a>
       
-      <a href="{% url 'inicio' %}">Unb Alerta</a>
-
       {% if user.is_authenticated %}
         <div class="hamb-accordion">
           <a onclick="hamb_drop()" href="#"> Estatísticas <i class="fa fa-caret-down"></i></a>
@@ -226,6 +224,7 @@ $(document).ready(function(){
       <div class="hamb-container">
         <input type="image" src="{% static 'images/hamb.png' %}" class="hamb-opennav hamb-xlarge" onClick="hamb_open()"/>
       </div>
+      <a class="navbar-brand nav-right" href="{% url 'inicio' %}">UnB Alerta</a>
     </nav>
 
 {% endblock %}
