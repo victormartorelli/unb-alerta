@@ -41,6 +41,8 @@ class Local(models.Model):
     pai = models.IntegerField(
         blank=True,
         null=True)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
     class Meta:
         verbose_name = ('Local')

@@ -1,0 +1,231 @@
+id,nome,descricao,pai,Latitude ,Longitude
+1,Campus_DarcyRibeiro,UnB - Campus Darcy Ribeiro,0,-15.7589781,-47.8706322
+2,Area_ICC,ICC - Instituto Central de Ciências – Área,1,-15.7640248,-47.86949295
+3,Subarea_ICC_Norte,ICC Norte - Subárea,2,-15.76144995,-47.8712256
+4,ICC_Norte,ICC Norte,3,-15.761308,-47.8703566
+5,P_Onibus_ICC_Norte,ICC Norte - Parada de ônibus,3,-15.7600405,-47.8701742
+6,Estac_ICC_Norte,ICC Norte - Estacionamento,3,-15.7616126,-47.8716347
+7,Subarea_ICC_Centro_RU,Extensão do ICC Centro e RU - Subárea,2,-15.76404415,-47.8701387
+8,ICC_Centro,ICC Centro,7,-15.76354085,-47.8694715
+9,MASC_Centro,MASC Centro- Módulo de Apoio e Serviços Comunitários Centro,7,-15.7631072,-47.8712404
+10,P_Onibus_ICC_Centro_Norte,ICC Centro/Norte - Parada de ônibus,7,-15.7632156,-47.8717178
+11,RU,RU - Restaurante Universitário,7,-15.7642636,-47.87048665
+12,Centro_Convivencia,Centro de Vivência,7,-15.7650251,-47.87024525
+13,Subarea_ICC_Sul,ICC Sul - Subárea,2,-15.76604535,-47.86802575
+14,ICC_Sul,ICC Sul,13,-15.76507805,-47.86770255
+15,Estac_ICC_Sul,ICC Sul - Estacionamento,13,-15.76615445,-47.8682859
+16,P_Onibus_ICC_Sul,ICC Sul - Parada de ônibus,13,-15.76531165,-47.86630915
+17,P_Onibus_ICC_Centro_Sul,ICC Centro/Sul - Parada de ônibus,13,-15.7660563,-47.8696029
+18,P_Onibus_ICC_Sul_FS,ICC Sul/FS - Parada de ônibus,13,-15.7671199,-47.86764755
+19,Area_BCE_Reitoria,BCE/Reitoria e adjacências - Área,1,-15.76184095,-47.86641505
+20,Subarea_BCE,BCE - Subárea,19,-15.7605181,-47.86759855
+21,BCE,BCE - Biblioteca Central Estudantil,20,-15.76089235,-47.8677361
+22,Estac_BCE,BCE - Estacionamento,20,-15.7612938,-47.866981
+23,Estac_BCE_Serv,BCE - Estacionamento para Servidores,20,-15.76026255,-47.8679775
+24,P_Onibus_BCE,BCE - Parada de ônibus,20,-15.7605697,-47.8667638
+25,Subarea_Reitoria,Reitoria - Subárea,19,-15.763001,-47.86616835
+26,Estac_BCE_Reitoria,BCE/Reitoria - Estacionamento,25,-15.7619495,-47.86652505
+27,Reitoria_UnB,Reitoria,25,-15.76288005,-47.86693275
+28,Estac_Reitoria,Reitoria - Estacionamento,25,-15.7634776,-47.86640165
+29,P_Onibus_Reitoria,Reitoria - Paradas de ônibus,25,-15.76226565,-47.86558695
+30,Memorial_Darcy_Ribeiro,Memorial Darcy Ribeiro (Beijódromo),25,-15.76394285,-47.86587595
+31,Subarea_Circulacao_ICC_BCE_Reitoria,ICC/BCE/Reitoria - Trajeto de Pedestres e Ciclistas,19,-15.7623799,-47.8679466
+32,TeatroArena_Honestino_Gimaraes,Teatro Arena Honestino Guimarães,31,-15.76175975,-47.86907045
+33,Trajetos_Centrais_BCE_Reitoria,BCE/Reitoria - Trajetos Centrais,31,-15.76267155,-47.86830945
+34,Area_PAT_PJC_IPol_CIC,PAT/PJC/IPol/IRel/CIC/Est - Área,1,-15.7572077,-47.86958545
+35,Subarea_PAT,PAT - Subárea,34,-15.7588408,-47.87092515
+36,PAT_UnB,PAT - Pavilhão Anísio Teixeira,35,-15.7589757,-47.87078575
+37,Estac_PAT_Norte,PAT - Estacionamento Norte,35,-15.7582971,-47.8710322
+38,Estac_PAT_Oeste,PAT - Estacionamento Oeste,35,-15.7590647,-47.87109825
+39,Masc_Norte,MASC Norte - Módulo de Apoio e Serviços Comunitários Norte,35,-15.7579428,-47.87113705
+40,Acesso_PAT_PJC_Sul,PAT - Acesso Sul,35,-15.75977075,-47.8706342
+41,P_Onibus_PAT_PJC,PAT/PJC - Parada de Onibus,35,-15.7599634,-47.87068785
+42,Subarea_PJC,PJC - Subárea,34,-15.75869075,-47.87013865
+43,PJC_UnB,PJC - Pavilhão João Calmon,42,-15.7584611,-47.8702315
+44,Estac_PJC_Sul,PJC - Estacionamento Sul,42,-15.7593035,-47.8699365
+45,Estac_PAT_PJC,PAT/PJC - Estacionamento,42,-15.7587808,-47.87049875
+46,Estac_PJC_PAT_Norte,PJC/PAT - Estacionamento Norte,42,-15.75767435,-47.8704659
+47,Estac_PJC_IPol_IRel,PJC/IPol/IRel - Estacionamento,42,-15.75822775,-47.8699073
+48,Frente_PJC,PJC - Gramado frontal,42,-15.7596959,-47.86988815
+49,Subarea_IPol_IRel_CIC_Est,IPol/IRel/CIC/Est - Subárea,34,-15.7585948,-47.8689239
+50,IPol_IRel_UnB,IPOL/IREL - Institutos de Ciência Politica e Relações Internacionais,49,-15.75821675,-47.86959215
+51,CIC_Est_UnB,CIC/Est - Prédio de Ciência da Computação e Estatística,49,-15.75867625,-47.86899
+52,Estac_Acesso_CIC_Est,CIC/Est - Estacionamento e acesso,49,-15.7590099,-47.86936955
+53,Subarea_Centro_Comunitario,Centro Comunitário - Subárea,34,-15.757867,-47.8680405
+54,AthosBulcao,Centro Comunitário Athos Bulcão,53,-15.75803735,-47.8684187
+55,Estac_Centro_Comunitario,Centro Comunitário Athos Bulcão - Estacionamento,53,-15.7577134,-47.8678272
+56,Subarea_BAES_Almox,BAES/Almoxarifado - Subárea,34,-15.75600575,-47.8705645
+57,Almoxarifado,Almoxarifado,56,-15.7567415,-47.86961495
+58,Garagem_Oficina,Garagem e Oficina Mecânica,56,-15.755869,-47.8704089
+59,BAES,BAES - Bloco de Salas de Aula Eudoro de Souza,56,-15.7569403,-47.870366
+60,BSAN,BSAN - Bloco de Salas de Aula Norte,56,-15.757059,-47.87121895
+61,Estac_BAES_BSAN,BAES/BSAN - Estacionamento,56,-15.7569506,-47.87054035
+62,Area_PRC_Colina_FACE,PRC/Colina/FACE - Área,1,-15.7574617,-47.87383445
+63,Subarea_FACE,FACE/ICS - Subárea,62,-15.75853075,-47.87219295
+64,FACE,"FACE - Faculdade de Economia, Administração e Contabilidade",63,-15.758471,-47.8718385
+65,FA,FD - Faculdade de Direito,63,-15.75954745,-47.87213225
+66,Estac_FACE,FACE - Estacionamento,63,-15.75842975,-47.87271025
+67,Estac_FA,FD - Estacionamento,63,-15.75956295,-47.87282825
+68,Circulacao_Pedestres_FA,FD – Circulação de pedestres,63,-15.76022255,-47.8719113
+69,ICS,ICS - Instituto de Ciências Sociais,63,-15.7575701,-47.87293015
+70,Subarea_PRC,PRC/Colina - Subárea,62,-15.75964815,-47.87415595
+71,PostoPetrobras,Posto Petrobrás,70,-15.76074525,-47.8743866
+72,P_Onibus_Posto,Posto Petrobrás - Parada de ônibus Posto,70,-15.76087495,-47.87388635
+73,PRC,Prefeitura do Campus,70,-15.7603064,-47.87445635
+74,ASFUB,ASFUB - Associação de Servidores da Fundação Universidade de Brasília,70,-15.7590415,-47.87339955
+75,Subarea_Colina_Blocos_ABCDE,"Colina - Blocos A, B, C, D e E - Subárea",62,-15.7573094,-47.87424445
+76,Colina_Bloco_A,Colina - Bloco A,75,-15.75694285,-47.87382065
+77,Colina_Bloco_B,Colina - Bloco B,75,-15.7575508,-47.8737563
+78,Colina_Bloco_C,Colina - Bloco C,75,-15.75686285,-47.8743021
+79,Colina_Bloco_D,Colina - Bloco D,75,-15.75754175,-47.87421225
+80,Colina_Bloco_E,Colina - Bloco E,75,-15.75785665,-47.874514
+81,Subarea_Colina_Blocos_FGHIJ,"Colina - Blocos F, G, H, I e J -  Subárea",62,-15.7561968,-47.87540855
+82,Colina_Bloco_F,Colina - Bloco F,81,-15.7563349,-47.87546085
+83,Colina_Bloco_G,Colina - Bloco G,81,-15.7555463,-47.8759718
+84,Colina_Bloco_G,Colina - Bloco H,81,-15.75566635,-47.87536025
+85,Colina_Bloco_I,Colina - Bloco I,81,-15.7546647,-47.87609785
+86,Colina_Bloco_J,Colina - Bloco J,81,-15.7546854,-47.87543935
+87,Area_SGs_Artes_FT,SGs e Prédios das Artes - Área,1,-15.7643062,-47.87227095
+88,Subarea_FT,FT - Faculdade de Tecnologia - Subárea,87,-15.76292875,-47.8730294
+89,FT,FT - Faculdade de Tecnologia,88,-15.76371245,-47.87244605
+90,Est_menor_FT,FT - Estacionamento Secundário,88,-15.7620811,-47.8728028
+91,Est_maior_FT,FT - Estacionamento Principal,88,-15.7637251,-47.87351755
+92,Lab_de_Hidraulica_e_Estrut,FT - Laboratório de Hidráulica e Estruturas,88,-15.7631046,-47.8733741
+93,UnB_Lab_de_Energia,FT - Laboratório de Energia,88,-15.7621495,-47.8736859
+94,Passagem_Pedestres_FT,FT - Passagem dos Pedestres,88,-15.76138675,-47.87370395
+95,Subarea_Musica,SGs da música - Subárea,87,-15.76473825,-47.8716253
+96,SG_2,SG 2 - Departamento de Música,95,-15.76432525,-47.87139595
+97,Aud_de_Mus,SG 8 - Auditório de Música,95,-15.76442105,-47.8718868
+98,Est_SG2_8,SG 2/SG 8 - Estacionamento,95,-15.76489085,-47.87104595
+99,SG_8,SG 4 - Departamento de Música,95,-15.76494835,-47.87153405
+100,SG_10,SG 10 - Prédio do Ceplan,95,-15.76491155,-47.87204235
+101,Est_SG10,SG 10 - Estacionamento,95,-15.7654562,-47.8716762
+102,Subarea_Artes,Artes - Subárea,87,-15.7658008,-47.87086015
+103,Inst_de_Artes,IDA - Instituto de Artes,102,-15.76554395,-47.87050205
+104,Concha_Praca,Concha Acústica e Praça da Música,102,-15.76586665,-47.8709547
+105,Dep_de_Artes_Cen,CEN - Departamento de Artes Cênicas,102,-15.76612345,-47.8713222
+106,Subarea_Engenharias,SGs das Engenharias - Subárea,87,-15.7659944,-47.8720826
+107,Est_SG12,SG 12 - Estacionamento,106,-15.76521355,-47.87275715
+108,SG_11,SG 11 - Laboratório de Engenharia Elétrica,106,-15.76589955,-47.8721758
+109,Est_SG9,SG 9 - Estacionamento,106,-15.76682685,-47.87197265
+110,SG_12,SG 12 - Laboratório de Engenharia Civil,106,-15.76504705,-47.87249565
+111,Est_SG11,SG 11 - Estacionamento,106,-15.76574535,-47.8719217
+112,SG_9,SG 9 - Laboratório de Engenharia Mecânica,106,-15.7665055,-47.87147105
+113,Subarea_Complementares,Observatório Sismológico/APOSFUB/Associação dos Ex-Alunos da UnB/Retaurante - Subárea,87,-15.76643385,-47.87276525
+114,Obs_Sism,SG 13 - Observatório Sismológico,106,-15.76570335,-47.87291545
+115,APOSFUB_EX_UNB,APOSFUB/Alumni - Associação dos Aposentados da FUB - Associação dos Ex-Alunos,106,-15.7664422,-47.8726378
+116,Rest_ADUnB,ADUnB - Restaurante,106,-15.76728635,-47.8725654
+117,Educacao,Prédios da Educação/Bancos/Correio - Área,1,-15.7695475,-47.8705611
+118,Subarea_Principal,Faculdade de Educação - Subárea,117,-15.7691616,-47.8715602
+119,Cast_d'Agua,Castelo D'água,118,-15.77031155,-47.8719485
+120,Est_FE,FE - Estacionamento,118,-15.7685176,-47.8720263
+121,FE,FE - Faculdade de Educação,118,-15.7679497,-47.87188145
+122,Aud_dois_Cand,Auditório Dois Candangos,118,-15.76892805,-47.87122965
+123,Dep_de_Planej_e_Adm,PAD - Departamento de Planejamento e Administração,118,-15.76749925,-47.8715086
+124,Dep_de_Met_e_Tec,MTC - Departamento de Métodos e Técnicas,118,-15.7683885,-47.87089305
+125,Subarea_PMU_I_e_Bancos,PMU I/Bancos/Quadra - Subárea,117,-15.76730955,-47.87031635
+126,Banco_Santander,Banco Santander,125,-15.76672745,-47.87037805
+127,Quadra_Jose,Quadra José Honório,125,-15.7668643,-47.8705685
+128,PMU_I,PMU I - Prédio Multiuso I,125,-15.7668088,-47.8698
+129,Est_Dep_de_Met_e_Tec,MTC - Estacionamento,125,-15.76773935,-47.8706074
+130,NEEPE,NEPPE - Núcleo de Ensino e Pesquisa em Português para Estrangeiros,125,-15.7675754,-47.87005485
+131,Subarea_Turismo,Turismo/Fiocruz/PMU II - Subárea,117,-15.7701102,-47.87024395
+132,PMU_II,PMU II - Prédio Multiuso II,131,-15.76789035,-47.86890285
+133,Passagem_dos_Pedestres,CDS - Centro de Desenvolvimento Sustentável,131,-15.7684453,-47.86949155
+134,Est_CET,CET - Estacionamento,131,-15.76950105,-47.87076835
+135,CET,CET - Centro de Excelência em Turismo,131,-15.7698689,-47.8701675
+136,Fiocruz,Fiocruz – Fundação Oswaldo Cruz,131,-15.77169125,-47.87127525
+137,Area_Anexos_UnB,FUBRA/Finatec/Autotrac/CDT/CRAD/Outros - Área,1,-15.77437305,-47.86839455
+138,Subarea_Anexos_1,Autotrac/Finatec/FUBRA - Subárea,137,-15.77560045,-47.8700119
+139,Autotrac,Autotrac,138,-15.77169255,-47.8705135
+140,Finatec,Finatec - Fundação de Empreendimentos Científicos e Tecnológicos,138,-15.77296765,-47.87114915
+141,Est_Finatec,Finatec - Estacionamento,138,-15.7738814,-47.87101775
+142,Anexo_Finatec,Finatec - Anexo do Prédio,138,-15.77464025,-47.87080825
+143,FUBRA,FUBRA - Fundação Universitária de Brasília,138,-15.77596315,-47.8709896
+144,Subarea_Anexos_2,CDT/CEFTRU/CME - Subárea,137,-15.7748868,-47.86730555
+145,CDT,CDT - Centro de Desenvolvimento Tecnológico,144,-15.77467385,-47.86678385
+146,Est_CDT,CDT - Estacionamento,144,-15.77403885,-47.86678255
+147,CEFTRU,CEFTRU - Centro Interdisciplinar de Estudos em Transportes,144,-15.7729483,-47.86712855
+148,Anexo_CEFTRU,CEFTRU - Anexo do Prédio,144,-15.7729509,-47.86671885
+149,CME,CME - Centro de Manutenção de Equipamentos,144,-15.77244495,-47.8675242
+150,Est_CEFTRU_e_CME,CEFTRU/CME - Estacionamento,144,-15.77231715,-47.8669575
+151,Subarea_Anexos_3,NMT/CRAD - Subárea,137,-15.77005215,-47.86821755
+152,NMT,NMT – Núcleo de Medicina Tropical,151,-15.76972305,-47.86774545
+153,Lab_Est_Geo_e_Amb,LEGA - Laboratório de Estudos Geodinâmicos e Ambientais,151,-15.77094655,-47.86719025
+154,Lab_de_Term,Laboratório de Termobiologia,151,-15.77031415,-47.868526
+155,CRAD,CRAD - Centro de Referência em Conservação da Natureza e Recuperação de Áreas Degradadas,151,-15.7713957,-47.86808345
+156,Area_L2_e_L3,L2/L3 - Área,1,-15.76464565,-47.87539244
+157,Subarea_605,L2/L3 - Quadra 605,156,-15.7710317,-47.87360605
+158,HUB,HUB - Hospital Universitário de Brasília,157,-15.7720667,-47.87342905
+159,Amb1,HUB - Ambulatório 1,157,-15.7706497,-47.8743625
+160,Amb2,HUB - Ambulatório 2,157,-15.77049485,-47.87343445
+161,Est_Amb,HUB - Estacionamento dos Ambulatórios,157,-15.7703916,-47.8727827
+162,Odonto,HUB - Clínica Odontológica e Farmácia Escola,157,-15.7696417,-47.87453815
+163,Est_Odonto,HUB - Estacionamento Clínica Odontológica e Farmácia Escola,157,-15.7694249,-47.87326945
+164,Subarea_604,L2/L3 - Quadra 604,156,-15.77428405,-47.8731635
+165,HUB_Est,HUB - Estacionamento,164,-15.7734013,-47.8740862
+166,Subarea_606_607,L2/L3 - Quadras 606/607,156,-15.765642,-47.87483185
+167,Pass_Alu_UnB,L2/L3 - Passagem entre quadras 406/407,166,-15.76539165,-47.8748399
+168,Subarea_602_603,L2/L3 - Quadras 602/603,156,-15.7796632,-47.87273435
+169,Subarea_608_609,L2/L3 - Quadras 608/609,156,-15.75908795,-47.87671205
+170,Subarea_610_611_612,L2/L3 - Quadras 610/611/612,156,-15.7513565,-47.8792253
+171,Area_Arboreto_Botanica_Vet,Arboreto e Botânica e Veterinária - Área,1,-15.7454575,-47.87821145
+172,Subarea_Botanica,Região voltada para o cultivo de plantas - Subárea,171,-15.7364092,-47.8822911
+173,Fitopatologia,Casas de Vegetação - Fitopatologia,172,-15.7352139,-47.8834927
+174,Estufa,Estufa para cultivo das plantas,172,-15.73722245,-47.88107875
+175,Hospital_Vet,HVet - Hospital Veterinário da UnB,171,-15.74913135,-47.87721095
+176,Area_Bio_Quim_Saude_CESPE,IB/IQ/FS/CPD/CESPE - Área,1,-15.76926605,-47.8655568
+177,Subarea_FS_Quimica,Faculdade de Ciências da Saúde e Instituto de Química - Subárea,176,-15.76903515,-47.86591485
+178,Instituto_Quimica,IQ - Instituto de Química,177,-15.76852925,-47.8648125
+179,Estacionamento_IQ,IQ - Estacionamento,177,-15.76907515,-47.8648245
+180,Faculdade_de_saude,FS/FM - Faculdade de Ciências da Saúde/Faculdade de Medicina,177,-15.7683963,-47.86672085
+181,Estacionamento_FS_1,FS/FM - Estacionamento frontal,177,-15.76961205,-47.8668952
+182,MASC_Sul,MASC Sul - Módulo de Apoio e Serviços Comunitários Sul,177,-15.7678671,-47.86557285
+183,P_Onibus_FS,FS/FM - Ponto de ônibus,177,-15.76964045,-47.8671527
+184,SUBAREA_BIOLOGICAS_FS,IB/FS - Subárea,176,-15.76608595,-47.86510615
+185,Instituto_Biologia,IB - Instituto de Ciências Biológicas,184,-15.7665145,-47.8650793
+186,Estacionamento_IB,IB- Estacionamento,184,-15.76723085,-47.86414055
+187,Estacionamento_FS_2,FS/FM - Estacionamento dos fundos,184,-15.7672889,-47.86612275
+188,BSA_Sul,BSAS - Bloco de Salas Ala Sul,184,-15.7668888,-47.86669105
+189,Estacionamento_bsa_sul_ib,BSAS/IB - Estacionamento,184,-15.76689135,-47.8657231
+190,Subarea_CPD_CESPE,Centro de Informática e Centro de Seleção e de Promoção de Eventos - Subárea,176,-15.7729974,-47.8651223
+191,CPD,CPD- Centro de Informática,190,-15.77275085,-47.8657774
+192,Estacionamento_cpd,CPD - Estacionamento,190,-15.7728483,-47.8659088
+193,CESPE,CESPE - Centro de Seleção e de Promoção de Eventos,190,-15.77198295,-47.865302
+194,Estacionamento_CESPE_1,CESPE - Estacionamento 1,190,-15.7721507,-47.86592155
+195,Estacionamento_CESPE_2,CESPE - Estacionamento 2,190,-15.77137245,-47.8654039
+196,Estacionamento_CESPE_3,CESPE - Estacionamento 3,190,-15.77164605,-47.86540385
+197,P_Onibus_CESPE_CPD,CESPE/CPD - Ponto de ônibus,190,-15.7724101,-47.86629705
+198,Area_Centro_Olimpico,CO - Centro Olímpico - Área,1,-15.7625986,-47.86009985
+199,SUBAREA_FEF_CO_1,FEF/CO - Subárea 1,198,-15.7640235,-47.8595312
+200,FEF,FEF - Faculdade de Educação Física,199,-15.7631033,-47.8606202
+201,ESTACIONAMENTO_FEF,FEF - Estacionamento,199,-15.7638067,-47.85990265
+202,ESTACIONAMENTO_CO,CO - Estacionamento,199,-15.7646198,-47.85899075
+203,QUADRAS_15,CO - Quadra 1,199,-15.7640829,-47.85851065
+204,SUBAREA_FEF_CO_2,CEU - Subárea,198,-15.7645656,-47.8576054
+205,CEU_1,CEU - Casa do Estudante 1,204,-15.7653865,-47.85787765
+206,CEU_2,CEU - Casa do Estudante 2,204,-15.7658576,-47.8571628
+207,CENTRO_OLIMPICO,CO - Centro Olímpico,204,-15.76345565,-47.8577167
+208,QUADRA_14,CO - Piscinas,204,-15.7636054,-47.85705955
+209,SUBAREA_FEF_CO_3,FEF/CO - Subárea 2,198,-15.7613828,-47.86119215
+210,QUADRA_16,CO - Quadra 2,209,-15.76295615,-47.85844215
+211,QUADRA_17,CO - Quadra 3,209,-15.76264385,-47.8592576
+212,QUADRA_18,CO - Quadra 4,209,-15.76167065,-47.8590431
+213,QUADRA_19,CO - Quadra 5,209,-15.7616642,-47.86020975
+214,QUADRA_20,"CO - Quadra 6""",209,-15.7610447,-47.8613913
+215,SUBAREA_FEF_CO_4,FEF/CO - Subárea 3,198,-15.76267095,-47.857022
+216,QUADRA_9,CO - Quadra 7,215,-15.76244635,-47.85686305
+217,QUADRA_10,CO - Quadra 8,215,-15.7624399,-47.8566183
+218,QUADRA_11,CO - Quadra 9,215,-15.76289295,-47.8570743
+219,QUADRA_12,CO - Quadra 10,215,-15.76290205,-47.8568543
+220,QUADRA_13,CO - Quadra 11,215,-15.7629239,-47.85660895
+221,SUBAREA_FEF_CO_5,FEF/CO - Subárea 4,198,-15.76183715,-47.85695225
+222,QUADRA_5,CO - Quadra 12,221,-15.7615816,-47.8567913
+223,QUADRA_6,CO - Quadra 13,221,-15.7615971,-47.85653245
+224,QUADRA_7,CO - Quadra 14,221,-15.7620269,-47.85702465
+225,QUADRA_8,CO - Quadra 15,221,-15.76205785,-47.85668935
+226,SUBAREA_FEF_CO_6,FEF/CO - Subárea 5,198,-15.7602935,-47.85682955
+227,QUADRA_1,CO - Quadra 16,226,-15.76152805,-47.8577978
+228,QUADRA_2,CO - Quadra 17,226,-15.76153125,-47.8575363
+229,QUADRA_3,CO - Quadra 18,226,-15.7615403,-47.8572869
+230,QUADRA_4,CO - Quadra 19,226,-15.76154805,-47.8570287
