@@ -18,12 +18,13 @@ function popupMaps(url, title, w, h) {
             			<h1>Ocorrências sem validação</h1>
 		          	</div>
 
-					<table class="table">
-						{% if vazio %}
+		          	{% if vazio %}
 						<div class="alert alert-dismissible alert-warning">
 							<h3>Nao há nenhuma ocorrência pendente!</h3>
 						</div>
-						{% else %}
+					{% else %}		
+					<table class="table table-hover table-sm">
+						
 							<tr>
 								<th>Número</th>
 								<th>Localização</th>

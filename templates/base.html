@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="{% static 'js/jquery.mask.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/bootstrap-datepicker.min.js' %}" type="text/javascript"></script>
@@ -22,14 +21,74 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
-  </head>
+</head>
+
+<script type="text/javascript">
+
+function hamb_open() {
+    document.getElementById("mySidenav").style.display = "block";
+}
+
+function hamb_close() {
+    document.getElementById("mySidenav").style.display = "none";
+}
+
+function hamb_drop() {
+    var x = document.getElementById("hambDrop");
+    if (x.className.indexOf("hamb-show") == -1) {
+        x.className += " hamb-show";
+        x.previousElementSibling.className += " hamb-cor";
+    } else {
+        x.className = x.className.replace(" hamb-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" hamb-cor", "");
+    }
+}
+
+function hamb_drop2() {
+    var x = document.getElementById("hambDrop2");
+    if (x.className.indexOf("hamb-show") == -1) {
+        x.className += " hamb-show";
+        x.previousElementSibling.className += " hamb-cor";
+    } else {
+        x.className = x.className.replace(" hamb-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" hamb-cor", "");
+    }
+}
+
+function hamb_drop3() {
+    var x = document.getElementById("hambDrop3");
+    if (x.className.indexOf("hamb-show") == -1) {
+        x.className += " hamb-show";
+        x.previousElementSibling.className += " hamb-cor";
+    } else {
+        x.className = x.className.replace(" hamb-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" hamb-cor", "");
+    }
+}
+
+$(document).ready(function(){
+  
+  if (screen.width <= 1080) {
+    $('#desktop').hide(-999);
+    $('#mobile').fadeIn(-999);
+  }
+    
+});
+
+</script>
 
 {%endblock%}
 
 {%block body%}
 
   <body>
-    <nav class="navbar navbar-default">
+
+    <!-- VERSAO DESKTOP !-->
+
+    <nav class="navbar navbar-default" id="desktop">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -96,6 +155,76 @@
               <li><a href="{% url 'sobre' %}"> Sobre</a></li>
             </ul>
         </div>
+      </div>
+    </nav>
+
+    <!-- VERSAO MOBILE !-->
+
+    <nav class="hamb-sidenav hamb-dark-grey hamb-animate-left" style="display:none" id="mySidenav">
+      <a href="javascript:void(0)" onclick="hamb_close()"
+      class="hamb-closenav hamb-large">Fechar &times;</a>
+      
+      <a href="{% url 'inicio' %}">Unb Alerta</a>
+
+      {% if user.is_authenticated %}
+        <div class="hamb-accordion">
+          <a onclick="hamb_drop()" href="#"> Estatísticas <i class="fa fa-caret-down"></i></a>
+          <div id="hambDrop" class="hamb-accordion-content hamb-white hamb-card-4">
+            
+            <a href="{% url 'estatisticas' %}">Mapa</a>
+            {% if perms.ocorrencia.change_ocorrencia %}
+              <a href="{% url 'gerar_relatorio' %}">Relatórios</a>
+              <a href="{% url 'gerar_grafico' %}">Gráficos</a>
+            {% endif %}
+
+          </div>
+        </div>
+
+        {% if perms.ocorrencia.change_ocorrencia %}
+          <a href="{% url 'lista_validacao' %}">Validar Ocorrência</a>
+          <a href="{% url 'pesquisar_placas' %}">Procurar Placa</a>
+        {% endif %}
+        
+        <a href="{% url 'criar_ocorrencia' %}">Fazer Ocorrência</a>
+
+        <div class="hamb-accordion">
+          <a onclick="hamb_drop2()" href="#"> Ocorrências <i class="fa fa-caret-down"></i></a>
+          <div id="hambDrop2" class="hamb-accordion-content hamb-white hamb-card-4">
+            
+            {% if perms.ocorrencia.change_ocorrencia %}
+              <a href="{% url 'lista_ocorrencias' %}">Todas ocorrências</a>
+            {% endif %}
+            <a href="{% url 'minhas_ocorrencias' %}">Minhas ocorrências</a>
+            
+          </div>
+        </div>
+
+        <a href="{% url 'sobre' %}">Sobre</a>
+
+
+        <div class="hamb-accordion">
+          <a onclick="hamb_drop3()" href="#"> {{ user.username }} <i class="fa fa-caret-down"></i></a>
+          <div id="hambDrop3" class="hamb-accordion-content hamb-white hamb-card-4">
+
+            <a href="{% url 'perfil' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Sair</a>
+
+          </div>
+        </div>
+
+      {% else %}
+
+        <a href="{% url 'cadastrar_usuario' %}">Cadastre-se</a>
+        <a href="{% url 'login' %}">Entrar</a>
+        <a href="{% url 'sobre' %}">Sobre</a>
+
+      {% endif %}
+      
+    </nav>
+
+    <nav class="navbar navbar-default" id="mobile">
+      <div class="hamb-container">
+        <input type="image" src="{% static 'images/hamb.png' %}" class="hamb-opennav hamb-xlarge" onClick="hamb_open()"/>
       </div>
     </nav>
 
