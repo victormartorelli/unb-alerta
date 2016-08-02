@@ -14,9 +14,9 @@ function popupMaps(url, title, w, h) {
 	<div class="container">
 		<div class="row vertical-offset-100">
 			<div class="panel panel-primary">
-          <div class="panel-heading" style="text-align:center">
-            <h1>Minhas Ocorrências</h1>
-        	</div>
+	          	<div class="panel-heading" style="text-align:center">
+	            	<h1>Minhas Ocorrências</h1>
+	        	</div>
         		
         	{% for message in messages %}
             <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade in" style="text-align: center" role="alert">
@@ -25,7 +25,7 @@ function popupMaps(url, title, w, h) {
             </button>
             <strong>{{ message|safe }}</strong>
             </div>
-          {% endfor %}
+          	{% endfor %}
 				
 				{% if vazio %}
 					<div class="alert alert-dismissible alert-warning">
