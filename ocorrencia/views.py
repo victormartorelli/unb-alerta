@@ -340,8 +340,11 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
         atendidas_list = ocorrencia.filter(atendida=True)
 
         if form.data.get('localidade'):
-            localidade = Local.objects.filter(id=form.data.get('localidade'))[0].descricao
-            lista_top = Local.objects.values('descricao').annotate(numero=Count('ocorrencia')).order_by('-numero')
+            localidade = Local.objects.filter(
+                id=form.data.get('localidade'))[0].descricao
+            lista_top = Local.objects.values(
+                'descricao').annotate(numero=Count(
+                    'ocorrencia')).order_by('-numero')
             # TODO
             # Filtrar lista de categorias de ocorrências que ocorrem em determinado local
             # Filtrar o tipo de ocorrências que ocorrem em determinado local (vitima, emergencia, validadas, atendidas)
@@ -358,8 +361,10 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             posicao_rank_local = None
 
         if form.data.get('tipo'):
-            categoria = Categoria.objects.filter(id=form.data.get('tipo'))[0].tipo
-            lista_top = Categoria.objects.values('tipo').annotate(numero=Count('ocorrencia')).order_by('-numero')
+            categoria = Categoria.objects.filter(
+                id=form.data.get('tipo'))[0].tipo
+            lista_top = Categoria.objects.values('tipo').annotate(
+                numero=Count('ocorrencia')).order_by('-numero')
             # TODO
             # Filtrar lista de categorias de ocorrência de determinada categoria
             # Filtrar tipo de ocorrencias de determinada categoria
@@ -375,10 +380,12 @@ class GerarRelatorioView(PermissionRequiredMixin, FormView):
             categoria = None
             posicao_rank_cat = None
 
-        locais_list = enumerate(locais_list.annotate(numero=Count('ocorrencia')).order_by('-numero')[:5])
+        locais_list = enumerate(locais_list.annotate(
+            numero=Count('ocorrencia')).order_by('-numero')[:5])
         locais_list = [(i + 1, a) for (i, a) in locais_list]
 
-        categorias_list = enumerate(categorias_list.annotate(numero=Count('ocorrencia')).order_by('-numero')[:5])
+        categorias_list = enumerate(categorias_list.annotate(
+            numero=Count('ocorrencia')).order_by('-numero')[:5])
         categorias_list = [(i + 1, a) for (i, a) in categorias_list]
 
         vitima = vitima_list.count()
@@ -605,7 +612,7 @@ class FiltroMapa(LoginRequiredMixin, FilterView):
         else:
             url = ''
 
-        if self.request.user.groups.filter(name="Usuário Comum"):
+        if self.request.user.groups.filter(name='Usuário Comum'):
             queryset = self.object_list.filter(
                 validade=True,
                 atendida=True).distinct()

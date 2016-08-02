@@ -1,5 +1,3 @@
-from captcha.fields import CaptchaField
-
 from django.views.generic import FormView, DetailView, TemplateView
 from django.contrib import messages
 from django.conf import settings
@@ -87,7 +85,7 @@ class CriarUsuarioView(FormView):
                 {'form': form})
 
 
-class PerfilView(DetailView):
+class PerfilView(PermissionRequiredMixin, DetailView):
     template_name = "usuario/perfil.html"
 
     def get_object(self):
@@ -95,6 +93,18 @@ class PerfilView(DetailView):
             return Usuario.objects.get(user_id=self.request.user.id)
         else:
             return User.objects.get(id=self.request.user.id)
+
+    def has_permission(self):
+        usuario = Usuario.objects.get(user_id=self.request.user.id)
+
+        if self.request.user.is_superuser:
+            return True
+
+        if self.kwargs['pk'] == usuario.id:
+            return True
+
+        else:
+            return False
 
 
 class ConfirmarEmailView(TemplateView):

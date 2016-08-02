@@ -6,10 +6,11 @@ from captcha.fields import CaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Fieldset, Layout
 
+from datetime import timedelta
 from django import forms
 from django.db import models
 from django.forms import ModelForm, ValidationError
-from django.utils import six
+from django.utils.timezone import now
 from .models import Categoria, Ocorrencia, Local, StatusOcorrencia
 
 from unb_alerta.utils import to_row, form_actions
@@ -502,13 +503,26 @@ class OcorrenciaFiltroMapa(OcorrenciaFiltro):
             form_actions(save_label='Filtrar'))
 
 
+def _truncate(dt):
+    return dt.date()
+
+
 class DateRangeFilterEdit(django_filters.DateRangeFilter):
-    def __init__(self, *args, **kwargs):
-        self.options.pop(4)
-        self.options.pop(5)
-        kwargs['choices'] = [
-            (key, value[0]) for key, value in six.iteritems(self.options)]
-        super(DateRangeFilterEdit, self).__init__(*args, **kwargs)
+    options = {
+        '': ('Hoje', lambda qs, name: qs.filter(**{
+            '%s__year' % name: now().year,
+            '%s__month' % name: now().month,
+            '%s__day' % name: now().day
+        })),
+        2: ('Últimos 7 dias', lambda qs, name: qs.filter(**{
+            '%s__gte' % name: _truncate(now() - timedelta(days=7)),
+            '%s__lt' % name: _truncate(now() + timedelta(days=1)),
+        })),
+        3: ('Esse mês', lambda qs, name: qs.filter(**{
+            '%s__year' % name: now().year,
+            '%s__month' % name: now().month
+        })),
+    }
 
 
 class OcorrenciaFiltroMapaUsuario(django_filters.FilterSet):
